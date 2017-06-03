@@ -112,7 +112,7 @@ type
   TRangeState = (rsNormalText, rsComment, rsX3DHeader, rsX3DDocType);
 
 type
-  TSynVrml97Syn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterVrml97 = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
     FIsDoctype: boolean;
@@ -407,7 +407,7 @@ const
     'WorldInfo';
 
 
-procedure TSynVrml97Syn.DoAddKeyword(AKeyword: UnicodeString; AKind: integer);
+procedure TSynEdit32HighlighterVrml97.DoAddKeyword(AKeyword: UnicodeString; AKind: integer);
 var
   HashValue: integer;
 begin
@@ -415,7 +415,7 @@ begin
   FKeywords[HashValue] := TSynEdit32HashEntry.Create(AKeyword, AKind);
 end;
 
-function TSynVrml97Syn.HashKey(Str: PWideChar): Integer;
+function TSynEdit32HighlighterVrml97.HashKey(Str: PWideChar): Integer;
 
   function GetOrd: Integer;
   begin
@@ -443,7 +443,7 @@ begin
   FStringLen := Str - FToIdent;
 end;
 
-function TSynVrml97Syn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterVrml97.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Entry: TSynEdit32HashEntry;
 begin
@@ -464,7 +464,7 @@ begin
   Result := tkIdentifier;
 end;
 
-constructor TSynVrml97Syn.Create(AOwner :TComponent);
+constructor TSynEdit32HighlighterVrml97.Create(AOwner :TComponent);
 begin
   inherited Create(AOwner);
 
@@ -658,20 +658,20 @@ begin
   FRange := rsNormalText;
 end;
 
-destructor TSynVrml97Syn.Destroy;
+destructor TSynEdit32HighlighterVrml97.Destroy;
 begin
   FKeywords.Free;
   inherited Destroy;
 end;
 
-procedure TSynVrml97Syn.AndSymbolProc;
+procedure TSynEdit32HighlighterVrml97.AndSymbolProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if CharInSet(FLine[FRun], ['=', '&']) then Inc(FRun);
 end;
 
-function TSynVrml97Syn.NextTokenIs(T: UnicodeString): Boolean;
+function TSynEdit32HighlighterVrml97.NextTokenIs(T: UnicodeString): Boolean;
 var
   I, Len: Integer;
 begin
@@ -685,7 +685,7 @@ begin
     end;
 end;
 
-procedure TSynVrml97Syn.InCommentProc;
+procedure TSynEdit32HighlighterVrml97.InCommentProc;
 begin
   if (FLine[FRun + 1] = '-') and (FLine[FRun + 2] = '-') then
   begin
@@ -706,7 +706,7 @@ begin
   end;
 end;
 
-procedure TSynVrml97Syn.DiesisCommentProc;
+procedure TSynEdit32HighlighterVrml97.DiesisCommentProc;
 begin
   if FLine[FRun] = #0 then
     NullProc
@@ -719,7 +719,7 @@ begin
   end;
 end;
 
-procedure TSynVrml97Syn.X3DHeaderOpenProc;
+procedure TSynEdit32HighlighterVrml97.X3DHeaderOpenProc;
 begin
   Inc(FRun);
   FRange := rsX3DHeader;
@@ -727,7 +727,7 @@ begin
   FTokenID := tkX3DHeader;
 end;
 
-procedure TSynVrml97Syn.X3DHeaderProc;
+procedure TSynEdit32HighlighterVrml97.X3DHeaderProc;
 begin
   case FLine[FRun] of
     #0 :NullProc;
@@ -750,7 +750,7 @@ begin
   end;
 end;
 
-procedure TSynVrml97Syn.X3DDocTypeOpenProc;
+procedure TSynEdit32HighlighterVrml97.X3DDocTypeOpenProc;
 begin
   if NextTokenIs('DOCTYPE') then
   begin
@@ -772,7 +772,7 @@ begin
     end;
 end;
 
-procedure TSynVrml97Syn.X3DDocTypeProc;
+procedure TSynEdit32HighlighterVrml97.X3DDocTypeProc;
 begin
   case FLine[FRun] of
     #0 :NullProc;
@@ -795,7 +795,7 @@ begin
   end;
 end;
 
-procedure TSynVrml97Syn.CommentProc;
+procedure TSynEdit32HighlighterVrml97.CommentProc;
 begin
   if FLine[FRun] = #0 then
     NullProc
@@ -816,14 +816,14 @@ begin
     end;
 end;
 
-procedure TSynVrml97Syn.CRProc;
+procedure TSynEdit32HighlighterVrml97.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
   if FLine[FRun] = #10 then Inc(FRun);
 end;
 
-procedure TSynVrml97Syn.IdentProc;
+procedure TSynEdit32HighlighterVrml97.IdentProc;
 begin
   FTokenID := IdentKind(FLine + FRun);
   Inc(FRun, FStringLen);
@@ -831,33 +831,33 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynVrml97Syn.LFProc;
+procedure TSynEdit32HighlighterVrml97.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynVrml97Syn.MinusProc;
+procedure TSynEdit32HighlighterVrml97.MinusProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if CharInSet(FLine[FRun], ['=', '-', '>']) then Inc(FRun);
 end;
 
-procedure TSynVrml97Syn.ModSymbolProc;
+procedure TSynEdit32HighlighterVrml97.ModSymbolProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if FLine[FRun] = '=' then Inc(FRun);
 end;
 
-procedure TSynVrml97Syn.NullProc;
+procedure TSynEdit32HighlighterVrml97.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynVrml97Syn.NumberProc;
+procedure TSynEdit32HighlighterVrml97.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -901,28 +901,28 @@ begin
   end;
 end;
 
-procedure TSynVrml97Syn.OrSymbolProc;
+procedure TSynEdit32HighlighterVrml97.OrSymbolProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if CharInSet(FLine[FRun], ['=', '|']) then Inc(FRun);
 end;
 
-procedure TSynVrml97Syn.PlusProc;
+procedure TSynEdit32HighlighterVrml97.PlusProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if CharInSet(FLine[FRun], ['=', '+']) then Inc(FRun);
 end;
 
-procedure TSynVrml97Syn.PointProc;
+procedure TSynEdit32HighlighterVrml97.PointProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if (FLine[FRun] = '.') and (FLine[FRun + 1] = '.') then Inc(FRun, 2);
 end;
 
-procedure TSynVrml97Syn.SlashProc;
+procedure TSynEdit32HighlighterVrml97.SlashProc;
 begin
   Inc(FRun);
   case FLine[FRun] of
@@ -957,21 +957,21 @@ begin
   end;
 end;
 
-procedure TSynVrml97Syn.SpaceProc;
+procedure TSynEdit32HighlighterVrml97.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynVrml97Syn.StarProc;
+procedure TSynEdit32HighlighterVrml97.StarProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if FLine[FRun] = '=' then Inc(FRun);
 end;
 
-procedure TSynVrml97Syn.StringProc;
+procedure TSynEdit32HighlighterVrml97.StringProc;
 var
   l_strChar: UnicodeString;
 begin
@@ -986,19 +986,19 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynVrml97Syn.SymbolProc;
+procedure TSynEdit32HighlighterVrml97.SymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynVrml97Syn.UnknownProc;
+procedure TSynEdit32HighlighterVrml97.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynVrml97Syn.Next;
+procedure TSynEdit32HighlighterVrml97.Next;
 begin
   fTokenPos := FRun;
   case FRange of
@@ -1032,7 +1032,7 @@ begin
   inherited;
 end;
 
-function TSynVrml97Syn.GetDefaultAttribute(Index :integer) :TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterVrml97.GetDefaultAttribute(Index :integer) :TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -1046,22 +1046,22 @@ begin
   end;
 end;
 
-function TSynVrml97Syn.GetEol :Boolean;
+function TSynEdit32HighlighterVrml97.GetEol :Boolean;
 begin
   Result := FTokenID = tkNull;
 end;
 
-function TSynVrml97Syn.GetRange :Pointer;
+function TSynEdit32HighlighterVrml97.GetRange :Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-function TSynVrml97Syn.GetTokenID :TtkTokenKind;
+function TSynEdit32HighlighterVrml97.GetTokenID :TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynVrml97Syn.GetTokenAttribute :TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterVrml97.GetTokenAttribute :TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkComment: Result := FCommentAttri;
@@ -1099,32 +1099,32 @@ begin
   end;
 end;
 
-function TSynVrml97Syn.GetTokenKind :integer;
+function TSynEdit32HighlighterVrml97.GetTokenKind :integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-procedure TSynVrml97Syn.ResetRange;
+procedure TSynEdit32HighlighterVrml97.ResetRange;
 begin
   FRange := rsNormalText;
 end;
 
-procedure TSynVrml97Syn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterVrml97.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-function TSynVrml97Syn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterVrml97.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterVrml97;
 end;
 
-class function TSynVrml97Syn.GetLanguageName: string;
+class function TSynEdit32HighlighterVrml97.GetLanguageName: string;
 begin
   Result := SYNS_LangVrml97;
 end;
 
-function TSynVrml97Syn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterVrml97.GetSampleSource: UnicodeString;
 begin
   Result :=
     '#VRML V2.0 utf8'#13#10 +
@@ -1185,11 +1185,11 @@ begin
     '}';
 end;
 
-class function TSynVrml97Syn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterVrml97.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangVrml97;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynVrml97Syn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterVrml97);
 end.

@@ -1,4 +1,4 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{6E21797B-4D50-4028-9D52-05CDFE6CEAEA}</ProjectGuid>
         <MainSource>SynEdit32_D.dpk</MainSource>
@@ -40,6 +40,7 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
+        <DCC_OutputNeverBuildDcps>true</DCC_OutputNeverBuildDcps>
         <SanitizedProjectName>SynEdit32_D</SanitizedProjectName>
         <DesignOnlyPackage>true</DesignOnlyPackage>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
@@ -91,7 +92,7 @@
         <DCCReference Include="..\..\Source\SynEdit32.Reg.dcr"/>
         <DCCReference Include="designide.dcp"/>
         <DCCReference Include="SynEdit32_R.dcp"/>
-        <DCCReference Include="..\..\Source\SynEdit32.EditReg.pas"/>
+        <DCCReference Include="..\..\Source\SynEdit32.Reg.pas"/>
         <DCCReference Include="..\..\Source\SynEdit32.PropertyReg.pas"/>
         <DCCReference Include="..\..\Source\SynEdit32.HighlighterManager.pas"/>
         <BuildConfiguration Include="Debug">

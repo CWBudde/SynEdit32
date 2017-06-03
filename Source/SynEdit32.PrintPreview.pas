@@ -81,7 +81,7 @@ type
   TSynEditPrintPreview = class(TCustomControl)
   protected
     FBorderStyle: TBorderStyle;
-    FSynEditPrint: TSynEditPrint;
+    FSynEditPrint: TSynEdit32Print;
     FScaleMode: TSynPreviewScale;
     FScalePercent: Integer;
         // these are in pixels ( = screen device units)
@@ -97,7 +97,7 @@ type
     FWheelAccumulator: Integer;
     procedure SetBorderStyle(Value: TBorderStyle);
     procedure SetPageBG(Value: TColor);
-    procedure SetSynEditPrint(Value: TSynEditPrint);
+    procedure SetSynEditPrint(Value: TSynEdit32Print);
     procedure SetScaleMode(Value: TSynPreviewScale);
     procedure SetScalePercent(Value: Integer);
   private
@@ -141,7 +141,7 @@ type
     property Cursor;
     property PageBGColor: TColor read FPageBG write SetPageBG default clWhite;
     property PopupMenu;
-    property SynEditPrint: TSynEditPrint read FSynEditPrint
+    property SynEditPrint: TSynEdit32Print read FSynEditPrint
       write SetSynEditPrint;
     property ScaleMode: TSynPreviewScale read FScaleMode write SetScaleMode
       default pscUserScaled;
@@ -536,7 +536,7 @@ begin
   end;
 end;
 
-procedure TSynEditPrintPreview.SetSynEditPrint(Value: TSynEditPrint);
+procedure TSynEditPrintPreview.SetSynEditPrint(Value: TSynEdit32Print);
 begin
   if (FSynEditPrint <> Value) then
   begin

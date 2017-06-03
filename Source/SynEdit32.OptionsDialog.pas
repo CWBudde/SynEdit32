@@ -264,7 +264,7 @@ type
     property UseExtendedStrings: Boolean read FExtended write FExtended;
   end;
 
-  TSynEditOptionsDialog = class(TComponent)
+  TSynEdit32OptionsDialog = class(TComponent)
   private
     FForm: TfmEditorOptionsDialog;
     function GetUserCommandNames: TSynEditorOptionsUserCommand;
@@ -347,53 +347,53 @@ implementation
 uses
   SynEdit32.KeyConst;
 
-{ TSynEditOptionsDialog }
+{ TSynEdit32OptionsDialog }
 
-constructor TSynEditOptionsDialog.create(AOwner: TComponent);
+constructor TSynEdit32OptionsDialog.create(AOwner: TComponent);
 begin
   inherited;
   FForm := TfmEditorOptionsDialog.Create(Self);
 end;
 
-destructor TSynEditOptionsDialog.destroy;
+destructor TSynEdit32OptionsDialog.destroy;
 begin
   FForm.Free;
   inherited;
 end;
 
-function TSynEditOptionsDialog.Execute(EditOptions : TSynEditorOptionsContainer) : Boolean;
+function TSynEdit32OptionsDialog.Execute(EditOptions : TSynEditorOptionsContainer) : Boolean;
 begin
   Result := FForm.Execute(EditOptions);
 end;
 
-function TSynEditOptionsDialog.GetUserCommands: TSynEditorOptionsAllUserCommands;
+function TSynEdit32OptionsDialog.GetUserCommands: TSynEditorOptionsAllUserCommands;
 begin
   Result := FForm.GetAllUserCommands;
 end;
 
-function TSynEditOptionsDialog.GetUserCommandNames: TSynEditorOptionsUserCommand;
+function TSynEdit32OptionsDialog.GetUserCommandNames: TSynEditorOptionsUserCommand;
 begin
   Result := FForm.GetUserCommandNames
 end;
 
-procedure TSynEditOptionsDialog.SetUserCommands(
+procedure TSynEdit32OptionsDialog.SetUserCommands(
   const Value: TSynEditorOptionsAllUserCommands);
 begin
   FForm.GetAllUserCommands := Value;
 end;
 
-procedure TSynEditOptionsDialog.SetUserCommandNames(
+procedure TSynEdit32OptionsDialog.SetUserCommandNames(
   const Value: TSynEditorOptionsUserCommand);
 begin
   FForm.GetUserCommandNames := Value;
 end;
 
-function TSynEditOptionsDialog.GetExtended: Boolean;
+function TSynEdit32OptionsDialog.GetExtended: Boolean;
 begin
   Result := FForm.UseExtendedStrings;
 end;
 
-procedure TSynEditOptionsDialog.SetExtended(const Value: Boolean);
+procedure TSynEdit32OptionsDialog.SetExtended(const Value: Boolean);
 begin
   FForm.UseExtendedStrings := Value;
 end;

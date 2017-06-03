@@ -781,8 +781,8 @@ begin
   else
     HighlighterList.Add(Highlighter);
 
-  if Highlighter is TSynEdit32MultiSyn then
-    with TSynEdit32MultiSyn(Highlighter) do
+  if Highlighter is TSynEdit32HighlighterMulti then
+    with TSynEdit32HighlighterMulti(Highlighter) do
     begin
       Result := InternalEnumHighlighterAttris(DefaultHighlighter, SkipDuplicates,
         HighlighterAttriProc, Params, HighlighterList);

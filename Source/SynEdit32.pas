@@ -973,7 +973,7 @@ type
 {$ENDIF}
   end;
 
-  TSynEdit = class(TCustomSynEdit32)
+  TSynEdit32 = class(TCustomSynEdit32)
   published
     // inherited properties
     property Align;
@@ -10368,7 +10368,7 @@ begin
   iDefaultKeys := TSynEdit32KeyStrokes.Create(nil);
   try
     if Writer.Ancestor <> nil then
-      iDefaultKeys.Assign(TSynEdit(Writer.Ancestor).Keystrokes)
+      iDefaultKeys.Assign(TSynEdit32(Writer.Ancestor).Keystrokes)
     else
       iDefaultKeys.ResetDefaults;
     iAddedKeys := TSynEdit32KeyStrokes.Create(nil);
@@ -10400,7 +10400,7 @@ begin
   iRemovedKeys := TSynEdit32KeyStrokes.Create(nil);
   try
     if Writer.Ancestor <> nil then
-      iRemovedKeys.Assign(TSynEdit(Writer.Ancestor).Keystrokes)
+      iRemovedKeys.Assign(TSynEdit32(Writer.Ancestor).Keystrokes)
     else
       iRemovedKeys.ResetDefaults;
     cKey := 0;

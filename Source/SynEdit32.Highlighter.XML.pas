@@ -86,7 +86,7 @@ type
      rsDocTypeQuoteEntityRef}
   );
 
-  TSynXMLSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterXML = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
     FTokenID: TtkTokenKind;
@@ -180,7 +180,7 @@ implementation
 uses
   SynEdit32.StrConst;
 
-constructor TSynXMLSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterXML.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -261,26 +261,26 @@ begin
   fDefaultFilter := SYNS_FilterXML;
 end;
 
-procedure TSynXMLSyn.NullProc;
+procedure TSynEdit32HighlighterXML.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynXMLSyn.CarriageReturnProc;
+procedure TSynEdit32HighlighterXML.CarriageReturnProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
   if FLine[FRun] = #10 then Inc(FRun);
 end;
 
-procedure TSynXMLSyn.LineFeedProc;
+procedure TSynEdit32HighlighterXML.LineFeedProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynXMLSyn.SpaceProc;
+procedure TSynEdit32HighlighterXML.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
@@ -291,7 +291,7 @@ begin
   end;
 end;
 
-procedure TSynXMLSyn.LessThanProc;
+procedure TSynEdit32HighlighterXML.LessThanProc;
 begin
   Inc(FRun);
   if (FLine[FRun] = '/') then
@@ -337,14 +337,14 @@ begin
   end;
 end;
 
-procedure TSynXMLSyn.GreaterThanProc;
+procedure TSynEdit32HighlighterXML.GreaterThanProc;
 begin
   FTokenID := tkSymbol;
   FRange:= rsText;
   Inc(FRun);
 end;
 
-procedure TSynXMLSyn.CommentProc;
+procedure TSynEdit32HighlighterXML.CommentProc;
 begin
   if (FLine[FRun] = '-') and (FLine[FRun + 1] = '-') and (FLine[FRun + 2] = '>') then
   begin
@@ -373,7 +373,7 @@ begin
   end;
 end;
 
-procedure TSynXMLSyn.ProcessingInstructionProc;
+procedure TSynEdit32HighlighterXML.ProcessingInstructionProc;
 begin
   FTokenID := tkProcessingInstruction;
   if IsLineEnd(FRun) then
@@ -395,7 +395,7 @@ begin
   end;
 end;
 
-procedure TSynXMLSyn.DocTypeProc;
+procedure TSynEdit32HighlighterXML.DocTypeProc;
 begin
   FTokenID := tkDocType;
 
@@ -454,7 +454,7 @@ begin
   end;
 end;
 
-procedure TSynXMLSyn.CDATAProc;
+procedure TSynEdit32HighlighterXML.CDATAProc;
 begin
   FTokenID := tkCDATA;
   if IsLineEnd(FRun) then
@@ -476,7 +476,7 @@ begin
   end;
 end;
 
-procedure TSynXMLSyn.ElementProc;
+procedure TSynEdit32HighlighterXML.ElementProc;
 begin
   if FLine[FRun] = '/' then Inc(FRun);
   while IsNameChar do Inc(FRun);
@@ -484,7 +484,7 @@ begin
   FTokenID := tkElement;
 end;
 
-procedure TSynXMLSyn.AttributeProc;
+procedure TSynEdit32HighlighterXML.AttributeProc;
 begin
   //Check if we are starting on a closing quote
   if CharInSet(FLine[FRun], [#34, #39]) then
@@ -509,7 +509,7 @@ begin
   end;
 end;
 
-procedure TSynXMLSyn.EqualProc;
+procedure TSynEdit32HighlighterXML.EqualProc;
 begin
   if FRange = rsnsEqual then
     FTokenID := tknsEqual
@@ -547,7 +547,7 @@ begin
   end;
 end;
 
-procedure TSynXMLSyn.QAttributeValueProc;
+procedure TSynEdit32HighlighterXML.QAttributeValueProc;
 begin
   if FRange = rsnsQuoteAttrValue then
     FTokenID := tknsQuoteAttrValue
@@ -571,7 +571,7 @@ begin
   FRange := rsAttribute;
 end;
 
-procedure TSynXMLSyn.AAttributeValueProc;
+procedure TSynEdit32HighlighterXML.AAttributeValueProc;
 begin
   if FRange = rsnsAPosAttrValue then
     FTokenID := tknsAPosAttrValue
@@ -595,7 +595,7 @@ begin
   FRange := rsAttribute;
 end;
 
-procedure TSynXMLSyn.TextProc;
+procedure TSynEdit32HighlighterXML.TextProc;
 begin
   if (FLine[FRun] <= #31) or (FLine[FRun] = '<') then
   begin
@@ -614,7 +614,7 @@ begin
   end;
 end;
 
-procedure TSynXMLSyn.EntityRefProc;
+procedure TSynEdit32HighlighterXML.EntityRefProc;
 begin
   FTokenID := tkEntityRef;
   FRange := rsEntityRef;
@@ -623,7 +623,7 @@ begin
   FRange := rsText;
 end;
 
-procedure TSynXMLSyn.QEntityRefProc;
+procedure TSynEdit32HighlighterXML.QEntityRefProc;
 begin
   if FRange = rsnsQuoteEntityRef then
     FTokenID := tknsQuoteEntityRef
@@ -639,7 +639,7 @@ begin
     FRange := rsQuoteAttrValue;
 end;
 
-procedure TSynXMLSyn.AEntityRefProc;
+procedure TSynEdit32HighlighterXML.AEntityRefProc;
 begin
   if FRange = rsnsAPosEntityRef then
     FTokenID := tknsAPosEntityRef
@@ -655,7 +655,7 @@ begin
     FRange := rsAPosAttrValue;
 end;
 
-procedure TSynXMLSyn.IdentProc;
+procedure TSynEdit32HighlighterXML.IdentProc;
 begin
   case FRange of
     rsElement:
@@ -694,7 +694,7 @@ begin
   end;
 end;
 
-procedure TSynXMLSyn.Next;
+procedure TSynEdit32HighlighterXML.Next;
 begin
   fTokenPos := FRun;
   case FRange of
@@ -710,7 +710,7 @@ begin
   inherited;
 end;
 
-procedure TSynXMLSyn.NextProcedure;
+procedure TSynEdit32HighlighterXML.NextProcedure;
 begin
   case FLine[FRun] of
     #0: NullProc;
@@ -723,7 +723,7 @@ begin
   end;
 end;
 
-function TSynXMLSyn.NextTokenIs(Token: UnicodeString): Boolean;
+function TSynEdit32HighlighterXML.NextTokenIs(Token: UnicodeString): Boolean;
 var
   I, Len: Integer;
 begin
@@ -737,7 +737,7 @@ begin
     end;
 end;
 
-function TSynXMLSyn.GetDefaultAttribute(Index: Integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterXML.GetDefaultAttribute(Index: Integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -750,12 +750,12 @@ begin
   end;
 end;
 
-function TSynXMLSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterXML.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynXMLSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterXML.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case FTokenID of
     tkElement: Result:= FElementAttri;
@@ -784,34 +784,34 @@ begin
   end;
 end;
 
-function TSynXMLSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterXML.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-function TSynXMLSyn.GetRange: Pointer;
+function TSynEdit32HighlighterXML.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-procedure TSynXMLSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterXML.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-procedure TSynXMLSyn.ResetRange;
+procedure TSynEdit32HighlighterXML.ResetRange;
 begin
   FRange := rsText;
 end;
 
-function TSynXMLSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterXML.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterXML;
 end;
 
 { TODO: In fact every Number also non-arabics and every letter also German umlauts
   can be used. Something like IsAlphaNumericCharW should be used instead. }
-function TSynXMLSyn.IsNameChar: Boolean;
+function TSynEdit32HighlighterXML.IsNameChar: Boolean;
 begin
   case FLine[FRun] of
     '0'..'9', 'a'..'z', 'A'..'Z', '_', '.', ':', '-':
@@ -823,12 +823,12 @@ begin
   end;
 end;
 
-class function TSynXMLSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterXML.GetLanguageName: string;
 begin
   Result := SYNS_LangXML;
 end;
 
-function TSynXMLSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterXML.GetSampleSource: UnicodeString;
 begin
   Result :=
     '<?xml version="1.0"?>'#13#10+
@@ -840,11 +840,11 @@ begin
     '</root>';
 end;
 
-class function TSynXMLSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterXML.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangXML;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynXMLSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterXML);
 end.

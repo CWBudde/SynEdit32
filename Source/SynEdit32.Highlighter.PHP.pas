@@ -82,7 +82,7 @@ type
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
 type
-  TSynPHPSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterPHP = class(TSynEdit32CustomHighlighter)
   private
     fRange: TRangeState;
 {$IFDEF SYN_HEREDOC}
@@ -219,7 +219,7 @@ const
   );
 
 {$Q-}
-function TSynPHPSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterPHP.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) do
@@ -231,7 +231,7 @@ begin
   FStringLen := Str - FToIdent;
 end;{$Q+}
 
-function TSynPHPSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterPHP.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -243,7 +243,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynPHPSyn.InitIdent;
+procedure TSynEdit32HighlighterPHP.InitIdent;
 var
   i: Integer;
 begin
@@ -256,12 +256,12 @@ begin
       fIdentFuncTable[i] := KeyWordFunc;
 end;
 
-function TSynPHPSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPHP.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier;
 end;
 
-function TSynPHPSyn.KeyWordFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPHP.KeyWordFunc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then begin
     Result := tkKey;
@@ -270,7 +270,7 @@ begin
   end;
 end;
 
-constructor TSynPHPSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterPHP.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -300,7 +300,7 @@ begin
   fRange := rsUnknown;
 end;
 
-procedure TSynPHPSyn.AndSymbolProc;
+procedure TSynEdit32HighlighterPHP.AndSymbolProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {and assign}
@@ -321,25 +321,25 @@ begin
   end;
 end;
 
-procedure TSynPHPSyn.AtSymbolProc;
+procedure TSynEdit32HighlighterPHP.AtSymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynPHPSyn.BraceCloseProc;
+procedure TSynEdit32HighlighterPHP.BraceCloseProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynPHPSyn.BraceOpenProc;
+procedure TSynEdit32HighlighterPHP.BraceOpenProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynPHPSyn.CRProc;
+procedure TSynEdit32HighlighterPHP.CRProc;
 begin
   FTokenID := tkSpace;
   case FLine[FRun + 1] of
@@ -349,19 +349,19 @@ begin
   end;
 end;
 
-procedure TSynPHPSyn.ColonProc;
+procedure TSynEdit32HighlighterPHP.ColonProc;
 begin
   Inc(FRun);                            {colon - conditional}
   FTokenID := tkSymbol;
 end;
 
-procedure TSynPHPSyn.CommaProc;
+procedure TSynEdit32HighlighterPHP.CommaProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynPHPSyn.EqualProc;
+procedure TSynEdit32HighlighterPHP.EqualProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {logical equal}
@@ -382,7 +382,7 @@ begin
   end;
 end;
 
-procedure TSynPHPSyn.GreaterProc;
+procedure TSynEdit32HighlighterPHP.GreaterProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {greater than or equal to}
@@ -403,20 +403,20 @@ begin
   end;
 end;
 
-procedure TSynPHPSyn.IdentProc;
+procedure TSynEdit32HighlighterPHP.IdentProc;
 begin
   FTokenID := IdentKind((FLine + FRun));
   Inc(FRun, FStringLen);
   while IsIdentChar(FLine[FRun]) do Inc(FRun);
 end;
 
-procedure TSynPHPSyn.LFProc;
+procedure TSynEdit32HighlighterPHP.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynPHPSyn.LowerProc;
+procedure TSynEdit32HighlighterPHP.LowerProc;
 {$IFDEF SYN_HEREDOC}
 var
   i, Len : Integer;
@@ -472,7 +472,7 @@ begin
   end;
 end;
 
-procedure TSynPHPSyn.MinusProc;
+procedure TSynEdit32HighlighterPHP.MinusProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {subtract assign}
@@ -498,7 +498,7 @@ begin
   end;
 end;
 
-procedure TSynPHPSyn.MultiplyProc;
+procedure TSynEdit32HighlighterPHP.MultiplyProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {multiply assign}
@@ -514,7 +514,7 @@ begin
   end;
 end;
 
-procedure TSynPHPSyn.NotSymbolProc;
+procedure TSynEdit32HighlighterPHP.NotSymbolProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {not equal}
@@ -530,13 +530,13 @@ begin
   end;
 end;
 
-procedure TSynPHPSyn.NullProc;
+procedure TSynEdit32HighlighterPHP.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynPHPSyn.NumberProc;
+procedure TSynEdit32HighlighterPHP.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -561,7 +561,7 @@ begin
   end;
 end;
 
-procedure TSynPHPSyn.OrSymbolProc;
+procedure TSynEdit32HighlighterPHP.OrSymbolProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {inclusive or assign}
@@ -582,7 +582,7 @@ begin
   end;
 end;
 
-procedure TSynPHPSyn.PlusProc;
+procedure TSynEdit32HighlighterPHP.PlusProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {add assign}
@@ -603,13 +603,13 @@ begin
   end;
 end;
 
-procedure TSynPHPSyn.PointProc;
+procedure TSynEdit32HighlighterPHP.PointProc;
 begin
   Inc(FRun);                            {point}
   FTokenID := tkSymbol;
 end;
 
-procedure TSynPHPSyn.PoundProc;
+procedure TSynEdit32HighlighterPHP.PoundProc;
 begin
   repeat
     Inc(FRun);
@@ -617,13 +617,13 @@ begin
   FTokenID := tkComment;
 end;
 
-procedure TSynPHPSyn.QuestionProc;
+procedure TSynEdit32HighlighterPHP.QuestionProc;
 begin
   FTokenID := tkSymbol;                {question mark - conditional}
   Inc(FRun);
 end;
 
-procedure TSynPHPSyn.RemainderSymbolProc;
+procedure TSynEdit32HighlighterPHP.RemainderSymbolProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {remainder assign}
@@ -639,25 +639,25 @@ begin
   end;
 end;
 
-procedure TSynPHPSyn.RoundCloseProc;
+procedure TSynEdit32HighlighterPHP.RoundCloseProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynPHPSyn.RoundOpenProc;
+procedure TSynEdit32HighlighterPHP.RoundOpenProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynPHPSyn.SemiColonProc;
+procedure TSynEdit32HighlighterPHP.SemiColonProc;
 begin
   Inc(FRun);                            {semicolon}
   FTokenID := tkSymbol;
 end;
 
-procedure TSynPHPSyn.SlashProc;
+procedure TSynEdit32HighlighterPHP.SlashProc;
 begin
   case FLine[FRun + 1] of
     '/':                               {c++ style comments}
@@ -702,26 +702,26 @@ begin
   end;
 end;
 
-procedure TSynPHPSyn.SpaceProc;
+procedure TSynEdit32HighlighterPHP.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynPHPSyn.SquareCloseProc;
+procedure TSynEdit32HighlighterPHP.SquareCloseProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynPHPSyn.SquareOpenProc;
+procedure TSynEdit32HighlighterPHP.SquareOpenProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynPHPSyn.StringProc;
+procedure TSynEdit32HighlighterPHP.StringProc;
 
   function IsEscaped: Boolean;
   var
@@ -771,7 +771,7 @@ begin
   if not IsLineEnd(FRun) then Inc(FRun);
 end;
 
-procedure TSynPHPSyn.VarExpansionProc;
+procedure TSynEdit32HighlighterPHP.VarExpansionProc;
 type
   TExpansionSyntax = (esNormal, esComplex, esBrace);
 var
@@ -871,20 +871,20 @@ begin
   end;
 end;
 
-procedure TSynPHPSyn.TildeProc;
+procedure TSynEdit32HighlighterPHP.TildeProc;
 begin
   Inc(FRun);                            {bitwise complement}
   FTokenID := tkSymbol;
 end;
 
-procedure TSynPHPSyn.VariableProc;
+procedure TSynEdit32HighlighterPHP.VariableProc;
 begin
   FTokenID := tkVariable;
   Inc(FRun);
   while IsIdentChar(FLine[FRun]) do Inc(FRun);
 end;
 
-procedure TSynPHPSyn.XOrSymbolProc;
+procedure TSynEdit32HighlighterPHP.XOrSymbolProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {xor assign}
@@ -900,13 +900,13 @@ begin
   end;
 end;
 
-procedure TSynPHPSyn.UnknownProc;
+procedure TSynEdit32HighlighterPHP.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynPHPSyn.AnsiCProc;
+procedure TSynEdit32HighlighterPHP.AnsiCProc;
 begin
   FTokenID := tkComment;
   case FLine[FRun] of
@@ -943,14 +943,14 @@ begin
       Inc(FRun);
 end;
 
-procedure TSynPHPSyn.String39Proc;
+procedure TSynEdit32HighlighterPHP.String39Proc;
 begin
   fRange := rsString39;
   Inc( FRun );
   StringProc;
 end;
 
-procedure TSynPHPSyn.String34Proc;
+procedure TSynEdit32HighlighterPHP.String34Proc;
 begin
   fRange := rsString34;
   Inc( FRun );
@@ -958,7 +958,7 @@ begin
 end;
 
 {$IFDEF SYN_HEREDOC}
-procedure TSynPHPSyn.HeredocProc;
+procedure TSynEdit32HighlighterPHP.HeredocProc;
 
   procedure SkipToEOL;
   begin
@@ -1015,7 +1015,7 @@ begin
 end;
 {$ENDIF}
 
-procedure TSynPHPSyn.Next;
+procedure TSynEdit32HighlighterPHP.Next;
 begin
   fTokenPos := FRun;
   case fRange of
@@ -1038,7 +1038,7 @@ begin
   inherited;
 end;
 
-procedure TSynPHPSyn.NextProcedure;
+procedure TSynEdit32HighlighterPHP.NextProcedure;
 begin
   case FLine[FRun] of
     '&': AndSymbolProc;
@@ -1080,7 +1080,7 @@ begin
   end;
 end;
 
-function TSynPHPSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterPHP.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := fCommentAttri;
@@ -1094,7 +1094,7 @@ begin
   end;
 end;
 
-function TSynPHPSyn.GetRange: Pointer;
+function TSynEdit32HighlighterPHP.GetRange: Pointer;
 {$IFDEF SYN_HEREDOC}
 var
   RangePointer: TRangePointer;
@@ -1115,12 +1115,12 @@ begin
 {$ENDIF}
 end;
 
-function TSynPHPSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterPHP.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynPHPSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterPHP.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkComment: Result := fCommentAttri;
@@ -1136,12 +1136,12 @@ begin
   end;
 end;
 
-function TSynPHPSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterPHP.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-procedure TSynPHPSyn.ResetRange;
+procedure TSynEdit32HighlighterPHP.ResetRange;
 begin
   fRange := rsUnknown;
 {$IFDEF SYN_HEREDOC}
@@ -1150,7 +1150,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TSynPHPSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterPHP.SetRange(Value: Pointer);
 {$IFDEF SYN_HEREDOC}
 var
   RangePointer: TRangePointer;
@@ -1171,17 +1171,17 @@ begin
 {$ENDIF}
 end;
 
-function TSynPHPSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterPHP.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterPHP;
 end;
 
-class function TSynPHPSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterPHP.GetLanguageName: string;
 begin
   Result := SYNS_LangPHP;
 end;
 
-function TSynPHPSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterPHP.GetSampleSource: UnicodeString;
 begin
   Result :=
     '// Syntax highlighting'#13#10+
@@ -1198,11 +1198,11 @@ begin
     '}';
 end;
 
-class function TSynPHPSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterPHP.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangPHP;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynPHPSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterPHP);
 end.

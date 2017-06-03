@@ -327,7 +327,7 @@ type
   PIdentFuncTableFunc = ^TIdentFuncTableFunc;
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
-  TSynHTMLSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterHTML = class(TSynEdit32CustomHighlighter)
   private
     FAndCode: Integer;
     FRange: TRangeState;
@@ -674,7 +674,7 @@ const
   );
 
 {$Q-}
-function TSynHTMLSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterHTML.HashKey(Str: PWideChar): Cardinal;
 begin
 //  Result := 0;
 //  while IsIdentChar(Str^) or CharInSet(Str^, ['!', '/']) do
@@ -696,7 +696,7 @@ begin
 end;
 {$Q+}
 
-function TSynHTMLSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterHTML.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -708,7 +708,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynHTMLSyn.InitIdent;
+procedure TSynEdit32HighlighterHTML.InitIdent;
 var
   i: Integer;
 begin
@@ -721,12 +721,12 @@ begin
       FIdentFuncTable[i] := KeyWordFunc;
 end;
 
-function TSynHTMLSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterHTML.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkUndefKey;
 end;
 
-function TSynHTMLSyn.KeyWordFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterHTML.KeyWordFunc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -734,7 +734,7 @@ begin
     Result := tkUndefKey;
 end;
 
-constructor TSynHTMLSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterHTML.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -783,14 +783,14 @@ begin
   FAndCode := -1;
 end;
 
-procedure TSynHTMLSyn.BraceCloseProc;
+procedure TSynEdit32HighlighterHTML.BraceCloseProc;
 begin
   FRange := rsText;
   FTokenId := tkSymbol;
   Inc(FRun);
 end;
 
-procedure TSynHTMLSyn.CommentProc;
+procedure TSynEdit32HighlighterHTML.CommentProc;
 begin
   FTokenId := tkComment;
 
@@ -812,7 +812,7 @@ begin
   end;
 end;
 
-procedure TSynHTMLSyn.BraceOpenProc;
+procedure TSynEdit32HighlighterHTML.BraceOpenProc;
 begin
   Inc(FRun);
   if (FLine[FRun] = '!') and (FLine[FRun + 1] = '-') and (FLine[FRun + 2] = '-') then
@@ -828,21 +828,21 @@ begin
   end;
 end;
 
-procedure TSynHTMLSyn.CRProc;
+procedure TSynEdit32HighlighterHTML.CRProc;
 begin
   FTokenId := tkSpace;
   Inc(FRun);
   if FLine[FRun] = #10 then Inc(FRun);
 end;
 
-procedure TSynHTMLSyn.EqualProc;
+procedure TSynEdit32HighlighterHTML.EqualProc;
 begin
   FRange := rsValue;
   FTokenId := tkSymbol;
   Inc(FRun);
 end;
 
-procedure TSynHTMLSyn.IdentProc;
+procedure TSynEdit32HighlighterHTML.IdentProc;
 begin
   case FRange of
   rsKey:
@@ -868,19 +868,19 @@ begin
   end;
 end;
 
-procedure TSynHTMLSyn.LFProc;
+procedure TSynEdit32HighlighterHTML.LFProc;
 begin
   FTokenId := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynHTMLSyn.NullProc;
+procedure TSynEdit32HighlighterHTML.NullProc;
 begin
   FTokenId := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynHTMLSyn.TextProc;
+procedure TSynEdit32HighlighterHTML.TextProc;
 
   function IsStopChar: Boolean;
   begin
@@ -957,7 +957,7 @@ begin
   end;
 end;
 
-procedure TSynHTMLSyn.AmpersandProc;
+procedure TSynEdit32HighlighterHTML.AmpersandProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -1015,7 +1015,7 @@ begin
   FRange := rsText;
 end;
 
-procedure TSynHTMLSyn.SpaceProc;
+procedure TSynEdit32HighlighterHTML.SpaceProc;
 begin
   Inc(FRun);
   FTokenId := tkSpace;
@@ -1026,7 +1026,7 @@ begin
   end;
 end;
 
-procedure TSynHTMLSyn.StringProc;
+procedure TSynEdit32HighlighterHTML.StringProc;
 var
   iOpenChar: WideChar;
 begin
@@ -1075,7 +1075,7 @@ begin
   end;
 end;
 
-function TSynHTMLSyn.IsIdentChar(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterHTML.IsIdentChar(AChar: WideChar): Boolean;
 begin
   case AChar of
     '_', '/', '0'..'9', 'A'..'Z', 'a'..'z':
@@ -1086,7 +1086,7 @@ begin
 end;
 
 
-procedure TSynHTMLSyn.Next;
+procedure TSynEdit32HighlighterHTML.Next;
 begin
   fTokenPos := FRun;
   case FRange of
@@ -1109,7 +1109,7 @@ begin
   inherited;
 end;
 
-procedure TSynHTMLSyn.NextProcedure;
+procedure TSynEdit32HighlighterHTML.NextProcedure;
 begin
   case FLine[FRun] of
     #0: NullProc;
@@ -1125,7 +1125,7 @@ begin
   end;
 end;
 
-function TSynHTMLSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterHTML.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -1138,12 +1138,12 @@ begin
   end;
 end;
 
-function TSynHTMLSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterHTML.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenId;
 end;
 
-function TSynHTMLSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterHTML.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case FTokenId of
     tkAmpersand: Result := FAndAttri;
@@ -1159,37 +1159,37 @@ begin
   end;
 end;
 
-function TSynHTMLSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterHTML.GetTokenKind: integer;
 begin
   Result := Ord(FTokenId);
 end;
 
-function TSynHTMLSyn.GetRange: Pointer;
+function TSynEdit32HighlighterHTML.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-procedure TSynHTMLSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterHTML.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-procedure TSynHTMLSyn.ResetRange;
+procedure TSynEdit32HighlighterHTML.ResetRange;
 begin
   FRange:= rsText;
 end;
 
-function TSynHTMLSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterHTML.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterHTML;
 end;
 
-class function TSynHTMLSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterHTML.GetLanguageName: string;
 begin
   Result := SYNS_LangHTML;
 end;
 
-function TSynHTMLSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterHTML.GetSampleSource: UnicodeString;
 begin
   Result :=
     '<!-- Syntax highlighting -->'#13#10 +
@@ -1205,11 +1205,11 @@ begin
     '</html>';
 end;
 
-class function TSynHTMLSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterHTML.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangHTML;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynHTMLSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterHTML);
 end.

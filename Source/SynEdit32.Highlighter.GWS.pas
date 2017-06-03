@@ -80,7 +80,7 @@ type
   PIdentFuncTableFunc = ^TIdentFuncTableFunc;
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
-  TSynGWScriptSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterGWScript = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
     FTokenID: TtkTokenKind;
@@ -190,7 +190,7 @@ const
   );
 
 {$Q-}
-function TSynGWScriptSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterGWScript.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) do
@@ -203,7 +203,7 @@ begin
 end;
 {$Q+}
 
-procedure TSynGWScriptSyn.InitIdent;
+procedure TSynEdit32HighlighterGWScript.InitIdent;
 var
   i: Integer;
 begin
@@ -226,13 +226,13 @@ begin
   FIdentFuncTable[3] := FuncWhile;
 end;
 
-function TSynGWScriptSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGWScript.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier;
 end;
 
 
-function TSynGWScriptSyn.FuncBool(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGWScript.FuncBool(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -240,7 +240,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGWScriptSyn.FuncBreak(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGWScript.FuncBreak(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -248,7 +248,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGWScriptSyn.FuncChar(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGWScript.FuncChar(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -256,7 +256,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGWScriptSyn.FuncDo(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGWScript.FuncDo(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -264,7 +264,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGWScriptSyn.FuncElse(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGWScript.FuncElse(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -272,7 +272,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGWScriptSyn.FuncFalse(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGWScript.FuncFalse(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -280,7 +280,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGWScriptSyn.FuncFor(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGWScript.FuncFor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -288,7 +288,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGWScriptSyn.FuncIf(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGWScript.FuncIf(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -296,7 +296,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGWScriptSyn.FuncInt(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGWScript.FuncInt(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -304,7 +304,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGWScriptSyn.FuncReturn(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGWScript.FuncReturn(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -312,7 +312,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGWScriptSyn.FuncString(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGWScript.FuncString(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -320,7 +320,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGWScriptSyn.FuncTrue(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGWScript.FuncTrue(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -328,7 +328,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGWScriptSyn.FuncWhile(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGWScript.FuncWhile(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -337,7 +337,7 @@ begin
 end;
 
 
-function TSynGWScriptSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterGWScript.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -349,7 +349,7 @@ begin
     Result := tkIdentifier;
 end;
 
-constructor TSynGWScriptSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterGWScript.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -381,7 +381,7 @@ begin
   fDefaultFilter := SYNS_FilterGWS;
 end; { Create }
 
-procedure TSynGWScriptSyn.AnsiCProc;
+procedure TSynEdit32HighlighterGWScript.AnsiCProc;
 begin
   FTokenID := tkComment;
   case FLine[FRun] of
@@ -417,7 +417,7 @@ begin
     end;
 end;
 
-procedure TSynGWScriptSyn.AndSymbolProc;
+procedure TSynEdit32HighlighterGWScript.AndSymbolProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -439,7 +439,7 @@ begin
   end;
 end;
 
-procedure TSynGWScriptSyn.AsciiCharProc;
+procedure TSynEdit32HighlighterGWScript.AsciiCharProc;
 begin
   FTokenID := tkString;
   repeat
@@ -453,13 +453,13 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynGWScriptSyn.AtSymbolProc;
+procedure TSynEdit32HighlighterGWScript.AtSymbolProc;
 begin
   FTokenID := tkUnknown;
   Inc(FRun);
 end;
 
-procedure TSynGWScriptSyn.BraceCloseProc;
+procedure TSynEdit32HighlighterGWScript.BraceCloseProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -467,21 +467,21 @@ begin
   FRange := rsUnknown;
 end;
 
-procedure TSynGWScriptSyn.BraceOpenProc;
+procedure TSynEdit32HighlighterGWScript.BraceOpenProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
   FExtTokenID := xtkBraceOpen;
 end;
 
-procedure TSynGWScriptSyn.CRProc;
+procedure TSynEdit32HighlighterGWScript.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
   if FLine[FRun + 1] = #10 then Inc(FRun);
 end;
 
-procedure TSynGWScriptSyn.ColonProc;
+procedure TSynEdit32HighlighterGWScript.ColonProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -498,14 +498,14 @@ begin
   end;
 end;
 
-procedure TSynGWScriptSyn.CommaProc;
+procedure TSynEdit32HighlighterGWScript.CommaProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
   FExtTokenID := xtkComma;
 end;
 
-procedure TSynGWScriptSyn.EqualProc;
+procedure TSynEdit32HighlighterGWScript.EqualProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -522,7 +522,7 @@ begin
   end;
 end;
 
-procedure TSynGWScriptSyn.GreaterProc;
+procedure TSynEdit32HighlighterGWScript.GreaterProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -552,27 +552,27 @@ begin
   end;
 end;
 
-procedure TSynGWScriptSyn.QuestionProc;
+procedure TSynEdit32HighlighterGWScript.QuestionProc;
 begin
   FTokenID := tkSymbol;                {conditional}
   FExtTokenID := xtkQuestion;
   Inc(FRun);
 end;
 
-procedure TSynGWScriptSyn.IdentProc;
+procedure TSynEdit32HighlighterGWScript.IdentProc;
 begin
   FTokenID := IdentKind((FLine + FRun));
   Inc(FRun, FStringLen);
   while IsIdentChar(FLine[FRun]) do Inc(FRun);
 end;
 
-procedure TSynGWScriptSyn.LFProc;
+procedure TSynEdit32HighlighterGWScript.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynGWScriptSyn.LowerProc;
+procedure TSynEdit32HighlighterGWScript.LowerProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -602,7 +602,7 @@ begin
   end;
 end;
 
-procedure TSynGWScriptSyn.MinusProc;
+procedure TSynEdit32HighlighterGWScript.MinusProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -629,7 +629,7 @@ begin
   end;
 end;
 
-procedure TSynGWScriptSyn.ModSymbolProc;
+procedure TSynEdit32HighlighterGWScript.ModSymbolProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -646,7 +646,7 @@ begin
   end;
 end;
 
-procedure TSynGWScriptSyn.NotSymbolProc;
+procedure TSynEdit32HighlighterGWScript.NotSymbolProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -663,13 +663,13 @@ begin
   end;
 end;
 
-procedure TSynGWScriptSyn.NullProc;
+procedure TSynEdit32HighlighterGWScript.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynGWScriptSyn.NumberProc;
+procedure TSynEdit32HighlighterGWScript.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -694,7 +694,7 @@ begin
   end;
 end;
 
-procedure TSynGWScriptSyn.OrSymbolProc;
+procedure TSynEdit32HighlighterGWScript.OrSymbolProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -716,7 +716,7 @@ begin
   end;
 end;
 
-procedure TSynGWScriptSyn.PlusProc;
+procedure TSynEdit32HighlighterGWScript.PlusProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -738,7 +738,7 @@ begin
   end;
 end;
 
-procedure TSynGWScriptSyn.PointProc;
+procedure TSynEdit32HighlighterGWScript.PointProc;
 begin
   FTokenID := tkSymbol;
   if (FLine[FRun + 1] = '.') and (FLine[FRun + 2] = '.') then
@@ -753,21 +753,21 @@ begin
     end;
 end;
 
-procedure TSynGWScriptSyn.RoundCloseProc;
+procedure TSynEdit32HighlighterGWScript.RoundCloseProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
   FExtTokenID := xtkRoundClose;
 end;
 
-procedure TSynGWScriptSyn.RoundOpenProc;
+procedure TSynEdit32HighlighterGWScript.RoundOpenProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
   FExtTokenID := xtkRoundOpen;
 end;
 
-procedure TSynGWScriptSyn.SemiColonProc;
+procedure TSynEdit32HighlighterGWScript.SemiColonProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -775,7 +775,7 @@ begin
   FRange := rsUnknown;
 end;
 
-procedure TSynGWScriptSyn.SlashProc;
+procedure TSynEdit32HighlighterGWScript.SlashProc;
 begin
   case FLine[FRun + 1] of
     '/':                               {c++ style comments}
@@ -818,28 +818,28 @@ begin
   end;
 end;
 
-procedure TSynGWScriptSyn.SpaceProc;
+procedure TSynEdit32HighlighterGWScript.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynGWScriptSyn.SquareCloseProc;
+procedure TSynEdit32HighlighterGWScript.SquareCloseProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
   FExtTokenID := xtkSquareClose;
 end;
 
-procedure TSynGWScriptSyn.SquareOpenProc;
+procedure TSynEdit32HighlighterGWScript.SquareOpenProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
   FExtTokenID := xtkSquareOpen;
 end;
 
-procedure TSynGWScriptSyn.StarProc;
+procedure TSynEdit32HighlighterGWScript.StarProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -856,7 +856,7 @@ begin
   end;
 end;
 
-procedure TSynGWScriptSyn.StringProc;
+procedure TSynEdit32HighlighterGWScript.StringProc;
 begin
   FTokenID := tkString;
   if (FLine[FRun + 1] = #34) and (FLine[FRun + 2] = #34) then Inc(FRun, 2);
@@ -874,14 +874,14 @@ begin
   if FLine[FRun] <> #0 then Inc(FRun);
 end;
 
-procedure TSynGWScriptSyn.TildeProc;
+procedure TSynEdit32HighlighterGWScript.TildeProc;
 begin
   Inc(FRun);                            {bitwise complement}
   FTokenID := tkSymbol;
   FExtTokenID := xtkBitComplement;
 end;
 
-procedure TSynGWScriptSyn.XOrSymbolProc;
+procedure TSynEdit32HighlighterGWScript.XOrSymbolProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -898,13 +898,13 @@ begin
   end;
 end;
 
-procedure TSynGWScriptSyn.UnknownProc;
+procedure TSynEdit32HighlighterGWScript.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynGWScriptSyn.Next;
+procedure TSynEdit32HighlighterGWScript.Next;
 begin
   fTokenPos := FRun;
   case FRange of
@@ -953,22 +953,22 @@ begin
   inherited;
 end;
 
-function TSynGWScriptSyn.GetRange: Pointer;
+function TSynEdit32HighlighterGWScript.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-function TSynGWScriptSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterGWScript.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynGWScriptSyn.GetExtTokenID: TxtkTokenKind;
+function TSynEdit32HighlighterGWScript.GetExtTokenID: TxtkTokenKind;
 begin
   Result := FExtTokenID;
 end;
 
-function TSynGWScriptSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterGWScript.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case FTokenID of
     tkComment: Result := FCommentAttri;
@@ -983,32 +983,32 @@ begin
   end;
 end;
 
-function TSynGWScriptSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterGWScript.GetTokenKind: integer;
 begin
   Result := Ord(GetTokenID);
 end;
 
-procedure TSynGWScriptSyn.ResetRange;
+procedure TSynEdit32HighlighterGWScript.ResetRange;
 begin
   FRange:= rsUnknown;
 end;
 
-procedure TSynGWScriptSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterGWScript.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-function TSynGWScriptSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterGWScript.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterGWS;
 end;
 
-class function TSynGWScriptSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterGWScript.GetLanguageName: string;
 begin
   Result := SYNS_LangGWS;
 end;
 
-function TSynGWScriptSyn.GetDefaultAttribute (Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterGWScript.GetDefaultAttribute (Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT    : Result := FCommentAttri;
@@ -1022,11 +1022,11 @@ begin
   end;
 end;
 
-class function TSynGWScriptSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterGWScript.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangGWS;
 end;
 
 initialization
-  RegisterPlaceableHighlighter (TSynGWScriptSyn);
+  RegisterPlaceableHighlighter (TSynEdit32HighlighterGWScript);
 end.

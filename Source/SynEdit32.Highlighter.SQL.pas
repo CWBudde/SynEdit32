@@ -1,4 +1,4 @@
-{-------------------------------------------------------------------------------
+﻿{-------------------------------------------------------------------------------
 The contents of this file are subject to the Mozilla Public License
 Version 1.1 (the "License"); you may not use this file except in compliance
 with the License. You may obtain a copy of the License at
@@ -82,7 +82,7 @@ type
     sqlSybase, sqlIngres, sqlMSSQL2K, sqlPostgres, sqlNexus);
 
 type
-  TSynSQLSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterSQL = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
     FTokenID: TtkTokenKind;
@@ -1277,7 +1277,7 @@ const
     'AUTOINC,BIGINT,LARGEINT,WORD,DWORD,FLOAT,REAL,DOUBLE,EXTENDED,MONEY,' +
     'BOOLEAN,BOOL,DATE,TIME,TIMESTAMP,DATETIME,GUID,BYTEARRAY,RECREV';
 
-function TSynSQLSyn.HashKey(Str: PWideChar): Integer;
+function TSynEdit32HighlighterSQL.HashKey(Str: PWideChar): Integer;
 var
   FoundDoubleMinus: Boolean;
 
@@ -1316,7 +1316,7 @@ begin
     FStringLen := 0;
 end;
 
-function TSynSQLSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterSQL.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Entry: TSynEdit32HashEntry;
 begin
@@ -1342,7 +1342,7 @@ begin
     Result := tkIdentifier;
 end;
 
-constructor TSynSQLSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterSQL.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -1418,7 +1418,7 @@ begin
   InitializeKeywordLists;
 end;
 
-destructor TSynSQLSyn.Destroy;
+destructor TSynEdit32HighlighterSQL.Destroy;
 begin
   FKeywords.Free;
   FProcNames.Free;
@@ -1430,21 +1430,21 @@ begin
   inherited Destroy;
 end;
 
-procedure TSynSQLSyn.Assign(Source: TPersistent);
+procedure TSynEdit32HighlighterSQL.Assign(Source: TPersistent);
 begin
   inherited Assign(Source);
-  if (Source is TSynSQLSyn) then
-    SQLDialect := TSynSQLSyn(Source).SQLDialect;
+  if (Source is TSynEdit32HighlighterSQL) then
+    SQLDialect := TSynEdit32HighlighterSQL(Source).SQLDialect;
 end;
 
-procedure TSynSQLSyn.AndSymbolProc;
+procedure TSynEdit32HighlighterSQL.AndSymbolProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if CharInSet(FLine[FRun], ['=', '&']) then Inc(FRun);
 end;
 
-procedure TSynSQLSyn.AsciiCharProc;
+procedure TSynEdit32HighlighterSQL.AsciiCharProc;
 begin
   // Oracle SQL allows strings to go over multiple lines
   if FLine[FRun] = #0 then
@@ -1491,28 +1491,28 @@ begin
   end;
 end;
 
-procedure TSynSQLSyn.CRProc;
+procedure TSynEdit32HighlighterSQL.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
   if FLine[FRun] = #10 then Inc(FRun);
 end;
 
-procedure TSynSQLSyn.EqualProc;
+procedure TSynEdit32HighlighterSQL.EqualProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if CharInSet(FLine[FRun], ['=', '>']) then Inc(FRun);
 end;
 
-procedure TSynSQLSyn.GreaterProc;
+procedure TSynEdit32HighlighterSQL.GreaterProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if CharInSet(FLine[FRun], ['=', '>']) then Inc(FRun);
 end;
 
-procedure TSynSQLSyn.IdentProc;
+procedure TSynEdit32HighlighterSQL.IdentProc;
 var
   FoundDoubleMinus: Boolean;
 begin
@@ -1532,13 +1532,13 @@ begin
     end;
 end;
 
-procedure TSynSQLSyn.LFProc;
+procedure TSynEdit32HighlighterSQL.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynSQLSyn.LowerProc;
+procedure TSynEdit32HighlighterSQL.LowerProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
@@ -1551,7 +1551,7 @@ begin
   end;
 end;
 
-procedure TSynSQLSyn.MinusProc;
+procedure TSynEdit32HighlighterSQL.MinusProc;
 begin
   Inc(FRun);
   if FLine[FRun] = '-' then
@@ -1565,7 +1565,7 @@ begin
     FTokenID := tkSymbol;
 end;
 
-procedure TSynSQLSyn.HashProc;
+procedure TSynEdit32HighlighterSQL.HashProc;
 begin
   if SQLDialect = sqlMySql then
   begin
@@ -1581,13 +1581,13 @@ begin
   end;
 end;
 
-procedure TSynSQLSyn.NullProc;
+procedure TSynEdit32HighlighterSQL.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynSQLSyn.NumberProc;
+procedure TSynEdit32HighlighterSQL.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -1612,31 +1612,31 @@ begin
   end;
 end;
 
-procedure TSynSQLSyn.OrSymbolProc;
+procedure TSynEdit32HighlighterSQL.OrSymbolProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if CharInSet(FLine[FRun], ['=', '|']) then Inc(FRun);
 end;
 
-procedure TSynSQLSyn.PlusProc;
+procedure TSynEdit32HighlighterSQL.PlusProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if CharInSet(FLine[FRun], ['=', '+']) then Inc(FRun);
 end;
 
-procedure TSynSQLSyn.FunctionNamesChanged(Sender: TObject);
+procedure TSynEdit32HighlighterSQL.FunctionNamesChanged(Sender: TObject);
 begin
   InitializeKeywordLists;
 end;
 
-procedure TSynSQLSyn.ProcNamesChanged(Sender: TObject);
+procedure TSynEdit32HighlighterSQL.ProcNamesChanged(Sender: TObject);
 begin
   InitializeKeywordLists;
 end;
 
-procedure TSynSQLSyn.SlashProc;
+procedure TSynEdit32HighlighterSQL.SlashProc;
 begin
   Inc(FRun);
   case FLine[FRun] of
@@ -1681,14 +1681,14 @@ begin
   end;
 end;
 
-procedure TSynSQLSyn.SpaceProc;
+procedure TSynEdit32HighlighterSQL.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynSQLSyn.QuoteProc;
+procedure TSynEdit32HighlighterSQL.QuoteProc;
 begin
   FTokenID := tkDelimitedIdentifier;
   Inc(FRun);
@@ -1704,7 +1704,7 @@ begin
   end;
 end;
 
-procedure TSynSQLSyn.BacktickProc;
+procedure TSynEdit32HighlighterSQL.BacktickProc;
 begin
   if SQLDialect = sqlMySql then
   begin
@@ -1728,7 +1728,7 @@ begin
   end;
 end;
 
-procedure TSynSQLSyn.BracketProc;
+procedure TSynEdit32HighlighterSQL.BracketProc;
 begin
   if SQLDialect in [sqlMSSQL7, sqlMSSQL2K] then
   begin
@@ -1752,20 +1752,20 @@ begin
   end;
 end;
 
-procedure TSynSQLSyn.SymbolProc;
+procedure TSynEdit32HighlighterSQL.SymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynSQLSyn.SymbolAssignProc;
+procedure TSynEdit32HighlighterSQL.SymbolAssignProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if FLine[FRun] = '=' then Inc(FRun);
 end;
 
-procedure TSynSQLSyn.VariableProc;
+procedure TSynEdit32HighlighterSQL.VariableProc;
 var
   i: integer;
   FoundDoubleMinus: Boolean;
@@ -1792,13 +1792,13 @@ begin
   end;
 end;
 
-procedure TSynSQLSyn.UnknownProc;
+procedure TSynEdit32HighlighterSQL.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynSQLSyn.AnsiCProc;
+procedure TSynEdit32HighlighterSQL.AnsiCProc;
 begin
   case FLine[FRun] of
      #0: NullProc;
@@ -1823,7 +1823,7 @@ begin
   end;
 end;
 
-function TSynSQLSyn.IsKeyword(const AKeyword: UnicodeString): Boolean;
+function TSynEdit32HighlighterSQL.IsKeyword(const AKeyword: UnicodeString): Boolean;
 var
   tk: TtkTokenKind;
 begin
@@ -1832,7 +1832,7 @@ begin
     tkDefaultPackage];
 end;
 
-procedure TSynSQLSyn.Next;
+procedure TSynEdit32HighlighterSQL.Next;
 begin
   fTokenPos := FRun;
   case FRange of
@@ -1875,7 +1875,7 @@ begin
   inherited;
 end;
 
-function TSynSQLSyn.GetDefaultAttribute(Index: integer):
+function TSynEdit32HighlighterSQL.GetDefaultAttribute(Index: integer):
   TSynEdit32HighlighterAttributes;
 begin
   case Index of
@@ -1890,17 +1890,17 @@ begin
   end;
 end;
 
-function TSynSQLSyn.GetRange: Pointer;
+function TSynEdit32HighlighterSQL.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-function TSynSQLSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterSQL.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynSQLSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterSQL.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkComment: Result := FCommentAttri;
@@ -1928,27 +1928,27 @@ begin
   end;
 end;
 
-function TSynSQLSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterSQL.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-procedure TSynSQLSyn.ResetRange;
+procedure TSynEdit32HighlighterSQL.ResetRange;
 begin
   FRange := rsUnknown;
 end;
 
-procedure TSynSQLSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterSQL.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-function TSynSQLSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterSQL.IsFilterStored: Boolean;
 begin
   Result := FDefaultFilter <> SYNS_FilterSQL;
 end;
 
-function TSynSQLSyn.IsIdentChar(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterSQL.IsIdentChar(AChar: WideChar): Boolean;
 begin
   case AChar of
     'a'..'z', 'A'..'Z', '0'..'9', '_':
@@ -1966,12 +1966,12 @@ begin
   end;
 end;
 
-class function TSynSQLSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterSQL.GetLanguageName: string;
 begin
   Result := SYNS_LangSQL;
 end;
 
-procedure TSynSQLSyn.DoAddKeyword(AKeyword: UnicodeString; AKind: integer);
+procedure TSynEdit32HighlighterSQL.DoAddKeyword(AKeyword: UnicodeString; AKind: integer);
 var
   HashValue: Integer;
 begin
@@ -1980,17 +1980,17 @@ begin
   FKeywords[HashValue] := TSynEdit32HashEntry.Create(AKeyword, AKind);
 end;
 
-procedure TSynSQLSyn.SetTableNames(const Value: TUnicodeStrings);
+procedure TSynEdit32HighlighterSQL.SetTableNames(const Value: TUnicodeStrings);
 begin
   FTableNames.Assign(Value);
 end;
 
-procedure TSynSQLSyn.TableNamesChanged(Sender: TObject);
+procedure TSynEdit32HighlighterSQL.TableNamesChanged(Sender: TObject);
 begin
   InitializeKeywordLists;
 end;
 
-procedure TSynSQLSyn.PutTableNamesInKeywordList;
+procedure TSynEdit32HighlighterSQL.PutTableNamesInKeywordList;
 var
   i: Integer;
   Entry: TSynEdit32HashEntry;
@@ -2014,7 +2014,7 @@ begin
   end;
 end;
 
-procedure TSynSQLSyn.PutFunctionNamesInKeywordList;
+procedure TSynEdit32HighlighterSQL.PutFunctionNamesInKeywordList;
 var
   i: Integer;
   Entry: TSynEdit32HashEntry;
@@ -2033,7 +2033,7 @@ begin
   end;
 end;
 
-procedure TSynSQLSyn.PutProcNamesInKeywordList;
+procedure TSynEdit32HighlighterSQL.PutProcNamesInKeywordList;
 var
   i: Integer;
   Entry: TSynEdit32HashEntry;
@@ -2052,7 +2052,7 @@ begin
   end;
 end;
 
-procedure TSynSQLSyn.InitializeKeywordLists;
+procedure TSynEdit32HighlighterSQL.InitializeKeywordLists;
 var
   I: Integer;
 begin
@@ -2075,7 +2075,7 @@ begin
   DefHighlightChange(Self);
 end;
 
-procedure TSynSQLSyn.SetDialect(Value: TSQLDialect);
+procedure TSynEdit32HighlighterSQL.SetDialect(Value: TSQLDialect);
 begin
   if (Value <> FDialect) then
   begin
@@ -2084,17 +2084,17 @@ begin
   end;
 end;
 
-procedure TSynSQLSyn.SetFunctionNames(const Value: TUnicodeStrings);
+procedure TSynEdit32HighlighterSQL.SetFunctionNames(const Value: TUnicodeStrings);
 begin
   FFunctionNames.Assign(Value);
 end;
 
-procedure TSynSQLSyn.SetProcNames(const Value: TUnicodeStrings);
+procedure TSynEdit32HighlighterSQL.SetProcNames(const Value: TUnicodeStrings);
 begin
   FProcNames.Assign(Value);
 end;
 
-function TSynSQLSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterSQL.GetSampleSource: UnicodeString;
 begin
   Result := '';
   case FDialect of
@@ -2224,12 +2224,12 @@ begin
   end;
 end;
 
-class function TSynSQLSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterSQL.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangSQL;
 end;
 
-function TSynSQLSyn.GetKeyWords(TokenKind: Integer): UnicodeString;
+function TSynEdit32HighlighterSQL.GetKeyWords(TokenKind: Integer): UnicodeString;
 begin
   Result := '';
 
@@ -2302,5 +2302,5 @@ begin
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynSQLSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterSQL);
 end.

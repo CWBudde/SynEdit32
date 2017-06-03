@@ -1,4 +1,4 @@
-{-------------------------------------------------------------------------------
+﻿{-------------------------------------------------------------------------------
 The contents of this file are subject to the Mozilla Public License
 Version 1.1 (the "License"); you may not use this file except in compliance
 with the License. You may obtain a copy of the License at
@@ -263,7 +263,7 @@ type
     property Images: TImageList read FImages write SetImages;
   end;
 
-  TSynBaseCompletionProposal = class(TComponent)
+  TSynEdit32BaseCompletionProposal = class(TComponent)
   private
     FForm: TSynBaseCompletionProposalForm;
     FOnExecute: TCompletionExecute;
@@ -398,7 +398,7 @@ type
     property OnShow: TNotifyEvent read FOnShow write FOnShow;
   end;
 
-  TSynCompletionProposal = class(TSynBaseCompletionProposal)
+  TSynEdit32CompletionProposal = class(TSynEdit32BaseCompletionProposal)
   private
     FEditors: TList;
     FShortCut: TShortCut;
@@ -458,7 +458,7 @@ type
     property OnCodeCompletion: TCodeCompletionEvent read FOnCodeCompletion write FOnCodeCompletion;
   end;
 
-  TSynAutoComplete = class(TComponent)
+  TSynEdit32AutoComplete = class(TComponent)
   private
     FShortCut: TShortCut;
     FEditor: TCustomSynEdit32;
@@ -467,7 +467,7 @@ type
     FEndOfTokenChr: UnicodeString;
     FOnBeforeExecute: TNotifyEvent;
     FOnAfterExecute: TNotifyEvent;
-    FInternalCompletion: TSynCompletionProposal;
+    FInternalCompletion: TSynEdit32CompletionProposal;
     FDoLookup: Boolean;
     FOptions: TSynCompletionOptions;
     procedure SetAutoCompleteList(List: TUnicodeStrings);
@@ -1845,7 +1845,7 @@ begin
       Position := 0;
     
     if Visible and Assigned(FOnChangePosition) and (DisplayType = ctCode) then
-      FOnChangePosition(Owner as TSynBaseCompletionProposal,
+      FOnChangePosition(Owner as TSynEdit32BaseCompletionProposal,
         LogicalToPhysicalIndex(FPosition));
         
     Repaint;
@@ -1896,7 +1896,7 @@ begin
       FScrollbar.Position := Position - FLinesInWindow + 1;
 
     if Visible and Assigned(FOnChangePosition) and (DisplayType = ctCode) then
-      FOnChangePosition(Owner as TSynBaseCompletionProposal,
+      FOnChangePosition(Owner as TSynEdit32BaseCompletionProposal,
         LogicalToPhysicalIndex(FPosition));
 
     Repaint;
@@ -1953,7 +1953,7 @@ end;
 
 function TSynBaseCompletionProposalForm.IsWordBreakChar(AChar: WideChar): Boolean;
 begin
-  Result := (Owner as TSynBaseCompletionProposal).IsWordBreakChar(AChar);
+  Result := (Owner as TSynEdit32BaseCompletionProposal).IsWordBreakChar(AChar);
 end;
 
 {$IFNDEF SYN_CLX}
@@ -2052,12 +2052,12 @@ begin
 //    (CurrentEditor as TCustomSynEdit32).UpdateCaret;
     if DisplayType = ctCode then
     begin
-      (Owner as TSynBaseCompletionProposal).FWidth := Width;
-      (Owner as TSynBaseCompletionProposal).FNbLinesInWindow := FLinesInWindow;
+      (Owner as TSynEdit32BaseCompletionProposal).FWidth := Width;
+      (Owner as TSynEdit32BaseCompletionProposal).FNbLinesInWindow := FLinesInWindow;
     end;
   end;
-  if Assigned((Owner as TSynBaseCompletionProposal).OnClose) then
-    TSynBaseCompletionProposal(Owner).OnClose(Self);
+  if Assigned((Owner as TSynEdit32BaseCompletionProposal).OnClose) then
+    TSynEdit32BaseCompletionProposal(Owner).OnClose(Self);
 end;
 
 procedure TSynBaseCompletionProposalForm.DoFormShow(Sender: TObject);
@@ -2071,8 +2071,8 @@ begin
 //      UpdateCaret;
     end;
   end;
-  if Assigned((Owner as TSynBaseCompletionProposal).OnShow) then
-    (Owner as TSynBaseCompletionProposal).OnShow(Self);
+  if Assigned((Owner as TSynEdit32BaseCompletionProposal).OnShow) then
+    (Owner as TSynEdit32BaseCompletionProposal).OnShow(Self);
 end;
 
 procedure TSynBaseCompletionProposalForm.WMEraseBackgrnd(
@@ -2213,9 +2213,9 @@ begin
 end;
 
 
-{ TSynBaseCompletionProposal }
+{ TSynEdit32BaseCompletionProposal }
 
-constructor TSynBaseCompletionProposal.Create(Aowner: TComponent);
+constructor TSynEdit32BaseCompletionProposal.Create(Aowner: TComponent);
 begin
   FWidth := 260;
   FNbLinesInWindow := 8;
@@ -2226,12 +2226,12 @@ begin
   DefaultType := ctCode;
 end;
 
-procedure TSynBaseCompletionProposal.Execute(s: UnicodeString; x, y: integer);
+procedure TSynEdit32BaseCompletionProposal.Execute(s: UnicodeString; x, y: integer);
 begin
   ExecuteEx(s, x, y, DefaultType);
 end;
 
-procedure TSynBaseCompletionProposal.ExecuteEx(s: UnicodeString; x, y: integer; Kind : SynCompletionType);
+procedure TSynEdit32BaseCompletionProposal.ExecuteEx(s: UnicodeString; x, y: integer; Kind : SynCompletionType);
 
   function GetWorkAreaWidth: Integer;
   begin
@@ -2440,132 +2440,132 @@ begin
   end;
 end;
 
-function TSynBaseCompletionProposal.GetCurrentString: UnicodeString;
+function TSynEdit32BaseCompletionProposal.GetCurrentString: UnicodeString;
 begin
   Result := Form.CurrentString;
 end;
 
-function TSynBaseCompletionProposal.GetItemList: TUnicodeStrings;
+function TSynEdit32BaseCompletionProposal.GetItemList: TUnicodeStrings;
 begin
   Result := Form.ItemList;
 end;
 
-function TSynBaseCompletionProposal.GetInsertList: TUnicodeStrings;
+function TSynEdit32BaseCompletionProposal.GetInsertList: TUnicodeStrings;
 begin
   Result := Form.InsertList;
 end;
 
-function TSynBaseCompletionProposal.GetOnCancel: TNotifyEvent;
+function TSynEdit32BaseCompletionProposal.GetOnCancel: TNotifyEvent;
 begin
   Result := Form.OnCancel;
 end;
 
-function TSynBaseCompletionProposal.GetOnKeyPress: TKeyPressWEvent;
+function TSynEdit32BaseCompletionProposal.GetOnKeyPress: TKeyPressWEvent;
 begin
   Result := Form.OnKeyPress;
 end;
 
-function TSynBaseCompletionProposal.GetOnPaintItem: TSynBaseCompletionProposalPaintItem;
+function TSynEdit32BaseCompletionProposal.GetOnPaintItem: TSynBaseCompletionProposalPaintItem;
 begin
   Result := Form.OnPaintItem;
 end;
 
-function TSynBaseCompletionProposal.GetOnMeasureItem: TSynBaseCompletionProposalMeasureItem;
+function TSynEdit32BaseCompletionProposal.GetOnMeasureItem: TSynBaseCompletionProposalMeasureItem;
 begin
   Result := Form.OnMeasureItem;
 end;
 
-function TSynBaseCompletionProposal.GetOnValidate: TValidateEvent;
+function TSynEdit32BaseCompletionProposal.GetOnValidate: TValidateEvent;
 begin
   Result := Form.OnValidate;
 end;
 
-function TSynBaseCompletionProposal.GetPosition: Integer;
+function TSynEdit32BaseCompletionProposal.GetPosition: Integer;
 begin
   Result := Form.Position;
 end;
 
-procedure TSynBaseCompletionProposal.SetCurrentString(const Value: UnicodeString);
+procedure TSynEdit32BaseCompletionProposal.SetCurrentString(const Value: UnicodeString);
 begin
   Form.CurrentString := Value;
 end;
 
-procedure TSynBaseCompletionProposal.SetItemList(const Value: TUnicodeStrings);
+procedure TSynEdit32BaseCompletionProposal.SetItemList(const Value: TUnicodeStrings);
 begin
   Form.ItemList := Value;
 end;
 
-procedure TSynBaseCompletionProposal.SetInsertList(const Value: TUnicodeStrings);
+procedure TSynEdit32BaseCompletionProposal.SetInsertList(const Value: TUnicodeStrings);
 begin
   Form.InsertList := Value;
 end;
 
-procedure TSynBaseCompletionProposal.SetNbLinesInWindow(const Value: Integer);
+procedure TSynEdit32BaseCompletionProposal.SetNbLinesInWindow(const Value: Integer);
 begin
   FNbLinesInWindow := Value;
 end;
 
-procedure TSynBaseCompletionProposal.SetOnCancel(const Value: TNotifyEvent);
+procedure TSynEdit32BaseCompletionProposal.SetOnCancel(const Value: TNotifyEvent);
 begin
   Form.OnCancel := Value;
 end;
 
-procedure TSynBaseCompletionProposal.SetOnKeyPress(const Value: TKeyPressWEvent);
+procedure TSynEdit32BaseCompletionProposal.SetOnKeyPress(const Value: TKeyPressWEvent);
 begin
   Form.OnKeyPress := Value;
 end;
 
-procedure TSynBaseCompletionProposal.SetOnPaintItem(const Value:
+procedure TSynEdit32BaseCompletionProposal.SetOnPaintItem(const Value:
   TSynBaseCompletionProposalPaintItem);
 begin
   Form.OnPaintItem := Value;
 end;
 
-procedure TSynBaseCompletionProposal.SetOnMeasureItem(const Value:
+procedure TSynEdit32BaseCompletionProposal.SetOnMeasureItem(const Value:
   TSynBaseCompletionProposalMeasureItem);
 begin
   Form.OnMeasureItem := Value;
 end;
 
 
-procedure TSynBaseCompletionProposal.SetPosition(const Value: Integer);
+procedure TSynEdit32BaseCompletionProposal.SetPosition(const Value: Integer);
 begin
   form.Position := Value;
 end;
 
-procedure TSynBaseCompletionProposal.SetOnValidate(const Value: TValidateEvent);
+procedure TSynEdit32BaseCompletionProposal.SetOnValidate(const Value: TValidateEvent);
 begin
   form.OnValidate := Value;
 end;
 
-function TSynBaseCompletionProposal.GetClSelect: TColor;
+function TSynEdit32BaseCompletionProposal.GetClSelect: TColor;
 begin
   Result := Form.ClSelect;
 end;
 
-procedure TSynBaseCompletionProposal.SetClSelect(const Value: TColor);
+procedure TSynEdit32BaseCompletionProposal.SetClSelect(const Value: TColor);
 begin
   Form.ClSelect := Value;
 end;
 
-procedure TSynBaseCompletionProposal.SetWidth(Value: Integer);
+procedure TSynEdit32BaseCompletionProposal.SetWidth(Value: Integer);
 begin
   FWidth := Value;
 end;
 
-procedure TSynBaseCompletionProposal.Activate;
+procedure TSynEdit32BaseCompletionProposal.Activate;
 begin
   if Assigned(Form) then
     Form.Activate;
 end;
 
-procedure TSynBaseCompletionProposal.Deactivate;
+procedure TSynEdit32BaseCompletionProposal.Deactivate;
 begin
   if Assigned(Form) then
     Form.Deactivate;
 end;
 
-procedure TSynBaseCompletionProposal.DefineProperties(Filer: TFiler);
+procedure TSynEdit32BaseCompletionProposal.DefineProperties(Filer: TFiler);
 begin
   inherited;
 {$IFNDEF UNICODE}
@@ -2573,7 +2573,7 @@ begin
 {$ENDIF}
 end;
 
-function TSynBaseCompletionProposal.GetClBack(AIndex: Integer): TColor;
+function TSynEdit32BaseCompletionProposal.GetClBack(AIndex: Integer): TColor;
 begin
   case AIndex of
     1: Result := Form.ClBackground;
@@ -2583,7 +2583,7 @@ begin
   end;
 end;
 
-procedure TSynBaseCompletionProposal.SetClBack(AIndex: Integer; const Value: TColor);
+procedure TSynEdit32BaseCompletionProposal.SetClBack(AIndex: Integer; const Value: TColor);
 begin
   case AIndex of
     1: Form.ClBackground := Value;
@@ -2591,23 +2591,23 @@ begin
   end;
 end;
 
-function TSynBaseCompletionProposal.GetClSelectedText: TColor;
+function TSynEdit32BaseCompletionProposal.GetClSelectedText: TColor;
 begin
   Result := Form.ClSelectedText;
 end;
 
-procedure TSynBaseCompletionProposal.SetClSelectedText(const Value: TColor);
+procedure TSynEdit32BaseCompletionProposal.SetClSelectedText(const Value: TColor);
 begin
   Form.ClSelectedText := Value;
 end;
 
-procedure TSynBaseCompletionProposal.AddItem(ADisplayText, AInsertText: UnicodeString);
+procedure TSynEdit32BaseCompletionProposal.AddItem(ADisplayText, AInsertText: UnicodeString);
 begin
   GetInsertList.Add(AInsertText);
   GetItemList.Add(ADisplayText);
 end;
 
-procedure TSynBaseCompletionProposal.AddItemAt(Where: Integer; ADisplayText, AInsertText: UnicodeString);
+procedure TSynEdit32BaseCompletionProposal.AddItemAt(Where: Integer; ADisplayText, AInsertText: UnicodeString);
 begin
   try
     GetInsertList.Insert(Where, AInsertText);
@@ -2617,23 +2617,23 @@ begin
   end;
 end;
 
-procedure TSynBaseCompletionProposal.ClearList;
+procedure TSynEdit32BaseCompletionProposal.ClearList;
 begin
   GetInsertList.Clear;
   GetItemList.Clear;
 end;
 
-function TSynBaseCompletionProposal.DisplayItem(AIndex : Integer): UnicodeString;
+function TSynEdit32BaseCompletionProposal.DisplayItem(AIndex : Integer): UnicodeString;
 begin
   Result := GetItemList[AIndex];
 end;
 
-function TSynBaseCompletionProposal.InsertItem(AIndex : Integer): UnicodeString;
+function TSynEdit32BaseCompletionProposal.InsertItem(AIndex : Integer): UnicodeString;
 begin
   Result := GetInsertList[AIndex];
 end;
 
-function TSynBaseCompletionProposal.IsWordBreakChar(AChar: WideChar): Boolean;
+function TSynEdit32BaseCompletionProposal.IsWordBreakChar(AChar: WideChar): Boolean;
 begin
   Result := False;
   if (scoConsiderWordBreakChars in Options) and Assigned(Form) and
@@ -2643,93 +2643,93 @@ begin
   Result := Result or (Pos(AChar, EndOfTokenChr) > 0);
 end;
 
-function TSynBaseCompletionProposal.GetDisplayKind: SynCompletionType;
+function TSynEdit32BaseCompletionProposal.GetDisplayKind: SynCompletionType;
 begin
   Result := Form.DisplayType;
 end;
 
-procedure TSynBaseCompletionProposal.SetDisplayKind(const Value: SynCompletionType);
+procedure TSynEdit32BaseCompletionProposal.SetDisplayKind(const Value: SynCompletionType);
 begin
   Form.DisplayType := Value;
 end;
 
-function TSynBaseCompletionProposal.GetParameterToken: TCompletionParameter;
+function TSynEdit32BaseCompletionProposal.GetParameterToken: TCompletionParameter;
 begin
   Result := Form.OnParameterToken;
 end;
 
-procedure TSynBaseCompletionProposal.SetParameterToken(
+procedure TSynEdit32BaseCompletionProposal.SetParameterToken(
   const Value: TCompletionParameter);
 begin
   Form.OnParameterToken := Value;
 end;
 
-procedure TSynBaseCompletionProposal.SetColumns(const Value: TProposalColumns);
+procedure TSynEdit32BaseCompletionProposal.SetColumns(const Value: TProposalColumns);
 begin
   FForm.Columns := Value;
 end;
 
-function TSynBaseCompletionProposal.GetColumns: TProposalColumns;
+function TSynEdit32BaseCompletionProposal.GetColumns: TProposalColumns;
 begin
   Result := FForm.Columns;
 end;
 
-function TSynBaseCompletionProposal.GetResizeable: Boolean;
+function TSynEdit32BaseCompletionProposal.GetResizeable: Boolean;
 begin
   Result := FForm.Resizeable;
 end;
 
-procedure TSynBaseCompletionProposal.SetResizeable(const Value: Boolean);
+procedure TSynEdit32BaseCompletionProposal.SetResizeable(const Value: Boolean);
 begin
   if FForm.Resizeable <> Value then
     FForm.Resizeable := Value;
 end;
 
-function TSynBaseCompletionProposal.GetItemHeight: Integer;
+function TSynEdit32BaseCompletionProposal.GetItemHeight: Integer;
 begin
   Result := FForm.ItemHeight;
 end;
 
-procedure TSynBaseCompletionProposal.SetItemHeight(const Value: Integer);
+procedure TSynEdit32BaseCompletionProposal.SetItemHeight(const Value: Integer);
 begin
   if FForm.ItemHeight <> Value then
     FForm.ItemHeight := Value;
 end;
 
-procedure TSynBaseCompletionProposal.SetImages(const Value: TImageList);
+procedure TSynEdit32BaseCompletionProposal.SetImages(const Value: TImageList);
 begin
   FForm.Images := Value;
 end;
 
-function TSynBaseCompletionProposal.GetImages: TImageList;
+function TSynEdit32BaseCompletionProposal.GetImages: TImageList;
 begin
   Result := FForm.Images;
 end;
 
-function TSynBaseCompletionProposal.GetMargin: Integer;
+function TSynEdit32BaseCompletionProposal.GetMargin: Integer;
 begin
   Result := FForm.Margin;
 end;
 
-procedure TSynBaseCompletionProposal.SetMargin(const Value: Integer);
+procedure TSynEdit32BaseCompletionProposal.SetMargin(const Value: Integer);
 begin
   if Value <> FForm.Margin then
     FForm.Margin := Value;
 end;
 
-function TSynBaseCompletionProposal.GetDefaultKind: SynCompletionType;
+function TSynEdit32BaseCompletionProposal.GetDefaultKind: SynCompletionType;
 begin
   Result := Form.DefaultType;
 end;
 
-procedure TSynBaseCompletionProposal.SetDefaultKind(const Value: SynCompletionType);
+procedure TSynEdit32BaseCompletionProposal.SetDefaultKind(const Value: SynCompletionType);
 begin
   Form.DefaultType := Value;
   Form.DisplayType := Value;
   Form.RecreateWnd;
 end;
 
-procedure TSynBaseCompletionProposal.SetEndOfTokenChar(
+procedure TSynEdit32BaseCompletionProposal.SetEndOfTokenChar(
   const Value: UnicodeString);
 begin
   if Form.FEndOfTokenChr <> Value then
@@ -2738,58 +2738,58 @@ begin
   end;
 end;
 
-function TSynBaseCompletionProposal.GetClTitleBackground: TColor;
+function TSynEdit32BaseCompletionProposal.GetClTitleBackground: TColor;
 begin
   Result := Form.ClTitleBackground;
 end;
 
-procedure TSynBaseCompletionProposal.SetClTitleBackground(
+procedure TSynEdit32BaseCompletionProposal.SetClTitleBackground(
   const Value: TColor);
 begin
   Form.ClTitleBackground := Value;
 end;
 
-function TSynBaseCompletionProposal.GetTitle: UnicodeString;
+function TSynEdit32BaseCompletionProposal.GetTitle: UnicodeString;
 begin
   Result := Form.Title;
 end;
 
-procedure TSynBaseCompletionProposal.SetTitle(const Value: UnicodeString);
+procedure TSynEdit32BaseCompletionProposal.SetTitle(const Value: UnicodeString);
 begin
   Form.Title := Value;
 end;
 
-function TSynBaseCompletionProposal.GetFont: TFont;
+function TSynEdit32BaseCompletionProposal.GetFont: TFont;
 begin
   Result := Form.Font;
 end;
 
-function TSynBaseCompletionProposal.GetTitleFont: TFont;
+function TSynEdit32BaseCompletionProposal.GetTitleFont: TFont;
 begin
   Result := Form.TitleFont;
 end;
 
-procedure TSynBaseCompletionProposal.SetFont(const Value: TFont);
+procedure TSynEdit32BaseCompletionProposal.SetFont(const Value: TFont);
 begin
   Form.Font := Value;
 end;
 
-procedure TSynBaseCompletionProposal.SetTitleFont(const Value: TFont);
+procedure TSynEdit32BaseCompletionProposal.SetTitleFont(const Value: TFont);
 begin
   Form.TitleFont := Value;
 end;
 
-function TSynBaseCompletionProposal.GetEndOfTokenChar: UnicodeString;
+function TSynEdit32BaseCompletionProposal.GetEndOfTokenChar: UnicodeString;
 begin
   Result := Form.EndOfTokenChr;
 end;
 
-function TSynBaseCompletionProposal.GetOptions: TSynCompletionOptions;
+function TSynEdit32BaseCompletionProposal.GetOptions: TSynCompletionOptions;
 begin
   Result := FOptions;
 end;
 
-procedure TSynBaseCompletionProposal.SetOptions(
+procedure TSynEdit32BaseCompletionProposal.SetOptions(
   const Value: TSynCompletionOptions);
 begin
   if FOptions <> Value then
@@ -2805,47 +2805,47 @@ begin
   end;
 end;
 
-function TSynBaseCompletionProposal.GetTriggerChars: UnicodeString;
+function TSynEdit32BaseCompletionProposal.GetTriggerChars: UnicodeString;
 begin
   Result := Form.TriggerChars;
 end;
 
-procedure TSynBaseCompletionProposal.SetTriggerChars(const Value: UnicodeString);
+procedure TSynEdit32BaseCompletionProposal.SetTriggerChars(const Value: UnicodeString);
 begin
   Form.TriggerChars := Value;
 end;
 
-procedure TSynBaseCompletionProposal.EditorCancelMode(Sender: TObject);
+procedure TSynEdit32BaseCompletionProposal.EditorCancelMode(Sender: TObject);
 begin
-  //Do nothing here, used in TSynCompletionProposal
+  //Do nothing here, used in TSynEdit32CompletionProposal
 end;
 
-procedure TSynBaseCompletionProposal.HookedEditorCommand(Sender: TObject;
+procedure TSynEdit32BaseCompletionProposal.HookedEditorCommand(Sender: TObject;
   AfterProcessing: Boolean; var Handled: Boolean; var Command: TSynEditorCommand;
   var AChar: WideChar; Data, HandlerData: Pointer);
 begin
-  // Do nothing here, used in TSynCompletionProposal
+  // Do nothing here, used in TSynEdit32CompletionProposal
 end;
 
-function TSynBaseCompletionProposal.GetOnChange: TCompletionChange;
+function TSynEdit32BaseCompletionProposal.GetOnChange: TCompletionChange;
 begin
   Result := Form.FOnChangePosition;
 end;
 
-procedure TSynBaseCompletionProposal.SetOnChange(
+procedure TSynEdit32BaseCompletionProposal.SetOnChange(
   const Value: TCompletionChange);
 begin
   Form.FOnChangePosition := Value;
 end;
 
-procedure TSynBaseCompletionProposal.ResetAssignedList;
+procedure TSynEdit32BaseCompletionProposal.ResetAssignedList;
 begin
   Form.AssignedList.Assign(ItemList);
 end;
 
-{ ----------------  TSynCompletionProposal -------------- }
+{ ----------------  TSynEdit32CompletionProposal -------------- }
 
-procedure TSynCompletionProposal.HandleOnCancel(Sender: TObject);
+procedure TSynEdit32CompletionProposal.HandleOnCancel(Sender: TObject);
 var
   F: TSynBaseCompletionProposalForm;
 begin
@@ -2871,7 +2871,7 @@ begin
   end;
 end;
 
-procedure TSynCompletionProposal.HandleOnValidate(Sender: TObject;
+procedure TSynEdit32CompletionProposal.HandleOnValidate(Sender: TObject;
   Shift: TShiftState; EndToken: WideChar);
 var
   F: TSynBaseCompletionProposalForm;
@@ -2956,7 +2956,7 @@ begin
     end;
 end;
 
-procedure TSynCompletionProposal.HandleOnKeyPress(Sender: TObject; var Key: WideChar);
+procedure TSynEdit32CompletionProposal.HandleOnKeyPress(Sender: TObject; var Key: WideChar);
 var
   F: TSynBaseCompletionProposalForm;
 begin
@@ -2978,7 +2978,7 @@ begin
   end;
 end;
 
-procedure TSynCompletionProposal.SetEditor(const Value: TCustomSynEdit32);
+procedure TSynEdit32CompletionProposal.SetEditor(const Value: TCustomSynEdit32);
 begin
   if Editor <> Value then
   begin
@@ -2990,7 +2990,7 @@ begin
   end;
 end;
 
-procedure TSynCompletionProposal.Notification(AComponent: TComponent;
+procedure TSynEdit32CompletionProposal.Notification(AComponent: TComponent;
   Operation: TOperation);
 begin
   if (Operation = opRemove) then
@@ -3004,7 +3004,7 @@ begin
   inherited Notification(AComponent, Operation);
 end;
 
-constructor TSynCompletionProposal.Create(AOwner: TComponent);
+constructor TSynEdit32CompletionProposal.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   Form.OnKeyPress := HandleOnKeyPress;
@@ -3021,12 +3021,12 @@ begin
   FEditors := TList.Create;
 end;
 
-procedure TSynCompletionProposal.SetShortCut(Value: TShortCut);
+procedure TSynEdit32CompletionProposal.SetShortCut(Value: TShortCut);
 begin
   FShortCut := Value;
 end;
 
-procedure TSynCompletionProposal.EditorKeyDown(Sender: TObject;
+procedure TSynEdit32CompletionProposal.EditorKeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 var
   ShortCutKey: Word;
@@ -3044,7 +3044,7 @@ begin
   end;
 end;
 
-function TSynCompletionProposal.GetCurrentInput(AEditor: TCustomSynEdit32): UnicodeString;
+function TSynEdit32CompletionProposal.GetCurrentInput(AEditor: TCustomSynEdit32): UnicodeString;
 var
   s: UnicodeString;
   i: integer;
@@ -3070,7 +3070,7 @@ begin
   end;       
 end;
 
-function TSynCompletionProposal.GetPreviousToken(AEditor: TCustomSynEdit32): UnicodeString;
+function TSynEdit32CompletionProposal.GetPreviousToken(AEditor: TCustomSynEdit32): UnicodeString;
 var
   Line: UnicodeString;
   X: Integer;
@@ -3094,7 +3094,7 @@ begin
   end;
 end;
 
-procedure TSynCompletionProposal.EditorKeyPress(Sender: TObject; var Key: WideChar);
+procedure TSynEdit32CompletionProposal.EditorKeyPress(Sender: TObject; var Key: WideChar);
 begin
   if FNoNextKey  then
   begin
@@ -3111,7 +3111,7 @@ begin
   end;
 end;
 
-procedure TSynCompletionProposal.ActivateTimer(ACurrentEditor: TCustomSynEdit32);
+procedure TSynEdit32CompletionProposal.ActivateTimer(ACurrentEditor: TCustomSynEdit32);
 begin
   if Assigned(FTimer) then
   begin
@@ -3120,7 +3120,7 @@ begin
   end;
 end;
 
-procedure TSynCompletionProposal.DeactivateTimer;
+procedure TSynEdit32CompletionProposal.DeactivateTimer;
 begin
   if Assigned(FTimer) then
   begin
@@ -3129,12 +3129,12 @@ begin
 end;
 
 
-procedure TSynCompletionProposal.HandleDblClick(Sender: TObject);
+procedure TSynEdit32CompletionProposal.HandleDblClick(Sender: TObject);
 begin
   HandleOnValidate(Sender, [], #0);
 end;
 
-destructor TSynCompletionProposal.Destroy;
+destructor TSynEdit32CompletionProposal.Destroy;
 begin
   if Form.Visible then
     CancelCompletion;
@@ -3147,7 +3147,7 @@ begin
   FEditors.Free;
 end;
 
-procedure TSynCompletionProposal.TimerExecute(Sender: TObject);
+procedure TSynEdit32CompletionProposal.TimerExecute(Sender: TObject);
 begin
   if not Assigned(FTimer) then exit;
   FTimer.Enabled := False;
@@ -3158,19 +3158,19 @@ begin
   end else if Form.Visible then Form.Hide;
 end;
 
-function TSynCompletionProposal.GetTimerInterval: Integer;
+function TSynEdit32CompletionProposal.GetTimerInterval: Integer;
 begin
   Result := FTimerInterval;
 end;
 
-procedure TSynCompletionProposal.SetTimerInterval(const Value: Integer);
+procedure TSynEdit32CompletionProposal.SetTimerInterval(const Value: Integer);
 begin
   FTimerInterval := Value;
   if Assigned(FTimer) then
     FTimer.Interval := Value;
 end;
 
-procedure TSynCompletionProposal.SetOptions(const Value: TSynCompletionOptions);
+procedure TSynEdit32CompletionProposal.SetOptions(const Value: TSynCompletionOptions);
 begin
   inherited;
 
@@ -3192,7 +3192,7 @@ begin
 
 end;
 
-procedure TSynCompletionProposal.ExecuteEx(s: UnicodeString; x, y: integer;
+procedure TSynEdit32CompletionProposal.ExecuteEx(s: UnicodeString; x, y: integer;
   Kind: SynCompletionType);
 begin
   inherited;
@@ -3200,7 +3200,7 @@ begin
     FTimer.Enabled := False;
 end;
 
-procedure TSynCompletionProposal.AddEditor(AEditor: TCustomSynEdit32);
+procedure TSynEdit32CompletionProposal.AddEditor(AEditor: TCustomSynEdit32);
 var
   i : integer;
 begin
@@ -3214,12 +3214,12 @@ begin
   end;
 end;
 
-function TSynCompletionProposal.EditorsCount: integer;
+function TSynEdit32CompletionProposal.EditorsCount: integer;
 begin
   result := FEditors.count;
 end;
 
-function TSynCompletionProposal.GetEditor(i: integer): TCustomSynEdit32;
+function TSynEdit32CompletionProposal.GetEditor(i: integer): TCustomSynEdit32;
 begin
   if (i < 0) or (i >= EditorsCount) then
     Result := nil
@@ -3227,7 +3227,7 @@ begin
     Result := FEditors[i];
 end;
 
-function TSynCompletionProposal.RemoveEditor(AEditor: TCustomSynEdit32): boolean;
+function TSynEdit32CompletionProposal.RemoveEditor(AEditor: TCustomSynEdit32): boolean;
 var
   i: integer;
 begin
@@ -3251,7 +3251,7 @@ begin
   end;
 end;
 
-procedure TSynCompletionProposal.DoExecute(AEditor: TCustomSynEdit32);
+procedure TSynEdit32CompletionProposal.DoExecute(AEditor: TCustomSynEdit32);
 var
   p: TPoint;
   i: integer;
@@ -3279,7 +3279,7 @@ begin
     end;  
 end;
 
-procedure TSynCompletionProposal.InternalCancelCompletion;
+procedure TSynEdit32CompletionProposal.InternalCancelCompletion;
 begin
   if Assigned(FTimer) then FTimer.Enabled := False;
   FNoNextKey := False;
@@ -3290,18 +3290,18 @@ begin
   end;
 end;
 
-procedure TSynCompletionProposal.CancelCompletion;
+procedure TSynEdit32CompletionProposal.CancelCompletion;
 begin
   InternalCancelCompletion;
   if Assigned(OnCancelled) then OnCancelled(Self); 
 end;
 
-procedure TSynCompletionProposal.EditorCancelMode(Sender: TObject);
+procedure TSynEdit32CompletionProposal.EditorCancelMode(Sender: TObject);
 begin
   if (DisplayType = ctParams) then CancelCompletion;
 end;
 
-procedure TSynCompletionProposal.HookedEditorCommand(Sender: TObject;
+procedure TSynEdit32CompletionProposal.HookedEditorCommand(Sender: TObject;
   AfterProcessing: Boolean; var Handled: Boolean; var Command: TSynEditorCommand;
   var AChar: WideChar; Data, HandlerData: Pointer);
 begin
@@ -3363,16 +3363,16 @@ begin
 
 end;
 
-procedure TSynCompletionProposal.ActivateCompletion;
+procedure TSynEdit32CompletionProposal.ActivateCompletion;
 begin
   DoExecute(Editor);
 end;
 
 
 
-{ TSynAutoComplete }
+{ TSynEdit32AutoComplete }
 
-constructor TSynAutoComplete.Create(AOwner: TComponent);
+constructor TSynEdit32AutoComplete.Create(AOwner: TComponent);
 begin
   inherited;
   FDoLookup := True;
@@ -3383,12 +3383,12 @@ begin
   FShortCut := Menus.ShortCut(Ord(' '), [ssShift]);
 end;
 
-procedure TSynAutoComplete.SetShortCut(Value: TShortCut);
+procedure TSynEdit32AutoComplete.SetShortCut(Value: TShortCut);
 begin
   FShortCut := Value;
 end;
 
-destructor TSynAutoComplete.Destroy;
+destructor TSynEdit32AutoComplete.Destroy;
 begin
   Editor := nil;
   if Assigned(FInternalCompletion) then
@@ -3400,7 +3400,7 @@ begin
   fAutoCompleteList.free;
 end;
 
-procedure TSynAutoComplete.EditorKeyDown(Sender: TObject; var Key: Word;
+procedure TSynEdit32AutoComplete.EditorKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 var
   ShortCutKey: Word;
@@ -3416,7 +3416,7 @@ begin
   end;
 end;
 
-procedure TSynAutoComplete.EditorKeyPress(Sender: TObject; var Key: WideChar);
+procedure TSynEdit32AutoComplete.EditorKeyPress(Sender: TObject; var Key: WideChar);
 begin
   if FNoNextKey then
   begin
@@ -3425,12 +3425,12 @@ begin
   end;
 end;
 
-procedure TSynAutoComplete.Execute(Token: UnicodeString; Editor: TCustomSynEdit32);
+procedure TSynEdit32AutoComplete.Execute(Token: UnicodeString; Editor: TCustomSynEdit32);
 begin
   ExecuteEx(Token, Editor, FDoLookup);
 end;
 
-procedure TSynAutoComplete.ExecuteEx(Token: UnicodeString; Editor: TCustomSynEdit32;
+procedure TSynEdit32AutoComplete.ExecuteEx(Token: UnicodeString; Editor: TCustomSynEdit32;
   LookupIfNotExact: Boolean);
 var
   Temp: UnicodeString;
@@ -3548,14 +3548,14 @@ begin
   end;    
 end;
 
-procedure TSynAutoComplete.DoInternalAutoCompletion(Sender: TObject;
+procedure TSynEdit32AutoComplete.DoInternalAutoCompletion(Sender: TObject;
   const Value: UnicodeString; Shift: TShiftState; Index: Integer; EndToken: WideChar);
 begin
   ExecuteEx(GetPreviousToken(Editor), Editor, False);
   FInternalCompletion.Editor := nil;
 end;
 
-function TSynAutoComplete.GetPreviousToken(Editor: TCustomSynEdit32): UnicodeString;
+function TSynEdit32AutoComplete.GetPreviousToken(Editor: TCustomSynEdit32): UnicodeString;
 var
   s: UnicodeString;
   i: Integer;
@@ -3574,19 +3574,19 @@ begin
   end
 end;
 
-procedure TSynAutoComplete.Notification(AComponent: TComponent; Operation: TOperation);
+procedure TSynEdit32AutoComplete.Notification(AComponent: TComponent; Operation: TOperation);
 begin
   if (Operation = opRemove) and (Editor = AComponent) then
     Editor := nil;
   inherited Notification(AComponent, Operation);
 end;
 
-procedure TSynAutoComplete.SetAutoCompleteList(List: TUnicodeStrings);
+procedure TSynEdit32AutoComplete.SetAutoCompleteList(List: TUnicodeStrings);
 begin
   fAutoCompleteList.Assign(List);
 end;
 
-procedure TSynAutoComplete.SetEditor(const Value: TCustomSynEdit32);
+procedure TSynEdit32AutoComplete.SetEditor(const Value: TCustomSynEdit32);
 begin
   if Editor <> Value then
   begin
@@ -3608,7 +3608,7 @@ begin
   end;
 end;
 
-function TSynAutoComplete.GetTokenList: UnicodeString;
+function TSynEdit32AutoComplete.GetTokenList: UnicodeString;
 var
   List: TUnicodeStringList;
   i: integer;
@@ -3626,7 +3626,7 @@ begin
   List.Free;
 end;
 
-function TSynAutoComplete.GetTokenValue(Token: UnicodeString): UnicodeString;
+function TSynEdit32AutoComplete.GetTokenValue(Token: UnicodeString): UnicodeString;
 var
   i: integer;
   List: TUnicodeStringList;
@@ -3651,7 +3651,7 @@ begin
   end;
 end;
 
-procedure TSynAutoComplete.SetDoLookup(const Value: Boolean);
+procedure TSynEdit32AutoComplete.SetDoLookup(const Value: Boolean);
 begin
   FDoLookup := Value;
   if FDoLookup and not(Assigned(FInternalCompletion)) then
@@ -3662,9 +3662,9 @@ begin
   end;
 end;
 
-procedure TSynAutoComplete.CreateInternalCompletion;
+procedure TSynEdit32AutoComplete.CreateInternalCompletion;
 begin
-  FInternalCompletion := TSynCompletionProposal.Create(Self);
+  FInternalCompletion := TSynEdit32CompletionProposal.Create(Self);
   FInternalCompletion.Options := DefaultProposalOptions + [scoUsePrettyText] - [scoUseBuiltInTimer];
   FInternalCompletion.EndOfTokenChr := FEndOfTokenChr;
   FInternalCompletion.ShortCut := 0;
@@ -3674,25 +3674,25 @@ begin
 //    BiggestWord := 'XXXXXXXX';
 end;
 
-function TSynAutoComplete.GetOptions: TSynCompletionOptions;
+function TSynEdit32AutoComplete.GetOptions: TSynCompletionOptions;
 begin
   Result := FOptions;
 end;
 
-procedure TSynAutoComplete.SetOptions(const Value: TSynCompletionOptions);
+procedure TSynEdit32AutoComplete.SetOptions(const Value: TSynCompletionOptions);
 begin
   FOptions := Value;
   if Assigned(FInternalCompletion) then
     FInternalCompletion.Options := FOptions + [scoUsePrettyText] - [scoUseBuiltInTimer];
 end;
 
-procedure TSynAutoComplete.CancelCompletion;
+procedure TSynEdit32AutoComplete.CancelCompletion;
 begin
   if Assigned(FInternalCompletion) then
     FInternalCompletion.CancelCompletion;
 end;
 
-function TSynAutoComplete.GetExecuting: Boolean;
+function TSynEdit32AutoComplete.GetExecuting: Boolean;
 begin
   if Assigned(FInternalCompletion) then
     Result := FInternalCompletion.Form.Visible

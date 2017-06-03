@@ -50,7 +50,7 @@ type
   TRangeState = (rsUnknown, rsAttribute, rsObjectValue, rsArrayValue);
 
 type
-  TSynJSONSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterJSON = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
     FTokenID: TtkTokenKind;
@@ -113,9 +113,9 @@ uses
   SynEdit32.StrConst;
 
 
-{ TSynJSONSyn }
+{ TSynEdit32HighlighterJSON }
 
-constructor TSynJSONSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterJSON.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -161,51 +161,51 @@ begin
   FRange := rsUnknown;
 end;
 
-procedure TSynJSONSyn.CloseArrayProc;
+procedure TSynEdit32HighlighterJSON.CloseArrayProc;
 begin
   SymbolProc;
   FRange := rsUnknown;
 end;
 
-procedure TSynJSONSyn.CloseObjectProc;
+procedure TSynEdit32HighlighterJSON.CloseObjectProc;
 begin
   SymbolProc;
   FRange := rsUnknown;
 end;
 
-procedure TSynJSONSyn.ColonProc;
+procedure TSynEdit32HighlighterJSON.ColonProc;
 begin
   SymbolProc;
   FRange := rsObjectValue;
 end;
 
-procedure TSynJSONSyn.CommaProc;
+procedure TSynEdit32HighlighterJSON.CommaProc;
 begin
   SymbolProc;
   if FRange = rsObjectValue then
     FRange := rsAttribute;
 end;
 
-procedure TSynJSONSyn.CRProc;
+procedure TSynEdit32HighlighterJSON.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
   if FLine[FRun] = #10 then Inc(FRun);
 end;
 
-procedure TSynJSONSyn.LFProc;
+procedure TSynEdit32HighlighterJSON.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynJSONSyn.NullProc;
+procedure TSynEdit32HighlighterJSON.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynJSONSyn.NumberProc;
+procedure TSynEdit32HighlighterJSON.NumberProc;
 
   function ExpectDigit: Boolean;
   begin
@@ -271,19 +271,19 @@ begin
   end;
 end;
 
-procedure TSynJSONSyn.OpenArrayProc;
+procedure TSynEdit32HighlighterJSON.OpenArrayProc;
 begin
   SymbolProc;
   FRange := rsArrayValue;
 end;
 
-procedure TSynJSONSyn.OpenObjectProc;
+procedure TSynEdit32HighlighterJSON.OpenObjectProc;
 begin
   SymbolProc;
   FRange := rsAttribute;
 end;
 
-procedure TSynJSONSyn.ReservedWordProc;
+procedure TSynEdit32HighlighterJSON.ReservedWordProc;
 
   procedure SkipToken;
   begin
@@ -330,14 +330,14 @@ begin
   end;
 end;
 
-procedure TSynJSONSyn.SpaceProc;
+procedure TSynEdit32HighlighterJSON.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynJSONSyn.StringProc;
+procedure TSynEdit32HighlighterJSON.StringProc;
 
   function IsHex(Digit: AnsiChar): Boolean; overload;
   begin 
@@ -383,19 +383,19 @@ begin
   until IsLineEnd(FRun);
 end;
 
-procedure TSynJSONSyn.SymbolProc;
+procedure TSynEdit32HighlighterJSON.SymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynJSONSyn.UnknownProc;
+procedure TSynEdit32HighlighterJSON.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynJSONSyn.Next;
+procedure TSynEdit32HighlighterJSON.Next;
 begin
   fTokenPos := FRun;
   case FLine[FRun] of
@@ -420,7 +420,7 @@ begin
   inherited;
 end;
 
-function TSynJSONSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterJSON.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_KEYWORD: Result := FReservedAttri;
@@ -433,17 +433,17 @@ begin
   end;
 end;
 
-function TSynJSONSyn.GetRange: Pointer;
+function TSynEdit32HighlighterJSON.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-function TSynJSONSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterJSON.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynJSONSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterJSON.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkString:
@@ -460,32 +460,32 @@ begin
   end;
 end;
 
-function TSynJSONSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterJSON.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-procedure TSynJSONSyn.ResetRange;
+procedure TSynEdit32HighlighterJSON.ResetRange;
 begin
   FRange := rsUnknown;
 end;
 
-procedure TSynJSONSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterJSON.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-function TSynJSONSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterJSON.IsFilterStored: Boolean;
 begin
   Result := FDefaultFilter <> SYNS_FilterJSON;
 end;
 
-class function TSynJSONSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterJSON.GetLanguageName: string;
 begin
   Result := SYNS_LangJSON;
 end;
 
-function TSynJSONSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterJSON.GetSampleSource: UnicodeString;
 begin
   Result :=
     '{'#13#10 +
@@ -516,11 +516,11 @@ begin
     '}';
 end;
 
-class function TSynJSONSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterJSON.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangJSON;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynJSONSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterJSON);
 end.

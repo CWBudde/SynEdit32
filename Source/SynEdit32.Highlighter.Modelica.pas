@@ -54,7 +54,7 @@ type
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
 type
-  TSynModelicaSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterModelica = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
     FTokenID: TtkTokenKind;
@@ -155,7 +155,7 @@ const
   );
 
 {$Q-}
-function TSynModelicaSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterModelica.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) do
@@ -168,7 +168,7 @@ begin
 end;
 {$Q+}
 
-function TSynModelicaSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterModelica.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -180,7 +180,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynModelicaSyn.InitIdent;
+procedure TSynEdit32HighlighterModelica.InitIdent;
 var
   i: Integer;
 begin
@@ -193,12 +193,12 @@ begin
       FIdentFuncTable[i] := KeyWordFunc;
 end;
 
-function TSynModelicaSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterModelica.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier;
 end;
 
-function TSynModelicaSyn.KeyWordFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterModelica.KeyWordFunc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -206,7 +206,7 @@ begin
     Result := tkIdentifier
 end;
 
-constructor TSynModelicaSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterModelica.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -236,7 +236,7 @@ begin
   FRange := rsUnknown;
 end;
 
-procedure TSynModelicaSyn.AndSymbolProc;
+procedure TSynEdit32HighlighterModelica.AndSymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -244,7 +244,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynModelicaSyn.AsciiCharProc;
+procedure TSynEdit32HighlighterModelica.AsciiCharProc;
 begin
   FRange := rsString39;
   FTokenID := tkString;
@@ -258,7 +258,7 @@ begin
   end;
 end;
 
-procedure TSynModelicaSyn.CRProc;
+procedure TSynEdit32HighlighterModelica.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
@@ -266,7 +266,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynModelicaSyn.ColonProc;
+procedure TSynEdit32HighlighterModelica.ColonProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -274,7 +274,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynModelicaSyn.DirectiveProc;
+procedure TSynEdit32HighlighterModelica.DirectiveProc;
 begin
   FTokenID := tkDirective;
   repeat
@@ -282,7 +282,7 @@ begin
   until IsLineEnd(FRun);
 end;
 
-procedure TSynModelicaSyn.GreaterProc;
+procedure TSynEdit32HighlighterModelica.GreaterProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -296,20 +296,20 @@ begin
   end;
 end;
 
-procedure TSynModelicaSyn.IdentProc;
+procedure TSynEdit32HighlighterModelica.IdentProc;
 begin
   FTokenID := IdentKind((FLine + FRun));
   Inc(FRun, FStringLen);
   while IsIdentChar(FLine[FRun]) do Inc(FRun);
 end;
 
-procedure TSynModelicaSyn.LFProc;
+procedure TSynEdit32HighlighterModelica.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynModelicaSyn.LowerProc;
+procedure TSynEdit32HighlighterModelica.LowerProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -323,7 +323,7 @@ begin
   end;
 end;
 
-procedure TSynModelicaSyn.MinusProc;
+procedure TSynEdit32HighlighterModelica.MinusProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -331,13 +331,13 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynModelicaSyn.NullProc;
+procedure TSynEdit32HighlighterModelica.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynModelicaSyn.NumberProc;
+procedure TSynEdit32HighlighterModelica.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -362,7 +362,7 @@ begin
   end;
 end;
 
-procedure TSynModelicaSyn.OrSymbolProc;
+procedure TSynEdit32HighlighterModelica.OrSymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -370,7 +370,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynModelicaSyn.PlusProc;
+procedure TSynEdit32HighlighterModelica.PlusProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -378,7 +378,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynModelicaSyn.PointProc;
+procedure TSynEdit32HighlighterModelica.PointProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -386,7 +386,7 @@ begin
     Inc(FRun, 2);
 end;
 
-procedure TSynModelicaSyn.SlashProc;
+procedure TSynEdit32HighlighterModelica.SlashProc;
 begin
   Inc(FRun);
   case FLine[FRun] of
@@ -413,7 +413,7 @@ begin
   end;
 end;
 
-procedure TSynModelicaSyn.SpaceProc;
+procedure TSynEdit32HighlighterModelica.SpaceProc;
 begin
   FTokenID := tkSpace;
   repeat
@@ -421,7 +421,7 @@ begin
   until (FLine[FRun] > #32) or IsLineEnd(FRun);
 end;
 
-procedure TSynModelicaSyn.StringProc;
+procedure TSynEdit32HighlighterModelica.StringProc;
 begin
   FRange := rsString34;
   Inc(FRun);
@@ -431,13 +431,13 @@ begin
     String34Proc;
 end;
 
-procedure TSynModelicaSyn.SymbolProc;
+procedure TSynEdit32HighlighterModelica.SymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynModelicaSyn.SymbolProcWithEqual;
+procedure TSynEdit32HighlighterModelica.SymbolProcWithEqual;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -445,13 +445,13 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynModelicaSyn.UnknownProc;
+procedure TSynEdit32HighlighterModelica.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynModelicaSyn.AnsiCProc;
+procedure TSynEdit32HighlighterModelica.AnsiCProc;
 begin
   case FLine[FRun] of
      #0: NullProc;
@@ -470,7 +470,7 @@ begin
   end;
 end;
 
-procedure TSynModelicaSyn.String39Proc;
+procedure TSynEdit32HighlighterModelica.String39Proc;
 begin
   case FLine[FRun] of
      #0: NullProc;
@@ -489,7 +489,7 @@ begin
   end;
 end;
 
-procedure TSynModelicaSyn.String34Proc;
+procedure TSynEdit32HighlighterModelica.String34Proc;
 begin
   case FLine[FRun] of
      #0: NullProc;
@@ -518,7 +518,7 @@ begin
   end;
 end;
 
-procedure TSynModelicaSyn.Next;
+procedure TSynEdit32HighlighterModelica.Next;
 begin
   fTokenPos := FRun;
   case FRange of
@@ -554,7 +554,7 @@ begin
   inherited;
 end;
 
-function TSynModelicaSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterModelica.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -568,17 +568,17 @@ begin
   end;
 end;
 
-function TSynModelicaSyn.GetRange: Pointer;
+function TSynEdit32HighlighterModelica.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-function TSynModelicaSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterModelica.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynModelicaSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterModelica.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkComment: Result := FCommentAttri;
@@ -595,36 +595,36 @@ begin
   end;
 end;
 
-function TSynModelicaSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterModelica.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-procedure TSynModelicaSyn.ResetRange;
+procedure TSynEdit32HighlighterModelica.ResetRange;
 begin
   FRange := rsUnknown;
 end;
 
-procedure TSynModelicaSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterModelica.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-function TSynModelicaSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterModelica.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterModelica;
 end;
 
-class function TSynModelicaSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterModelica.GetLanguageName: string;
 begin
   Result := SYNS_LangModelica;
 end;
 
-class function TSynModelicaSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterModelica.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangModelica;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynModelicaSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterModelica);
 end.

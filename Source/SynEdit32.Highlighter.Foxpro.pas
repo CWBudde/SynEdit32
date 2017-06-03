@@ -66,7 +66,7 @@ type
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
 type
-  TSynFoxproSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterFoxpro = class(TSynEdit32CustomHighlighter)
   private
     FTokenID: TtkTokenKind;
     FIdentFuncTable: array[0..17908] of TIdentFuncTableFunc;
@@ -1223,7 +1223,7 @@ const
   );
 
 {$Q-}
-function TSynFoxproSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterFoxpro.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) do
@@ -1236,7 +1236,7 @@ begin
 end;
 {$Q+}
 
-function TSynFoxproSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterFoxpro.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -1248,7 +1248,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynFoxproSyn.InitIdent;
+procedure TSynEdit32HighlighterFoxpro.InitIdent;
 var
   i: Integer;
 begin
@@ -1261,12 +1261,12 @@ begin
       FIdentFuncTable[i] := KeyWordFunc;
 end;
 
-function TSynFoxproSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterFoxpro.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier;
 end;
 
-function TSynFoxproSyn.KeyWordFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterFoxpro.KeyWordFunc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1274,7 +1274,7 @@ begin
     Result := tkIdentifier
 end;
 
-constructor TSynFoxproSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterFoxpro.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -1299,7 +1299,7 @@ begin
   fDefaultFilter := SYNS_FilterFoxpro;
 end;
 
-procedure TSynFoxproSyn.AndSymbolProc;
+procedure TSynEdit32HighlighterFoxpro.AndSymbolProc;
 begin
   case FLine[FRun + 1] of
     '&':                               {Comments}
@@ -1322,7 +1322,7 @@ begin
   end;
 end;
 
-procedure TSynFoxproSyn.AsciiCharProc;
+procedure TSynEdit32HighlighterFoxpro.AsciiCharProc;
 begin
   FTokenID := tkString;
   repeat
@@ -1334,13 +1334,13 @@ begin
   if FLine[FRun] <> #0 then Inc(FRun);
 end;
 
-procedure TSynFoxproSyn.AtSymbolProc;
+procedure TSynEdit32HighlighterFoxpro.AtSymbolProc;
 begin
   FTokenID := tkKey;
   Inc(FRun);
 end;
 
-procedure TSynFoxproSyn.BraceOpenProc;
+procedure TSynEdit32HighlighterFoxpro.BraceOpenProc;
 begin
   FTokenID := tkString;
   repeat
@@ -1354,7 +1354,7 @@ begin
   if FLine[FRun] <> #0 then Inc(FRun);
 end;
 
-procedure TSynFoxproSyn.CRProc;
+procedure TSynEdit32HighlighterFoxpro.CRProc;
 begin
   FTokenID := tkSpace;
   case FLine[FRun + 1] of
@@ -1363,20 +1363,20 @@ begin
   end;
 end;
 
-procedure TSynFoxproSyn.ColonProc;
+procedure TSynEdit32HighlighterFoxpro.ColonProc;
 begin
   {colon}
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFoxproSyn.CommaProc;
+procedure TSynEdit32HighlighterFoxpro.CommaProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFoxproSyn.EqualProc;
+procedure TSynEdit32HighlighterFoxpro.EqualProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {logical equal}
@@ -1392,7 +1392,7 @@ begin
   end;
 end;
 
-procedure TSynFoxproSyn.GreaterProc;
+procedure TSynEdit32HighlighterFoxpro.GreaterProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {greater than or equal to}
@@ -1416,20 +1416,20 @@ begin
   end;
 end;
 
-procedure TSynFoxproSyn.IdentProc;
+procedure TSynEdit32HighlighterFoxpro.IdentProc;
 begin
   FTokenID := IdentKind((FLine + FRun));
   Inc(FRun, FStringLen);
   while IsIdentChar(FLine[FRun]) do Inc(FRun);
 end;
 
-procedure TSynFoxproSyn.LFProc;
+procedure TSynEdit32HighlighterFoxpro.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynFoxproSyn.LowerProc;
+procedure TSynEdit32HighlighterFoxpro.LowerProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {less than or equal to}
@@ -1453,34 +1453,34 @@ begin
   end;
 end;
 
-procedure TSynFoxproSyn.MinusProc;
+procedure TSynEdit32HighlighterFoxpro.MinusProc;
 begin
   {subtract}
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFoxproSyn.ModSymbolProc;
+procedure TSynEdit32HighlighterFoxpro.ModSymbolProc;
 begin
   {mod}
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFoxproSyn.NotSymbolProc;
+procedure TSynEdit32HighlighterFoxpro.NotSymbolProc;
 begin
   {not}
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFoxproSyn.NullProc;
+procedure TSynEdit32HighlighterFoxpro.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynFoxproSyn.NumberProc;
+procedure TSynEdit32HighlighterFoxpro.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -1505,21 +1505,21 @@ begin
   end;
 end;
 
-procedure TSynFoxproSyn.OrSymbolProc;
+procedure TSynEdit32HighlighterFoxpro.OrSymbolProc;
 begin
   {or}
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFoxproSyn.PlusProc;
+procedure TSynEdit32HighlighterFoxpro.PlusProc;
 begin
   {subtract}
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFoxproSyn.PointProc;
+procedure TSynEdit32HighlighterFoxpro.PointProc;
 begin
   if ((SynWideUpperCase(FLine[FRun + 1]) = 'T') or      {.t.}
     (SynWideUpperCase(FLine[FRun + 1]) = 'F')) and     {.f.}
@@ -1553,57 +1553,57 @@ begin
   end;
 end;
 
-procedure TSynFoxproSyn.QuestionProc;
+procedure TSynEdit32HighlighterFoxpro.QuestionProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFoxproSyn.RoundCloseProc;
+procedure TSynEdit32HighlighterFoxpro.RoundCloseProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFoxproSyn.RoundOpenProc;
+procedure TSynEdit32HighlighterFoxpro.RoundOpenProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFoxproSyn.SemiColonProc;
+procedure TSynEdit32HighlighterFoxpro.SemiColonProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFoxproSyn.SlashProc;
+procedure TSynEdit32HighlighterFoxpro.SlashProc;
 begin
   {division}
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFoxproSyn.SpaceProc;
+procedure TSynEdit32HighlighterFoxpro.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynFoxproSyn.SquareCloseProc;
+procedure TSynEdit32HighlighterFoxpro.SquareCloseProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFoxproSyn.SquareOpenProc;
+procedure TSynEdit32HighlighterFoxpro.SquareOpenProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFoxproSyn.StarProc;
+procedure TSynEdit32HighlighterFoxpro.StarProc;
 begin
   if (FRun = 0) or (WideTrim(Copy(FLine, 1, FRun)) = '') then
   begin                        {Foxpro Comments}
@@ -1625,7 +1625,7 @@ begin
   end;
 end;
 
-procedure TSynFoxproSyn.StringProc;
+procedure TSynEdit32HighlighterFoxpro.StringProc;
 begin
   FTokenID := tkString;
   if (FLine[FRun + 1] = #34) and (FLine[FRun + 2] = #34) then Inc(FRun, 2);
@@ -1640,26 +1640,26 @@ begin
   if FLine[FRun] <> #0 then Inc(FRun);
 end;
 
-procedure TSynFoxproSyn.TildeProc;
+procedure TSynEdit32HighlighterFoxpro.TildeProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFoxproSyn.XOrSymbolProc;
+procedure TSynEdit32HighlighterFoxpro.XOrSymbolProc;
 begin
   {xor}
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFoxproSyn.UnknownProc;
+procedure TSynEdit32HighlighterFoxpro.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynFoxproSyn.Next;
+procedure TSynEdit32HighlighterFoxpro.Next;
 begin
   fTokenPos := FRun;
   case FLine[FRun] of
@@ -1700,7 +1700,7 @@ begin
   inherited;
 end;
 
-function TSynFoxproSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterFoxpro.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -1714,12 +1714,12 @@ begin
   end;
 end;
 
-function TSynFoxproSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterFoxpro.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynFoxproSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterFoxpro.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkComment: Result := FCommentAttri;
@@ -1734,26 +1734,26 @@ begin
   end;
 end;
 
-function TSynFoxproSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterFoxpro.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-function TSynFoxproSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterFoxpro.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterFoxpro;
 end;
 
-class function TSynFoxproSyn.GetLanguageName: string;                    
+class function TSynEdit32HighlighterFoxpro.GetLanguageName: string;
 begin
   Result := SYNS_LangFoxpro;
 end;
 
-class function TSynFoxproSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterFoxpro.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangFoxpro;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynFoxproSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterFoxpro);
 end.

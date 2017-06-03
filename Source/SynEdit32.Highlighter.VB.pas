@@ -61,7 +61,7 @@ type
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
 type
-  TSynVBSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterVB = class(TSynEdit32CustomHighlighter)
   private
     FTokenId: TtkTokenKind;
     FIdentFuncTable: array[0..1422] of TIdentFuncTableFunc;
@@ -238,7 +238,7 @@ const
   );
 
 {$Q-}
-function TSynVBSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterVB.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) do
@@ -251,7 +251,7 @@ begin
 end;
 {$Q+}
 
-function TSynVBSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterVB.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -263,7 +263,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynVBSyn.InitIdent;
+procedure TSynEdit32HighlighterVB.InitIdent;
 var
   i: Integer;
 begin
@@ -278,12 +278,12 @@ begin
       FIdentFuncTable[i] := KeyWordFunc;
 end;
 
-function TSynVBSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterVB.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier;
 end;
 
-function TSynVBSyn.KeyWordFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterVB.KeyWordFunc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -291,7 +291,7 @@ begin
     Result := tkIdentifier
 end;
 
-function TSynVBSyn.FuncRem(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterVB.FuncRem(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -303,7 +303,7 @@ begin
     Result := tkIdentifier;
 end;
 
-constructor TSynVBSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterVB.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -330,13 +330,13 @@ begin
   FDefaultFilter := SYNS_FilterVisualBASIC;
 end;
 
-procedure TSynVBSyn.SymbolProc;
+procedure TSynEdit32HighlighterVB.SymbolProc;
 begin
   Inc(FRun);
   FTokenId := tkSymbol;
 end;
 
-procedure TSynVBSyn.ApostropheProc;
+procedure TSynEdit32HighlighterVB.ApostropheProc;
 begin
   FTokenId := tkComment;
   repeat
@@ -344,14 +344,14 @@ begin
   until IsLineEnd(FRun);
 end;
 
-procedure TSynVBSyn.CRProc;
+procedure TSynEdit32HighlighterVB.CRProc;
 begin
   FTokenId := tkSpace;
   Inc(FRun);
   if FLine[FRun] = #10 then Inc(FRun);
 end;
 
-procedure TSynVBSyn.DateProc;
+procedure TSynEdit32HighlighterVB.DateProc;
 begin
   FTokenId := tkString;
   repeat
@@ -361,40 +361,40 @@ begin
   if not IsLineEnd(FRun) then Inc(FRun);
 end;
 
-procedure TSynVBSyn.GreaterProc;
+procedure TSynEdit32HighlighterVB.GreaterProc;
 begin
   FTokenId := tkSymbol;
   Inc(FRun);
   if FLine[FRun] = '=' then Inc(FRun);
 end;
 
-procedure TSynVBSyn.IdentProc;
+procedure TSynEdit32HighlighterVB.IdentProc;
 begin
   FTokenId := IdentKind(FLine + FRun);
   Inc(FRun, FStringLen);
   while IsIdentChar(FLine[FRun]) do Inc(FRun);
 end;
 
-procedure TSynVBSyn.LFProc;
+procedure TSynEdit32HighlighterVB.LFProc;
 begin
   FTokenId := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynVBSyn.LowerProc;
+procedure TSynEdit32HighlighterVB.LowerProc;
 begin
   FTokenId := tkSymbol;
   Inc(FRun);
   if CharInSet(FLine[FRun], ['=', '>']) then Inc(FRun);
 end;
 
-procedure TSynVBSyn.NullProc;
+procedure TSynEdit32HighlighterVB.NullProc;
 begin
   FTokenId := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynVBSyn.NumberProc;
+procedure TSynEdit32HighlighterVB.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -412,14 +412,14 @@ begin
   while IsNumberChar do Inc(FRun);
 end;
 
-procedure TSynVBSyn.SpaceProc;
+procedure TSynEdit32HighlighterVB.SpaceProc;
 begin
   Inc(FRun);
   FTokenId := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynVBSyn.StringProc;
+procedure TSynEdit32HighlighterVB.StringProc;
 begin
   FTokenId := tkString;
   if (FLine[FRun + 1] = #34) and (FLine[FRun + 2] = #34) then Inc(FRun, 2);
@@ -430,13 +430,13 @@ begin
   if not IsLineEnd(FRun) then Inc(FRun);
 end;
 
-procedure TSynVBSyn.UnknownProc;
+procedure TSynEdit32HighlighterVB.UnknownProc;
 begin
   Inc(FRun);
   FTokenId := tkUnknown;
 end;
 
-procedure TSynVBSyn.Next;
+procedure TSynEdit32HighlighterVB.Next;
 begin
   fTokenPos := FRun;
   case FLine[FRun] of
@@ -471,7 +471,7 @@ begin
   inherited;
 end;
 
-function TSynVBSyn.GetDefaultAttribute(Index: integer):
+function TSynEdit32HighlighterVB.GetDefaultAttribute(Index: integer):
   TSynEdit32HighlighterAttributes;
 begin
   case Index of
@@ -486,12 +486,12 @@ begin
   end;
 end;
 
-function TSynVBSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterVB.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenId;
 end;
 
-function TSynVBSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterVB.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkComment: Result := FCommentAttri;
@@ -506,22 +506,22 @@ begin
   end;
 end;
 
-function TSynVBSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterVB.GetTokenKind: integer;
 begin
   Result := Ord(FTokenId);
 end;
 
-function TSynVBSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterVB.IsFilterStored: Boolean;
 begin
   Result := FDefaultFilter <> SYNS_FilterVisualBASIC;
 end;
 
-class function TSynVBSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterVB.GetLanguageName: string;
 begin
   Result := SYNS_LangVisualBASIC;
 end;
 
-function TSynVBSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterVB.GetSampleSource: UnicodeString;
 begin
   Result := ''' Syntax highlighting'#13#10+
             'Function PrintNumber'#13#10+
@@ -541,11 +541,11 @@ begin
             'End Function';
 end;
 
-class function TSynVBSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterVB.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangVisualBASIC;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynVBSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterVB);
 end.

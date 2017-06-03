@@ -76,7 +76,7 @@ type
     procedure lbxItemsDrawItem(Control: TWinControl; Index: Integer;
       Rect: TRect; State: TOwnerDrawState);
   public
-    SynAutoCorrect: TSynAutoCorrect;
+    SynAutoCorrect: TSynEdit32AutoCorrect;
   end;
 
 resourcestring

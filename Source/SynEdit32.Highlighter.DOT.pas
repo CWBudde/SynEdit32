@@ -75,7 +75,7 @@ type
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
 type
-  TSynDOTSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterDOT = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
     FTokenID: TtkTokenKind;
@@ -361,7 +361,7 @@ const
   );
 
 {$Q-}
-function TSynDOTSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterDOT.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) do
@@ -374,7 +374,7 @@ begin
 end;
 {$Q+}
 
-function TSynDOTSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterDOT.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -386,7 +386,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynDOTSyn.InitIdent;
+procedure TSynEdit32HighlighterDOT.InitIdent;
 var
   i: Integer;
 begin
@@ -542,12 +542,12 @@ begin
   FIdentFuncTable[245] := FuncZ;
 end;
 
-function TSynDOTSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncAll(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncAll(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -555,7 +555,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncAppendix(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncAppendix(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -563,7 +563,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncArrowhead(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncArrowhead(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -571,7 +571,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncArrowsize(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncArrowsize(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -579,7 +579,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncArrowtail(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncArrowtail(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -587,7 +587,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncAuto(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncAuto(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -595,7 +595,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncBack(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncBack(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -603,7 +603,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncBgcolor(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncBgcolor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -611,7 +611,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncBold(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncBold(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -619,7 +619,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncBoth(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncBoth(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -627,7 +627,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncBottomlabel(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncBottomlabel(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -635,7 +635,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncBox(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncBox(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -643,7 +643,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncCenter(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncCenter(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -651,7 +651,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncCircle(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncCircle(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -659,7 +659,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncClusterrank(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncClusterrank(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -667,7 +667,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncColor(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncColor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -675,7 +675,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncComment(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncComment(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -683,7 +683,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncCompound(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncCompound(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -691,7 +691,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncConcentrate(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncConcentrate(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -699,7 +699,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncConstraint(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncConstraint(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -707,7 +707,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncDecorate(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncDecorate(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -715,7 +715,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncDiamond(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncDiamond(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -723,7 +723,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncDigraph(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncDigraph(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -731,7 +731,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncDir(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncDir(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -739,7 +739,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncDistortion(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncDistortion(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -747,7 +747,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncDot(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncDot(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkArrowHead
@@ -755,7 +755,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncDotted(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncDotted(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -763,7 +763,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncDoublecircle(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncDoublecircle(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -771,7 +771,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncDoubleoctagon(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncDoubleoctagon(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -779,7 +779,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncE(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncE(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -787,7 +787,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncEdge(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncEdge(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -795,7 +795,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncEgg(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncEgg(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -803,7 +803,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncEllipse(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncEllipse(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -811,7 +811,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncFalse(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncFalse(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -819,7 +819,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncFill(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncFill(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -827,7 +827,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncFillcolor(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncFillcolor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -835,7 +835,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncFilled(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncFilled(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue  // TODO: ANSI source isn't clear if tkValue or tkAttribute
@@ -843,7 +843,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncFixedsize(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncFixedsize(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -851,7 +851,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncFontcolor(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncFontcolor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -859,7 +859,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncFontname(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncFontname(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -867,7 +867,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncFontpath(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncFontpath(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -875,7 +875,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncFontsize(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncFontsize(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -883,7 +883,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncForward(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncForward(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -891,7 +891,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncGlobal(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncGlobal(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -899,7 +899,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncGraph(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncGraph(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -907,7 +907,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncGroup(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncGroup(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -915,7 +915,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncHeadlabel(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncHeadlabel(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -923,7 +923,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncHeadport(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncHeadport(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -931,7 +931,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncHeadurl(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncHeadurl(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -939,7 +939,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncHeight(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncHeight(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -947,7 +947,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncHexagon(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncHexagon(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -955,7 +955,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncHouse(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncHouse(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -963,7 +963,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncId(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncId(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -971,7 +971,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncInv(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncInv(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkArrowHead
@@ -979,7 +979,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncInvdot(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncInvdot(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkArrowHead
@@ -987,7 +987,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncInvhouse(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncInvhouse(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -995,7 +995,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncInvodot(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncInvodot(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkArrowHead
@@ -1003,7 +1003,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncInvtrapezium(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncInvtrapezium(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -1011,7 +1011,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncInvtriangle(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncInvtriangle(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -1019,7 +1019,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncLabel(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncLabel(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1027,7 +1027,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncLabelangle(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncLabelangle(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1035,7 +1035,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncLabeldistance(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncLabeldistance(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1043,7 +1043,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncLabelfloat(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncLabelfloat(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1051,7 +1051,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncLabelfontcolor(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncLabelfontcolor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1059,7 +1059,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncLabelfontname(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncLabelfontname(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1067,7 +1067,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncLabelfontsize(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncLabelfontsize(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1075,7 +1075,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncLabeljust(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncLabeljust(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1083,7 +1083,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncLabelloc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncLabelloc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1091,7 +1091,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncLayer(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncLayer(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute  // TODO: ANSI source isn't clear if tkAttribute or tkKey
@@ -1099,7 +1099,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncLayers(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncLayers(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute  // TODO: ANSI source isn't clear if tkAttribute or tkKey
@@ -1107,7 +1107,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncLhead(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncLhead(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1115,7 +1115,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncLtail(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncLtail(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1123,7 +1123,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncMargin(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncMargin(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1131,7 +1131,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncMax(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncMax(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -1139,7 +1139,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncMcircle(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncMcircle(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -1147,7 +1147,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncMclimit(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncMclimit(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1155,7 +1155,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncMdiamond(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncMdiamond(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -1163,7 +1163,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncMerged(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncMerged(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1171,7 +1171,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncMin(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncMin(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -1179,7 +1179,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncMinimum(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncMinimum(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1187,7 +1187,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncMinlen(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncMinlen(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1195,7 +1195,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncMrecord(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncMrecord(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -1203,7 +1203,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncMsquare(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncMsquare(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -1211,7 +1211,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncMultiples(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncMultiples(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1219,7 +1219,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncN(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncN(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -1227,7 +1227,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncNe(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncNe(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -1235,7 +1235,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncNode(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncNode(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1243,7 +1243,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncNodesep(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncNodesep(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1251,7 +1251,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncNone(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncNone(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -1261,7 +1261,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncNormal(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncNormal(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkArrowHead
@@ -1269,7 +1269,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncNslimit(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncNslimit(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1277,7 +1277,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncNw(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncNw(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -1285,7 +1285,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncOctagon(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncOctagon(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -1293,7 +1293,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncOdot(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncOdot(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkArrowHead
@@ -1301,7 +1301,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncOnto(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncOnto(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1309,7 +1309,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncOrdering(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncOrdering(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1317,7 +1317,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncOrientation(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncOrientation(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1325,7 +1325,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncPage(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncPage(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1335,7 +1335,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncPagedir(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncPagedir(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1343,7 +1343,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncParallelogram(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncParallelogram(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -1351,7 +1351,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncPeripheries(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncPeripheries(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1359,7 +1359,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncPlaintext(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncPlaintext(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -1367,7 +1367,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncPoint(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncPoint(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -1375,7 +1375,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncPolygon(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncPolygon(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -1383,7 +1383,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncQuantum(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncQuantum(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1391,7 +1391,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncRank(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncRank(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1399,7 +1399,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncRankdir(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncRankdir(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1407,7 +1407,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncRanksep(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncRanksep(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1415,7 +1415,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncRatio(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncRatio(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1423,7 +1423,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncRecord(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncRecord(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -1431,7 +1431,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncRegular(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncRegular(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1439,7 +1439,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncRemincross(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncRemincross(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1447,7 +1447,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncRotate(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncRotate(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1455,7 +1455,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncS(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncS(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -1463,7 +1463,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncSame(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncSame(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -1471,7 +1471,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncSamehead(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncSamehead(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1479,7 +1479,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncSametail(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncSametail(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1487,7 +1487,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncSamplepoints(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncSamplepoints(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1495,7 +1495,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncSe(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncSe(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -1503,7 +1503,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncSearchsize(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncSearchsize(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1511,7 +1511,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncSection(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncSection(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1519,7 +1519,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncShape(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncShape(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1527,7 +1527,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncShapefile(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncShapefile(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1535,7 +1535,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncSides(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncSides(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1543,7 +1543,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncSink(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncSink(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -1551,7 +1551,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncSize(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncSize(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1559,7 +1559,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncSkew(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncSkew(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1567,7 +1567,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncSource(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncSource(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -1575,7 +1575,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncStrict(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncStrict(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1583,7 +1583,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncStyle(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncStyle(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1591,7 +1591,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncSubgraph(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncSubgraph(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1599,7 +1599,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncSw(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncSw(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -1607,7 +1607,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncTaillabel(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncTaillabel(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1615,7 +1615,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncTailport(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncTailport(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1623,7 +1623,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncTailurl(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncTailurl(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1631,7 +1631,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncToplabel(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncToplabel(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1639,7 +1639,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncTrapezium(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncTrapezium(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -1647,7 +1647,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncTriangle(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncTriangle(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -1655,7 +1655,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncTripleoctagon(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncTripleoctagon(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkShape
@@ -1663,7 +1663,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncTrue(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncTrue(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -1671,7 +1671,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncUrl(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncUrl(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1679,7 +1679,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncW(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncW(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkValue
@@ -1687,7 +1687,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncWeight(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncWeight(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1695,7 +1695,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncWhen(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncWhen(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1705,7 +1705,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncWidth(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncWidth(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1713,7 +1713,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDOTSyn.FuncZ(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDOT.FuncZ(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkAttribute
@@ -1721,20 +1721,20 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynDOTSyn.SpaceProc;
+procedure TSynEdit32HighlighterDOT.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynDOTSyn.NullProc;
+procedure TSynEdit32HighlighterDOT.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynDOTSyn.CRProc;
+procedure TSynEdit32HighlighterDOT.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
@@ -1742,13 +1742,13 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynDOTSyn.LFProc;
+procedure TSynEdit32HighlighterDOT.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynDOTSyn.DirectionsProc;
+procedure TSynEdit32HighlighterDOT.DirectionsProc;
 begin
   Inc(FRun);
   if (FLine[FRun] = '>') or (FLine[FRun] = '-') then
@@ -1760,7 +1760,7 @@ begin
     FTokenID := tkSymbol;
 end;
 
-procedure TSynDOTSyn.CStyleCommentOpenProc;
+procedure TSynEdit32HighlighterDOT.CStyleCommentOpenProc;
 begin
   Inc(FRun);
   if FLine[FRun] = '/' then
@@ -1780,7 +1780,7 @@ begin
     FTokenID := tkIdentifier;
 end;
 
-procedure TSynDOTSyn.CStyleCommentProc;
+procedure TSynEdit32HighlighterDOT.CStyleCommentProc;
 begin
   case FLine[FRun] of
      #0: NullProc;
@@ -1803,7 +1803,7 @@ begin
   end;
 end;
 
-procedure TSynDOTSyn.StringOpenProc;
+procedure TSynEdit32HighlighterDOT.StringOpenProc;
 begin
   Inc(FRun);
   FRange := rsString;
@@ -1811,7 +1811,7 @@ begin
   FTokenID := tkString;
 end;
 
-procedure TSynDOTSyn.StringProc;
+procedure TSynEdit32HighlighterDOT.StringProc;
 begin
   FTokenID := tkString;
   repeat
@@ -1826,7 +1826,7 @@ begin
   until IsLineEnd(FRun);
 end;
 
-constructor TSynDOTSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterDOT.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -1883,7 +1883,7 @@ begin
   FRange := rsUnknown;
 end;
 
-procedure TSynDOTSyn.IdentProc;
+procedure TSynEdit32HighlighterDOT.IdentProc;
 begin
   FTokenID := IdentKind((FLine + FRun));
   Inc(FRun, FStringLen);
@@ -1891,19 +1891,19 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynDOTSyn.UnknownProc;
+procedure TSynEdit32HighlighterDOT.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynDOTSyn.SymbolProc;
+procedure TSynEdit32HighlighterDOT.SymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynDOTSyn.Next;
+procedure TSynEdit32HighlighterDOT.Next;
 begin
   fTokenPos := FRun;
   case FRange of
@@ -1928,7 +1928,7 @@ begin
   inherited;
 end;
 
-function TSynDOTSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterDOT.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -1942,7 +1942,7 @@ begin
   end;
 end;
 
-function TSynDOTSyn.GetKeyWords(TokenKind: Integer): UnicodeString;
+function TSynEdit32HighlighterDOT.GetKeyWords(TokenKind: Integer): UnicodeString;
 begin
   Result :=
     '--,->,all,appendix,arrowhead,arrowsize,arrowtail,auto,back,bgcolor,bo' +
@@ -1964,12 +1964,12 @@ begin
     'dth,z';
 end;
 
-function TSynDOTSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterDOT.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynDOTSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterDOT.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkArrowHead: Result := FArrowHeadAttri;
@@ -1989,12 +1989,12 @@ begin
   end;
 end;
 
-function TSynDOTSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterDOT.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-function TSynDOTSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterDOT.GetSampleSource: UnicodeString;
 begin
   Result :=
     '// ATT DOT Graphic description language'#13#10 +
@@ -2039,12 +2039,12 @@ begin
     '}';
 end;
 
-function TSynDOTSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterDOT.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterDOT;
 end;
 
-function TSynDOTSyn.IsIdentChar(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterDOT.IsIdentChar(AChar: WideChar): Boolean;
 begin
   case AChar of
     '_', 'A'..'Z', 'a'..'z':
@@ -2054,31 +2054,31 @@ begin
   end;
 end;
 
-class function TSynDOTSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterDOT.GetLanguageName: string;
 begin
   Result := SYNS_LangDOT;
 end;
 
-procedure TSynDOTSyn.ResetRange;
+procedure TSynEdit32HighlighterDOT.ResetRange;
 begin
   FRange := rsUnknown;
 end;
 
-procedure TSynDOTSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterDOT.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-function TSynDOTSyn.GetRange: Pointer;
+function TSynEdit32HighlighterDOT.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-class function TSynDOTSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterDOT.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangDOT;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynDOTSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterDOT);
 end.

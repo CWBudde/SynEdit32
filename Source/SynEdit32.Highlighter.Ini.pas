@@ -59,7 +59,7 @@ type
     tkSpace, tkString, tkSymbol, tkUnknown);
 
 type
-  TSynIniSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterIni = class(TSynEdit32CustomHighlighter)
   private
     FTokenID: TtkTokenKind;
     FCommentAttri: TSynEdit32HighlighterAttributes;
@@ -120,7 +120,7 @@ implementation
 uses
   SynEdit32.StrConst;
 
-constructor TSynIniSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterIni.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FCommentAttri := TSynEdit32HighlighterAttributes.Create(SYNS_AttrComment, SYNS_FriendlyAttrComment);
@@ -147,7 +147,7 @@ begin
   fDefaultFilter := SYNS_FilterINI;
 end; { Create }
 
-procedure TSynIniSyn.SectionOpenProc;
+procedure TSynEdit32HighlighterIni.SectionOpenProc;
 begin
   // if it is not column 0 mark as tkText and get out of here
   if FRun > 0 then
@@ -173,7 +173,7 @@ begin
     end;
 end;
 
-procedure TSynIniSyn.CRProc;
+procedure TSynEdit32HighlighterIni.CRProc;
 begin
   FTokenID := tkSpace;
   case FLine[FRun + 1] of
@@ -182,13 +182,13 @@ begin
   end;
 end;
 
-procedure TSynIniSyn.EqualProc;
+procedure TSynEdit32HighlighterIni.EqualProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynIniSyn.KeyProc;
+procedure TSynEdit32HighlighterIni.KeyProc;
 begin
   FTokenID := tkKey;
   Inc(FRun);
@@ -201,7 +201,7 @@ begin
     end;
 end;
 
-procedure TSynIniSyn.TextProc;
+procedure TSynEdit32HighlighterIni.TextProc;
 
   function IsTextChar: Boolean;
   begin
@@ -228,19 +228,19 @@ begin
   end;
 end;
 
-procedure TSynIniSyn.LFProc;
+procedure TSynEdit32HighlighterIni.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynIniSyn.NullProc;
+procedure TSynEdit32HighlighterIni.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynIniSyn.NumberProc;
+procedure TSynEdit32HighlighterIni.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -275,7 +275,7 @@ begin
 end;
 
 // ;
-procedure TSynIniSyn.SemiColonProc;
+procedure TSynEdit32HighlighterIni.SemiColonProc;
 begin
   // if it is not column 0 mark as tkText and get out of here
   if FRun > 0 then
@@ -296,7 +296,7 @@ begin
     end;
 end;
 
-procedure TSynIniSyn.SpaceProc;
+procedure TSynEdit32HighlighterIni.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
@@ -304,7 +304,7 @@ begin
 end;
 
 // ""
-procedure TSynIniSyn.StringProc;
+procedure TSynEdit32HighlighterIni.StringProc;
 begin
   FTokenID := tkString;
   if (FLine[FRun + 1] = #34) and (FLine[FRun + 2] = #34) then Inc(FRun, 2);
@@ -318,7 +318,7 @@ begin
 end;
 
 // ''
-procedure TSynIniSyn.StringProc1;
+procedure TSynEdit32HighlighterIni.StringProc1;
 begin
   FTokenID := tkString;
   if (FLine[FRun + 1] = #39) and (FLine[FRun + 2] = #39) then Inc(FRun, 2);
@@ -331,7 +331,7 @@ begin
   if FLine[FRun] <> #0 then Inc(FRun);
 end;
 
-procedure TSynIniSyn.Next;
+procedure TSynEdit32HighlighterIni.Next;
 begin
   fTokenPos := FRun;
   case FLine[FRun] of
@@ -350,7 +350,7 @@ begin
   inherited;
 end;
 
-function TSynIniSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterIni.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -363,12 +363,12 @@ begin
   end;
 end;
 
-function TSynIniSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterIni.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynIniSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterIni.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case FTokenID of
     tkComment: Result := FCommentAttri;
@@ -384,22 +384,22 @@ begin
   end;
 end;
 
-function TSynIniSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterIni.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-function TSynIniSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterIni.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterINI;
 end;
 
-class function TSynIniSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterIni.GetLanguageName: string;
 begin
   Result := SYNS_LangINI;
 end;
 
-function TSynIniSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterIni.GetSampleSource: UnicodeString;
 begin
   Result :=
     '; Syntax highlighting'#13#10+
@@ -409,11 +409,11 @@ begin
     'Number=123456';
 end;
 
-class function TSynIniSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterIni.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangINI;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynIniSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterIni);
 end.

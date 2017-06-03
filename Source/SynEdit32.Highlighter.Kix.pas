@@ -65,7 +65,7 @@ type
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
 type
-  TSynKixSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterKix = class(TSynEdit32CustomHighlighter)
   private
     FTokenID: TtkTokenKind;
     FIdentFuncTable: array[0..970] of TIdentFuncTableFunc;
@@ -223,7 +223,7 @@ const
   );
 
 {$Q-}
-function TSynKixSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterKix.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) do
@@ -236,7 +236,7 @@ begin
 end;
 {$Q+}
 
-function TSynKixSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterKix.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -248,7 +248,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynKixSyn.InitIdent;
+procedure TSynEdit32HighlighterKix.InitIdent;
 var
   i: Integer;
 begin
@@ -261,12 +261,12 @@ begin
       FIdentFuncTable[i] := KeyWordFunc;
 end;
 
-function TSynKixSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterKix.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier;
 end;
 
-function TSynKixSyn.KeyWordFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterKix.KeyWordFunc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -274,7 +274,7 @@ begin
     Result := tkIdentifier;
 end;
 
-constructor TSynKixSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterKix.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -306,28 +306,28 @@ begin
   FDefaultFilter := SYNS_FilterKIX;
 end;
 
-procedure TSynKixSyn.AsciiCharProc;
+procedure TSynEdit32HighlighterKix.AsciiCharProc;
 begin
   FTokenID := tkString;
   Inc(FRun);
   while CharInSet(FLine[FRun], ['0'..'9']) do Inc(FRun);
 end;
 
-procedure TSynKixSyn.CRProc;
+procedure TSynEdit32HighlighterKix.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
   if FLine[FRun] = #10 then Inc(FRun);
 end;
 
-procedure TSynKixSyn.IdentProc;
+procedure TSynEdit32HighlighterKix.IdentProc;
 begin
   FTokenID := IdentKind((FLine + FRun));
   Inc(FRun, FStringLen);
   while IsIdentChar(FLine[FRun]) do Inc(FRun);
 end;
 
-procedure TSynKixSyn.MacroProc;
+procedure TSynEdit32HighlighterKix.MacroProc;
 
   function IsMacroChar: Boolean;
   begin
@@ -345,32 +345,32 @@ begin
   while IsMacroChar do Inc(FRun);
 end;
 
-procedure TSynKixSyn.LFProc;
+procedure TSynEdit32HighlighterKix.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynKixSyn.PrintProc;
+procedure TSynEdit32HighlighterKix.PrintProc;
 begin
   FTokenID := tkKey;
   Inc(FRun);
 end;
 
-procedure TSynKixSyn.VariableProc;
+procedure TSynEdit32HighlighterKix.VariableProc;
 begin
   FTokenID := tkVariable;
   Inc(FRun);
   while IsIdentChar(FLine[FRun]) do Inc(FRun);
 end;
 
-procedure TSynKixSyn.NullProc;
+procedure TSynEdit32HighlighterKix.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynKixSyn.NumberProc;
+procedure TSynEdit32HighlighterKix.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -395,7 +395,7 @@ begin
   end;
 end;
 
-procedure TSynKixSyn.CommentProc;
+procedure TSynEdit32HighlighterKix.CommentProc;
 begin
   FTokenID := tkComment;
   repeat
@@ -403,14 +403,14 @@ begin
   until IsLineEnd(FRun);
 end;
 
-procedure TSynKixSyn.SpaceProc;
+procedure TSynEdit32HighlighterKix.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynKixSyn.StringProc;
+procedure TSynEdit32HighlighterKix.StringProc;
 var
   C: WideChar;
 begin
@@ -425,13 +425,13 @@ begin
   if FLine[FRun] <> #0 then Inc(FRun);
 end;
 
-procedure TSynKixSyn.UnknownProc;
+procedure TSynEdit32HighlighterKix.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynKixSyn.Next;
+procedure TSynEdit32HighlighterKix.Next;
 begin
   fTokenPos := FRun;
   case FLine[FRun] of
@@ -452,7 +452,7 @@ begin
   inherited;
 end;
 
-function TSynKixSyn.GetDefaultAttribute(Index: Integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterKix.GetDefaultAttribute(Index: Integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -465,12 +465,12 @@ begin
   end;
 end;
 
-function TSynKixSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterKix.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynKixSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterKix.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkComment: Result := FCommentAttri;
@@ -487,22 +487,22 @@ begin
   end;
 end;
 
-function TSynKixSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterKix.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-class function TSynKixSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterKix.GetLanguageName: string;
 begin
   Result := SYNS_LangKIX;
 end;
 
-function TSynKixSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterKix.IsFilterStored: Boolean;
 begin
   Result := FDefaultFilter <> SYNS_FilterKIX;
 end;
 
-function TSynKixSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterKix.GetSampleSource: UnicodeString;
 begin
   Result :=
     '; KiXtart sample source'#13#10 +
@@ -514,11 +514,11 @@ begin
     'AT(1, 30) $USERID';
 end;
 
-class function TSynKixSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterKix.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangKIX;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynKixSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterKix);
 end.

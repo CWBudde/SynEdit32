@@ -62,7 +62,7 @@ type
   TRangeState = (rsUnKnown, rsMessageStyle);
 
 type
-  TSynGalaxySyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterGalaxy = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
     FTokenID: TtkTokenKind;
@@ -122,7 +122,7 @@ implementation
 uses
   SynEdit32.StrConst;
 
-function TSynGalaxySyn.IsIdentChar(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterGalaxy.IsIdentChar(AChar: WideChar): Boolean;
 begin
   case AChar of
    '_', '0'..'9', 'a'..'z', 'A'..'Z', '#':
@@ -132,7 +132,7 @@ begin
   end;
 end;
 
-function TSynGalaxySyn.IsKeyword(const AKeyword: UnicodeString): Boolean;
+function TSynEdit32HighlighterGalaxy.IsKeyword(const AKeyword: UnicodeString): Boolean;
 var
   First, Last, I, Compare: Integer;
   Token: UnicodeString;
@@ -154,7 +154,7 @@ begin
   end;
 end; { IsKeyWord }
 
-constructor TSynGalaxySyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterGalaxy.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -189,13 +189,13 @@ begin
   fDefaultFilter := SYNS_FilterGalaxy;
 end; { Create }
 
-destructor TSynGalaxySyn.Destroy;
+destructor TSynEdit32HighlighterGalaxy.Destroy;
 begin
   FKeyWords.Free;
   inherited Destroy;
 end; { Destroy }
 
-procedure TSynGalaxySyn.MessageStyleProc;
+procedure TSynEdit32HighlighterGalaxy.MessageStyleProc;
 begin
   FTokenID := tkMessage;
   case FLine[FRun] of
@@ -225,7 +225,7 @@ begin
       Inc(FRun);
 end;
 
-procedure TSynGalaxySyn.PointCommaProc;                                         
+procedure TSynEdit32HighlighterGalaxy.PointCommaProc;
 begin
   FTokenID := tkComment;
   FRange := rsUnknown;
@@ -234,7 +234,7 @@ begin
   until FLine[FRun] = #0;
 end;
 
-procedure TSynGalaxySyn.CRProc;
+procedure TSynEdit32HighlighterGalaxy.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
@@ -242,7 +242,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynGalaxySyn.IdentProc;
+procedure TSynEdit32HighlighterGalaxy.IdentProc;
 begin
   while IsIdentChar(FLine[FRun]) do
     Inc(FRun);
@@ -252,26 +252,26 @@ begin
     FTokenID := tkIdentifier;
 end;
 
-procedure TSynGalaxySyn.LFProc;
+procedure TSynEdit32HighlighterGalaxy.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynGalaxySyn.NullProc;
+procedure TSynEdit32HighlighterGalaxy.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynGalaxySyn.SpaceProc;
+procedure TSynEdit32HighlighterGalaxy.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynGalaxySyn.StringProc;
+procedure TSynEdit32HighlighterGalaxy.StringProc;
 begin
   if (FRun = 0) and (FTokenID <> tkMessage) then
   begin
@@ -281,13 +281,13 @@ begin
   Inc(FRun);
 end;
 
-procedure TSynGalaxySyn.UnknownProc;
+procedure TSynEdit32HighlighterGalaxy.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnKnown;
 end;
 
-procedure TSynGalaxySyn.Next;
+procedure TSynEdit32HighlighterGalaxy.Next;
 begin
   FTokenPos := FRun;
   if FRange = rsMessageStyle then
@@ -306,7 +306,7 @@ begin
   inherited;
 end;
 
-function TSynGalaxySyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterGalaxy.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -319,17 +319,17 @@ begin
   end;
 end;
 
-function TSynGalaxySyn.GetRange: Pointer;
+function TSynEdit32HighlighterGalaxy.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-function TSynGalaxySyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterGalaxy.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynGalaxySyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterGalaxy.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case FTokenID of
     tkComment: Result := FCommentAttri;
@@ -343,22 +343,22 @@ begin
   end;
 end;
 
-function TSynGalaxySyn.GetTokenKind: integer;
+function TSynEdit32HighlighterGalaxy.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-procedure TSynGalaxySyn.ResetRange;
+procedure TSynEdit32HighlighterGalaxy.ResetRange;
 begin
   FRange := rsUnknown;
 end;
 
-procedure TSynGalaxySyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterGalaxy.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-procedure TSynGalaxySyn.SetKeyWords(const Value: TUnicodeStrings);
+procedure TSynEdit32HighlighterGalaxy.SetKeyWords(const Value: TUnicodeStrings);
 var
   i: Integer;
 begin
@@ -373,18 +373,18 @@ begin
   DefHighLightChange(nil);
 end;
 
-function TSynGalaxySyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterGalaxy.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterGalaxy;
 end;
 
-class function TSynGalaxySyn.GetLanguageName: string;
+class function TSynEdit32HighlighterGalaxy.GetLanguageName: string;
 begin
   Result := SYNS_LangGalaxy;
 end;
 
 {$IFNDEF SYN_CLX}
-function TSynGalaxySyn.LoadFromRegistry(RootKey: HKEY; Key: string): boolean;
+function TSynEdit32HighlighterGalaxy.LoadFromRegistry(RootKey: HKEY; Key: string): boolean;
 var
   r: TBetterRegistry;
 begin
@@ -403,7 +403,7 @@ begin
   end;
 end;
 
-function TSynGalaxySyn.SaveToRegistry(RootKey: HKEY; Key: string): boolean;
+function TSynEdit32HighlighterGalaxy.SaveToRegistry(RootKey: HKEY; Key: string): boolean;
 var
   r: TBetterRegistry;
 begin
@@ -426,11 +426,11 @@ begin
 end;
 {$ENDIF}
 
-class function TSynGalaxySyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterGalaxy.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangGalaxy;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynGalaxySyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterGalaxy);
 end.

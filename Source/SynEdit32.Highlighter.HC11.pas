@@ -74,7 +74,7 @@ type
     Op: Boolean;
   end;
 
-  TSynHC11Syn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterHC11 = class(TSynEdit32CustomHighlighter)
   private
     FTokenID: TtkTokenKind;
     FKeyWordType: TkwKeyWordType;
@@ -170,7 +170,7 @@ const
     'EQU_,OPT_,PAGE,ORG_,RMB_,END'  // directives
   );
 
-procedure TSynHC11Syn.DoAddKeyword(AKeyword: UnicodeString; AKind: Integer);
+procedure TSynEdit32HighlighterHC11.DoAddKeyword(AKeyword: UnicodeString; AKind: Integer);
 var
   HashValue: Integer;
 begin
@@ -178,7 +178,7 @@ begin
   FKeywords[HashValue] := TSynEdit32HashEntry.Create(AKeyword, AKind);
 end;
 
-function TSynHC11Syn.HashKey(Str: PWideChar): Integer;
+function TSynEdit32HighlighterHC11.HashKey(Str: PWideChar): Integer;
 
   function GetOrd: Integer;
   begin
@@ -206,7 +206,7 @@ begin
   FStringLen := Str - FToIdent;
 end;
 
-function TSynHC11Syn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterHC11.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Entry: TSynEdit32HashEntry;
 begin
@@ -227,7 +227,7 @@ begin
   Result := tkIdentifier;
 end;
 
-constructor TSynHC11Syn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterHC11.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -261,13 +261,13 @@ begin
   fDefaultFilter := SYNS_FilterAsm68HC11;
 end; { Create }
 
-destructor TSynHC11Syn.Destroy;
+destructor TSynEdit32HighlighterHC11.Destroy;
 begin
   FKeywords.Free;
   inherited Destroy;
 end;
 
-procedure TSynHC11Syn.SymAsciiCharProc;
+procedure TSynEdit32HighlighterHC11.SymAsciiCharProc;
 begin
   FTokenID := tkString;
   if (FLine[FRun + 1] = #39) and (FLine[FRun + 2] = #39) then Inc(FRun, 2);
@@ -284,13 +284,13 @@ begin
   if FLine[FRun] <> #0 then Inc(FRun);
 end;
 
-procedure TSynHC11Syn.SymbolProc;
+procedure TSynEdit32HighlighterHC11.SymbolProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
 end;
 
-procedure TSynHC11Syn.SymDollarProc;
+procedure TSynEdit32HighlighterHC11.SymDollarProc;
 begin
   FTokenID := tkNumber;
   Inc(FRun);
@@ -300,7 +300,7 @@ begin
   end;
 end;
 
-procedure TSynHC11Syn.SymCRProc;
+procedure TSynEdit32HighlighterHC11.SymCRProc;
 begin
   FTokenID := tkSpace;
   FKeyWordType := kwNone;
@@ -308,21 +308,21 @@ begin
   if FLine[FRun] = #10 then Inc(FRun);
 end;
 
-procedure TSynHC11Syn.SymIdentProc;
+procedure TSynEdit32HighlighterHC11.SymIdentProc;
 begin
   FTokenID := IdentKind(FLine + FRun);
   Inc(FRun, FStringLen);
   while IsIdentChar(FLine[FRun]) do Inc(FRun);
 end;
 
-procedure TSynHC11Syn.SymLFProc;
+procedure TSynEdit32HighlighterHC11.SymLFProc;
 begin
   FKeyWordType := kwNone;
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynHC11Syn.SymPercentProc;
+procedure TSynEdit32HighlighterHC11.SymPercentProc;
 begin
   Inc(FRun);
   FTokenID := tkNumber;
@@ -330,13 +330,13 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynHC11Syn.SymNullProc;
+procedure TSynEdit32HighlighterHC11.SymNullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynHC11Syn.SymNumberProc;
+procedure TSynEdit32HighlighterHC11.SymNumberProc;
 begin
   Inc(FRun);
   FTokenID := tkNumber;
@@ -344,7 +344,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynHC11Syn.SymSpaceProc;
+procedure TSynEdit32HighlighterHC11.SymSpaceProc;
 begin
   Inc(FRun);
   if FKeyWordType in [kwOperandOver, kwNoOperand] then
@@ -364,7 +364,7 @@ begin
   end;
 end;
 
-procedure TSynHC11Syn.SymStarProc;
+procedure TSynEdit32HighlighterHC11.SymStarProc;
 begin
   Inc(FRun);
   if FKeyWordType = kwOperandOver then
@@ -377,7 +377,7 @@ begin
   end;
 end;
 
-procedure TSynHC11Syn.SymStringProc;
+procedure TSynEdit32HighlighterHC11.SymStringProc;
 begin
   FTokenID := tkString;
   if (FLine[FRun + 1] = #34) and (FLine[FRun + 2] = #34) then Inc(FRun, 2);
@@ -390,13 +390,13 @@ begin
   if FLine[FRun] <> #0 then Inc(FRun);
 end;
 
-procedure TSynHC11Syn.SymUnknownProc;
+procedure TSynEdit32HighlighterHC11.SymUnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynHC11Syn.Next;
+procedure TSynEdit32HighlighterHC11.Next;
 begin
   fTokenPos := FRun;
   case FLine[FRun] of
@@ -417,7 +417,7 @@ begin
   inherited;
 end;
 
-function TSynHC11Syn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterHC11.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -431,7 +431,7 @@ begin
   end;
 end;
 
-function TSynHC11Syn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterHC11.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case FTokenID of
     tkComment: Result := FCommentAttri;
@@ -447,27 +447,27 @@ begin
   end;
 end;
 
-function TSynHC11Syn.GetTokenKind: integer;
+function TSynEdit32HighlighterHC11.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-function TSynHC11Syn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterHC11.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynHC11Syn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterHC11.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterAsm68HC11;
 end;
 
-class function TSynHC11Syn.GetLanguageName: string;
+class function TSynEdit32HighlighterHC11.GetLanguageName: string;
 begin
   Result := SYNS_Lang68HC11;
 end;
 
-function TSynHC11Syn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterHC11.GetSampleSource: UnicodeString;
 begin
   Result :=
     '* TX.ASM'#13#10 +
@@ -482,11 +482,11 @@ begin
     '	END';
 end;
 
-class function TSynHC11Syn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterHC11.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLang68HC11;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynHC11Syn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterHC11);
 end.

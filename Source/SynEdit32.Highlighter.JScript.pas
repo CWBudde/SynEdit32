@@ -64,7 +64,7 @@ type
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
 type
-  TSynJScriptSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterJScript = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
     FTokenID: TtkTokenKind;
@@ -871,7 +871,7 @@ const
   );
 
 {$Q-}
-function TSynJScriptSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterJScript.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) do
@@ -884,7 +884,7 @@ begin
 end;
 {$Q+}
 
-function TSynJScriptSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterJScript.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -896,7 +896,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynJScriptSyn.InitIdent;
+procedure TSynEdit32HighlighterJScript.InitIdent;
 var
   i: Integer;
 begin
@@ -1305,12 +1305,12 @@ begin
   FIdentFuncTable[4030] := FuncZindex;
 end;
 
-function TSynJScriptSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncAbs(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncAbs(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1318,231 +1318,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncAbstract(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncAcos(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncAction(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncAlert(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncAlign(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncAlinkcolor(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncAll(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncAnchor(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncAnchors(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncAppcodename(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncApplet(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncApplets(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncAppname(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncAppversion(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncArea(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncArguments(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncArray(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncAsin(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncAtan(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncAtan2(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncBack(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncBackground(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncBgcolor(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncBig(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncBlink(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncBlur(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncBody(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncBold(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncBoolean(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncAbstract(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1550,7 +1326,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncBoolean2(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncAcos(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1558,8 +1334,7 @@ begin
     Result := tkIdentifier;
 end;
 
-
-function TSynJScriptSyn.FuncBorder(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncAction(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1567,7 +1342,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncBottom(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncAlert(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1575,15 +1350,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncBreak(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncButton(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncAlign(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1591,15 +1358,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncByte(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncCall(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncAlinkcolor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1607,15 +1366,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncCallee(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncCaller(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncAll(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1623,7 +1374,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncCaptureevents(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncAnchor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1631,23 +1382,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncCase(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncCatch(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncCeil(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncAnchors(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1655,15 +1390,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncChar(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncCharat(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncAppcodename(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1671,7 +1398,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncCharcodeat(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncApplet(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1679,7 +1406,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncCheckbox(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncApplets(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1687,7 +1414,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncChecked(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncAppname(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1695,15 +1422,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncClass(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncClear(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncAppversion(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1711,7 +1430,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncClearinterval(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncArea(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1719,7 +1438,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncCleartimeout(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncArguments(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1727,7 +1446,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncClick(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncArray(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1735,7 +1454,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncClose(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncAsin(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1743,7 +1462,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncClosed(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncAtan(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1751,7 +1470,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncColor(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncAtan2(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1759,7 +1478,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncComplete(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncBack(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1767,7 +1486,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncConcat(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncBackground(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1775,7 +1494,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncConfirm(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncBgcolor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1783,7 +1502,47 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncConst(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncBig(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncBlink(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncBlur(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncBody(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncBold(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncBoolean(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1791,7 +1550,32 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncConstructor(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncBoolean2(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+
+function TSynEdit32HighlighterJScript.FuncBorder(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncBottom(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncBreak(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1799,7 +1583,15 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncContinue(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncButton(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncByte(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1807,7 +1599,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncCookie(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncCall(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1815,31 +1607,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncCos(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncCurrent(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncDate(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncDebugger(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncCallee(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1847,7 +1615,23 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncDefault(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncCaller(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncCaptureevents(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncCase(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1855,39 +1639,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncDefaultchecked(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncDefaultselected(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncDefaultstatus(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncDefaultvalue(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncDelete(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncCatch(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1895,7 +1647,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncDescription(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncCeil(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1903,15 +1655,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncDisplay(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncDo(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncChar(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1919,7 +1663,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncDocument(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncCharat(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1927,7 +1671,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncDomain(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncCharcodeat(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1935,15 +1679,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncDouble(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncE(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncCheckbox(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1951,7 +1687,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncElements(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncChecked(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1959,7 +1695,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncElse(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncClass(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1967,7 +1703,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncEmbed(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncClear(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1975,7 +1711,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncEmbeds(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncClearinterval(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1983,7 +1719,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncEnabledplugin(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncCleartimeout(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1991,7 +1727,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncEncoding(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncClick(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -1999,15 +1735,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncEnum(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncEscape(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncClose(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2015,7 +1743,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncEval(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncClosed(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2023,7 +1751,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncEvent(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncColor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2031,7 +1759,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncExp(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncComplete(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2039,23 +1767,23 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncExport(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncConcat(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
+    Result := tkNonReservedKey
   else
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncExtends(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncConfirm(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
+    Result := tkNonReservedKey
   else
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncFalse(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncConst(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2063,31 +1791,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncFgcolor(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncFilename(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncFileupload(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncFinal(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncConstructor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2095,7 +1799,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncFinally(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncContinue(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2103,7 +1807,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncFind(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncCookie(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2111,7 +1815,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncFixed(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncCos(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2119,15 +1823,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncFloat(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncFloat2(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncCurrent(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2135,7 +1831,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncFloor(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncDate(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2143,31 +1839,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncFocus(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncFontcolor(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncFontsize(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncFor(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncDebugger(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2175,55 +1847,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncForm(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncForms(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncForward(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncFrame(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncFrames(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncFromcharcode(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncFunction(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncDefault(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2231,7 +1855,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncFunction2(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncDefaultchecked(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2239,7 +1863,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncGetdate(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncDefaultselected(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2247,7 +1871,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncGetday(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncDefaultstatus(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2255,7 +1879,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncGetelementbyid(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncDefaultvalue(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2263,159 +1887,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncGetfullyear(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncGethours(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncGetmilliseconds(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncGetminutes(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncGetmonth(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncGetseconds(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncGettime(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncGettimezoneoffset(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncGetutcdate(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncGetutcday(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncGetutcfullyear(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncGetutchours(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncGetutcmilliseconds(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncGetutcminutes(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncGetutcmonth(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncGetutcseconds(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncGetyear(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncGlobal(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncGo(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncGoto(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncDelete(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2423,7 +1895,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncHandleevent(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncDescription(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2431,7 +1903,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncHash(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncDisplay(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2439,71 +1911,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncHeight(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncHidden(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncHistory(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncHome(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncHost(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncHostname(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncHref(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncHspace(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncIf(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncDo(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2511,7 +1919,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncImage(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncDocument(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2519,7 +1927,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncImages(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncDomain(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2527,7 +1935,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncImplements(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncDouble(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2535,7 +1943,23 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncImport(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncE(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncElements(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncElse(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2543,7 +1967,39 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncIn(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncEmbed(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncEmbeds(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncEnabledplugin(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncEncoding(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncEnum(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2551,7 +2007,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncIndex(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncEscape(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2559,7 +2015,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncIndexof(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncEval(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2567,7 +2023,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncInfinity(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncEvent(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2575,7 +2031,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncInnerheight(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncExp(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2583,23 +2039,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncInnerwidth(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncInput(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncInstanceof(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncExport(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2607,7 +2047,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncInt(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncExtends(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2615,7 +2055,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncInterface(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncFalse(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2623,7 +2063,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncIsfinite(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncFgcolor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2631,7 +2071,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncIsnan(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncFilename(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2639,7 +2079,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncItalics(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncFileupload(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2647,167 +2087,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncJava(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncJavaenabled(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncJoin(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncLastindexof(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncLastmodified(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncLayer(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncLayers(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncLeft(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncLength(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncLink(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncLinkcolor(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncLinks(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncLn10(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncLn2(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncLocation(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncLocationbar(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncLog(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncLog10e(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncLog2e(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncLogon(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncLong(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncFinal(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2815,119 +2095,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncLowsrc(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncMatch(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncMath(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncMax(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncMax_value(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncMenubar(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncMethod(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncMimetype(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncMimetypes(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncMin(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncMin_value(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncMoveby(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncMoveto(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncName(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncNan(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncFinally(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2935,7 +2103,23 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncNative(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncFind(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncFixed(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncFloat(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2943,7 +2127,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncNavigator(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncFloat2(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2951,7 +2135,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncNegative_infinity(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncFloor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2959,7 +2143,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncNetscape(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncFocus(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2967,7 +2151,23 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncNew(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncFontcolor(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncFontsize(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncFor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2975,7 +2175,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncNext(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncForm(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2983,7 +2183,47 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncNull(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncForms(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncForward(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncFrame(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncFrames(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncFromcharcode(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncFunction(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2991,7 +2231,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncNull2(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncFunction2(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -2999,7 +2239,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncNumber(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncGetdate(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3007,7 +2247,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncObject(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncGetday(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3015,7 +2255,767 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOnabort(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncGetelementbyid(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncGetfullyear(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncGethours(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncGetmilliseconds(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncGetminutes(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncGetmonth(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncGetseconds(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncGettime(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncGettimezoneoffset(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncGetutcdate(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncGetutcday(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncGetutcfullyear(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncGetutchours(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncGetutcmilliseconds(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncGetutcminutes(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncGetutcmonth(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncGetutcseconds(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncGetyear(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncGlobal(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncGo(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncGoto(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncHandleevent(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncHash(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncHeight(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncHidden(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncHistory(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncHome(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncHost(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncHostname(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncHref(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncHspace(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncIf(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncImage(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncImages(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncImplements(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncImport(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncIn(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncIndex(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncIndexof(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncInfinity(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncInnerheight(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncInnerwidth(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncInput(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncInstanceof(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncInt(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncInterface(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncIsfinite(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncIsnan(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncItalics(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncJava(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncJavaenabled(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncJoin(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncLastindexof(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncLastmodified(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncLayer(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncLayers(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncLeft(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncLength(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncLink(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncLinkcolor(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncLinks(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncLn10(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncLn2(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncLocation(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncLocationbar(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncLog(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncLog10e(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncLog2e(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncLogon(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncLong(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncLowsrc(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncMatch(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncMath(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncMax(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncMax_value(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncMenubar(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncMethod(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncMimetype(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncMimetypes(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncMin(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncMin_value(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncMoveby(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncMoveto(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncName(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncNan(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncNative(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncNavigator(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncNegative_infinity(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncNetscape(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncNew(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncNext(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncNull(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncNull2(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncNumber(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncObject(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncOnabort(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkEvent
@@ -3023,7 +3023,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOnblur(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOnblur(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkEvent
@@ -3031,7 +3031,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOnchange(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOnchange(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkEvent
@@ -3039,7 +3039,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOnclick(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOnclick(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkEvent
@@ -3047,7 +3047,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOndblclick(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOndblclick(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkEvent
@@ -3055,7 +3055,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOnerror(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOnerror(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkEvent
@@ -3063,7 +3063,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOnfocus(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOnfocus(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkEvent
@@ -3071,7 +3071,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOnkeydown(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOnkeydown(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkEvent
@@ -3079,7 +3079,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOnkeypress(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOnkeypress(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkEvent
@@ -3087,7 +3087,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOnkeyup(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOnkeyup(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkEvent
@@ -3095,7 +3095,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOnload(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOnload(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkEvent
@@ -3103,7 +3103,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOnmousedown(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOnmousedown(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkEvent
@@ -3111,7 +3111,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOnmousemove(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOnmousemove(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkEvent
@@ -3119,7 +3119,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOnmouseout(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOnmouseout(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkEvent
@@ -3127,7 +3127,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOnmouseover(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOnmouseover(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkEvent
@@ -3135,7 +3135,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOnmouseup(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOnmouseup(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkEvent
@@ -3143,7 +3143,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOnreset(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOnreset(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkEvent
@@ -3151,7 +3151,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOnselect(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOnselect(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkEvent
@@ -3159,7 +3159,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOnsubmit(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOnsubmit(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkEvent
@@ -3167,7 +3167,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOnunload(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOnunload(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkEvent
@@ -3175,7 +3175,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOpen(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOpen(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3183,7 +3183,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOpener(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOpener(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3191,7 +3191,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOption(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOption(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3199,7 +3199,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOptions(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOptions(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3207,7 +3207,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOuterheight(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOuterheight(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3215,7 +3215,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncOuterwidth(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncOuterwidth(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3223,183 +3223,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncPackage(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncPackages(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncPagex(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncPagexoffset(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncPagey(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncPageyoffset(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncParent(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncParse(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncParsefloat(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncParseint(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncPassword(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncPathname(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncPersonalbar(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncPi(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncPlatform(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncPlugin(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncPlugins(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncPort(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncPositive_infinity(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncPow(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncPrevious(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncPrint(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncPrivate(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPackage(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -3407,7 +3231,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncPrompt(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPackages(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3415,15 +3239,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncProtected(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncProtocol(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPagex(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3431,23 +3247,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncPrototype(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncPublic(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncRadio(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPagexoffset(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3455,7 +3255,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncRandom(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPagey(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3463,7 +3263,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncReferrer(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPageyoffset(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3471,7 +3271,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncRefresh(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncParent(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3479,7 +3279,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncRegexp(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncParse(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3487,7 +3287,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncReleaseevents(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncParsefloat(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3495,7 +3295,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncReload(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncParseint(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3503,7 +3303,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncReplace(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPassword(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3511,7 +3311,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncReset(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPathname(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3519,7 +3319,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncResizeby(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPersonalbar(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3527,7 +3327,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncResizeto(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPi(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3535,15 +3335,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncReturn(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncReverse(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPlatform(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3551,7 +3343,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncRight(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPlugin(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3559,7 +3351,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncRound(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPlugins(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3567,7 +3359,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncRouteevent(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPort(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3575,7 +3367,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncScreen(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPositive_infinity(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3583,7 +3375,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncScroll(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPow(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3591,7 +3383,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncScrollbars(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPrevious(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3599,7 +3391,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncScrollby(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPrint(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3607,199 +3399,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncScrollto(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSearch(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSelect(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSelected(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSelectedindex(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSelf(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSetdate(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSetfullyear(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSethours(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSetinterval(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSetmilliseconds(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSetminutes(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSetmonth(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSetseconds(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSettime(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSettimeout(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSetutcdate(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSetutcfullyear(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSetutchours(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSetutcmilliseconds(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSetutcminutes(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSetutcmonth(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSetutcseconds(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSetyear(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncShort(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPrivate(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -3807,7 +3407,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncSin(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPrompt(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -3815,71 +3415,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncSlice(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSmall(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSort(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSplit(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSqrt(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSqrt1_2(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSqrt2(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSrc(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncStart(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncProtected(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -3887,7 +3423,15 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncStatic(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncProtocol(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncPrototype(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -3895,103 +3439,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncStatus(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncStatusbar(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncStop(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncStrike(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncString(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncStyle(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSub(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSubmit(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSubstr(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSubstring(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSuffixes(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSup(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncSuper(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncPublic(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -3999,7 +3447,95 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncSwitch(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncRadio(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncRandom(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncReferrer(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncRefresh(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncRegexp(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncReleaseevents(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncReload(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncReplace(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncReset(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncResizeby(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncResizeto(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncReturn(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -4007,7 +3543,263 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncSynchronized(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncReverse(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncRight(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncRound(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncRouteevent(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncScreen(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncScroll(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncScrollbars(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncScrollby(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncScrollto(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSearch(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSelect(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSelected(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSelectedindex(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSelf(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSetdate(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSetfullyear(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSethours(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSetinterval(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSetmilliseconds(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSetminutes(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSetmonth(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSetseconds(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSettime(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSettimeout(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSetutcdate(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSetutcfullyear(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSetutchours(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSetutcmilliseconds(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSetutcminutes(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSetutcmonth(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSetutcseconds(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSetyear(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncShort(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -4015,7 +3807,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncTags(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncSin(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -4023,7 +3815,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncTaint(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncSlice(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -4031,7 +3823,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncTaintenabled(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncSmall(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -4039,7 +3831,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncTan(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncSort(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -4047,7 +3839,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncTarget(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncSplit(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -4055,7 +3847,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncText(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncSqrt(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -4063,7 +3855,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncTextarea(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncSqrt1_2(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -4071,7 +3863,23 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncThis(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncSqrt2(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSrc(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncStart(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -4079,7 +3887,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncThrow(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncStatic(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -4087,7 +3895,103 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncThrows(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncStatus(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncStatusbar(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncStop(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncStrike(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncString(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncStyle(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSub(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSubmit(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSubstr(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSubstring(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSuffixes(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSup(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncSuper(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -4095,87 +3999,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncTitle(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncTogmtstring(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncTolocalestring(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncTolowercase(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncToolbar(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncTop(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncTosource(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncTostring(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncTouppercase(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncToutcstring(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncTransient(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncSwitch(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -4183,7 +4007,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncTrue(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncSynchronized(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -4191,7 +4015,63 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncTry(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncTags(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncTaint(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncTaintenabled(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncTan(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncTarget(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncText(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncTextarea(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncThis(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -4199,15 +4079,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncType(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncTypeof(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncThrow(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -4215,79 +4087,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncUndefined(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncUnescape(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncUntaint(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncUnwatch(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncUrl(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncUseragent(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncUtc(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncValue(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncValueof(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncVar(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncThrows(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -4295,7 +4095,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncVisibility(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncTitle(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -4303,7 +4103,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncVlinkcolor(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncTogmtstring(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -4311,7 +4111,71 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncVoid(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncTolocalestring(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncTolowercase(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncToolbar(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncTop(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncTosource(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncTostring(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncTouppercase(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncToutcstring(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncTransient(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -4319,23 +4183,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncVspace(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncWatch(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncWhile(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncTrue(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -4343,23 +4191,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncWidth(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncWindow(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkNonReservedKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynJScriptSyn.FuncWith(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncTry(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -4367,7 +4199,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncWrite(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncType(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -4375,7 +4207,15 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncWriteln(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncTypeof(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncUndefined(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -4383,7 +4223,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynJScriptSyn.FuncZindex(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJScript.FuncUnescape(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkNonReservedKey
@@ -4391,7 +4231,167 @@ begin
     Result := tkIdentifier;
 end;
 
-constructor TSynJScriptSyn.Create(AOwner: TComponent);
+function TSynEdit32HighlighterJScript.FuncUntaint(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncUnwatch(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncUrl(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncUseragent(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncUtc(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncValue(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncValueof(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncVar(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncVisibility(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncVlinkcolor(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncVoid(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncVspace(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncWatch(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncWhile(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncWidth(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncWindow(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncWith(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncWrite(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncWriteln(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterJScript.FuncZindex(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkNonReservedKey
+  else
+    Result := tkIdentifier;
+end;
+
+constructor TSynEdit32HighlighterJScript.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -4423,14 +4423,14 @@ begin
   FRange := rsUnknown;
 end;
 
-procedure TSynJScriptSyn.AndSymbolProc;
+procedure TSynEdit32HighlighterJScript.AndSymbolProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if CharInSet(FLine[FRun], ['=', '&']) then Inc(FRun);
 end;
 
-procedure TSynJScriptSyn.CommentProc;
+procedure TSynEdit32HighlighterJScript.CommentProc;
 begin
   if FLine[FRun] = #0 then
     NullProc
@@ -4449,47 +4449,47 @@ begin
   end;
 end;
 
-procedure TSynJScriptSyn.CRProc;
+procedure TSynEdit32HighlighterJScript.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
   if FLine[FRun] = #10 then Inc(FRun);
 end;
 
-procedure TSynJScriptSyn.IdentProc;
+procedure TSynEdit32HighlighterJScript.IdentProc;
 begin
   FTokenID := IdentKind((FLine + FRun));
   Inc(FRun, FStringLen);
   while IsIdentChar(FLine[FRun]) do Inc(FRun);
 end;
 
-procedure TSynJScriptSyn.LFProc;
+procedure TSynEdit32HighlighterJScript.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynJScriptSyn.MinusProc;
+procedure TSynEdit32HighlighterJScript.MinusProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if CharInSet(FLine[FRun], ['=', '-', '>']) then Inc(FRun);
 end;
 
-procedure TSynJScriptSyn.ModSymbolProc;
+procedure TSynEdit32HighlighterJScript.ModSymbolProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if FLine[FRun] = '=' then Inc(FRun);
 end;
 
-procedure TSynJScriptSyn.NullProc;
+procedure TSynEdit32HighlighterJScript.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynJScriptSyn.NumberProc;
+procedure TSynEdit32HighlighterJScript.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -4541,28 +4541,28 @@ begin
   end;
 end;
 
-procedure TSynJScriptSyn.OrSymbolProc;
+procedure TSynEdit32HighlighterJScript.OrSymbolProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if CharInSet(FLine[FRun], ['=', '|']) then Inc(FRun);
 end;
 
-procedure TSynJScriptSyn.PlusProc;
+procedure TSynEdit32HighlighterJScript.PlusProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if CharInSet(FLine[FRun], ['=', '+']) then Inc(FRun);
 end;
 
-procedure TSynJScriptSyn.PointProc;
+procedure TSynEdit32HighlighterJScript.PointProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if (FLine[FRun] = '.') and (FLine[FRun + 1] = '.') then Inc(FRun, 2);
 end;
 
-procedure TSynJScriptSyn.SlashProc;
+procedure TSynEdit32HighlighterJScript.SlashProc;
 begin
   Inc(FRun);
   case FLine[FRun] of
@@ -4593,21 +4593,21 @@ begin
   end;
 end;
 
-procedure TSynJScriptSyn.SpaceProc;
+procedure TSynEdit32HighlighterJScript.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynJScriptSyn.StarProc;
+procedure TSynEdit32HighlighterJScript.StarProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if FLine[FRun] = '=' then Inc(FRun);
 end;
 
-procedure TSynJScriptSyn.StringProc;
+procedure TSynEdit32HighlighterJScript.StringProc;
 var
   l_strChar: UnicodeString;
 begin
@@ -4622,19 +4622,19 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynJScriptSyn.SymbolProc;
+procedure TSynEdit32HighlighterJScript.SymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynJScriptSyn.UnknownProc;
+procedure TSynEdit32HighlighterJScript.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynJScriptSyn.Next;
+procedure TSynEdit32HighlighterJScript.Next;
 begin
   fTokenPos := FRun;
   if FRange = rsANSI then
@@ -4663,7 +4663,7 @@ begin
   inherited;
 end;
 
-function TSynJScriptSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterJScript.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -4677,17 +4677,17 @@ begin
   end;
 end;
 
-function TSynJScriptSyn.GetRange: Pointer;
+function TSynEdit32HighlighterJScript.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-function TSynJScriptSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterJScript.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynJScriptSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterJScript.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkComment: Result := FCommentAttri;
@@ -4704,32 +4704,32 @@ begin
   end;
 end;
 
-function TSynJScriptSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterJScript.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-procedure TSynJScriptSyn.ResetRange;
+procedure TSynEdit32HighlighterJScript.ResetRange;
 begin
   FRange := rsUnknown;
 end;
 
-procedure TSynJScriptSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterJScript.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-function TSynJScriptSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterJScript.IsFilterStored: Boolean;
 begin
   Result := FDefaultFilter <> SYNS_FilterJScript;
 end;
 
-class function TSynJScriptSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterJScript.GetLanguageName: string;
 begin
   Result := SYNS_LangJScript;
 end;
 
-function TSynJScriptSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterJScript.GetSampleSource: UnicodeString;
 begin
   Result := '// Syntax highlighting'#13#10+
             'function printNumber()'#13#10+
@@ -4748,11 +4748,11 @@ begin
             'body.onLoad = printNumber;';
 end;
 
-class function TSynJScriptSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterJScript.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangJScript;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynJScriptSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterJScript);
 end.

@@ -81,7 +81,7 @@ const
   BDSVersionPrefix = 'BDS';
 
 type
-  TSynPasSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterPas = class(TSynEdit32CustomHighlighter)
   private
     FAsmStart: Boolean;
     FRange: TRangeState;
@@ -262,7 +262,7 @@ const
   );
 
 {$Q-}
-function TSynPasSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterPas.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) do
@@ -275,7 +275,7 @@ begin
 end;
 {$Q+}
 
-function TSynPasSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterPas.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -287,7 +287,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynPasSyn.InitIdent;
+procedure TSynEdit32HighlighterPas.InitIdent;
 var
   i: Integer;
 begin
@@ -335,12 +335,12 @@ begin
       FIdentFuncTable[i] := KeyWordFunc;
 end;
 
-function TSynPasSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier
 end;
 
-function TSynPasSyn.KeyWordFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.KeyWordFunc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -348,7 +348,7 @@ begin
     Result := tkIdentifier
 end;
 
-function TSynPasSyn.FuncAsm(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncAsm(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -360,7 +360,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncAutomated(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncAutomated(Index: Integer): TtkTokenKind;
 begin
   if (DelphiVersion >= dvDelphi3) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -368,7 +368,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncCdecl(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncCdecl(Index: Integer): TtkTokenKind;
 begin
   if (DelphiVersion >= dvDelphi2) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -376,7 +376,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncContains(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncContains(Index: Integer): TtkTokenKind;
 begin
   if PackageSource and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -384,7 +384,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncDeprecated(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncDeprecated(Index: Integer): TtkTokenKind;
 begin
   if (DelphiVersion >= dvDelphi6) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -392,7 +392,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncDispid(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncDispid(Index: Integer): TtkTokenKind;
 begin
   if (DelphiVersion >= dvDelphi3) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -400,7 +400,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncDispinterface(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncDispinterface(Index: Integer): TtkTokenKind;
 begin
   if (DelphiVersion >= dvDelphi3) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -408,7 +408,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncEnd(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncEnd(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -419,7 +419,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncExports(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncExports(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -430,7 +430,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncFinal(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncFinal(Index: Integer): TtkTokenKind;
 begin
  if (DelphiVersion >= dvDelphi8) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -438,7 +438,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncFinalization(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncFinalization(Index: Integer): TtkTokenKind;
 begin
   if (DelphiVersion >= dvDelphi2) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -446,7 +446,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncHelper(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncHelper(Index: Integer): TtkTokenKind;
 begin
   if (DelphiVersion >= dvDelphi8) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -454,7 +454,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncImplements(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncImplements(Index: Integer): TtkTokenKind;
 begin
   if (FRange = rsProperty) and (DelphiVersion >= dvDelphi4) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -462,7 +462,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncIndex(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncIndex(Index: Integer): TtkTokenKind;
 begin
   if (FRange in [rsProperty, rsExports]) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -470,7 +470,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncName(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncName(Index: Integer): TtkTokenKind;
 begin
   if (FRange = rsExports) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -478,7 +478,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncNodefault(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncNodefault(Index: Integer): TtkTokenKind;
 begin
   if (FRange = rsProperty) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -486,7 +486,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncOperator(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncOperator(Index: Integer): TtkTokenKind;
 begin
   if (DelphiVersion >= dvDelphi8) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -494,7 +494,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncOverload(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncOverload(Index: Integer): TtkTokenKind;
 begin
   if (DelphiVersion >= dvDelphi4) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -502,7 +502,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncPackage(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncPackage(Index: Integer): TtkTokenKind;
 begin
   if PackageSource and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -510,7 +510,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncPlatform(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncPlatform(Index: Integer): TtkTokenKind;
 begin
   if (DelphiVersion >= dvDelphi6) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -518,7 +518,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncProperty(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncProperty(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -529,7 +529,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncRead(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncRead(Index: Integer): TtkTokenKind;
 begin
   if (FRange = rsProperty) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -537,7 +537,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncReadonly(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncReadonly(Index: Integer): TtkTokenKind;
 begin
   if (DelphiVersion >= dvDelphi3) and (FRange = rsProperty) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -545,7 +545,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncReintroduce(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncReintroduce(Index: Integer): TtkTokenKind;
 begin
   if (DelphiVersion >= dvDelphi4) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -553,7 +553,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncRequires(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncRequires(Index: Integer): TtkTokenKind;
 begin
   if PackageSource and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -561,7 +561,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncResourcestring(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncResourcestring(Index: Integer): TtkTokenKind;
 begin
   if (DelphiVersion >= dvDelphi3) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -569,7 +569,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncSafecall(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncSafecall(Index: Integer): TtkTokenKind;
 begin
   if (DelphiVersion >= dvDelphi3) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -577,7 +577,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncSealed(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncSealed(Index: Integer): TtkTokenKind;
 begin
   if (DelphiVersion >= dvDelphi8) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -585,7 +585,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncStdcall(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncStdcall(Index: Integer): TtkTokenKind;
 begin
   if (DelphiVersion >= dvDelphi2) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -593,7 +593,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncStored(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncStored(Index: Integer): TtkTokenKind;
 begin
   if (FRange = rsProperty) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -601,7 +601,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncStringresource(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncStringresource(Index: Integer): TtkTokenKind;
 begin
   if (DelphiVersion >= dvDelphi3) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -609,7 +609,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncThreadvar(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncThreadvar(Index: Integer): TtkTokenKind;
 begin
   if (DelphiVersion >= dvDelphi3) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -617,7 +617,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncWrite(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncWrite(Index: Integer): TtkTokenKind;
 begin
   if (FRange = rsProperty) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -625,7 +625,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPasSyn.FuncWriteonly(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPas.FuncWriteonly(Index: Integer): TtkTokenKind;
 begin
   if (DelphiVersion >= dvDelphi3) and (FRange = rsProperty) and IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -633,7 +633,7 @@ begin
     Result := tkIdentifier;
 end;
 
-constructor TSynPasSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterPas.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   fCaseSensitive := False;
@@ -676,14 +676,14 @@ begin
   fDefaultFilter := SYNS_FilterPascal;
 end;
 
-procedure TSynPasSyn.AddressOpProc;
+procedure TSynEdit32HighlighterPas.AddressOpProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if FLine[FRun] = '@' then Inc(FRun);
 end;
 
-procedure TSynPasSyn.AsciiCharProc;
+procedure TSynEdit32HighlighterPas.AsciiCharProc;
 
   function IsAsciiChar: Boolean;
   begin
@@ -702,7 +702,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynPasSyn.BorProc;
+procedure TSynEdit32HighlighterPas.BorProc;
 begin
   case FLine[FRun] of
      #0: NullProc;
@@ -730,7 +730,7 @@ begin
   end;
 end;
 
-procedure TSynPasSyn.BraceOpenProc;
+procedure TSynEdit32HighlighterPas.BraceOpenProc;
 begin
   if (FLine[FRun + 1] = '$') then
   begin
@@ -749,14 +749,14 @@ begin
   BorProc;
 end;
 
-procedure TSynPasSyn.ColonOrGreaterProc;
+procedure TSynEdit32HighlighterPas.ColonOrGreaterProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if FLine[FRun] = '=' then Inc(FRun);
 end;
 
-procedure TSynPasSyn.CRProc;
+procedure TSynEdit32HighlighterPas.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
@@ -764,7 +764,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynPasSyn.IdentProc;
+procedure TSynEdit32HighlighterPas.IdentProc;
 begin
   FTokenID := IdentKind(FLine + FRun);
   Inc(FRun, FStringLen);
@@ -772,7 +772,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynPasSyn.IntegerProc;
+procedure TSynEdit32HighlighterPas.IntegerProc;
 
   function IsIntegerChar: Boolean;
   begin
@@ -791,13 +791,13 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynPasSyn.LFProc;
+procedure TSynEdit32HighlighterPas.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynPasSyn.LowerProc;
+procedure TSynEdit32HighlighterPas.LowerProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
@@ -805,13 +805,13 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynPasSyn.NullProc;
+procedure TSynEdit32HighlighterPas.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynPasSyn.NumberProc;
+procedure TSynEdit32HighlighterPas.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -847,7 +847,7 @@ begin
   end;
 end; 
 
-procedure TSynPasSyn.PointProc;
+procedure TSynEdit32HighlighterPas.PointProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
@@ -855,7 +855,7 @@ begin
     Inc(FRun);
 end; 
 
-procedure TSynPasSyn.AnsiProc;
+procedure TSynEdit32HighlighterPas.AnsiProc;
 begin
   case FLine[FRun] of
      #0: NullProc;
@@ -877,7 +877,7 @@ begin
   end;
 end;
 
-procedure TSynPasSyn.RoundOpenProc;
+procedure TSynEdit32HighlighterPas.RoundOpenProc;
 begin
   Inc(FRun);
   case FLine[FRun] of
@@ -902,7 +902,7 @@ begin
   end;
 end;
 
-procedure TSynPasSyn.SemicolonProc;
+procedure TSynEdit32HighlighterPas.SemicolonProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -910,7 +910,7 @@ begin
     FRange := rsUnknown;
 end;
 
-procedure TSynPasSyn.SlashProc;
+procedure TSynEdit32HighlighterPas.SlashProc;
 begin
   Inc(FRun);
   if (FLine[FRun] = '/') and (FDelphiVersion > dvDelphi1) then
@@ -924,14 +924,14 @@ begin
     FTokenID := tkSymbol;
 end;
 
-procedure TSynPasSyn.SpaceProc;
+procedure TSynEdit32HighlighterPas.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynPasSyn.StringProc;
+procedure TSynEdit32HighlighterPas.StringProc;
 begin
   FTokenID := tkString;
   Inc(FRun);
@@ -946,19 +946,19 @@ begin
   end;
 end;
 
-procedure TSynPasSyn.SymbolProc;
+procedure TSynEdit32HighlighterPas.SymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynPasSyn.UnknownProc;
+procedure TSynEdit32HighlighterPas.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynPasSyn.Next;
+procedure TSynEdit32HighlighterPas.Next;
 begin
   FAsmStart := False;
   fTokenPos := FRun;
@@ -1000,7 +1000,7 @@ begin
   inherited;
 end;
 
-function TSynPasSyn.GetDefaultAttribute(Index: Integer):
+function TSynEdit32HighlighterPas.GetDefaultAttribute(Index: Integer):
   TSynEdit32HighlighterAttributes;
 begin
   case Index of
@@ -1015,7 +1015,7 @@ begin
   end;
 end;
 
-function TSynPasSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterPas.GetTokenID: TtkTokenKind;
 begin
   if not FAsmStart and (FRange = rsAsm)
     and not (FTokenID in [tkNull, tkComment, tkDirec, tkSpace])
@@ -1025,7 +1025,7 @@ begin
     Result := FTokenID;
 end;
 
-function TSynPasSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterPas.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkAsm: Result := FAsmAttri;
@@ -1046,27 +1046,27 @@ begin
   end;
 end;
 
-function TSynPasSyn.GetTokenKind: Integer;
+function TSynEdit32HighlighterPas.GetTokenKind: Integer;
 begin
   Result := Ord(GetTokenID);
 end;
 
-function TSynPasSyn.GetRange: Pointer;
+function TSynEdit32HighlighterPas.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-procedure TSynPasSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterPas.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-procedure TSynPasSyn.ResetRange;
+procedure TSynEdit32HighlighterPas.ResetRange;
 begin
   FRange:= rsUnknown;
 end;
 
-procedure TSynPasSyn.EnumUserSettings(DelphiVersions: TStrings);
+procedure TSynEdit32HighlighterPas.EnumUserSettings(DelphiVersions: TStrings);
 
   procedure LoadKeyVersions(const Key, Prefix: string);
   var
@@ -1110,7 +1110,7 @@ begin
 {$ENDIF}
 end;
 
-function TSynPasSyn.UseUserSettings(VersionIndex: Integer): Boolean;
+function TSynEdit32HighlighterPas.UseUserSettings(VersionIndex: Integer): Boolean;
 // Possible parameter values:
 //   index into TStrings returned by EnumUserSettings
 // Possible return values:
@@ -1263,7 +1263,7 @@ begin
 {$ENDIF}
 end;
 
-function TSynPasSyn.GetSampleSource: UnicodeString;                                   
+function TSynEdit32HighlighterPas.GetSampleSource: UnicodeString;
 begin
   Result := '{ Syntax highlighting }'#13#10 +
              'procedure TForm1.Button1Click(Sender: TObject);'#13#10 +
@@ -1289,22 +1289,22 @@ begin
 end;
 
 
-class function TSynPasSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterPas.GetLanguageName: string;
 begin
   Result := SYNS_LangPascal;
 end;
 
-class function TSynPasSyn.GetCapabilities: TSynHighlighterCapabilities;
+class function TSynEdit32HighlighterPas.GetCapabilities: TSynHighlighterCapabilities;
 begin
   Result := inherited GetCapabilities + [hcUserSettings];
 end;
 
-function TSynPasSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterPas.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterPascal;
 end;
 
-procedure TSynPasSyn.SetDelphiVersion(const Value: TDelphiVersion);
+procedure TSynEdit32HighlighterPas.SetDelphiVersion(const Value: TDelphiVersion);
 begin
   if FDelphiVersion <> Value then
   begin
@@ -1315,7 +1315,7 @@ begin
   end;
 end;
 
-procedure TSynPasSyn.SetPackageSource(const Value: Boolean);
+procedure TSynEdit32HighlighterPas.SetPackageSource(const Value: Boolean);
 begin
   if FPackageSource <> Value then
   begin
@@ -1326,12 +1326,12 @@ begin
   end;
 end;
 
-class function TSynPasSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterPas.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangPascal;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynPasSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterPas);
 end.
 

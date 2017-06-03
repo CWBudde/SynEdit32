@@ -69,7 +69,7 @@ Type
   TRangeState = (rsBraceComment, rsUnKnown);
 
 type
-  TSynCPMSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterCPM = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
     FCommentLevel: Integer;
@@ -362,7 +362,7 @@ const
   );
 
 {$Q-}
-function TSynCPMSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterCPM.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) do
@@ -375,7 +375,7 @@ begin
 end;
 {$Q+}
 
-function TSynCPMSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterCPM.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -387,7 +387,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynCPMSyn.InitIdent;
+procedure TSynEdit32HighlighterCPM.InitIdent;
 var
   i: Integer;
 begin
@@ -543,12 +543,12 @@ begin
   FIdentFuncTable[745] := FuncZerorlenstr;
 end;
 
-function TSynCPMSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncAllentities(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncAllentities(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -556,7 +556,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncAllproducts(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncAllproducts(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -564,7 +564,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncAllproperties(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncAllproperties(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -572,7 +572,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncAllqualityproperties(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncAllqualityproperties(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -580,7 +580,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncAllsuppliers(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncAllsuppliers(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -588,7 +588,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncAssign(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncAssign(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -596,7 +596,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncBegin(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncBegin(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -604,7 +604,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncBlock(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncBlock(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -612,7 +612,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncCase(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncCase(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -620,7 +620,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncCategory(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncCategory(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -628,7 +628,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncCenterstr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncCenterstr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -636,7 +636,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncCharreplacestr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncCharreplacestr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -644,7 +644,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncCharrlenstr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncCharrlenstr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -652,7 +652,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncCharrllenstr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncCharrllenstr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -660,7 +660,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncChr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncChr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -668,7 +668,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncClient(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncClient(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -676,7 +676,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncConstants(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncConstants(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -684,7 +684,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncContinue(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncContinue(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -692,7 +692,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncCopyfile(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncCopyfile(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -700,7 +700,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncCountry(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncCountry(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -708,7 +708,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncDecr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncDecr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -716,7 +716,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncDefinition(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncDefinition(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -724,7 +724,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncDistinct_execute(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncDistinct_execute(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -732,7 +732,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncDivide(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncDivide(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -740,7 +740,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncElse(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncElse(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -748,7 +748,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncEmptysheet(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncEmptysheet(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -756,7 +756,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncEnd(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncEnd(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -764,7 +764,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncEntitycode(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncEntitycode(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -772,7 +772,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncEqualstring(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncEqualstring(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -780,7 +780,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncEqualvalue(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncEqualvalue(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -788,7 +788,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncExecute(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncExecute(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -796,7 +796,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncFileappend(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncFileappend(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -804,7 +804,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncFileassign(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncFileassign(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -812,7 +812,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncFileclose(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncFileclose(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -820,7 +820,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncFilecopy(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncFilecopy(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -828,7 +828,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncFiledate(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncFiledate(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -836,7 +836,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncFiledelete(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncFiledelete(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -844,7 +844,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncFileend(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncFileend(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -852,7 +852,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncFileexists(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncFileexists(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -860,7 +860,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncFilereadln(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncFilereadln(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -868,7 +868,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncFilereset(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncFilereset(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -876,7 +876,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncFilerewrite(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncFilerewrite(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -884,7 +884,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncFilesize(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncFilesize(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -892,7 +892,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncFilesort(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncFilesort(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -900,7 +900,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncFiletime(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncFiletime(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -908,7 +908,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncFilewriteln(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncFilewriteln(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -916,7 +916,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncFilterstr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncFilterstr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -924,7 +924,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncFirstinstance(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncFirstinstance(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -932,7 +932,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncFlow(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncFlow(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -940,7 +940,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncFold(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncFold(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -948,7 +948,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncForeign(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncForeign(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -956,7 +956,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncGlobalconstants(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncGlobalconstants(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -964,7 +964,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncGlobals(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncGlobals(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -972,7 +972,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncGlobalvariables(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncGlobalvariables(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -980,7 +980,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncGroupdown(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncGroupdown(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -988,7 +988,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncGroupfooter(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncGroupfooter(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -996,7 +996,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncGroupheader(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncGroupheader(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1004,7 +1004,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncGroupkey(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncGroupkey(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1012,7 +1012,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncGroupup(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncGroupup(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1020,7 +1020,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncIf(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncIf(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1028,7 +1028,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncInclude(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncInclude(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1036,7 +1036,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncIncr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncIncr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1044,7 +1044,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncLanguage(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncLanguage(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1052,7 +1052,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncLastinstance(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncLastinstance(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1060,7 +1060,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncLeftstr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncLeftstr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1068,7 +1068,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncLength(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncLength(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1076,7 +1076,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncLlenstr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncLlenstr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1084,7 +1084,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncLocal(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncLocal(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1092,7 +1092,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncLocasestr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncLocasestr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1100,7 +1100,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncLoop(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncLoop(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1108,7 +1108,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncLowerlevelstoo(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncLowerlevelstoo(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1116,7 +1116,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncLtrunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncLtrunc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1124,7 +1124,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncMatching(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncMatching(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1132,7 +1132,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncMember(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncMember(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1140,7 +1140,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncMerge(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncMerge(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1148,7 +1148,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncMessagedlg(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncMessagedlg(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1156,7 +1156,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncMetaflow(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncMetaflow(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1164,7 +1164,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncMidstr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncMidstr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1172,7 +1172,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncMultiply(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncMultiply(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1180,7 +1180,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncNextinstance(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncNextinstance(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1188,7 +1188,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncNextrepeatinstance(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncNextrepeatinstance(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1196,7 +1196,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncOf(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncOf(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1204,7 +1204,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncOptions(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncOptions(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1212,7 +1212,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncOrganisation(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncOrganisation(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1220,7 +1220,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncOutput(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncOutput(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1228,7 +1228,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncParam(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncParam(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1236,7 +1236,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncParent(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncParent(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1244,7 +1244,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncParseInc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncParseInc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1252,7 +1252,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncPdriver(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncPdriver(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1260,7 +1260,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncPrevinstance(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncPrevinstance(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1268,7 +1268,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncPrevrepeatinstance(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncPrevrepeatinstance(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1276,7 +1276,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncPrinter(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncPrinter(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1284,7 +1284,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncPrintfile(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncPrintfile(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1292,7 +1292,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncPropertygroup(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncPropertygroup(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1300,7 +1300,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncRastr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncRastr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1308,7 +1308,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncRaval(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncRaval(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1316,7 +1316,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncReadinstance(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncReadinstance(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1324,7 +1324,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncReadrepeatinstance(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncReadrepeatinstance(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1332,7 +1332,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncRepeat(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncRepeat(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1340,7 +1340,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncRepeatcount(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncRepeatcount(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1348,7 +1348,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncReportlevel(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncReportlevel(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1356,7 +1356,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncRightstr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncRightstr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1364,7 +1364,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncRlenstr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncRlenstr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1372,7 +1372,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncRoot(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncRoot(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1380,7 +1380,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncRound(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncRound(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1388,7 +1388,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncShowmessage(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncShowmessage(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1396,7 +1396,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSkipemtpty(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSkipemtpty(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1404,7 +1404,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSortdown(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSortdown(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1412,7 +1412,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSortkey(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSortkey(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1420,7 +1420,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSortup(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSortup(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1428,7 +1428,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSql_add(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSql_add(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSQLKey
@@ -1436,7 +1436,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSql_asfloat(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSql_asfloat(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSQLKey
@@ -1444,7 +1444,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSql_asstring(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSql_asstring(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSQLKey
@@ -1452,7 +1452,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSql_create(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSql_create(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSQLKey
@@ -1460,7 +1460,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSql_dump(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSql_dump(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSQLKey
@@ -1468,7 +1468,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSql_eof(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSql_eof(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSQLKey
@@ -1476,7 +1476,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSql_execute(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSql_execute(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSQLKey
@@ -1484,7 +1484,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSql_free(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSql_free(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSQLKey
@@ -1492,7 +1492,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSql_mladd(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSql_mladd(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSQLKey
@@ -1500,7 +1500,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSql_mlmultiadd(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSql_mlmultiadd(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSQLKey
@@ -1508,7 +1508,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSql_next(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSql_next(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSQLKey
@@ -1516,7 +1516,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSql_setvar(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSql_setvar(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSQLKey
@@ -1524,7 +1524,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSqr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSqr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1532,7 +1532,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncStripstr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncStripstr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1540,7 +1540,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncStroptions(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncStroptions(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1548,7 +1548,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncStrpos(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncStrpos(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1556,7 +1556,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSubtract(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSubtract(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1564,7 +1564,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSum(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSum(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1572,7 +1572,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSupplier(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSupplier(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1580,7 +1580,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncSuppliesofmembers(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncSuppliesofmembers(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1588,7 +1588,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncThen(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncThen(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1596,7 +1596,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncTrunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncTrunc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1604,7 +1604,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncUpcasestr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncUpcasestr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1612,7 +1612,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncUsedby(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncUsedby(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1620,7 +1620,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncV_date(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncV_date(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSpecialVar
@@ -1628,7 +1628,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncV_false(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncV_false(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSpecialVar
@@ -1636,7 +1636,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncV_nonereal(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncV_nonereal(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSpecialVar
@@ -1644,7 +1644,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncV_par_language(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncV_par_language(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSpecialVar
@@ -1652,7 +1652,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncV_par_language_count(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncV_par_language_count(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSpecialVar
@@ -1660,7 +1660,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncV_par_language_fields(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncV_par_language_fields(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSpecialVar
@@ -1668,7 +1668,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncV_time(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncV_time(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSpecialVar
@@ -1676,7 +1676,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncV_true(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncV_true(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSpecialVar
@@ -1684,7 +1684,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncVariables(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncVariables(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1692,7 +1692,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncVaroptions(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncVaroptions(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1700,7 +1700,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncWhile(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncWhile(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1708,7 +1708,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCPMSyn.FuncZerorlenstr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCPM.FuncZerorlenstr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSystem
@@ -1716,7 +1716,7 @@ begin
     Result := tkIdentifier;
 end;
 
-constructor TSynCPMSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterCPM.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -1772,14 +1772,14 @@ begin
   fDefaultFilter := SYNS_FilterCPM;
 end; { Create }
 
-procedure TSynCPMSyn.BraceOpenProc;
+procedure TSynEdit32HighlighterCPM.BraceOpenProc;
 begin
   FRange := rsBraceComment;
   BraceCommentProc;
   FTokenID := tkComment;
 end; { BraceOpenProc }
 
-procedure TSynCPMSyn.IdentProc;
+procedure TSynEdit32HighlighterCPM.IdentProc;
 begin
   FTokenID := IdentKind(FLine + FRun);
   Inc(FRun, FStringLen);
@@ -1787,7 +1787,7 @@ begin
     Inc(FRun);
 end; { IdentProc }
 
-procedure TSynCPMSyn.VariableProc;
+procedure TSynEdit32HighlighterCPM.VariableProc;
 begin
   FTokenID := IdentKind((FLine + FRun));
   if (FTokenID = tkIdentifier) then
@@ -1800,20 +1800,20 @@ begin
     Inc(FRun);
 end; { VariableProc }
 
-procedure TSynCPMSyn.NullProc;
+procedure TSynEdit32HighlighterCPM.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end; { NullProc }
 
-procedure TSynCPMSyn.SpaceProc;
+procedure TSynEdit32HighlighterCPM.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end; { SpaceProc }
 
-procedure TSynCPMSyn.StringProc;
+procedure TSynEdit32HighlighterCPM.StringProc;
 begin
   FTokenID := tkString;
   repeat
@@ -1827,13 +1827,13 @@ begin
   end;
 end; { StringProc }
 
-procedure TSynCPMSyn.UnknownProc;
+procedure TSynEdit32HighlighterCPM.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end; { UnknownProc }
 
-procedure TSynCPMSyn.Next;
+procedure TSynEdit32HighlighterCPM.Next;
 begin
   fTokenPos := FRun;
   case FRange of
@@ -1868,7 +1868,7 @@ begin
   inherited;
 end; { Next }
 
-function TSynCPMSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterCPM.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -1882,12 +1882,12 @@ begin
   end;
 end; { GetDefaultAttribute }
 
-function TSynCPMSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterCPM.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end; { GetTokenID }
 
-function TSynCPMSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterCPM.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkComment: Result := FCommentAttri;
@@ -1907,17 +1907,17 @@ begin
   end;
 end; { GetTokenAttribute }
 
-function TSynCPMSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterCPM.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end; { GetTokenKind }
 
-class function TSynCPMSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterCPM.GetLanguageName: string;
 begin
   Result := SYNS_LangCPM;
 end;
 
-procedure TSynCPMSyn.BraceCommentProc;
+procedure TSynEdit32HighlighterCPM.BraceCommentProc;
 begin
   case FLine[FRun] of
      #0: NullProc;
@@ -1946,7 +1946,7 @@ begin
   end;
 end; { BraceCommentProc }
 
-procedure TSynCPMSyn.CRProc;
+procedure TSynEdit32HighlighterCPM.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
@@ -1954,13 +1954,13 @@ begin
     Inc(FRun);
 end; { CRProc }
 
-procedure TSynCPMSyn.LFProc;
+procedure TSynEdit32HighlighterCPM.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end; { LFProc }
 
-function TSynCPMSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterCPM.GetSampleSource: UnicodeString;
 begin
   Result := '{ COAS Product Manager report (RDF) }'#13#10 +
             'PARAM'#13#10 +
@@ -1984,18 +1984,18 @@ begin
             'END;';
 end; { GetSampleSource }
 
-function TSynCPMSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterCPM.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterCPM;
 end; { IsFilterStored }
 
-procedure TSynCPMSyn.SemiColonProc;
+procedure TSynEdit32HighlighterCPM.SemiColonProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end; { SemiColonProc }
 
-procedure TSynCPMSyn.NumberProc;
+procedure TSynEdit32HighlighterCPM.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -2020,20 +2020,20 @@ begin
   end;
 end; { NumberProc }
 
-procedure TSynCPMSyn.SymbolProc;
+procedure TSynEdit32HighlighterCPM.SymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end; { SymbolProc }
 
-procedure TSynCPMSyn.ResetRange;
+procedure TSynEdit32HighlighterCPM.ResetRange;
 begin
   inherited;
   FRange := rsUnknown;
   FCommentLevel := 0;
 end; { ResetRange }
 
-procedure TSynCPMSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterCPM.SetRange(Value: Pointer);
 var
   AValue: LongInt;
 begin
@@ -2043,16 +2043,16 @@ begin
   FRange := TRangeState(AValue mod $10000);
 end; { SetRange }
 
-function TSynCPMSyn.GetRange: Pointer;
+function TSynEdit32HighlighterCPM.GetRange: Pointer;
 begin
   Result := Pointer((FCommentLevel * $10000) + Integer(FRange));
 end; { GetRange }
 
-class function TSynCPMSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterCPM.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangCPM;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynCPMSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterCPM);
 end.

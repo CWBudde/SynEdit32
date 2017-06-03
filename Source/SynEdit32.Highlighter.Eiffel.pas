@@ -75,7 +75,7 @@ type
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
 type
-  TSynEiffelSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterEiffel = class(TSynEdit32CustomHighlighter)
   private
     fRange: TRangeState;
     FTokenID: TtkTokenKind;
@@ -284,7 +284,7 @@ const
   );
 
 {$Q-}
-function TSynEiffelSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterEiffel.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) or IsOperatorChar(Str^) do
@@ -297,7 +297,7 @@ begin
 end;
 {$Q+}
 
-function TSynEiffelSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -309,7 +309,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynEiffelSyn.InitIdent;
+procedure TSynEdit32HighlighterEiffel.InitIdent;
 var
   i: Integer;
 begin
@@ -438,12 +438,12 @@ begin
   fIdentFuncTable[471] := FuncYes;
 end;
 
-function TSynEiffelSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.OperatorFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.OperatorFunc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkOperatorAndSymbols
@@ -451,7 +451,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.Func37u(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.Func37u(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkPredefined
@@ -459,7 +459,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncAdapt(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncAdapt(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -467,7 +467,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncAlias(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncAlias(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -475,7 +475,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncAll(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncAll(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -483,7 +483,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncAnd(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncAnd(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -491,7 +491,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncArray(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncArray(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkBasicTypes
@@ -499,7 +499,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncAs(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncAs(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -507,7 +507,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncAssertion(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncAssertion(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -515,7 +515,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncBit(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncBit(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkPredefined
@@ -523,7 +523,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncBoolean(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncBoolean(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkBasicTypes
@@ -531,7 +531,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncCharacter(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncCharacter(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkBasicTypes
@@ -539,7 +539,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncCheck(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncCheck(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -547,7 +547,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncClass(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncClass(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -555,7 +555,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncCluster(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncCluster(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -563,7 +563,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncColon(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncColon(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -571,7 +571,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncComma(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncComma(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -579,7 +579,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncCreation(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncCreation(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -587,7 +587,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncCurrent(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncCurrent(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkPredefined
@@ -595,7 +595,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncDebug(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncDebug(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -603,7 +603,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncDefault(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncDefault(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -611,7 +611,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncDeferred(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncDeferred(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -619,7 +619,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncDo(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncDo(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -627,7 +627,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncDouble(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncDouble(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkBasicTypes
@@ -635,7 +635,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncElse(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncElse(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -643,7 +643,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncElseif(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncElseif(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -651,7 +651,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncEnd(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncEnd(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -659,7 +659,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncEnsure(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncEnsure(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -667,7 +667,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncExclude(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncExclude(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -675,7 +675,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncExecutable(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncExecutable(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -683,7 +683,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncExpanded(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncExpanded(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -691,7 +691,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncExport(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncExport(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -699,7 +699,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncExternal(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncExternal(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -707,7 +707,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncFalse(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncFalse(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkPredefined
@@ -715,7 +715,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncFeature(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncFeature(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -723,7 +723,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncFrom(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncFrom(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -731,7 +731,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncFrozen(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncFrozen(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -739,7 +739,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncGenerate(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncGenerate(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -747,7 +747,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncIdentifier(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncIdentifier(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -755,7 +755,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncIf(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncIf(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -763,7 +763,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncIgnore(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncIgnore(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -771,7 +771,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncImplies(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncImplies(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -779,7 +779,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncInclude(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncInclude(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -787,7 +787,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncInclude95path(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncInclude95path(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -795,7 +795,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncIndexing(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncIndexing(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -803,7 +803,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncInfix(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncInfix(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -811,7 +811,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncInherit(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncInherit(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -819,7 +819,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncInspect(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncInspect(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -827,7 +827,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncInteger(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncInteger(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkBasicTypes
@@ -835,7 +835,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncInvariant(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncInvariant(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -843,7 +843,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncIs(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncIs(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -851,7 +851,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncLike(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncLike(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -859,7 +859,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncLocal(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncLocal(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -867,7 +867,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncLoop(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncLoop(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -875,7 +875,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncMake(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncMake(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -883,7 +883,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncNo(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncNo(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -891,7 +891,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncNot(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncNot(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -899,7 +899,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncObject(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncObject(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -907,7 +907,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncObsolete(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncObsolete(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -915,7 +915,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncOld(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncOld(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -923,7 +923,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncOnce(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncOnce(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -931,7 +931,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncOptimize(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncOptimize(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -939,7 +939,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncOption(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncOption(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -947,7 +947,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncOr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncOr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -955,7 +955,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncPointer(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncPointer(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkBasicTypes
@@ -963,7 +963,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncPrecompiled(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncPrecompiled(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -971,7 +971,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncPrecursor(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncPrecursor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkPredefined
@@ -979,7 +979,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncPrefix(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncPrefix(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -987,7 +987,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncReal(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncReal(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkBasicTypes
@@ -995,7 +995,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncRedefine(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncRedefine(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1003,7 +1003,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncRename(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncRename(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1011,7 +1011,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncRequire(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncRequire(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1019,7 +1019,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncRescue(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncRescue(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1027,7 +1027,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncResult(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncResult(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkResultValue
@@ -1035,7 +1035,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncRetry(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncRetry(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1043,7 +1043,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncRoot(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncRoot(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -1051,7 +1051,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncSelect(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncSelect(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1059,7 +1059,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncSeparate(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncSeparate(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1067,7 +1067,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncString(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncString(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkBasicTypes
@@ -1075,7 +1075,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncStrip(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncStrip(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkPredefined
@@ -1083,7 +1083,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncSystem(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncSystem(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -1091,7 +1091,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncThen(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncThen(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1099,7 +1099,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncTrace(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncTrace(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -1107,7 +1107,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncTrue(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncTrue(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkPredefined
@@ -1115,7 +1115,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncUndefine(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncUndefine(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1123,7 +1123,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncUnique(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncUnique(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkPredefined
@@ -1131,7 +1131,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncUntil(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncUntil(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1139,7 +1139,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncUse(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncUse(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -1147,7 +1147,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncVariant(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncVariant(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1155,7 +1155,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncVisible(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncVisible(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -1163,7 +1163,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncVoid(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncVoid(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkPredefined
@@ -1171,7 +1171,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncWhen(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncWhen(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1179,7 +1179,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncXor(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncXor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1187,7 +1187,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynEiffelSyn.FuncYes(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterEiffel.FuncYes(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkLace
@@ -1195,20 +1195,20 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynEiffelSyn.SpaceProc;
+procedure TSynEdit32HighlighterEiffel.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynEiffelSyn.NullProc;
+procedure TSynEdit32HighlighterEiffel.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynEiffelSyn.CRProc;
+procedure TSynEdit32HighlighterEiffel.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
@@ -1216,13 +1216,13 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynEiffelSyn.LFProc;
+procedure TSynEdit32HighlighterEiffel.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynEiffelSyn.OperatorAndSymbolProc;
+procedure TSynEdit32HighlighterEiffel.OperatorAndSymbolProc;
 begin
   FTokenID := tkIdentifier;
   if FLine[FRun] = #33 then
@@ -1269,7 +1269,7 @@ begin
     end;
 end;
 
-procedure TSynEiffelSyn.EiffelCommentOpenProc;
+procedure TSynEdit32HighlighterEiffel.EiffelCommentOpenProc;
 begin
   Inc(FRun);
   if (FLine[FRun - 1] = '-') and (FLine[FRun] = '-') then
@@ -1282,7 +1282,7 @@ begin
     FTokenID := tkOperatorAndSymbols;
 end;
 
-procedure TSynEiffelSyn.EiffelCommentProc;
+procedure TSynEdit32HighlighterEiffel.EiffelCommentProc;
 begin
   FTokenID := tkComment;
   repeat
@@ -1291,7 +1291,7 @@ begin
   until IsLineEnd(FRun);
 end;
 
-procedure TSynEiffelSyn.StringOpenProc;
+procedure TSynEdit32HighlighterEiffel.StringOpenProc;
 begin
   Inc(FRun);
   fRange := rsString;
@@ -1299,7 +1299,7 @@ begin
   FTokenID := tkString;
 end;
 
-procedure TSynEiffelSyn.StringProc;
+procedure TSynEdit32HighlighterEiffel.StringProc;
 begin
   FTokenID := tkString;
   repeat
@@ -1314,7 +1314,7 @@ begin
   until IsLineEnd(FRun);
 end;
 
-constructor TSynEiffelSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterEiffel.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -1373,7 +1373,7 @@ begin
   fRange := rsUnknown;
 end;
 
-procedure TSynEiffelSyn.IdentProc;
+procedure TSynEdit32HighlighterEiffel.IdentProc;
 begin
   FTokenID := IdentKind(FLine + FRun);
   Inc(FRun, FStringLen);
@@ -1381,13 +1381,13 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynEiffelSyn.UnknownProc;
+procedure TSynEdit32HighlighterEiffel.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynEiffelSyn.Next;
+procedure TSynEdit32HighlighterEiffel.Next;
 begin
   fTokenPos := FRun;
   fRange := rsUnknown;
@@ -1405,7 +1405,7 @@ begin
   inherited;
 end;
 
-function TSynEiffelSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterEiffel.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := fCommentAttri;
@@ -1417,7 +1417,7 @@ begin
   end;
 end;
 
-function TSynEiffelSyn.GetKeyWords(TokenKind: Integer): UnicodeString;
+function TSynEdit32HighlighterEiffel.GetKeyWords(TokenKind: Integer): UnicodeString;
 begin
   Result :=
     '-,!,#,$,%U,&,(,),*,.,/,//,/=,:,:=,;,@,[,\\,],^,|,+,<,<>,=,>,adapt,ali' +
@@ -1432,12 +1432,12 @@ begin
     'e,unique,until,use,variant,visible,void,when,xor,yes';
 end;
 
-function TSynEiffelSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterEiffel.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynEiffelSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterEiffel.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkBasicTypes: Result := fBasicTypesAttri;
@@ -1455,12 +1455,12 @@ begin
   end;
 end;
 
-function TSynEiffelSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterEiffel.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-function TSynEiffelSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterEiffel.GetSampleSource: UnicodeString;
 begin
   Result := '-- Eiffel sample source from SmartEiffel'#13#10 +
     'class FIBONACCI'#13#10 +
@@ -1499,32 +1499,32 @@ begin
     'end';
 end;
 
-function TSynEiffelSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterEiffel.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterEiffel;
 end;
 
-class function TSynEiffelSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterEiffel.GetLanguageName: string;
 begin
   Result := SYNS_LangEiffel;
 end;
 
-procedure TSynEiffelSyn.ResetRange;
+procedure TSynEdit32HighlighterEiffel.ResetRange;
 begin
   fRange := rsUnknown;
 end;
 
-procedure TSynEiffelSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterEiffel.SetRange(Value: Pointer);
 begin
   fRange := TRangeState(Value);
 end;
 
-function TSynEiffelSyn.GetRange: Pointer;
+function TSynEdit32HighlighterEiffel.GetRange: Pointer;
 begin
   Result := Pointer(fRange);
 end;
 
-function TSynEiffelSyn.IsOperatorChar(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterEiffel.IsOperatorChar(AChar: WideChar): Boolean;
 begin
   case AChar of
     '-', '!', '#', '$', '%', '&', '(', ')', '*', '.', '/',
@@ -1535,12 +1535,12 @@ begin
   end;
 end;
 
-class function TSynEiffelSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterEiffel.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangEiffel;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynEiffelSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterEiffel);
 
 end.

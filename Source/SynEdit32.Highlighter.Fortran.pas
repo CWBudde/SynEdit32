@@ -66,7 +66,7 @@ type
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
 type
-  TSynFortranSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterFortran = class(TSynEdit32CustomHighlighter)
   private
     FTokenID: TtkTokenKind;
     FIdentFuncTable: array[0..192] of TIdentFuncTableFunc;
@@ -169,7 +169,7 @@ const
   );
 
 {$Q-}
-function TSynFortranSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterFortran.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) do
@@ -182,7 +182,7 @@ begin
 end;
 {$Q+}
 
-function TSynFortranSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterFortran.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -194,7 +194,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynFortranSyn.InitIdent;
+procedure TSynEdit32HighlighterFortran.InitIdent;
 var
   i: Integer;
 begin
@@ -207,12 +207,12 @@ begin
       FIdentFuncTable[i] := KeyWordFunc;
 end;
 
-function TSynFortranSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterFortran.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier;
 end;
 
-function TSynFortranSyn.KeyWordFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterFortran.KeyWordFunc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -220,7 +220,7 @@ begin
     Result := tkIdentifier
 end;
 
-constructor TSynFortranSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterFortran.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -247,7 +247,7 @@ begin
   fDefaultFilter := SYNS_FilterFortran;
 end;
 
-procedure TSynFortranSyn.AsciiCharProc;
+procedure TSynEdit32HighlighterFortran.AsciiCharProc;
 begin
   FTokenID := tkString;
   repeat
@@ -259,20 +259,20 @@ begin
   if FLine[FRun] <> #0 then Inc(FRun);
 end;
 
-procedure TSynFortranSyn.CRProc;
+procedure TSynEdit32HighlighterFortran.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
   if FLine[FRun] = #10 then Inc(FRun);
 end;
 
-procedure TSynFortranSyn.CommaProc;
+procedure TSynEdit32HighlighterFortran.CommaProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFortranSyn.EqualProc;
+procedure TSynEdit32HighlighterFortran.EqualProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {logical equal}
@@ -288,7 +288,7 @@ begin
   end;
 end;
 
-procedure TSynFortranSyn.ExclamationProc;
+procedure TSynEdit32HighlighterFortran.ExclamationProc;
 begin
   Inc(FRun, 1);                        {Fortran Comments}
   FTokenID := tkComment;
@@ -301,7 +301,7 @@ begin
   end;
 end;
 
-procedure TSynFortranSyn.GreaterProc;
+procedure TSynEdit32HighlighterFortran.GreaterProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {greater than or equal to}
@@ -325,7 +325,7 @@ begin
   end;
 end;
 
-procedure TSynFortranSyn.IdentProc;
+procedure TSynEdit32HighlighterFortran.IdentProc;
 begin
   if CharInSet(FLine[FRun], ['C', 'c']) and (FRun = 0) then
   begin   //Fortran comments
@@ -339,13 +339,13 @@ begin
   end;
 end;
 
-procedure TSynFortranSyn.LFProc;
+procedure TSynEdit32HighlighterFortran.LFProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
 end;
 
-procedure TSynFortranSyn.LowerProc;
+procedure TSynEdit32HighlighterFortran.LowerProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {less than or equal to}
@@ -369,27 +369,27 @@ begin
   end;
 end;
 
-procedure TSynFortranSyn.MinusProc;
+procedure TSynEdit32HighlighterFortran.MinusProc;
 begin
   {subtract}
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFortranSyn.ModSymbolProc;
+procedure TSynEdit32HighlighterFortran.ModSymbolProc;
 begin
   {mod}
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFortranSyn.NullProc;
+procedure TSynEdit32HighlighterFortran.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynFortranSyn.NumberProc;
+procedure TSynEdit32HighlighterFortran.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -414,14 +414,14 @@ begin
   end;
 end;
 
-procedure TSynFortranSyn.PlusProc;
+procedure TSynEdit32HighlighterFortran.PlusProc;
 begin
   {subtract}
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFortranSyn.PointProc;
+procedure TSynEdit32HighlighterFortran.PointProc;
 begin
   if (((SynWideUpperCase(FLine[FRun + 1]) = 'G') and CharInSet(SynWideUpperCase(FLine[FRun + 2])[1], ['E', 'T'])) {.ge. .gt.}
        or ((SynWideUpperCase(FLine[FRun + 1]) = 'L') and CharInSet(SynWideUpperCase(FLine[FRun + 2])[1], ['E', 'T'])) {.le. .lt.}
@@ -470,39 +470,39 @@ begin
     end;
 end;
 
-procedure TSynFortranSyn.RoundCloseProc;
+procedure TSynEdit32HighlighterFortran.RoundCloseProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFortranSyn.RoundOpenProc;
+procedure TSynEdit32HighlighterFortran.RoundOpenProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFortranSyn.SemiColonProc;
+procedure TSynEdit32HighlighterFortran.SemiColonProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFortranSyn.SlashProc;
+procedure TSynEdit32HighlighterFortran.SlashProc;
 begin
   {division}
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynFortranSyn.SpaceProc;
+procedure TSynEdit32HighlighterFortran.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynFortranSyn.StarProc;
+procedure TSynEdit32HighlighterFortran.StarProc;
 begin
   if (FRun = 0) then begin   //Fortran comments
     Inc(FRun);
@@ -515,7 +515,7 @@ begin
   end;
 end;
 
-procedure TSynFortranSyn.CommentProc;
+procedure TSynEdit32HighlighterFortran.CommentProc;
 begin
   FTokenID := tkComment;
   while FLine[FRun] <> #0 do
@@ -527,7 +527,7 @@ begin
   end; //while
 end;
 
-procedure TSynFortranSyn.StringProc;
+procedure TSynEdit32HighlighterFortran.StringProc;
 begin
   FTokenID := tkString;
   if (FLine[FRun + 1] = #34) and (FLine[FRun + 2] = #34) then Inc(FRun, 2);
@@ -542,13 +542,13 @@ begin
   if FLine[FRun] <> #0 then Inc(FRun);
 end;
 
-procedure TSynFortranSyn.UnknownProc;
+procedure TSynEdit32HighlighterFortran.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynFortranSyn.Next;
+procedure TSynEdit32HighlighterFortran.Next;
 begin
   fTokenPos := FRun;
   case FLine[FRun] of
@@ -579,7 +579,7 @@ begin
   inherited;
 end;
 
-function TSynFortranSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterFortran.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -593,12 +593,12 @@ begin
   end;
 end;
 
-function TSynFortranSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterFortran.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynFortranSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterFortran.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkComment: Result := FCommentAttri;
@@ -613,26 +613,26 @@ begin
   end;
 end;
 
-function TSynFortranSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterFortran.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-function TSynFortranSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterFortran.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterFortran;
 end;
 
-class function TSynFortranSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterFortran.GetLanguageName: string;
 begin
   Result := SYNS_LangFortran;
 end;
 
-class function TSynFortranSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterFortran.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangFortran;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynFortranSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterFortran);
 end.

@@ -71,7 +71,7 @@ type
    end;
 
 type
-  TSynDWSSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterDWS = class(TSynEdit32CustomHighlighter)
   private
     FAsmStart: Boolean;
     FRange: TRangeState;
@@ -154,7 +154,7 @@ type
     procedure LoadDelphiStyle; virtual;
     // ^^^
     // This routine can be called to install a Delphi style of colors
-    // and highlighting. It modifies the basic TSynDWSSyn to reproduce
+    // and highlighting. It modifies the basic TSynEdit32HighlighterDWS to reproduce
     // the most recent Delphi editor highlighting.
 
   published
@@ -220,9 +220,9 @@ begin
 end;
 
 
-{ TSynDWSSyn }
+{ TSynEdit32HighlighterDWS }
 
-constructor TSynDWSSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterDWS.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FCaseSensitive := True; // bypass automatic lowercase, we handle it here
@@ -288,7 +288,7 @@ end;
 
 // Destroy
 //
-destructor TSynDWSSyn.Destroy;
+destructor TSynEdit32HighlighterDWS.Destroy;
 begin
   inherited;
   FKeywords.Free;
@@ -296,7 +296,7 @@ begin
   FKeywordsTypeScoped.Free;
 end;
 
-function TSynDWSSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterDWS.HashKey(Str: PWideChar): Cardinal;
 var
    c : Word;
 begin
@@ -312,7 +312,7 @@ begin
    Result := Result mod Cardinal(Length(FIdentFuncTable));
 end;
 
-function TSynDWSSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterDWS.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -324,7 +324,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynDWSSyn.InitIdent;
+procedure TSynEdit32HighlighterDWS.InitIdent;
 
    procedure SetIdentFunc(h : Integer; const func : TIdentFuncTableFunc);
    begin
@@ -364,12 +364,12 @@ begin
   FKeywords.Sorted := True;
 end;
 
-function TSynDWSSyn.AltFunc: TtkTokenKind;
+function TSynEdit32HighlighterDWS.AltFunc: TtkTokenKind;
 begin
   Result := tkIdentifier
 end;
 
-function TSynDWSSyn.KeywordFunc: TtkTokenKind;
+function TSynEdit32HighlighterDWS.KeywordFunc: TtkTokenKind;
 var
    buf: string;
 begin
@@ -379,7 +379,7 @@ begin
    else Result := tkIdentifier
 end;
 
-function TSynDWSSyn.FuncAsm: TtkTokenKind;
+function TSynEdit32HighlighterDWS.FuncAsm: TtkTokenKind;
 begin
    if IsCurrentToken('asm') then begin
       Result := tkKey;
@@ -388,7 +388,7 @@ begin
    end else Result := KeywordFunc;
 end;
 
-function TSynDWSSyn.FuncEnd: TtkTokenKind;
+function TSynEdit32HighlighterDWS.FuncEnd: TtkTokenKind;
 begin
   if IsCurrentToken('end') then begin
     if (FLine[FRun - 1] <> '&') then
@@ -401,7 +401,7 @@ begin
   end else Result := KeywordFunc;
 end;
 
-function TSynDWSSyn.FuncTypeScoped: TtkTokenKind;
+function TSynEdit32HighlighterDWS.FuncTypeScoped: TtkTokenKind;
 var
    buf: String;
 begin
@@ -412,7 +412,7 @@ begin
     Result := KeywordFunc;
 end;
 
-function TSynDWSSyn.FuncType: TtkTokenKind;
+function TSynEdit32HighlighterDWS.FuncType: TtkTokenKind;
 begin
   if IsCurrentToken('type') then
   begin
@@ -426,7 +426,7 @@ begin
   end else Result := KeywordFunc;
 end;
 
-function TSynDWSSyn.FuncPropertyScoped: TtkTokenKind;
+function TSynEdit32HighlighterDWS.FuncPropertyScoped: TtkTokenKind;
 var
    buf: String;
 begin
@@ -437,7 +437,7 @@ begin
     Result := KeywordFunc;
 end;
 
-function TSynDWSSyn.FuncProperty: TtkTokenKind;
+function TSynEdit32HighlighterDWS.FuncProperty: TtkTokenKind;
 begin
   if IsCurrentToken('property') then
   begin
@@ -448,14 +448,14 @@ begin
     Result := KeywordFunc;
 end;
 
-procedure TSynDWSSyn.AddressOpProc;
+procedure TSynEdit32HighlighterDWS.AddressOpProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if FLine[FRun] = '@' then Inc(FRun);
 end;
 
-procedure TSynDWSSyn.AsciiCharProc;
+procedure TSynEdit32HighlighterDWS.AsciiCharProc;
 
   function IsAsciiChar: Boolean;
   begin
@@ -478,7 +478,7 @@ begin
   end;
 end;
 
-procedure TSynDWSSyn.BorProc;
+procedure TSynEdit32HighlighterDWS.BorProc;
 begin
   case FLine[FRun] of
      #0: NullProc;
@@ -506,7 +506,7 @@ begin
   end;
 end;
 
-procedure TSynDWSSyn.BraceOpenProc;
+procedure TSynEdit32HighlighterDWS.BraceOpenProc;
 begin
   if (FLine[FRun + 1] = '$') then
   begin
@@ -525,14 +525,14 @@ begin
   BorProc;
 end;
 
-procedure TSynDWSSyn.ColonOrGreaterProc;
+procedure TSynEdit32HighlighterDWS.ColonOrGreaterProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if FLine[FRun] = '=' then Inc(FRun);
 end;
 
-procedure TSynDWSSyn.CRProc;
+procedure TSynEdit32HighlighterDWS.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
@@ -540,7 +540,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynDWSSyn.IdentProc;
+procedure TSynEdit32HighlighterDWS.IdentProc;
 begin
   FTokenID := IdentKind(FLine + FRun);
   Inc(FRun, FStringLen);
@@ -548,7 +548,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynDWSSyn.IntegerProc;
+procedure TSynEdit32HighlighterDWS.IntegerProc;
 
   function IsIntegerChar: Boolean;
   begin
@@ -567,13 +567,13 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynDWSSyn.LFProc;
+procedure TSynEdit32HighlighterDWS.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynDWSSyn.LoadDelphiStyle;
+procedure TSynEdit32HighlighterDWS.LoadDelphiStyle;
 
    procedure AddKeyword(const AName : string);
    var
@@ -605,7 +605,7 @@ var
   i : integer;
 begin
   // This routine can be called to install a Delphi style of colors
-  // and highlighting. It modifies the basic TSynDWSSyn to reproduce
+  // and highlighting. It modifies the basic TSynEdit32HighlighterDWS to reproduce
   // the most recent Delphi editor highlighting.
 
   // Delphi colors...
@@ -613,16 +613,16 @@ begin
   StringAttri.Foreground := clString;
   CommentAttri.Foreground := clComment;
 
-  // These are keywords highlighted in Delphi but not in TSynDWSSyn ..
+  // These are keywords highlighted in Delphi but not in TSynEdit32HighlighterDWS ..
   for i := Low(cKeywordsToAdd) to High(cKeywordsToAdd) do
     AddKeyword(cKeywordsToAdd[i]);
 
-  // These are keywords highlighted in TSynDWSSyn but not in Delphi...
+  // These are keywords highlighted in TSynEdit32HighlighterDWS but not in Delphi...
   for i := Low(cKeywordsToRemove) to High(cKeywordsToRemove) do
     RemoveKeyword(cKeywordsToRemove[i]);
 end;
 
-procedure TSynDWSSyn.LowerProc;
+procedure TSynEdit32HighlighterDWS.LowerProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
@@ -630,13 +630,13 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynDWSSyn.NullProc;
+procedure TSynEdit32HighlighterDWS.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynDWSSyn.NumberProc;
+procedure TSynEdit32HighlighterDWS.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -672,7 +672,7 @@ begin
   end;
 end;
 
-procedure TSynDWSSyn.PointProc;
+procedure TSynEdit32HighlighterDWS.PointProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
@@ -680,7 +680,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynDWSSyn.AnsiProc;
+procedure TSynEdit32HighlighterDWS.AnsiProc;
 begin
   case FLine[FRun] of
      #0: NullProc;
@@ -702,7 +702,7 @@ begin
   end;
 end;
 
-procedure TSynDWSSyn.RoundOpenProc;
+procedure TSynEdit32HighlighterDWS.RoundOpenProc;
 begin
   Inc(FRun);
   case FLine[FRun] of
@@ -728,7 +728,7 @@ begin
   end;
 end;
 
-procedure TSynDWSSyn.SemicolonProc;
+procedure TSynEdit32HighlighterDWS.SemicolonProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -736,7 +736,7 @@ begin
     FRange := rsUnknown;
 end;
 
-procedure TSynDWSSyn.SlashProc;
+procedure TSynEdit32HighlighterDWS.SlashProc;
 begin
   Inc(FRun);
   case FLine[FRun] of
@@ -763,14 +763,14 @@ begin
   end;
 end;
 
-procedure TSynDWSSyn.SpaceProc;
+procedure TSynEdit32HighlighterDWS.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynDWSSyn.StringAposProc;
+procedure TSynEdit32HighlighterDWS.StringAposProc;
 begin
   FTokenID := tkString;
   Inc(FRun);
@@ -785,7 +785,7 @@ begin
   end;
 end;
 
-procedure TSynDWSSyn.StringAposMultiProc;
+procedure TSynEdit32HighlighterDWS.StringAposMultiProc;
 begin
   FTokenID := tkString;
   if (FRun>0) or IsLineEnd(FRun+1) then
@@ -804,7 +804,7 @@ begin
   end;
 end;
 
-procedure TSynDWSSyn.StringQuoteProc;
+procedure TSynEdit32HighlighterDWS.StringQuoteProc;
 begin
   FTokenID := tkString;
   if FRange <> rsHereDocDouble then
@@ -835,19 +835,19 @@ begin
   end;
 end;
 
-procedure TSynDWSSyn.SymbolProc;
+procedure TSynEdit32HighlighterDWS.SymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynDWSSyn.UnknownProc;
+procedure TSynEdit32HighlighterDWS.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynDWSSyn.Next;
+procedure TSynEdit32HighlighterDWS.Next;
 begin
    FAsmStart := False;
    fTokenPos := FRun;
@@ -897,7 +897,7 @@ begin
    inherited;
 end;
 
-function TSynDWSSyn.GetDefaultAttribute(Index: Integer):
+function TSynEdit32HighlighterDWS.GetDefaultAttribute(Index: Integer):
   TSynEdit32HighlighterAttributes;
 begin
   case Index of
@@ -912,7 +912,7 @@ begin
   end;
 end;
 
-function TSynDWSSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterDWS.GetTokenID: TtkTokenKind;
 begin
   if not FAsmStart and (FRange = rsAsm)
     and not (FTokenID in [tkNull, tkComment, tkDirec, tkSpace])
@@ -922,7 +922,7 @@ begin
     Result := FTokenID;
 end;
 
-function TSynDWSSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterDWS.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkAsm: Result := FAsmAttri;
@@ -943,27 +943,27 @@ begin
   end;
 end;
 
-function TSynDWSSyn.GetTokenKind: Integer;
+function TSynEdit32HighlighterDWS.GetTokenKind: Integer;
 begin
   Result := Ord(GetTokenID);
 end;
 
-function TSynDWSSyn.GetRange: Pointer;
+function TSynEdit32HighlighterDWS.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-procedure TSynDWSSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterDWS.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-procedure TSynDWSSyn.ResetRange;
+procedure TSynEdit32HighlighterDWS.ResetRange;
 begin
   FRange := rsUnknown;
 end;
 
-function TSynDWSSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterDWS.GetSampleSource: UnicodeString;
 begin
   Result := '{ Syntax highlighting }'#13#10 +
              'procedure TForm1.Button1Click(Sender: TObject);'#13#10 +
@@ -989,24 +989,24 @@ begin
 end;
 
 
-class function TSynDWSSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterDWS.GetLanguageName: string;
 begin
   Result := SYNS_LangPascal;
 end;
 
-class function TSynDWSSyn.GetCapabilities: TSynHighlighterCapabilities;
+class function TSynEdit32HighlighterDWS.GetCapabilities: TSynHighlighterCapabilities;
 begin
   Result := inherited GetCapabilities + [hcUserSettings];
 end;
 
-function TSynDWSSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterDWS.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterPascal;
 end;
 
 // IsCurrentToken
 //
-function TSynDWSSyn.IsCurrentToken(const Token: UnicodeString): Boolean;
+function TSynEdit32HighlighterDWS.IsCurrentToken(const Token: UnicodeString): Boolean;
 var
    i : Integer;
    temp : PWideChar;
@@ -1028,7 +1028,7 @@ end;
 
 // IsIdentChar
 //
-function TSynDWSSyn.IsIdentChar(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterDWS.IsIdentChar(AChar: WideChar): Boolean;
 begin
    if Ord(AChar)<=$7F then
       Result := AnsiChar(AChar) in ['_', '0'..'9', 'A'..'Z', 'a'..'z']
@@ -1036,11 +1036,11 @@ begin
       Result := {$IFDEF SYN_COMPILER_18_UP}AChar.IsLetterOrDigit{$ELSE}TCharacter.IsLetterOrDigit(AChar){$ENDIF};
 end;
 
-class function TSynDWSSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterDWS.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangPascal;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynDWSSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterDWS);
 end.

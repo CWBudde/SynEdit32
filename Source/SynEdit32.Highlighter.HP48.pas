@@ -123,7 +123,7 @@ type
   TRangeState = (rsRpl, rsComRpl, rssasm1, rssasm2, rssasm3, rsAsm, rsComAsm2,
     rsComAsm1);
 
-  TSynHP48Syn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterHP48 = class(TSynEdit32CustomHighlighter)
   private
     FTockenKind: TtkTokenKind;
     FRange: TRangeState;
@@ -492,9 +492,9 @@ begin
   end;
 end;
 
-{ TSynHP48Syn }
+{ TSynEdit32HighlighterHP48 }
 
-constructor TSynHP48Syn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterHP48.Create(AOwner: TComponent);
 var
   j, k: Integer;
 begin
@@ -527,7 +527,7 @@ begin
   fDefaultFilter := SYNS_FilterHP48;
 end; { Create }
 
-destructor TSynHP48Syn.Destroy;
+destructor TSynEdit32HighlighterHP48.Destroy;
 var
   i: TtkTokenKind;
 begin
@@ -539,7 +539,7 @@ begin
   inherited Destroy;
 end; { Destroy }
 
-function TSynHP48Syn.AsmComProc(c: WideChar): TtkTokenKind;
+function TSynEdit32HighlighterHP48.AsmComProc(c: WideChar): TtkTokenKind;
 begin
   Result := tkAsmComment;
   if (FRun > Length(FLineStr)) then
@@ -558,7 +558,7 @@ begin
         Inc(FRun);
 end;
 
-function TSynHP48Syn.RplComProc: TtkTokenKind;
+function TSynEdit32HighlighterHP48.RplComProc: TtkTokenKind;
 begin
   Result := tkRplComment;
   if (FRun > Length(FLineStr)) then
@@ -574,7 +574,7 @@ begin
         Inc(FRun);
 end;
 
-function TSynHP48Syn.SlashProc: TtkTokenKind;
+function TSynEdit32HighlighterHP48.SlashProc: TtkTokenKind;
 begin
   if FRange = rsRpl then
     Result := IdentProc
@@ -603,7 +603,7 @@ begin
     Result := IdentProc
 end;
 
-function TSynHP48Syn.ParOpenProc: TtkTokenKind;
+function TSynEdit32HighlighterHP48.ParOpenProc: TtkTokenKind;
 begin
   if FRange = rsRpl then
     if ((FRun = 1) and ((Length(FLineStr) = 1) or (FLineStr[FRun + 1] <= ' '))) or
@@ -627,7 +627,7 @@ begin
     Result := IdentProc
 end;
 
-function TSynHP48Syn.PersentProc: TtkTokenKind;
+function TSynEdit32HighlighterHP48.PersentProc: TtkTokenKind;
 begin
   if FRange = rsAsm then begin
     Inc(FRun);
@@ -646,7 +646,7 @@ begin
     Result := IdentProc;
 end;
 
-function TSynHP48Syn.StarProc: TtkTokenKind;
+function TSynEdit32HighlighterHP48.StarProc: TtkTokenKind;
 begin
   if FRange = rsRpl then begin
     Inc(FRun);
@@ -665,7 +665,7 @@ begin
     Result := IdentProc;
 end;
 
-function TSynHP48Syn.IdentProc: TtkTokenKind;
+function TSynEdit32HighlighterHP48.IdentProc: TtkTokenKind;
 var
   i: Integer;
   s: UnicodeString;
@@ -700,7 +700,7 @@ begin
     Result := tkRpl;
 end;
 
-function TSynHP48Syn.GetTokenFromRange: TtkTokenKind;
+function TSynEdit32HighlighterHP48.GetTokenFromRange: TtkTokenKind;
 begin
   case FRange of
     rsAsm: Result := tkAsm;
@@ -715,13 +715,13 @@ begin
   end;
 end;
 
-function TSynHP48Syn.NullProc: TtkTokenKind;
+function TSynEdit32HighlighterHP48.NullProc: TtkTokenKind;
 begin
   Result := tkNull;
   Inc(FRun);
 end;
 
-function TSynHP48Syn.SpaceProc: TtkTokenKind;
+function TSynEdit32HighlighterHP48.SpaceProc: TtkTokenKind;
 begin
   Inc(FRun);
   while (FRun <= Length(FLineStr)) and CharInSet(FLineStr[FRun], [#1..#32]) do
@@ -729,7 +729,7 @@ begin
   Result := GetTokenFromRange;
 end;
 
-function TSynHP48Syn.Next1: TtkTokenKind;
+function TSynEdit32HighlighterHP48.Next1: TtkTokenKind;
 begin
   fTokenPos := FRun - 1;
   if FRun > Length(FLineStr) then
@@ -760,55 +760,55 @@ begin
     Result := IdentProc;
 end;
 
-procedure TSynHP48Syn.Next2(tkk: TtkTokenKind);
+procedure TSynEdit32HighlighterHP48.Next2(tkk: TtkTokenKind);
 begin
   FTockenKind := tkk;
 end;
 
-procedure TSynHP48Syn.Next;
+procedure TSynEdit32HighlighterHP48.Next;
 begin
   Next2(Next1);
   inherited;
 end;
 
-function TSynHP48Syn.GetEol: Boolean;
+function TSynEdit32HighlighterHP48.GetEol: Boolean;
 begin
   Result := FRun = fLineLen + 2;
 end;
 
-function TSynHP48Syn.GetRange: Pointer;
+function TSynEdit32HighlighterHP48.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-procedure TSynHP48Syn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterHP48.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-procedure TSynHP48Syn.ResetRange;
+procedure TSynEdit32HighlighterHP48.ResetRange;
 begin
   FRange := BaseRange;
 end;
 
-function TSynHP48Syn.GetAttrib(Index: Integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterHP48.GetAttrib(Index: Integer): TSynEdit32HighlighterAttributes;
 begin
   Result := FAttribs[TtkTokenKind(Index)];
 end;
 
-procedure TSynHP48Syn.SetAttrib(Index: Integer; Value: TSynEdit32HighlighterAttributes);
+procedure TSynEdit32HighlighterHP48.SetAttrib(Index: Integer; Value: TSynEdit32HighlighterAttributes);
 begin
   FAttribs[TtkTokenKind(Index)].Assign(Value);
 end;
 
-procedure TSynHP48Syn.EndOfToken;
+procedure TSynEdit32HighlighterHP48.EndOfToken;
 begin
   while (FRun <= Length(FLineStr)) and (FLineStr[FRun] > ' ') do
     Inc(FRun);
 end;
 
 {$IFNDEF SYN_CLX}
-function TSynHP48Syn.LoadFromRegistry(RootKey: HKEY; Key: string): boolean;
+function TSynEdit32HighlighterHP48.LoadFromRegistry(RootKey: HKEY; Key: string): boolean;
 var
   r: TBetterRegistry;
 begin
@@ -828,7 +828,7 @@ begin
   end;
 end;
 
-function TSynHP48Syn.SaveToRegistry(RootKey: HKEY; Key: string): boolean;
+function TSynEdit32HighlighterHP48.SaveToRegistry(RootKey: HKEY; Key: string): boolean;
 var
   r: TBetterRegistry;
 begin
@@ -850,29 +850,29 @@ begin
 end;
 {$ENDIF}
 
-procedure TSynHP48Syn.Assign(Source: TPersistent);
+procedure TSynEdit32HighlighterHP48.Assign(Source: TPersistent);
 var
   i: TtkTokenKind;
 begin
-  if Source is TSynHP48Syn then begin
+  if Source is TSynEdit32HighlighterHP48 then begin
     for i := Low(FAttribs) to High(FAttribs) do begin
-      FAttribs[i].Background := TSynHP48Syn(source).FAttribs[i].Background;
-      FAttribs[i].Foreground := TSynHP48Syn(source).FAttribs[i].Foreground;
-      FAttribs[i].Style := TSynHP48Syn(source).FAttribs[i].Style;
+      FAttribs[i].Background := TSynEdit32HighlighterHP48(source).FAttribs[i].Background;
+      FAttribs[i].Foreground := TSynEdit32HighlighterHP48(source).FAttribs[i].Foreground;
+      FAttribs[i].Style := TSynEdit32HighlighterHP48(source).FAttribs[i].Style;
     end;
-    AsmKeyWords.Text := TSynHP48Syn(source).AsmKeyWords.Text;
-    RplKeyWords.Text := TSynHP48Syn(source).RplKeyWords.Text;
+    AsmKeyWords.Text := TSynEdit32HighlighterHP48(source).AsmKeyWords.Text;
+    RplKeyWords.Text := TSynEdit32HighlighterHP48(source).RplKeyWords.Text;
   end
   else
     inherited Assign(Source);
 end;
 
-function TSynHP48Syn.GetAttribCount: Integer;
+function TSynEdit32HighlighterHP48.GetAttribCount: Integer;
 begin
   Result := Ord(High(FAttribs)) - Ord(Low(FAttribs)) + 1;
 end;
 
-function TSynHP48Syn.GetAttribute(idx: Integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterHP48.GetAttribute(idx: Integer): TSynEdit32HighlighterAttributes;
 begin // sorted by name
   if (idx <= Ord(High(TtkTokenKind))) then
     Result := FAttribs[TtkTokenKind(idx)]
@@ -880,17 +880,17 @@ begin // sorted by name
     Result := nil;
 end;
 
-function TSynHP48Syn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterHP48.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterHP48;
 end;
 
-class function TSynHP48Syn.GetLanguageName: string;
+class function TSynEdit32HighlighterHP48.GetLanguageName: string;
 begin
   Result := SYNS_LangHP48;
 end;
 
-procedure TSynHP48Syn.SetHighLightChange;
+procedure TSynEdit32HighlighterHP48.SetHighLightChange;
 var
   i: TtkTokenKind;
 begin
@@ -900,7 +900,7 @@ begin
   end;
 end;
 
-function TSynHP48Syn.SasmProc1: TtkTokenKind;
+function TSynEdit32HighlighterHP48.SasmProc1: TtkTokenKind;
 var
   i: Integer;
   s: UnicodeString;
@@ -931,7 +931,7 @@ begin
     FRange := rssasm1;
 end;
 
-function TSynHP48Syn.SasmProc2: TtkTokenKind;
+function TSynEdit32HighlighterHP48.SasmProc2: TtkTokenKind;
 var
   i: Integer;
   s: UnicodeString;
@@ -967,7 +967,7 @@ begin
   end;
 end;
 
-function TSynHP48Syn.SasmProc3: TtkTokenKind;
+function TSynEdit32HighlighterHP48.SasmProc3: TtkTokenKind;
 begin
   Result := tksAsmComment;
   while (FRun <= Length(FLineStr)) and (FLineStr[FRun] <> #10) do
@@ -976,17 +976,17 @@ begin
   FRange := rssasm1;
 end;
 
-function TSynHP48Syn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterHP48.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   Result := GetAttrib(Ord(FTockenKind));
 end;
 
-function TSynHP48Syn.GetTokenKind: Integer;
+function TSynEdit32HighlighterHP48.GetTokenKind: Integer;
 begin
   Result := Ord(FTockenKind);
 end;
 
-function TSynHP48Syn.GetDefaultAttribute(Index: Integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterHP48.GetDefaultAttribute(Index: Integer): TSynEdit32HighlighterAttributes;
 begin
   Result := nil;
 end;
@@ -994,7 +994,7 @@ end;
 // reimplement functions to handle the non-standard use of 1-based FRun
 // (instead of the standard 0-based FRun)
 
-procedure TSynHP48Syn.DoSetLine(const Value: UnicodeString;
+procedure TSynEdit32HighlighterHP48.DoSetLine(const Value: UnicodeString;
   LineNumber: Integer);
 begin
   inherited;
@@ -1002,7 +1002,7 @@ begin
   fOldRun := FRun;
 end;
 
-function TSynHP48Syn.GetToken: UnicodeString;
+function TSynEdit32HighlighterHP48.GetToken: UnicodeString;
 var
   Len: Integer;
 begin
@@ -1012,11 +1012,11 @@ begin
     WStrLCopy(@Result[1], fCasedLine + fTokenPos, Len);
 end;
 
-class function TSynHP48Syn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterHP48.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangHP48;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynHP48Syn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterHP48);
 end.

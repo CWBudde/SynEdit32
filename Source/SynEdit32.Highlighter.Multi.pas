@@ -102,11 +102,11 @@ type
 
   TgmSchemeClass = class of TScheme;
 
-  TSynEdit32MultiSyn = class;
+  TSynEdit32HighlighterMulti = class;
 
   TSchemes = class(TCollection)
   private
-    FOwner: TSynEdit32MultiSyn;
+    FOwner: TSynEdit32HighlighterMulti;
     function GetItems(Index: integer): TScheme;
     procedure SetItems(Index: integer; const Value: TScheme);
 {$IFDEF SYN_COMPILER_3_UP}
@@ -115,7 +115,7 @@ type
     procedure Update(Item: TCollectionItem); override;
 {$ENDIF}
   public
-    constructor Create(aOwner: TSynEdit32MultiSyn);
+    constructor Create(aOwner: TSynEdit32HighlighterMulti);
     property Items[aIndex: integer]: TScheme read GetItems write SetItems;
       default;
   end;
@@ -142,7 +142,7 @@ type
 {$ENDIF}
   TRangeProc = procedure (Operation: TRangeOperation; var Range: TRangeUNativeInt) of object;
 
-  TCustomRangeEvent = procedure (Sender: TSynEdit32MultiSyn; Operation: TRangeOperation;
+  TCustomRangeEvent = procedure (Sender: TSynEdit32HighlighterMulti; Operation: TRangeOperation;
     var Range: pointer) of object;
 
   {
@@ -177,7 +177,7 @@ type
     Range in case a nested MultiSyn uses the highlighter too.
   }
 
-  TSynEdit32MultiSyn = class(TSynEdit32CustomHighLighter)
+  TSynEdit32HighlighterMulti = class(TSynEdit32CustomHighLighter)
   private
     FRangeProc: TRangeProc;
     FDefaultLanguageName: string;
@@ -292,9 +292,9 @@ begin
   FMarkerText := aMarkerText;
 end;
 
-{ TSynEdit32MultiSyn }
+{ TSynEdit32HighlighterMulti }
 
-procedure TSynEdit32MultiSyn.ClearMarkers;
+procedure TSynEdit32HighlighterMulti.ClearMarkers;
 var
   i: Integer;
 begin
@@ -303,7 +303,7 @@ begin
   FMarkers.Clear;
 end;
 
-constructor TSynEdit32MultiSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterMulti.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FSchemes := TSchemes.Create(Self);
@@ -312,7 +312,7 @@ begin
   FRangeProc := NewRangeProc;
 end;
 
-destructor TSynEdit32MultiSyn.Destroy;
+destructor TSynEdit32HighlighterMulti.Destroy;
 begin
   ClearMarkers;
   { unhook notification handlers }
@@ -323,7 +323,7 @@ begin
   FMarkers.Free;
 end;
 
-function TSynEdit32MultiSyn.GetAttribCount: Integer;
+function TSynEdit32HighlighterMulti.GetAttribCount: Integer;
 var
   i: Integer;
 begin
@@ -335,7 +335,7 @@ begin
       Inc(Result, Schemes[i].Highlighter.AttrCount);
 end;
 
-function TSynEdit32MultiSyn.GetAttribute(Index: Integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterMulti.GetAttribute(Index: Integer): TSynEdit32HighlighterAttributes;
 var
   i: Integer;
   HL: TSynEdit32CustomHighLighter;
@@ -369,7 +369,7 @@ begin
   end;
 end;
 
-function TSynEdit32MultiSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterMulti.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 var
   HL: TSynEdit32CustomHighLighter;
 begin
@@ -377,16 +377,16 @@ begin
     HL := Schemes[CurrScheme].Highlighter
   else
     HL := DefaultHighlighter;
-  { the typecast to TSynEdit32MultiSyn is only necessary because the
+  { the typecast to TSynEdit32HighlighterMulti is only necessary because the
   GetDefaultAttribute method is protected.
   And don't worry: this really works }
   if HL <> nil then
-    Result := TSynEdit32MultiSyn(HL).GetDefaultAttribute(Index)
+    Result := TSynEdit32HighlighterMulti(HL).GetDefaultAttribute(Index)
   else
     Result := nil;
 end;
 
-function TSynEdit32MultiSyn.GetEol: Boolean;
+function TSynEdit32HighlighterMulti.GetEol: Boolean;
 begin
   if FMarker <> nil then
     Result := False
@@ -398,17 +398,17 @@ begin
     Result := FRun > fLineLen + 1;
 end;
 
-class function TSynEdit32MultiSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterMulti.GetLanguageName: string;
 begin
   Result := SYNS_LangGeneralMulti;
 end;
 
-function TSynEdit32MultiSyn.GetMarkers(Index: integer): TMarker;
+function TSynEdit32HighlighterMulti.GetMarkers(Index: integer): TMarker;
 begin
   Result := TMarker(FMarkers[Index]);
 end;
 
-procedure TSynEdit32MultiSyn.OldRangeProc(Operation: TRangeOperation; var Range: TRangeUNativeInt);
+procedure TSynEdit32HighlighterMulti.OldRangeProc(Operation: TRangeOperation; var Range: TRangeUNativeInt);
 const
   MaxNestedMultiSyn = 6;
   { number of bits of the Range that will be used to store the SchemeIndex }
@@ -433,7 +433,7 @@ begin
     if iHL <> nil then
     begin
       iSchemeRange := cardinal(iHL.GetRange);
-      Assert((iSchemeRange <= MaxSchemeRange) or (iHL is TSynEdit32MultiSyn));
+      Assert((iSchemeRange <= MaxSchemeRange) or (iHL is TSynEdit32HighlighterMulti));
     end
     else
       iSchemeRange := 0;
@@ -459,7 +459,7 @@ begin
   end;
 end;
 
-function TSynEdit32MultiSyn.GetToken: UnicodeString;
+function TSynEdit32HighlighterMulti.GetToken: UnicodeString;
 begin
   if DefaultHighlighter = nil then
     Result := FLineStr
@@ -467,7 +467,7 @@ begin
     Result := inherited GetToken;
 end;
 
-function TSynEdit32MultiSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterMulti.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   if FMarker <> nil then
     Result := Schemes[FMarker.FScheme].MarkerAttri
@@ -479,7 +479,7 @@ begin
     Result := nil;
 end;
 
-function TSynEdit32MultiSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterMulti.GetTokenKind: integer;
 begin
   if FMarker <> nil then
     Result := 0
@@ -491,13 +491,13 @@ begin
     Result := 0;
 end;
 
-procedure TSynEdit32MultiSyn.HookHighlighter(aHL: TSynEdit32CustomHighLighter);
+procedure TSynEdit32HighlighterMulti.HookHighlighter(aHL: TSynEdit32CustomHighLighter);
 begin
   aHL.FreeNotification(Self);
   aHL.HookAttrChangeEvent(DefHighlightChange);
 end;
 
-procedure TSynEdit32MultiSyn.Next;
+procedure TSynEdit32HighlighterMulti.Next;
 var
   iToken, TmpLine, ExpandedTmpLine: UnicodeString;
   iHL: TSynEdit32CustomHighLighter;
@@ -602,7 +602,7 @@ begin
   inherited;
 end;
 
-procedure TSynEdit32MultiSyn.Notification(aComp: TComponent; aOp: TOperation);
+procedure TSynEdit32HighlighterMulti.Notification(aComp: TComponent; aOp: TOperation);
 var
   i: Integer;
 begin
@@ -620,7 +620,7 @@ begin
   end;
 end;
 
-procedure TSynEdit32MultiSyn.ResetRange;
+procedure TSynEdit32HighlighterMulti.ResetRange;
 begin
   FCurrScheme := -1;
   if DefaultHighlighter <> nil then
@@ -630,7 +630,7 @@ begin
   end;
 end;
 
-procedure TSynEdit32MultiSyn.SetDefaultHighlighter(
+procedure TSynEdit32HighlighterMulti.SetDefaultHighlighter(
   const Value: TSynEdit32CustomHighLighter);
 const
   sDefaultHlSetToSelf = 'A SynMultiSyn cannot be its own DefaultHighlighter.';
@@ -647,7 +647,7 @@ begin
   end;
 end;
 
-procedure TSynEdit32MultiSyn.DoCheckMarker(Scheme:TScheme; StartPos, MarkerLen: Integer;
+procedure TSynEdit32HighlighterMulti.DoCheckMarker(Scheme:TScheme; StartPos, MarkerLen: Integer;
   const MarkerText: UnicodeString; Start: Boolean; Line: Integer;
   const LineStr: string);
 var
@@ -669,12 +669,12 @@ begin
   end;
 end;
 
-procedure TSynEdit32MultiSyn.SetSchemes(const Value: TSchemes);
+procedure TSynEdit32HighlighterMulti.SetSchemes(const Value: TSchemes);
 begin
   FSchemes.Assign(Value);
 end;
 
-procedure TSynEdit32MultiSyn.UnhookHighlighter(aHL: TSynEdit32CustomHighLighter);
+procedure TSynEdit32HighlighterMulti.UnhookHighlighter(aHL: TSynEdit32CustomHighLighter);
 begin
   aHL.UnhookAttrChangeEvent(DefHighlightChange);
 {$IFDEF SYN_COMPILER_5_UP}
@@ -682,18 +682,18 @@ begin
 {$ENDIF}
 end;
 
-function TSynEdit32MultiSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterMulti.GetSampleSource: UnicodeString;
 begin
   Result := FSampleSource;
 end;
 
-procedure TSynEdit32MultiSyn.SetSampleSource(Value: UnicodeString);
+procedure TSynEdit32HighlighterMulti.SetSampleSource(Value: UnicodeString);
 begin
   FSampleSource := Value;
 end;
 
 {$IFNDEF SYN_CLX}
-function TSynEdit32MultiSyn.LoadFromRegistry(RootKey: HKEY;
+function TSynEdit32HighlighterMulti.LoadFromRegistry(RootKey: HKEY;
   Key: string): Boolean;
 var
   r: TBetterRegistry;
@@ -723,7 +723,7 @@ begin
   end;
 end;
 
-function TSynEdit32MultiSyn.SaveToRegistry(RootKey: HKEY; Key: string): Boolean;
+function TSynEdit32HighlighterMulti.SaveToRegistry(RootKey: HKEY; Key: string): Boolean;
 var
   r: TBetterRegistry;
   i: integer;
@@ -753,18 +753,18 @@ begin
 end;
 {$ENDIF}
 
-function TSynEdit32MultiSyn.GetRange: Pointer;
+function TSynEdit32HighlighterMulti.GetRange: Pointer;
 begin
   Result := nil;
   FRangeProc(roGet, TRangeUNativeInt(Result));
 end;
 
-procedure TSynEdit32MultiSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterMulti.SetRange(Value: Pointer);
 begin
   FRangeProc(roSet, TRangeUNativeInt(Value));
 end;
 
-procedure TSynEdit32MultiSyn.NewRangeProc(Operation: TRangeOperation; var Range: TRangeUNativeInt);
+procedure TSynEdit32HighlighterMulti.NewRangeProc(Operation: TRangeOperation; var Range: TRangeUNativeInt);
 const
   SchemeIndexSize = 3;
   MaxSchemeCount = (1 shl SchemeIndexSize) - 1;
@@ -804,7 +804,7 @@ begin
   end;
 end;
 
-function TSynEdit32MultiSyn.UpdateRangeProcs: boolean;
+function TSynEdit32HighlighterMulti.UpdateRangeProcs: boolean;
 // determines the appropriate RangeProcs and returns whether they were changed
 var
   i: Integer;
@@ -816,7 +816,7 @@ begin
   else begin
     FRangeProc := NewRangeProc;
     for i := 0 to Schemes.Count -1 do
-      if Schemes[i].Highlighter is TSynEdit32MultiSyn then
+      if Schemes[i].Highlighter is TSynEdit32HighlighterMulti then
       begin
         FRangeProc := OldRangeProc;
         break;
@@ -827,14 +827,14 @@ begin
     DefHighlightChange(Self);
 end;
 
-procedure TSynEdit32MultiSyn.UserRangeProc(Operation: TRangeOperation; var Range: TRangeUNativeInt);
+procedure TSynEdit32HighlighterMulti.UserRangeProc(Operation: TRangeOperation; var Range: TRangeUNativeInt);
 begin
   OnCustomRange(Self, Operation, pointer(Range));
   if (Operation = roSet) and (DefaultHighlighter <> nil) then
     FTmpRange := DefaultHighlighter.GetRange;
 end;
 
-procedure TSynEdit32MultiSyn.SetOnCustomRange(const Value: TCustomRangeEvent);
+procedure TSynEdit32HighlighterMulti.SetOnCustomRange(const Value: TCustomRangeEvent);
 begin
   if (TMethod(OnCustomRange).Code <> TMethod(Value).Code) or
     (TMethod(OnCustomRange).Data <> TMethod(Value).Data) then
@@ -844,13 +844,13 @@ begin
   end;
 end;
 
-procedure TSynEdit32MultiSyn.Loaded;
+procedure TSynEdit32HighlighterMulti.Loaded;
 begin
   inherited;
   DefHighlightChange(Self);
 end;
 
-function TSynEdit32MultiSyn.IsIdentChar(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterMulti.IsIdentChar(AChar: WideChar): Boolean;
 begin
   if CurrScheme >= 0 then
     Result := Schemes[CurrScheme].Highlighter.IsIdentChar(AChar)
@@ -860,12 +860,12 @@ begin
     Result := inherited IsIdentChar(AChar);
 end;
 
-class function TSynEdit32MultiSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterMulti.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangGeneralMulti;
 end;
 
-procedure TSynEdit32MultiSyn.DoSetLine(const Value: UnicodeString; LineNumber: Integer);
+procedure TSynEdit32HighlighterMulti.DoSetLine(const Value: UnicodeString; LineNumber: Integer);
 var
   iParser: TRegExpr;
   iScheme: TScheme;
@@ -946,7 +946,7 @@ begin
   FLineNumber := LineNumber;
 end;
 
-function TSynEdit32MultiSyn.GetExpandedToken: UnicodeString;
+function TSynEdit32HighlighterMulti.GetExpandedToken: UnicodeString;
 begin
   if (DefaultHighlighter = nil) and (fExpandedLine <> nil) then
     Result := fExpandedLineStr
@@ -956,7 +956,7 @@ end;
 
 { TSchemes }
 
-constructor TSchemes.Create(aOwner: TSynEdit32MultiSyn);
+constructor TSchemes.Create(aOwner: TSynEdit32HighlighterMulti);
 begin
   inherited Create(TScheme);
   FOwner := aOwner;
@@ -1072,7 +1072,7 @@ end;
 
 procedure TScheme.SetHighlighter(const Value: TSynEdit32CustomHighLighter);
 var
-  iOwner: TSynEdit32MultiSyn;
+  iOwner: TSynEdit32HighlighterMulti;
   iAlreadyRepainted: Boolean;
 begin
   if Highlighter <> Value then
@@ -1083,7 +1083,7 @@ begin
     FHighlighter := Value;
     if (Highlighter <> nil) and (Highlighter <> iOwner) then
       iOwner.HookHighlighter(Highlighter);
-    if Highlighter is TSynEdit32MultiSyn then
+    if Highlighter is TSynEdit32HighlighterMulti then
       iAlreadyRepainted := iOwner.UpdateRangeProcs
     else
       iAlreadyRepainted := False;

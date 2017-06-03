@@ -66,7 +66,7 @@ type
   PIdentFuncTableFunc = ^TIdentFuncTableFunc;
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
-  TSynMsgSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterMsg = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
     FTokenID: TtkTokenKind;
@@ -143,7 +143,7 @@ const
   );
 
 {$Q-}
-function TSynMsgSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterMsg.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) do
@@ -156,7 +156,7 @@ begin
 end;
 {$Q+}
 
-function TSynMsgSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterMsg.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -168,7 +168,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynMsgSyn.InitIdent;
+procedure TSynEdit32HighlighterMsg.InitIdent;
 var
   i: Integer;
 begin
@@ -185,12 +185,12 @@ begin
   FIdentFuncTable[2] := FuncTokentypes;
 end;
 
-function TSynMsgSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterMsg.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier;
 end;
 
-function TSynMsgSyn.FuncBeginproc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterMsg.FuncBeginproc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -198,7 +198,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynMsgSyn.FuncChars(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterMsg.FuncChars(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -206,7 +206,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynMsgSyn.FuncEnclosedby(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterMsg.FuncEnclosedby(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -214,7 +214,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynMsgSyn.FuncEndproc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterMsg.FuncEndproc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -222,7 +222,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynMsgSyn.FuncKeys(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterMsg.FuncKeys(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -230,7 +230,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynMsgSyn.FuncSamplesource(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterMsg.FuncSamplesource(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -238,7 +238,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynMsgSyn.FuncTokentypes(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterMsg.FuncTokentypes(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -246,20 +246,20 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynMsgSyn.SpaceProc;
+procedure TSynEdit32HighlighterMsg.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynMsgSyn.NullProc;
+procedure TSynEdit32HighlighterMsg.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynMsgSyn.CRProc;
+procedure TSynEdit32HighlighterMsg.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
@@ -267,13 +267,13 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynMsgSyn.LFProc;
+procedure TSynEdit32HighlighterMsg.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynMsgSyn.BraceCommentOpenProc;
+procedure TSynEdit32HighlighterMsg.BraceCommentOpenProc;
 begin
   Inc(FRun);
   FRange := rsBraceComment;
@@ -281,7 +281,7 @@ begin
   FTokenID := tkComment;
 end;
 
-procedure TSynMsgSyn.BraceCommentProc;
+procedure TSynEdit32HighlighterMsg.BraceCommentProc;
 begin
   case FLine[FRun] of
      #0: NullProc;
@@ -304,7 +304,7 @@ begin
   end;
 end;
 
-procedure TSynMsgSyn.StringOpenProc;
+procedure TSynEdit32HighlighterMsg.StringOpenProc;
 begin
   Inc(FRun);
   FRange := rsString;
@@ -312,7 +312,7 @@ begin
   FTokenID := tkString;
 end;
 
-procedure TSynMsgSyn.StringProc;
+procedure TSynEdit32HighlighterMsg.StringProc;
 begin
   FTokenID := tkString;
   repeat
@@ -327,7 +327,7 @@ begin
   until IsLineEnd(FRun);
 end;
 
-constructor TSynMsgSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterMsg.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -363,7 +363,7 @@ begin
   FRange := rsUnknown;
 end;
 
-procedure TSynMsgSyn.IdentProc;
+procedure TSynEdit32HighlighterMsg.IdentProc;
 begin
   FTokenID := IdentKind(FLine + FRun);
   Inc(FRun, FStringLen);
@@ -371,13 +371,13 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynMsgSyn.SymbolProc;
+procedure TSynEdit32HighlighterMsg.SymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynMsgSyn.TerminatorProc;
+procedure TSynEdit32HighlighterMsg.TerminatorProc;
 begin
   Inc(FRun);
   if (FLine[FRun] = '>') and (FLine[FRun + 1] = '<') and (FLine[FRun + 2] = '|') then
@@ -389,13 +389,13 @@ begin
     FTokenID := tkSymbol;
 end;
 
-procedure TSynMsgSyn.UnknownProc;
+procedure TSynEdit32HighlighterMsg.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynMsgSyn.Next;
+procedure TSynEdit32HighlighterMsg.Next;
 begin
   fTokenPos := FRun;
   case FRange of
@@ -420,7 +420,7 @@ begin
   inherited;
 end;
 
-function TSynMsgSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterMsg.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -434,12 +434,12 @@ begin
   end;
 end;
 
-function TSynMsgSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterMsg.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynMsgSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterMsg.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkComment: Result := FCommentAttri;
@@ -455,12 +455,12 @@ begin
   end;
 end;
 
-function TSynMsgSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterMsg.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-function TSynMsgSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterMsg.GetSampleSource: UnicodeString;
 begin
   Result := 'TSynSampleSyn   {first identifier is the class name }'#13#10 +
             'tk              {second identifier is the prefix }'#13#10 +
@@ -471,12 +471,12 @@ begin
             '|><|';
 end;
 
-function TSynMsgSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterMsg.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterSynGenMsgfiles;
 end;
 
-function TSynMsgSyn.IsIdentChar(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterMsg.IsIdentChar(AChar: WideChar): Boolean;
 begin
   case AChar of
     '_', 'A'..'Z', 'a'..'z':
@@ -486,31 +486,31 @@ begin
   end;
 end;
 
-class function TSynMsgSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterMsg.GetLanguageName: string;
 begin
   Result := SYNS_LangSynGenMsgfiles;
 end;
 
-procedure TSynMsgSyn.ResetRange;
+procedure TSynEdit32HighlighterMsg.ResetRange;
 begin
   FRange := rsUnknown;
 end;
 
-procedure TSynMsgSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterMsg.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-function TSynMsgSyn.GetRange: Pointer;
+function TSynEdit32HighlighterMsg.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-class function TSynMsgSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterMsg.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangSynGenMsgfiles;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynMsgSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterMsg);
 end.

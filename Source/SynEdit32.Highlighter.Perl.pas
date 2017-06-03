@@ -67,7 +67,7 @@ type
   PIdentFuncTableFunc = ^TIdentFuncTableFunc;
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
-  TSynPerlSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterPerl = class(TSynEdit32CustomHighlighter)
   private
     FTokenID: TtkTokenKind;
     FIdentFuncTable: array[0..2422] of TIdentFuncTableFunc;
@@ -618,7 +618,7 @@ const
   );
 
 {$Q-}
-function TSynPerlSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterPerl.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) or CharInSet(Str^, ['$', '%', '@']) do
@@ -631,7 +631,7 @@ begin
 end;
 {$Q+}
 
-function TSynPerlSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterPerl.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -643,7 +643,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynPerlSyn.InitIdent;
+procedure TSynEdit32HighlighterPerl.InitIdent;
 var
   i: Integer;
 begin
@@ -935,12 +935,12 @@ begin
   FIdentFuncTable[290] := FuncXor;
 end;
 
-function TSynPerlSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36accumulator(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36accumulator(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -948,7 +948,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36arg(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36arg(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -956,7 +956,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36argv(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36argv(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -964,7 +964,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36basetime(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36basetime(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -972,7 +972,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36child95error(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36child95error(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -980,7 +980,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36debugging(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36debugging(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -988,7 +988,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36effective95group95id(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36effective95group95id(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -996,7 +996,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36effective95user95id(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36effective95user95id(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1004,7 +1004,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36egid(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36egid(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1012,7 +1012,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36env(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36env(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1020,7 +1020,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36errno(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36errno(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1028,7 +1028,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36euid(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36euid(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1036,7 +1036,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36eval95error(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36eval95error(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1044,7 +1044,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36executable95name(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36executable95name(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1052,7 +1052,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36format95formfeed(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36format95formfeed(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1060,7 +1060,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36format95line95break95characters(Index: Integer):
+function TSynEdit32HighlighterPerl.Func36format95line95break95characters(Index: Integer):
   TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
@@ -1069,7 +1069,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36format95lines95left(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36format95lines95left(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1077,7 +1077,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36format95lines95per95page(Index: Integer):
+function TSynEdit32HighlighterPerl.Func36format95lines95per95page(Index: Integer):
   TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
@@ -1086,7 +1086,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36format95name(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36format95name(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1094,7 +1094,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36format95page95number(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36format95page95number(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1102,7 +1102,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36format95top95name(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36format95top95name(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1110,7 +1110,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36gid(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36gid(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1118,7 +1118,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36inplace95edit(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36inplace95edit(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1126,7 +1126,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36input95line95number(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36input95line95number(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1134,7 +1134,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36input95record95separator(Index: Integer):
+function TSynEdit32HighlighterPerl.Func36input95record95separator(Index: Integer):
   TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
@@ -1143,7 +1143,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36last95paren95match(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36last95paren95match(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1151,7 +1151,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36list95separator(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36list95separator(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1159,7 +1159,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36match(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36match(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1167,7 +1167,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36multiline95matching(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36multiline95matching(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1175,7 +1175,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36nr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36nr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1183,7 +1183,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36ofmt(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36ofmt(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1191,7 +1191,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36ors(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36ors(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1199,7 +1199,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36os95error(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36os95error(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1207,7 +1207,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36output95autoflush(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36output95autoflush(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1215,7 +1215,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36output95field95separator(Index: Integer):
+function TSynEdit32HighlighterPerl.Func36output95field95separator(Index: Integer):
   TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
@@ -1224,7 +1224,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36perl95version(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36perl95version(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1232,7 +1232,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36perldb(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36perldb(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1240,7 +1240,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36pid(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36pid(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1248,7 +1248,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36postmatch(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36postmatch(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1256,7 +1256,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36prematch(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36prematch(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1264,7 +1264,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36process95id(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36process95id(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1272,7 +1272,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36program95name(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36program95name(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1280,7 +1280,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36real95group95id(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36real95group95id(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1288,7 +1288,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36real95user95id(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36real95user95id(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1296,7 +1296,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36rs(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36rs(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1304,7 +1304,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36sig(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36sig(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1312,7 +1312,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36subscript95separator(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36subscript95separator(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1320,7 +1320,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36subsep(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36subsep(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1328,7 +1328,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36system95fd95max(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36system95fd95max(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1336,7 +1336,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36uid(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36uid(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1344,7 +1344,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func36warning(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func36warning(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1352,7 +1352,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func37inc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func37inc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1360,7 +1360,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func64argv(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func64argv(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1368,7 +1368,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.Func64inc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.Func64inc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkVariable
@@ -1376,7 +1376,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncAbs(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncAbs(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1384,7 +1384,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncAccept(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncAccept(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1392,7 +1392,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncAlarm(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncAlarm(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1400,7 +1400,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncAnd(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncAnd(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkOperator
@@ -1408,7 +1408,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncAtan2(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncAtan2(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1416,7 +1416,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncBind(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncBind(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1424,7 +1424,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncBinmode(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncBinmode(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1432,7 +1432,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncBless(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncBless(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1440,7 +1440,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncCaller(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncCaller(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1448,7 +1448,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncChdir(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncChdir(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1456,7 +1456,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncChmod(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncChmod(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1464,7 +1464,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncChomp(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncChomp(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1472,7 +1472,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncChop(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncChop(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1480,7 +1480,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncChown(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncChown(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1488,7 +1488,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncChr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncChr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1496,7 +1496,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncChroot(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncChroot(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1504,7 +1504,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncClose(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncClose(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1512,7 +1512,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncClosedir(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncClosedir(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1520,7 +1520,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncCmp(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncCmp(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkOperator
@@ -1528,7 +1528,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncConnect(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncConnect(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1536,7 +1536,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncConstant(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncConstant(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkPragma
@@ -1544,7 +1544,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncCos(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncCos(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1552,7 +1552,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncCrypt(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncCrypt(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1560,7 +1560,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncDbmclose(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncDbmclose(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1568,7 +1568,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncDbmopen(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncDbmopen(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1576,7 +1576,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncDefined(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncDefined(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1584,7 +1584,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncDelete(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncDelete(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1592,7 +1592,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncDiagnostics(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncDiagnostics(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkPragma
@@ -1600,7 +1600,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncDie(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncDie(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1608,7 +1608,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncDo(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncDo(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1616,7 +1616,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncDump(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncDump(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1624,7 +1624,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncEach(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncEach(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1632,7 +1632,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncElse(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncElse(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1640,7 +1640,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncElsif(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncElsif(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1648,7 +1648,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncEndgrent(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncEndgrent(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1656,7 +1656,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncEndhostent(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncEndhostent(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1664,7 +1664,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncEndnetent(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncEndnetent(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1672,7 +1672,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncEndprotoent(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncEndprotoent(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1680,7 +1680,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncEndpwent(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncEndpwent(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1688,7 +1688,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncEndservent(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncEndservent(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1696,7 +1696,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncEof(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncEof(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1704,7 +1704,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncEq(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncEq(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkOperator
@@ -1712,7 +1712,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncEval(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncEval(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1720,7 +1720,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncExec(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncExec(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1728,7 +1728,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncExists(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncExists(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1736,7 +1736,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncExit(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncExit(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1744,7 +1744,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncExp(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncExp(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1752,7 +1752,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncFcntl(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncFcntl(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1760,7 +1760,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncFileno(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncFileno(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1768,7 +1768,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncFlock(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncFlock(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1776,7 +1776,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncFor(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncFor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1784,7 +1784,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncForeach(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncForeach(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1792,7 +1792,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncFork(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncFork(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1800,7 +1800,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncFormat(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncFormat(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1808,7 +1808,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncFormline(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncFormline(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1816,7 +1816,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGe(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGe(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkOperator
@@ -1824,7 +1824,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1832,7 +1832,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetgrent(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetgrent(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1840,7 +1840,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetgrgid(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetgrgid(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1848,7 +1848,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetgrnam(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetgrnam(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1856,7 +1856,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGethostbyaddr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGethostbyaddr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1864,7 +1864,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGethostbyname(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGethostbyname(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1872,7 +1872,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGethostent(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGethostent(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1880,7 +1880,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetlogin(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetlogin(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1888,7 +1888,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetnetbyaddr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetnetbyaddr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1896,7 +1896,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetnetbyname(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetnetbyname(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1904,7 +1904,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetnetent(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetnetent(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1912,7 +1912,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetpeername(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetpeername(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1920,7 +1920,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetpgrp(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetpgrp(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1928,7 +1928,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetppid(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetppid(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1936,7 +1936,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetpriority(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetpriority(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1944,7 +1944,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetprotobyname(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetprotobyname(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1952,7 +1952,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetprotobynumber(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetprotobynumber(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1960,7 +1960,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetprotoent(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetprotoent(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1968,7 +1968,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetpwent(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetpwent(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1976,7 +1976,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetpwnam(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetpwnam(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1984,7 +1984,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetpwuid(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetpwuid(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1992,7 +1992,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetservbyname(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetservbyname(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2000,7 +2000,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetservbyport(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetservbyport(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2008,7 +2008,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetservent(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetservent(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2016,7 +2016,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetsockname(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetsockname(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2024,7 +2024,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGetsockopt(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGetsockopt(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2032,7 +2032,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGlob(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGlob(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2040,7 +2040,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGmtime(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGmtime(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2048,7 +2048,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGoto(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGoto(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2056,7 +2056,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGrep(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGrep(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2064,7 +2064,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncGt(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncGt(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkOperator
@@ -2072,7 +2072,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncHex(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncHex(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2080,7 +2080,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncIf(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncIf(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2088,7 +2088,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncImport(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncImport(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2096,7 +2096,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncIndex(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncIndex(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2104,7 +2104,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncInt(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncInt(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2112,7 +2112,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncInteger(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncInteger(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkPragma
@@ -2120,7 +2120,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncIoctl(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncIoctl(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2128,7 +2128,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncJoin(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncJoin(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2136,7 +2136,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncKeys(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncKeys(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2144,7 +2144,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncKill(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncKill(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2152,7 +2152,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncLast(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncLast(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2160,7 +2160,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncLc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncLc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2168,7 +2168,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncLcfirst(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncLcfirst(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2176,87 +2176,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncLe(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkOperator
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncLength(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncLess(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkPragma
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncLink(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncListen(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncLocal(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncLocale(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkPragma
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncLocaltime(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncLog(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncLstat(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncLt(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncLe(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkOperator
@@ -2264,7 +2184,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncM(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncLength(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2272,535 +2192,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncMap(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncMkdir(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncMsgctl(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncMsgget(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncMsgrcv(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncMsgsnd(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncMy(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncNe(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkOperator
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncNext(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncNo(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncNot(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkOperator
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncOct(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncOpen(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncOpendir(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncOr(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkOperator
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncOrd(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncPack(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncPackage(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncPipe(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncPop(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncPos(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncPrint(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncPush(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncQ(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncQq(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncQuotemeta(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncQw(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncQx(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncRand(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncRead(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncReaddir(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncReadlink(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncRecv(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncRedo(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncRef(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncRename(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncRequire(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncReset(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncReturn(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncReverse(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncRewinddir(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncRindex(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncRmdir(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncScalar(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSeek(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSeekdir(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSelect(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSemctl(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSemget(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSemop(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSend(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSetgrent(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSethostent(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSetnetent(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSetpgrp(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSetpriority(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSetprotoent(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSetpwent(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSetservent(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSetsockopt(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncShift(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncShmctl(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncShmget(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncShmread(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncShmwrite(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncShutdown(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSigtrap(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncLess(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkPragma
@@ -2808,7 +2200,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncSin(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncLink(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2816,7 +2208,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncSleep(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncListen(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2824,7 +2216,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncSocket(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncLocal(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2832,71 +2224,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncSocketpair(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSort(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSplice(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSplit(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSprintf(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSqrt(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSrand(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncStat(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncStrict(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncLocale(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkPragma
@@ -2904,7 +2232,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncStudy(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncLocaltime(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2912,7 +2240,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncSub(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncLog(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2920,15 +2248,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncSubs(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkPragma
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSubstr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncLstat(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2936,263 +2256,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynPerlSyn.FuncSymlink(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSyscall(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSysread(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSystem(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncSyswrite(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncTell(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncTelldir(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncTie(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncTime(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncTimes(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncTr(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncTruncate(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncUc(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncUcfirst(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncUmask(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncUndef(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncUnless(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncUnlink(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncUnpack(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncUnshift(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncUntie(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncUse(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncUtime(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncValues(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncVars(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkPragma
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncVec(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncWait(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncWaitpid(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncWantarray(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncWarn(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncWhile(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncWrite(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynPerlSyn.FuncXor(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterPerl.FuncLt(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkOperator
@@ -3200,7 +2264,943 @@ begin
     Result := tkIdentifier;
 end;
 
-constructor TSynPerlSyn.Create(AOwner: TComponent);
+function TSynEdit32HighlighterPerl.FuncM(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncMap(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncMkdir(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncMsgctl(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncMsgget(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncMsgrcv(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncMsgsnd(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncMy(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncNe(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkOperator
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncNext(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncNo(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncNot(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkOperator
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncOct(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncOpen(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncOpendir(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncOr(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkOperator
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncOrd(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncPack(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncPackage(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncPipe(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncPop(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncPos(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncPrint(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncPush(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncQ(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncQq(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncQuotemeta(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncQw(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncQx(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncRand(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncRead(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncReaddir(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncReadlink(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncRecv(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncRedo(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncRef(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncRename(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncRequire(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncReset(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncReturn(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncReverse(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncRewinddir(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncRindex(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncRmdir(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncScalar(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSeek(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSeekdir(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSelect(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSemctl(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSemget(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSemop(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSend(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSetgrent(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSethostent(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSetnetent(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSetpgrp(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSetpriority(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSetprotoent(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSetpwent(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSetservent(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSetsockopt(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncShift(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncShmctl(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncShmget(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncShmread(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncShmwrite(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncShutdown(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSigtrap(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkPragma
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSin(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSleep(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSocket(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSocketpair(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSort(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSplice(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSplit(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSprintf(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSqrt(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSrand(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncStat(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncStrict(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkPragma
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncStudy(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSub(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSubs(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkPragma
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSubstr(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSymlink(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSyscall(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSysread(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSystem(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncSyswrite(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncTell(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncTelldir(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncTie(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncTime(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncTimes(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncTr(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncTruncate(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncUc(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncUcfirst(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncUmask(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncUndef(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncUnless(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncUnlink(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncUnpack(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncUnshift(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncUntie(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncUse(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncUtime(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncValues(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncVars(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkPragma
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncVec(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncWait(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncWaitpid(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncWantarray(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncWarn(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncWhile(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncWrite(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterPerl.FuncXor(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkOperator
+  else
+    Result := tkIdentifier;
+end;
+
+constructor TSynEdit32HighlighterPerl.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -3237,7 +3237,7 @@ begin
   fDefaultFilter := SYNS_FilterPerl;
 end; { Create }
 
-procedure TSynPerlSyn.AndSymbolProc;
+procedure TSynEdit32HighlighterPerl.AndSymbolProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {bit and assign}
@@ -3261,7 +3261,7 @@ begin
   end;
 end;
 
-procedure TSynPerlSyn.CRProc;
+procedure TSynEdit32HighlighterPerl.CRProc;
 begin
   FTokenID := tkSpace;
   case FLine[FRun + 1] of
@@ -3271,7 +3271,7 @@ begin
   end;
 end;
 
-procedure TSynPerlSyn.ColonProc;
+procedure TSynEdit32HighlighterPerl.ColonProc;
 begin
   case FLine[FRun + 1] of
     ':':                               {double colon}
@@ -3287,7 +3287,7 @@ begin
   end;
 end;
 
-procedure TSynPerlSyn.CommentProc;
+procedure TSynEdit32HighlighterPerl.CommentProc;
 begin
   FTokenID := tkComment;
   repeat
@@ -3298,7 +3298,7 @@ begin
   until FLine[FRun] = #0;
 end;
 
-procedure TSynPerlSyn.EqualProc;
+procedure TSynEdit32HighlighterPerl.EqualProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {logical equal}
@@ -3324,7 +3324,7 @@ begin
   end;
 end;
 
-procedure TSynPerlSyn.GreaterProc;
+procedure TSynEdit32HighlighterPerl.GreaterProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {greater than or equal to}
@@ -3348,7 +3348,7 @@ begin
   end;
 end;
 
-procedure TSynPerlSyn.IdentProc;
+procedure TSynEdit32HighlighterPerl.IdentProc;
 begin
   case FLine[FRun] of
     '$':
@@ -3420,13 +3420,13 @@ begin
   while IsIdentChar(FLine[FRun]) do Inc(FRun);
 end;
 
-procedure TSynPerlSyn.LFProc;
+procedure TSynEdit32HighlighterPerl.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynPerlSyn.LowerProc;
+procedure TSynEdit32HighlighterPerl.LowerProc;
 begin
   case FLine[FRun + 1] of
     '=':
@@ -3453,7 +3453,7 @@ begin
   end;
 end;
 
-procedure TSynPerlSyn.MinusProc;
+procedure TSynEdit32HighlighterPerl.MinusProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {subtract assign}
@@ -3479,7 +3479,7 @@ begin
   end;
 end;
 
-procedure TSynPerlSyn.NotSymbolProc;
+procedure TSynEdit32HighlighterPerl.NotSymbolProc;
 begin
   case FLine[FRun + 1] of
     '~':                               {logical negated bind like =~}
@@ -3500,13 +3500,13 @@ begin
   end;
 end;
 
-procedure TSynPerlSyn.NullProc;
+procedure TSynEdit32HighlighterPerl.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynPerlSyn.NumberProc;
+procedure TSynEdit32HighlighterPerl.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -3559,7 +3559,7 @@ begin
   end;
 end;
 
-procedure TSynPerlSyn.OrSymbolProc;
+procedure TSynEdit32HighlighterPerl.OrSymbolProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {bit or assign}
@@ -3583,7 +3583,7 @@ begin
   end;
 end;
 
-procedure TSynPerlSyn.PlusProc;
+procedure TSynEdit32HighlighterPerl.PlusProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {add assign}
@@ -3604,7 +3604,7 @@ begin
   end;
 end;
 
-procedure TSynPerlSyn.SlashProc;
+procedure TSynEdit32HighlighterPerl.SlashProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {division assign}
@@ -3620,14 +3620,14 @@ begin
   end;
 end;
 
-procedure TSynPerlSyn.SpaceProc;
+procedure TSynEdit32HighlighterPerl.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynPerlSyn.StarProc;
+procedure TSynEdit32HighlighterPerl.StarProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {multiply assign}
@@ -3651,7 +3651,7 @@ begin
   end;
 end;
 
-procedure TSynPerlSyn.StringInterpProc;
+procedure TSynEdit32HighlighterPerl.StringInterpProc;
 var
   fBackslashCount : Integer;
 begin
@@ -3680,7 +3680,7 @@ begin
   if FLine[FRun] <> #0 then Inc(FRun);
 end;
 
-procedure TSynPerlSyn.StringLiteralProc;
+procedure TSynEdit32HighlighterPerl.StringLiteralProc;
 begin
   FTokenID := tkString;
   repeat
@@ -3692,13 +3692,13 @@ begin
   if FLine[FRun] <> #0 then Inc(FRun);
 end;
 
-procedure TSynPerlSyn.SymbolProc;
+procedure TSynEdit32HighlighterPerl.SymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynPerlSyn.XOrSymbolProc;
+procedure TSynEdit32HighlighterPerl.XOrSymbolProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {xor assign}
@@ -3714,13 +3714,13 @@ begin
   end;
 end;
 
-procedure TSynPerlSyn.UnknownProc;
+procedure TSynEdit32HighlighterPerl.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynPerlSyn.Next;
+procedure TSynEdit32HighlighterPerl.Next;
 begin
   fTokenPos := FRun;
   case FLine[FRun] of
@@ -3751,7 +3751,7 @@ begin
   inherited;
 end;
 
-function TSynPerlSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterPerl.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -3765,12 +3765,12 @@ begin
   end;
 end;
 
-function TSynPerlSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterPerl.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynPerlSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterPerl.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case FTokenID of
     tkComment: Result := FCommentAttri;
@@ -3788,12 +3788,12 @@ begin
   end;
 end;
 
-function TSynPerlSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterPerl.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-function TSynPerlSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterPerl.GetSampleSource: UnicodeString;
 begin
   Result :=
     '#!/bin/perl'#13#10 +
@@ -3808,12 +3808,12 @@ begin
     '}';
 end;
 
-function TSynPerlSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterPerl.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterPerl;
 end;
 
-function TSynPerlSyn.IsIdentChar(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterPerl.IsIdentChar(AChar: WideChar): Boolean;
 begin
   case AChar of
     '%', '@', '$', '_', '0'..'9', 'a'..'z', 'A'..'Z':
@@ -3823,16 +3823,16 @@ begin
   end;
 end;
 
-class function TSynPerlSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterPerl.GetLanguageName: string;
 begin
   Result := SYNS_LangPerl;
 end;
 
-class function TSynPerlSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterPerl.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangPerl;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynPerlSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterPerl);
 end.

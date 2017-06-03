@@ -55,17 +55,17 @@ uses
 type
   TSynEdit32PythonBehaviour = class(TComponent)
   private
-    FEditor: TSynEdit;
+    FEditor: TSynEdit32;
     FIndent: integer;
   protected
-    procedure SetEditor(Value: TSynEdit); virtual;
+    procedure SetEditor(Value: TSynEdit32); virtual;
     procedure doProcessUserCommand(Sender: TObject; AfterProcessing: boolean;
       var Handled: boolean; var Command: TSynEditorCommand;
       var AChar: WideChar; Data: Pointer; HandlerData: Pointer); virtual;
   public
     constructor Create(aOwner: TComponent); override;
   published
-    property Editor: TSynEdit read FEditor write SetEditor;
+    property Editor: TSynEdit32 read FEditor write SetEditor;
     property Indent: integer read FIndent write FIndent default 4;
   end;
 
@@ -74,7 +74,7 @@ implementation
 uses
   SynEdit32.StrConst;
 
-procedure TSynEdit32PythonBehaviour.SetEditor(Value: TSynEdit);
+procedure TSynEdit32PythonBehaviour.SetEditor(Value: TSynEdit32);
 begin
   if FEditor <> Value then
   begin

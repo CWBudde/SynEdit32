@@ -77,7 +77,7 @@ type
   PIdentFuncTableFunc = ^TIdentFuncTableFunc;
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
-  TSynJavaSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterJava = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
     FRoundCount: Integer;
@@ -201,7 +201,7 @@ const
   );
 
 {$Q-}
-function TSynJavaSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterJava.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) do
@@ -214,7 +214,7 @@ begin
 end;
 {$Q+}
 
-function TSynJavaSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterJava.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -226,7 +226,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynJavaSyn.InitIdent;
+procedure TSynEdit32HighlighterJava.InitIdent;
 var
   i: Integer;
 begin
@@ -239,12 +239,12 @@ begin
       FIdentFuncTable[i] := KeyWordFunc;
 end;
 
-function TSynJavaSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJava.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier;
 end;
 
-function TSynJavaSyn.KeyWordFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterJava.KeyWordFunc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -252,7 +252,7 @@ begin
     Result := tkIdentifier
 end;
 
-constructor TSynJavaSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterJava.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -286,7 +286,7 @@ begin
   FDefaultFilter := SYNS_FilterJava;
 end; { Create }
 
-procedure TSynJavaSyn.CommentProc;
+procedure TSynEdit32HighlighterJava.CommentProc;
 begin
   if FRange = rsComment then
     FTokenID := tkComment
@@ -324,7 +324,7 @@ begin
     end;
 end;
 
-procedure TSynJavaSyn.AndSymbolProc;
+procedure TSynEdit32HighlighterJava.AndSymbolProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {and assign}
@@ -348,7 +348,7 @@ begin
   end;
 end;
 
-procedure TSynJavaSyn.AsciiCharProc;
+procedure TSynEdit32HighlighterJava.AsciiCharProc;
 begin
   FTokenID := tkString;
   repeat
@@ -360,27 +360,27 @@ begin
   if not IsLineEnd(FRun) then Inc(FRun);
 end;
 
-procedure TSynJavaSyn.AtSymbolProc;
+procedure TSynEdit32HighlighterJava.AtSymbolProc;
 begin
   FTokenID := tkInvalid;
   Inc(FRun);
 end;
 
-procedure TSynJavaSyn.BraceCloseProc;
+procedure TSynEdit32HighlighterJava.BraceCloseProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
   FExtTokenID := xtkBraceClose;
 end;
 
-procedure TSynJavaSyn.BraceOpenProc;
+procedure TSynEdit32HighlighterJava.BraceOpenProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
   FExtTokenID := xtkBraceOpen;
 end;
 
-procedure TSynJavaSyn.CRProc;
+procedure TSynEdit32HighlighterJava.CRProc;
 begin
   FTokenID := tkSpace;
   case FLine[FRun + 1] of
@@ -390,21 +390,21 @@ begin
   end;
 end;
 
-procedure TSynJavaSyn.ColonProc;
+procedure TSynEdit32HighlighterJava.ColonProc;
 begin
   Inc(FRun);                            {colon - conditional}
   FTokenID := tkSymbol;
   FExtTokenID := xtkColon;
 end;
 
-procedure TSynJavaSyn.CommaProc;
+procedure TSynEdit32HighlighterJava.CommaProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
   fExtTokenID := xtkComma;
 end;
 
-procedure TSynJavaSyn.EqualProc;
+procedure TSynEdit32HighlighterJava.EqualProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {logical equal}
@@ -422,7 +422,7 @@ begin
   end;
 end;
 
-procedure TSynJavaSyn.GreaterProc;
+procedure TSynEdit32HighlighterJava.GreaterProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {greater than or equal to}
@@ -467,20 +467,20 @@ begin
   end;
 end;
 
-procedure TSynJavaSyn.IdentProc;
+procedure TSynEdit32HighlighterJava.IdentProc;
 begin
   FTokenID := IdentKind((FLine + FRun));
   Inc(FRun, FStringLen);
   while IsIdentChar(FLine[FRun]) do Inc(FRun);
 end;
 
-procedure TSynJavaSyn.LFProc;
+procedure TSynEdit32HighlighterJava.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynJavaSyn.LowerProc;
+procedure TSynEdit32HighlighterJava.LowerProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {less than or equal to}
@@ -512,7 +512,7 @@ begin
   end;
 end;
 
-procedure TSynJavaSyn.MinusProc;
+procedure TSynEdit32HighlighterJava.MinusProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {subtract assign}
@@ -536,7 +536,7 @@ begin
   end;
 end;
 
-procedure TSynJavaSyn.MultiplyProc;
+procedure TSynEdit32HighlighterJava.MultiplyProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {multiply assign}
@@ -554,7 +554,7 @@ begin
   end;
 end;
 
-procedure TSynJavaSyn.NotSymbolProc;
+procedure TSynEdit32HighlighterJava.NotSymbolProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {not equal}
@@ -572,13 +572,13 @@ begin
   end;
 end;
 
-procedure TSynJavaSyn.NullProc;
+procedure TSynEdit32HighlighterJava.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynJavaSyn.NumberProc;
+procedure TSynEdit32HighlighterJava.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -603,7 +603,7 @@ begin
   end;
 end;
 
-procedure TSynJavaSyn.OrSymbolProc;
+procedure TSynEdit32HighlighterJava.OrSymbolProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {inclusive or assign}
@@ -627,7 +627,7 @@ begin
   end;
 end;
 
-procedure TSynJavaSyn.PlusProc;
+procedure TSynEdit32HighlighterJava.PlusProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {add assign}
@@ -651,7 +651,7 @@ begin
   end;
 end;
 
-procedure TSynJavaSyn.PointProc;
+procedure TSynEdit32HighlighterJava.PointProc;
 begin
   Inc(FRun);                            {point}
   if CharInSet(FLine[FRun], ['0'..'9']) then
@@ -663,20 +663,20 @@ begin
   FExtTokenID := xtkPoint;
 end;
 
-procedure TSynJavaSyn.PoundProc;
+procedure TSynEdit32HighlighterJava.PoundProc;
 begin
   Inc(FRun);
   FTokenID := tkInvalid;
 end;
 
-procedure TSynJavaSyn.QuestionProc;
+procedure TSynEdit32HighlighterJava.QuestionProc;
 begin
   FTokenID := tkSymbol;                {question mark - conditional}
   FExtTokenID := xtkQuestion;
   Inc(FRun);
 end;
 
-procedure TSynJavaSyn.RemainderSymbolProc;
+procedure TSynEdit32HighlighterJava.RemainderSymbolProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {remainder assign}
@@ -694,7 +694,7 @@ begin
   end;
 end;
 
-procedure TSynJavaSyn.RoundCloseProc;
+procedure TSynEdit32HighlighterJava.RoundCloseProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -702,7 +702,7 @@ begin
   dec(FRoundCount);
 end;
 
-procedure TSynJavaSyn.RoundOpenProc;
+procedure TSynEdit32HighlighterJava.RoundOpenProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -710,14 +710,14 @@ begin
   Inc(FRoundCount);
 end;
 
-procedure TSynJavaSyn.SemiColonProc;
+procedure TSynEdit32HighlighterJava.SemiColonProc;
 begin
   Inc(FRun);                            {semicolon}
   FTokenID := tkSymbol;
   FExtTokenID := xtkSemiColon;
 end;
 
-procedure TSynJavaSyn.SlashProc;
+procedure TSynEdit32HighlighterJava.SlashProc;
 begin
   case FLine[FRun + 1] of
     '/':                               {c++ style comments}
@@ -772,14 +772,14 @@ begin
   end;
 end;
 
-procedure TSynJavaSyn.SpaceProc;
+procedure TSynEdit32HighlighterJava.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynJavaSyn.SquareCloseProc;
+procedure TSynEdit32HighlighterJava.SquareCloseProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -787,7 +787,7 @@ begin
   dec(FSquareCount);
 end;
 
-procedure TSynJavaSyn.SquareOpenProc;
+procedure TSynEdit32HighlighterJava.SquareOpenProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -795,7 +795,7 @@ begin
   Inc(FSquareCount);
 end;
 
-procedure TSynJavaSyn.StringProc;
+procedure TSynEdit32HighlighterJava.StringProc;
 begin
   FTokenID := tkString;
   if (FLine[FRun + 1] = #34) and (FLine[FRun + 2] = #34) then Inc(FRun, 2);
@@ -809,14 +809,14 @@ begin
   if not IsLineEnd(FRun) then Inc(FRun);
 end;
 
-procedure TSynJavaSyn.TildeProc;
+procedure TSynEdit32HighlighterJava.TildeProc;
 begin
   Inc(FRun);                            {bitwise complement}
   FTokenID := tkSymbol;
   FExtTokenID := xtkBitComplement;
 end;
 
-procedure TSynJavaSyn.XOrSymbolProc;
+procedure TSynEdit32HighlighterJava.XOrSymbolProc;
 begin
   case FLine[FRun + 1] of
     '=':                               {xor assign}
@@ -834,13 +834,13 @@ begin
   end;
 end;
 
-procedure TSynJavaSyn.UnknownProc;
+procedure TSynEdit32HighlighterJava.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynJavaSyn.Next;
+procedure TSynEdit32HighlighterJava.Next;
 begin
   fTokenPos := FRun;
   case FRange of
@@ -892,7 +892,7 @@ begin
   inherited;
 end;
 
-function TSynJavaSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterJava.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -905,32 +905,32 @@ begin
   end;
 end;
 
-function TSynJavaSyn.GetRange: Pointer;
+function TSynEdit32HighlighterJava.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-procedure TSynJavaSyn.ResetRange;
+procedure TSynEdit32HighlighterJava.ResetRange;
 begin
   FRange := rsUnknown;
 end;
 
-procedure TSynJavaSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterJava.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-function TSynJavaSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterJava.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynJavaSyn.GetExtTokenID: TxtkTokenKind;
+function TSynEdit32HighlighterJava.GetExtTokenID: TxtkTokenKind;
 begin
   Result := FExtTokenID;
 end;
 
-function TSynJavaSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterJava.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case FTokenID of
     tkComment: Result := FCommentAttri;
@@ -947,17 +947,17 @@ begin
   end;
 end;
 
-function TSynJavaSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterJava.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-function TSynJavaSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterJava.IsFilterStored: Boolean;
 begin
   Result := FDefaultFilter <> SYNS_FilterJava;
 end;
 
-function TSynJavaSyn.IsIdentChar(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterJava.IsIdentChar(AChar: WideChar): Boolean;
 begin
   case AChar of
     '_', '$', '0'..'9', 'a'..'z', 'A'..'Z', 'À'..'Ö', 'Ø'..'ö', 'ø'..'ÿ':
@@ -967,12 +967,12 @@ begin
   end;
 end;
 
-class function TSynJavaSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterJava.GetLanguageName: string;
 begin
   Result := SYNS_LangJava;
 end;
 
-function TSynJavaSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterJava.GetSampleSource: UnicodeString;
 begin
   Result := '/* Java syntax highlighting */'#13#10 +
             'import java.util.*;'#13#10 +
@@ -987,11 +987,11 @@ begin
             '}';
 end;
 
-class function TSynJavaSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterJava.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangJava;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynJavaSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterJava);
 end.

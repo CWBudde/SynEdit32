@@ -61,7 +61,7 @@ type
   TtkTokenKind = (tkComment, tkIdentifier, tkInterFunc, tkKey, tkNull,
     tkNumber, tkSpace, tkString, tkSymbol, tkSysVar, tkUnknown);
 
-  TSynAWKSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterAWK = class(TSynEdit32CustomHighlighter)
   private
     FAWKSyntaxList: TUnicodeStringList;
     FTokenID: TtkTokenKind;
@@ -135,7 +135,7 @@ uses
 {$ENDIF}
   SynEdit32.StrConst;
 
-procedure TSynAWKSyn.MakeSyntaxList;
+procedure TSynEdit32HighlighterAWK.MakeSyntaxList;
 begin
   with FAWKSyntaxList do
   begin
@@ -208,13 +208,13 @@ begin
   end;
 end;
 
-procedure TSynAWKSyn.BraceProc;
+procedure TSynEdit32HighlighterAWK.BraceProc;
 begin
   FTokenID := tkIdentifier;
   Inc(FRun);
 end;
 
-procedure TSynAWKSyn.NumberProc;
+procedure TSynEdit32HighlighterAWK.NumberProc;
 begin
   FTokenID := tkNumber;
   Inc(FRun);
@@ -222,7 +222,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynAWKSyn.IdentProc;
+procedure TSynEdit32HighlighterAWK.IdentProc;
 var
   i: Integer;
   idx: Integer;
@@ -259,7 +259,7 @@ begin
     FTokenID := tkIdentifier;
 end;
 
-procedure TSynAWKSyn.Next;
+procedure TSynEdit32HighlighterAWK.Next;
 begin
   fTokenPos := FRun;
   case FLine[FRun] of
@@ -285,7 +285,7 @@ begin
   inherited;
 end;
 
-procedure TSynAWKSyn.StringProc;
+procedure TSynEdit32HighlighterAWK.StringProc;
 begin
   repeat
     Inc(FRun);
@@ -299,14 +299,14 @@ begin
   FTokenID := tkIdentifier;
 end;
 
-procedure TSynAWKSyn.CommentProc;
+procedure TSynEdit32HighlighterAWK.CommentProc;
 begin
   FTokenID := tkComment;
   while not IsLineEnd(FRun) do
     Inc(FRun);
 end;
 
-procedure TSynAWKSyn.FieldRefProc;
+procedure TSynEdit32HighlighterAWK.FieldRefProc;
 
   function IsAlphaNumChar(Run: Integer): Boolean;
   begin
@@ -329,13 +329,13 @@ begin
     FTokenID := tkIdentifier;
 end;
 
-procedure TSynAWKSyn.SymbolProc;
+procedure TSynEdit32HighlighterAWK.SymbolProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
 end;
 
-procedure TSynAWKSyn.PlusProc;
+procedure TSynEdit32HighlighterAWK.PlusProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
@@ -343,7 +343,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynAWKSyn.MinusProc;
+procedure TSynEdit32HighlighterAWK.MinusProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
@@ -351,7 +351,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynAWKSyn.OpInputProc;
+procedure TSynEdit32HighlighterAWK.OpInputProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
@@ -359,7 +359,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynAWKSyn.ExclamProc;
+procedure TSynEdit32HighlighterAWK.ExclamProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
@@ -367,7 +367,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynAWKSyn.QuestionProc;
+procedure TSynEdit32HighlighterAWK.QuestionProc;
 begin
   Inc(FRun);
   if (FLine[FRun] = ':') then
@@ -379,7 +379,7 @@ begin
     FTokenID := tkIdentifier;
 end;
 
-procedure TSynAWKSyn.OrProc;
+procedure TSynEdit32HighlighterAWK.OrProc;
 begin
   Inc(FRun);
   if (FLine[FRun] = '|') then
@@ -391,7 +391,7 @@ begin
     FTokenID := tkIdentifier;
 end;
 
-procedure TSynAWKSyn.AndProc;
+procedure TSynEdit32HighlighterAWK.AndProc;
 begin
   Inc(FRun);
   if (FLine[FRun] = '&') then
@@ -403,7 +403,7 @@ begin
     FTokenID := tkIdentifier;
 end;
 
-constructor TSynAWKSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterAWK.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -453,40 +453,40 @@ begin
   fDefaultFilter := SYNS_FilterAWK;
 end;
 
-destructor TSynAWKSyn.Destroy;
+destructor TSynEdit32HighlighterAWK.Destroy;
 begin
   FAWKSyntaxList.Free;
 
   inherited Destroy;
 end;
 
-procedure TSynAWKSyn.CRProc;
+procedure TSynEdit32HighlighterAWK.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
   if FLine[FRun] = #10 then Inc(FRun);
 end;
 
-procedure TSynAWKSyn.LFProc;
+procedure TSynEdit32HighlighterAWK.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynAWKSyn.NullProc;
+procedure TSynEdit32HighlighterAWK.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynAWKSyn.SpaceProc;
+procedure TSynEdit32HighlighterAWK.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-function TSynAWKSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterAWK.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -498,12 +498,12 @@ begin
   end;
 end;
 
-function TSynAWKSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterAWK.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynAWKSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterAWK.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case FTokenID of
     tkComment: Result := FCommentAttri;
@@ -520,26 +520,26 @@ begin
   end;
 end;
 
-function TSynAWKSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterAWK.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-function TSynAWKSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterAWK.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterAWK;
 end;
 
-class function TSynAWKSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterAWK.GetLanguageName: string;
 begin
   Result := SYNS_LangAWK;
 end;
 
-class function TSynAWKSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterAWK.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangAWK;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynAWKSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterAWK);
 end.

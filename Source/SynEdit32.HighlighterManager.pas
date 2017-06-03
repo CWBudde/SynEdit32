@@ -43,9 +43,7 @@ Known Issues:
 Provides a component to manage many highlighters in a single project.
 }
 
-{$IFNDEF QSYNHIGHLIGHTERMANAGER}
-unit SynEdit32.Highlighter.Manager;
-{$ENDIF}
+unit SynEdit32.HighlighterManager;
 
 {$I SynEdit.inc}
 
@@ -70,7 +68,7 @@ type
       no TSynCustomHighlighter components are found, first highlighter will be placed
       at coordinates (8,8).<p>
     Known issues:<br>
-    - If you place TSynHighlighterManager by double-clicking its icon in
+    - If you place TSynEdit32HighlighterManager by double-clicking its icon in
       component palette, it will function normally, except that when all is
       done, Delphi will disply small window with title "Error" and message
       "Operation aborted". Purely cosmetic issue for which there is no obvious
@@ -82,7 +80,7 @@ type
     @component
     @see TSynEditHighlighter
   :}
-  TSynHighlighterManager = class(TComponent)
+  TSynEdit32HighlighterManager = class(TComponent)
   public
     constructor Create(AOwner: TComponent); override;
   published
@@ -141,9 +139,9 @@ type
     TDesignerClass = TFormDesigner;
   {$ENDIF}
 
-{ TSynHighlighterManager }
+{ TSynEdit32HighlighterManager }
 
-constructor TSynHighlighterManager.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterManager.Create(AOwner: TComponent);
 var
   form: TCustomForm;
   dsgn: TDesignerClass;
@@ -165,7 +163,7 @@ var
     end; //for
   end;
 
-  function FindHighlighterComp(hlClass: TSynCustomHighlighterClass): integer;
+  function FindHighlighterComp(hlClass: TSynEdit32CustomHighlighterClass): integer;
   var
     i: integer;
   begin
@@ -195,7 +193,7 @@ var
       xpos := -1;
       ypos := -1;
       for i := 0 to form.ComponentCount-1 do begin
-        if form.Components[i] is TSynCustomHighlighterClass then begin
+        if form.Components[i] is TSynEdit32CustomHighlighterClass then begin
           compLeft := LongRec(form.Components[i].DesignInfo).Lo;
           compTop  := LongRec(form.Components[i].DesignInfo).Hi;
           if (xpos < 0) or (compLeft < xpos) then

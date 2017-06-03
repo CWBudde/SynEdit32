@@ -62,7 +62,7 @@ type
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
 type
-  TSynVBScriptSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterVBScript = class(TSynEdit32CustomHighlighter)
   private
     FTokenID: TtkTokenKind;
     FCommentAttri: TSynEdit32HighlighterAttributes;
@@ -160,7 +160,7 @@ const
   );
 
 {$Q-}
-function TSynVBScriptSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterVBScript.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) do
@@ -173,7 +173,7 @@ begin
 end;
 {$Q+}
 
-function TSynVBScriptSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterVBScript.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -185,7 +185,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynVBScriptSyn.InitIdent;
+procedure TSynEdit32HighlighterVBScript.InitIdent;
 var
   i: Integer;
 begin
@@ -200,12 +200,12 @@ begin
       FIdentFuncTable[i] := KeyWordFunc;
 end;
 
-function TSynVBScriptSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterVBScript.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier;
 end;
 
-function TSynVBScriptSyn.KeyWordFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterVBScript.KeyWordFunc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -213,7 +213,7 @@ begin
     Result := tkIdentifier
 end;
 
-function TSynVBScriptSyn.FuncRem(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterVBScript.FuncRem(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -225,7 +225,7 @@ begin
     Result := tkIdentifier;
 end;
 
-constructor TSynVBScriptSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterVBScript.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -252,7 +252,7 @@ begin
   InitIdent;
 end;
 
-procedure TSynVBScriptSyn.ApostropheProc;
+procedure TSynEdit32HighlighterVBScript.ApostropheProc;
 begin
   FTokenID := tkComment;
   repeat
@@ -260,14 +260,14 @@ begin
   until IsLineEnd(FRun);
 end;
 
-procedure TSynVBScriptSyn.CRProc;
+procedure TSynEdit32HighlighterVBScript.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
   if FLine[FRun] = #10 then Inc(FRun);
 end;
 
-procedure TSynVBScriptSyn.DateProc;
+procedure TSynEdit32HighlighterVBScript.DateProc;
 begin
   FTokenID := tkString;
   repeat
@@ -277,40 +277,40 @@ begin
   if not IsLineEnd(FRun) then Inc(FRun);
 end;
 
-procedure TSynVBScriptSyn.GreaterProc;
+procedure TSynEdit32HighlighterVBScript.GreaterProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if FLine[FRun] = '=' then Inc(FRun);
 end;
 
-procedure TSynVBScriptSyn.IdentProc;
+procedure TSynEdit32HighlighterVBScript.IdentProc;
 begin
   FTokenID := IdentKind((FLine + FRun));
   Inc(FRun, FStringLen);
   while IsIdentChar(FLine[FRun]) do Inc(FRun);
 end;
 
-procedure TSynVBScriptSyn.LFProc;
+procedure TSynEdit32HighlighterVBScript.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynVBScriptSyn.LowerProc;
+procedure TSynEdit32HighlighterVBScript.LowerProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if CharInSet(FLine[FRun], ['=', '>']) then Inc(FRun);
 end;
 
-procedure TSynVBScriptSyn.NullProc;
+procedure TSynEdit32HighlighterVBScript.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynVBScriptSyn.NumberProc;
+procedure TSynEdit32HighlighterVBScript.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -328,14 +328,14 @@ begin
   while IsNumberChar do Inc(FRun);
 end;
 
-procedure TSynVBScriptSyn.SpaceProc;
+procedure TSynEdit32HighlighterVBScript.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynVBScriptSyn.StringProc;
+procedure TSynEdit32HighlighterVBScript.StringProc;
 begin
   FTokenID := tkString;
   if (FLine[FRun + 1] = #34) and (FLine[FRun + 2] = #34) then Inc(FRun, 2);
@@ -346,19 +346,19 @@ begin
   if not IsLineEnd(FRun) then Inc(FRun);
 end;
 
-procedure TSynVBScriptSyn.SymbolProc;
+procedure TSynEdit32HighlighterVBScript.SymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynVBScriptSyn.UnknownProc;
+procedure TSynEdit32HighlighterVBScript.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkIdentifier;
 end;
 
-procedure TSynVBScriptSyn.Next;
+procedure TSynEdit32HighlighterVBScript.Next;
 begin
   fTokenPos := FRun;
   case FLine[FRun] of
@@ -380,7 +380,7 @@ begin
   inherited;
 end;
 
-function TSynVBScriptSyn.GetDefaultAttribute(Index: integer):
+function TSynEdit32HighlighterVBScript.GetDefaultAttribute(Index: integer):
   TSynEdit32HighlighterAttributes;
 begin
   case Index of
@@ -395,12 +395,12 @@ begin
   end;
 end;
 
-function TSynVBScriptSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterVBScript.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynVBScriptSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterVBScript.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case FTokenID of
     tkComment: Result := FCommentAttri;
@@ -415,22 +415,22 @@ begin
   end;
 end;
 
-function TSynVBScriptSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterVBScript.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-function TSynVBScriptSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterVBScript.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterVBScript;
 end;
 
-class function TSynVBScriptSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterVBScript.GetLanguageName: string;
 begin
   Result := SYNS_LangVBSScript;
 end;
 
-function TSynVBScriptSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterVBScript.GetSampleSource: UnicodeString;
 begin
   Result := ''' Syntax highlighting'#13#10 +
             'function printNumber()'#13#10 +
@@ -442,11 +442,11 @@ begin
             'end function';
 end;
 
-class function TSynVBScriptSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterVBScript.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangVBSScript;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynVBScriptSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterVBScript);
 end.

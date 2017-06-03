@@ -59,7 +59,7 @@ type
     FMouseDownX: Integer;
     FMouseDownY: Integer;
 
-    FURIHighlighter: TSynURISyn;
+    FURIHighlighter: TSynEdit32HighlighterURI;
     FVisitedURIs: TStringList;
     procedure OpenLink(URI: string; LinkType: Integer);
     function MouseInSynEdit: Boolean;
@@ -76,7 +76,7 @@ type
     procedure Notification(AComponent: TComponent; Operation: TOperation); override;
 
     procedure SetEditor(const Value: TCustomSynEdit32);
-    procedure SetURIHighlighter(const Value: TSynURISyn);
+    procedure SetURIHighlighter(const Value: TSynEdit32HighlighterURI);
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -85,7 +85,7 @@ type
     property CtrlActivatesLinks: Boolean read FCtrlActivatesLinks
       write FCtrlActivatesLinks default True;
     property Editor: TCustomSynEdit32 read FEditor write SetEditor;
-    property URIHighlighter: TSynURISyn read FURIHighlighter 
+    property URIHighlighter: TSynEdit32HighlighterURI read FURIHighlighter
       write SetURIHighlighter;
   end;
 
@@ -97,8 +97,8 @@ uses
   SynEdit32.Highlighter, SynEdit32.KeyConst;
 
 type
-  TAccessCustomSynEdit = class(TCustomSynEdit32);
-  TAccessSynURISyn = class(TSynURISyn);
+  TAccessCustomSynEdit32 = class(TCustomSynEdit32);
+  TAccessSynEdit32HighlighterURI = class(TSynEdit32HighlighterURI);
 
 { TSynEdit32URIOpener }
 
@@ -134,7 +134,7 @@ begin
   if (Key = SYNEDIT_CONTROL) and not FControlDown and MouseInSynEdit then
   begin
     FControlDown := True;
-    TAccessCustomSynEdit(FEditor).UpdateMouseCursor;
+    TAccessCustomSynEdit32(FEditor).UpdateMouseCursor;
   end;
 end;
 
@@ -144,7 +144,7 @@ begin
   if (Key = SYNEDIT_CONTROL) and FControlDown then
   begin
     FControlDown := False;
-    TAccessCustomSynEdit(FEditor).UpdateMouseCursor;
+    TAccessCustomSynEdit32(FEditor).UpdateMouseCursor;
   end;
 end;
 
@@ -196,7 +196,7 @@ begin
   if (Button <> mbLeft) or (FCtrlActivatesLinks and not FControlDown) or
     (Abs(FMouseDownX - X) > 4) or (Abs(FMouseDownY - Y) > 4) then exit;
 
-  with TAccessCustomSynEdit(FEditor) do
+  with TAccessCustomSynEdit32(FEditor) do
   begin
     if (eoDragDropEditing in Options) and IsPointInSelection(ptLineCol) then
       exit;
@@ -274,15 +274,15 @@ begin
   end;
 end;
 
-procedure TSynEdit32URIOpener.SetURIHighlighter(const Value: TSynURISyn);
+procedure TSynEdit32URIOpener.SetURIHighlighter(const Value: TSynEdit32HighlighterURI);
 begin
   if not(csDesigning in ComponentState) and Assigned(URIHighlighter) then
-    TAccessSynURISyn(FURIHighlighter).SetAlreadyVisitedURIFunc(nil);
+    TAccessSynEdit32HighlighterURI(FURIHighlighter).SetAlreadyVisitedURIFunc(nil);
 
   FURIHighlighter := Value;
 
   if not(csDesigning in ComponentState) and  Assigned(URIHighlighter) then
-    TAccessSynURISyn(FURIHighlighter).SetAlreadyVisitedURIFunc(VisitedURI);
+    TAccessSynEdit32HighlighterURI(FURIHighlighter).SetAlreadyVisitedURIFunc(VisitedURI);
 end;
 
 function TSynEdit32URIOpener.VisitedURI(URI: UnicodeString): Boolean;

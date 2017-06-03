@@ -72,7 +72,7 @@ type
 {$ENDIF}
 
 type
-  TSynUNIXShellScriptSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterUNIXShellScript = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
 {$IFDEF SYN_HEREDOC}
@@ -178,7 +178,7 @@ const
     'termcap', 'tz'
   );
 
-function TSynUNIXShellScriptSyn.IsKeyword(const AKeyword: UnicodeString): Boolean;
+function TSynEdit32HighlighterUNIXShellScript.IsKeyword(const AKeyword: UnicodeString): Boolean;
 var
   First, Last, I, Compare: Integer;
   Token: UnicodeString;
@@ -202,7 +202,7 @@ begin
   end;
 end; { IsKeyWord }
 
-function TSynUNIXShellScriptSyn.IsSecondKeyWord(AToken: UnicodeString): Boolean;
+function TSynEdit32HighlighterUNIXShellScript.IsSecondKeyWord(AToken: UnicodeString): Boolean;
 var
   First, Last, I, Compare: Integer;
   Token: UnicodeString;
@@ -225,7 +225,7 @@ begin
   end;
 end; { IsSecondKeyWord }
 
-constructor TSynUNIXShellScriptSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterUNIXShellScript.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FCaseSensitive := False;
@@ -260,12 +260,12 @@ begin
   fDefaultFilter := SYNS_FilterUNIXShellScript;
 end; { Create }
 
-destructor TSynUNIXShellScriptSyn.Destroy;
+destructor TSynEdit32HighlighterUNIXShellScript.Destroy;
 begin
   inherited Destroy;
 end; { Destroy }
 
-procedure TSynUNIXShellScriptSyn.DollarProc;
+procedure TSynEdit32HighlighterUNIXShellScript.DollarProc;
 var
   cc: WideChar;
 begin
@@ -290,7 +290,7 @@ begin
       Inc(FRun);
 end;
 
-procedure TSynUNIXShellScriptSyn.DotProc;
+procedure TSynEdit32HighlighterUNIXShellScript.DotProc;
 
   function TestDot: Boolean;
   var
@@ -318,19 +318,19 @@ begin
   end;
 end;
 
-procedure TSynUNIXShellScriptSyn.BraceOpenProc;
+procedure TSynEdit32HighlighterUNIXShellScript.BraceOpenProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynUNIXShellScriptSyn.PointCommaProc;
+procedure TSynEdit32HighlighterUNIXShellScript.PointCommaProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynUNIXShellScriptSyn.CRProc;
+procedure TSynEdit32HighlighterUNIXShellScript.CRProc;
 begin
   FTokenID := tkSpace;
   case FLine[FRun + 1] of
@@ -339,7 +339,7 @@ begin
   end;
 end;
 
-procedure TSynUNIXShellScriptSyn.IdentProc;
+procedure TSynEdit32HighlighterUNIXShellScript.IdentProc;
 begin
   while IsIdentChar(FLine[FRun]) do Inc(FRun);
   if IsKeyWord(GetToken) then
@@ -358,13 +358,13 @@ begin
     FTokenID := tkIdentifier;
 end;
 
-procedure TSynUNIXShellScriptSyn.LFProc;
+procedure TSynEdit32HighlighterUNIXShellScript.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynUNIXShellScriptSyn.LowerProc;
+procedure TSynEdit32HighlighterUNIXShellScript.LowerProc;
 {$IFDEF SYN_HEREDOC}
 
   // In UNIX Shell, Heredoc delimiter can be pretty much anything and the list
@@ -449,13 +449,13 @@ begin
   end;
 end;
 
-procedure TSynUNIXShellScriptSyn.NullProc;
+procedure TSynEdit32HighlighterUNIXShellScript.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynUNIXShellScriptSyn.NumberProc;
+procedure TSynEdit32HighlighterUNIXShellScript.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -480,13 +480,13 @@ begin
   end;
 end;
 
-procedure TSynUNIXShellScriptSyn.RoundOpenProc;
+procedure TSynEdit32HighlighterUNIXShellScript.RoundOpenProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynUNIXShellScriptSyn.SlashProc;
+procedure TSynEdit32HighlighterUNIXShellScript.SlashProc;
 begin
   if FLine[FRun] = '#' then
   begin
@@ -505,14 +505,14 @@ begin
   end;
 end;
 
-procedure TSynUNIXShellScriptSyn.SpaceProc;
+procedure TSynEdit32HighlighterUNIXShellScript.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynUNIXShellScriptSyn.StringProc;
+procedure TSynEdit32HighlighterUNIXShellScript.StringProc;
 var
   QuoteChar: WideChar;
 begin
@@ -529,14 +529,14 @@ begin
   if not IsLineEnd(FRun) then Inc(FRun);
 end;
 
-procedure TSynUNIXShellScriptSyn.UnknownProc;
+procedure TSynEdit32HighlighterUNIXShellScript.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
 {$IFDEF SYN_HEREDOC}
-procedure TSynUNIXShellScriptSyn.HeredocProc;
+procedure TSynEdit32HighlighterUNIXShellScript.HeredocProc;
 
   procedure SkipToEOL;
   begin
@@ -596,7 +596,7 @@ begin
 end;
 {$ENDIF}
 
-procedure TSynUNIXShellScriptSyn.Next;
+procedure TSynEdit32HighlighterUNIXShellScript.Next;
 begin
   fTokenPos := FRun;
 {$IFDEF SYN_HEREDOC}
@@ -608,7 +608,7 @@ begin
   inherited;
 end;
 
-procedure TSynUNIXShellScriptSyn.NextProcedure;
+procedure TSynEdit32HighlighterUNIXShellScript.NextProcedure;
 begin
   case FLine[FRun] of
     '<': LowerProc;
@@ -631,7 +631,7 @@ begin
   end;
 end;
 
-function TSynUNIXShellScriptSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterUNIXShellScript.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -645,7 +645,7 @@ begin
   end;
 end;
 
-function TSynUNIXShellScriptSyn.GetRange: Pointer;
+function TSynEdit32HighlighterUNIXShellScript.GetRange: Pointer;
 {$IFDEF SYN_HEREDOC}
 var
   RangePointer: TRangePointer;
@@ -666,12 +666,12 @@ begin
 {$ENDIF}
 end;
 
-function TSynUNIXShellScriptSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterUNIXShellScript.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynUNIXShellScriptSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterUNIXShellScript.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case FTokenID of
     tkComment: Result := FCommentAttri;
@@ -689,12 +689,12 @@ begin
   end;
 end;
 
-function TSynUNIXShellScriptSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterUNIXShellScript.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-procedure TSynUNIXShellScriptSyn.ResetRange;
+procedure TSynEdit32HighlighterUNIXShellScript.ResetRange;
 begin
   FRange := rsUnknown;
 {$IFDEF SYN_HEREDOC}
@@ -703,7 +703,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TSynUNIXShellScriptSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterUNIXShellScript.SetRange(Value: Pointer);
 {$IFDEF SYN_HEREDOC}
 var
   RangePointer : TRangePointer;
@@ -724,17 +724,17 @@ begin
 {$ENDIF}
 end;
 
-function TSynUNIXShellScriptSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterUNIXShellScript.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterUNIXShellScript;
 end;
 
-class function TSynUNIXShellScriptSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterUNIXShellScript.GetLanguageName: string;
 begin
   Result := SYNS_LangNameUNIXShellScript;
 end;
 
-function TSynUNIXShellScriptSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterUNIXShellScript.GetSampleSource: UnicodeString;
 begin
   Result := '######################################'#13#10 +
             '# Here is a comment about some stuff #'#13#10 +
@@ -753,17 +753,17 @@ begin
             'esac';
 end;
 
-class function TSynUNIXShellScriptSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterUNIXShellScript.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangNameUNIXShellScript;
 end;
 
-procedure TSynUNIXShellScriptSyn.SymbolProc;
+procedure TSynEdit32HighlighterUNIXShellScript.SymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynUNIXShellScriptSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterUNIXShellScript);
 end.

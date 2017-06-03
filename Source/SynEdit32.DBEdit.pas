@@ -89,7 +89,7 @@ type
     property OnLoadData: TNotifyEvent read fLoadData write fLoadData;
   end;
 
-  TDBSynEdit = class(TCustomDBSynEdit32)
+  TDBSynEdit32 = class(TCustomDBSynEdit32)
   published
     // TCustomDBSynEdit32 properties
     property DataField;

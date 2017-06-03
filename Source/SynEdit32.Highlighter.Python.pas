@@ -1,4 +1,4 @@
-{-------------------------------------------------------------------------------
+﻿{-------------------------------------------------------------------------------
 The contents of this file are subject to the Mozilla Public License
 Version 1.1 (the "License"); you may not use this file except in compliance
 with the License. You may obtain a copy of the License at
@@ -71,7 +71,7 @@ type
                 );
 
 type
-  TSynPythonSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterPython = class(TSynEdit32CustomHighlighter)
   private
     FStringStarter: WideChar;  // used only for rsMultilineString3 stuff
     FRange: TRangeState;
@@ -167,7 +167,7 @@ uses
 var
   GlobalKeywords: TUnicodeStringList;
 
-function TSynPythonSyn.GetKeywordIdentifiers: TUnicodeStringList;
+function TSynEdit32HighlighterPython.GetKeywordIdentifiers: TUnicodeStringList;
 const
   // No need to localise keywords!
 
@@ -295,7 +295,7 @@ begin
   Result := GlobalKeywords;
 end;
 
-function TSynPythonSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterPython.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   i: Integer;
   temp: PWideChar;
@@ -339,7 +339,7 @@ begin
     Result := tkIdentifier;
 end;
   
-constructor TSynPythonSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterPython.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -398,19 +398,19 @@ begin
   fDefaultFilter := SYNS_FilterPython;
 end; { Create }
 
-destructor TSynPythonSyn.Destroy;
+destructor TSynEdit32HighlighterPython.Destroy;
 begin
   FKeywords.Free;
   inherited;
 end;
 
-procedure TSynPythonSyn.SymbolProc;
+procedure TSynEdit32HighlighterPython.SymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynPythonSyn.CRProc;
+procedure TSynEdit32HighlighterPython.CRProc;
 begin
   FTokenID := tkSpace;
   case FLine[FRun + 1] of
@@ -420,7 +420,7 @@ begin
   end;
 end;
 
-procedure TSynPythonSyn.CommentProc;
+procedure TSynEdit32HighlighterPython.CommentProc;
 begin
   FTokenID := tkComment;
   Inc(FRun);
@@ -428,7 +428,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynPythonSyn.GreaterProc;
+procedure TSynEdit32HighlighterPython.GreaterProc;
 begin
   case FLine[FRun + 1] of
     '=': begin
@@ -442,19 +442,19 @@ begin
   end;
 end;
 
-procedure TSynPythonSyn.IdentProc;
+procedure TSynEdit32HighlighterPython.IdentProc;
 begin
   FTokenID := IdentKind((FLine + FRun));
   Inc(FRun, FStringLen);
 end;
 
-procedure TSynPythonSyn.LFProc;
+procedure TSynEdit32HighlighterPython.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynPythonSyn.LowerProc;
+procedure TSynEdit32HighlighterPython.LowerProc;
 begin
   case FLine[FRun + 1] of
     '=': begin
@@ -472,13 +472,13 @@ begin
   end;
 end;
 
-procedure TSynPythonSyn.NullProc;
+procedure TSynEdit32HighlighterPython.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynPythonSyn.NumberProc;
+procedure TSynEdit32HighlighterPython.NumberProc;
 type
   TNumberState =
     (
@@ -770,14 +770,14 @@ begin
   end; // while
 end;
 
-procedure TSynPythonSyn.SpaceProc;
+procedure TSynEdit32HighlighterPython.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynPythonSyn.String2Proc;
+procedure TSynEdit32HighlighterPython.String2Proc;
 var
   fBackslashCount: Integer;
 begin
@@ -855,7 +855,7 @@ begin
   if FLine[FRun] <> #0 then Inc(FRun);
 end;
 
-procedure TSynPythonSyn.PreStringProc;
+procedure TSynEdit32HighlighterPython.PreStringProc;
 var
   temp: WideChar;
 begin
@@ -879,7 +879,7 @@ begin
   end; // if
 end;
 
-procedure TSynPythonSyn.UnicodeStringProc;
+procedure TSynEdit32HighlighterPython.UnicodeStringProc;
 begin
   // Handle python raw and unicode strings
   // Valid syntax: u"", or ur""
@@ -893,7 +893,7 @@ begin
   PreStringProc;
 end;
 
-procedure TSynPythonSyn.StringProc;
+procedure TSynEdit32HighlighterPython.StringProc;
 var
   fBackslashCount: Integer;
 begin
@@ -968,7 +968,7 @@ begin
   if FLine[FRun] <> #0 then Inc(FRun);
 end;
 
-procedure TSynPythonSyn.StringEndProc(EndChar: WideChar);
+procedure TSynEdit32HighlighterPython.StringEndProc(EndChar: WideChar);
 var
   fBackslashCount: Integer;
 begin
@@ -1043,13 +1043,13 @@ begin
   until IsLineEnd(FRun);
 end;
 
-procedure TSynPythonSyn.UnknownProc;
+procedure TSynEdit32HighlighterPython.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynPythonSyn.Next;
+procedure TSynEdit32HighlighterPython.Next;
 begin
   fTokenPos := FRun;
 
@@ -1085,7 +1085,7 @@ begin
   inherited;
 end;
 
-function TSynPythonSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterPython.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -1097,17 +1097,17 @@ begin
   end;
 end;
 
-function TSynPythonSyn.GetRange: Pointer;
+function TSynEdit32HighlighterPython.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-function TSynPythonSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterPython.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynPythonSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterPython.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case FTokenID of
     tkComment: Result := FCommentAttri;
@@ -1129,32 +1129,32 @@ begin
   end;
 end;
 
-function TSynPythonSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterPython.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-procedure TSynPythonSyn.ResetRange;
+procedure TSynEdit32HighlighterPython.ResetRange;
 begin
   FRange := rsUnknown;
 end;
 
-procedure TSynPythonSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterPython.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-function TSynPythonSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterPython.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterPython;
 end;
 
-class function TSynPythonSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterPython.GetLanguageName: string;
 begin
   Result := SYNS_LangPython;
 end;
 
-function TSynPythonSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterPython.GetSampleSource: UnicodeString;
 begin
   Result :=
     '#!/usr/local/bin/python'#13#10 +
@@ -1165,13 +1165,13 @@ begin
     '    sys.exit(0)';
 end;
 
-class function TSynPythonSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterPython.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangPython;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynPythonSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterPython);
 finalization
   GlobalKeywords.Free;
 end.

@@ -69,7 +69,7 @@ type
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
 type
-  TSynCacheSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterCache = class(TSynEdit32CustomHighlighter)
   private
     fBrace: LongInt;
     fFirstBrace: Boolean;
@@ -321,7 +321,7 @@ const
   );
 
 {$Q-}
-function TSynCacheSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterCache.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) do
@@ -334,7 +334,7 @@ begin
 end;
 {$Q+}
 
-function TSynCacheSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterCache.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -346,7 +346,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynCacheSyn.InitIdent;
+procedure TSynEdit32HighlighterCache.InitIdent;
 var
   i: Integer;
 begin
@@ -362,12 +362,12 @@ begin
       fIdentFuncTable[i] := KeyWordFunc;
 end;
 
-function TSynCacheSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCache.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier;
 end;
 
-function TSynCacheSyn.KeyWordFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCache.KeyWordFunc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -375,7 +375,7 @@ begin
     Result := tkIdentifier
 end;
 
-function TSynCacheSyn.Func38html(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCache.Func38html(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -386,7 +386,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynCacheSyn.Func38sql(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterCache.Func38sql(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -397,7 +397,7 @@ begin
     Result := tkIdentifier;
 end;
 
-constructor TSynCacheSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterCache.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -444,7 +444,7 @@ begin
   fRange := rsUnknown;
 end;
 
-procedure TSynCacheSyn.CRProc;
+procedure TSynEdit32HighlighterCache.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
@@ -452,7 +452,7 @@ begin
   FRange := rsUnknown;
 end;
 
-procedure TSynCacheSyn.CommentProc;
+procedure TSynEdit32HighlighterCache.CommentProc;
 begin
   FTokenID := tkComment;
   if FLine[FRun+1]=';' then FTokenID := tkEmbedText;
@@ -468,7 +468,7 @@ end;
 //------------------------------------------------------------------------------
 //    higlight keywords and identifiers
 //------------------------------------------------------------------------------
-procedure TSynCacheSyn.IdentProc;
+procedure TSynEdit32HighlighterCache.IdentProc;
 var
   fir: WideChar;
 begin
@@ -496,20 +496,20 @@ begin
   while IsIdentChar(FLine[FRun]) do Inc(FRun);
 end;
 
-procedure TSynCacheSyn.LFProc;
+procedure TSynEdit32HighlighterCache.LFProc;
 begin
   FTokenID := tkSpace;
   FCanKey := true;
   Inc(FRun);
 end;
 
-procedure TSynCacheSyn.NullProc;
+procedure TSynEdit32HighlighterCache.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynCacheSyn.NumberProc;
+procedure TSynEdit32HighlighterCache.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -542,7 +542,7 @@ begin
   FRange := rsUnknown;
 end;
 
-procedure TSynCacheSyn.SpaceProc;
+procedure TSynEdit32HighlighterCache.SpaceProc;
 var
   x: integer;
 begin
@@ -555,7 +555,7 @@ begin
     FCanKey := (FRun - x > 1);
 end;
 
-procedure TSynCacheSyn.StringProc;
+procedure TSynEdit32HighlighterCache.StringProc;
 begin
   FTokenID := tkString;
   if (FLine[FRun + 1] = #34) and (FLine[FRun + 2] = #34) then Inc(FRun, 2);
@@ -569,13 +569,13 @@ begin
   FRange := rsUnknown;
 end;
 
-procedure TSynCacheSyn.UnknownProc;
+procedure TSynEdit32HighlighterCache.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynCacheSyn.Next;
+procedure TSynEdit32HighlighterCache.Next;
 begin
   fTokenPos := FRun;
   if FLine[FRun] = #0 then NullProc
@@ -605,7 +605,7 @@ begin
   inherited;
 end;
 
-function TSynCacheSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterCache.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := fCommentAttri;
@@ -617,17 +617,17 @@ begin
   end;
 end;
 
-function TSynCacheSyn.GetRange: Pointer;
+function TSynEdit32HighlighterCache.GetRange: Pointer;
 begin
   Result := Pointer(fRange);
 end;
 
-function TSynCacheSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterCache.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynCacheSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterCache.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkClass: Result := fClassAttri;
@@ -651,27 +651,27 @@ begin
   end;
 end;
 
-function TSynCacheSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterCache.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-procedure TSynCacheSyn.ResetRange;
+procedure TSynEdit32HighlighterCache.ResetRange;
 begin
   fRange := rsUnknown;
 end;
 
-procedure TSynCacheSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterCache.SetRange(Value: Pointer);
 begin
   fRange := TRangeState(Value);
 end;
 
-function TSynCacheSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterCache.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterCache;
 end;
 
-function TSynCacheSyn.IsIdentChar(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterCache.IsIdentChar(AChar: WideChar): Boolean;
 begin
   case AChar of
     '0'..'9', 'a'..'z', 'A'..'Z', '%', '^', '$', '&':
@@ -681,7 +681,7 @@ begin
   end;
 end;
 
-class function TSynCacheSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterCache.GetLanguageName: string;
 begin
   Result := SYNS_LangCache;
 end;
@@ -689,7 +689,7 @@ end;
 //------------------------------------------------------------------------------
 //   highlight indirection syntax:   @ident
 //------------------------------------------------------------------------------
-procedure TSynCacheSyn.IndirectProc;
+procedure TSynEdit32HighlighterCache.IndirectProc;
 begin
   FTokenID := tkIndirect;
   Inc(FRun);
@@ -700,7 +700,7 @@ end;
 //------------------------------------------------------------------------------
 //  highlight symbols
 //------------------------------------------------------------------------------
-procedure TSynCacheSyn.SymbolProc;
+procedure TSynEdit32HighlighterCache.SymbolProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
@@ -712,7 +712,7 @@ end;
 //              function:   $$ident
 //              macro   :   $$$ident
 //------------------------------------------------------------------------------
-procedure TSynCacheSyn.FuncProc;
+procedure TSynEdit32HighlighterCache.FuncProc;
 begin
   case FLine[FRun] of
     '$': case FLine[FRun + 1] of
@@ -737,7 +737,7 @@ end;
 //              preprocesor:  #identifier
 //              class      :  ##class
 //------------------------------------------------------------------------------
-procedure TSynCacheSyn.DirectiveProc;
+procedure TSynEdit32HighlighterCache.DirectiveProc;
 var
   i: integer;
 begin
@@ -766,7 +766,7 @@ end;
 //                SQL  :    &sql( .... )
 //                HTML :    &html<   ..... >
 //------------------------------------------------------------------------------
-procedure TSynCacheSyn.EmbeddedProc;
+procedure TSynEdit32HighlighterCache.EmbeddedProc;
 begin
   case fRange of
     rsUnknown, rsCommand: begin
@@ -807,11 +807,11 @@ begin
   end;
 end;
 
-class function TSynCacheSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterCache.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangCache;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynCacheSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterCache);
 end.

@@ -83,7 +83,7 @@ type
   PIdentFuncTableFunc = ^TIdentFuncTableFunc;
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
-  TSynUnrealSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterUnreal = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
     FRoundCount: Integer;
@@ -408,7 +408,7 @@ const
   );
 
 {$Q-}
-function TSynUnrealSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterUnreal.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) do
@@ -421,7 +421,7 @@ begin
 end;
 {$Q+}
 
-function TSynUnrealSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -433,7 +433,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynUnrealSyn.InitIdent;
+procedure TSynEdit32HighlighterUnreal.InitIdent;
 var
   i: Integer;
 begin
@@ -586,12 +586,12 @@ begin
   FIdentFuncTable[367] := FuncWithin;
 end;
 
-function TSynUnrealSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncAbstract(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncAbstract(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -599,7 +599,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncAlways(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncAlways(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -607,7 +607,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncArray(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncArray(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -615,7 +615,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncArraycount(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncArraycount(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -623,7 +623,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncAssert(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncAssert(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -631,7 +631,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncAuto(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncAuto(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -639,7 +639,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncAutomated(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncAutomated(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -647,7 +647,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncBool(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncBool(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -655,7 +655,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncBoundingbox(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncBoundingbox(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -663,7 +663,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncBoundingvolume(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncBoundingvolume(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -671,7 +671,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncBreak(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncBreak(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -679,7 +679,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncButton(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncButton(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -687,7 +687,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncByte(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncByte(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -695,7 +695,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncCache(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncCache(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -703,7 +703,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncCacheexempt(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncCacheexempt(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -711,7 +711,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncCase(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncCase(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -719,7 +719,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncCatch(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncCatch(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -727,7 +727,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncClass(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncClass(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -735,7 +735,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncCoerce(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncCoerce(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -743,7 +743,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncCollapsecategories(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncCollapsecategories(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -751,7 +751,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncColor(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncColor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -759,7 +759,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncConfig(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncConfig(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -767,7 +767,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncConst(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncConst(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -775,7 +775,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncContinue(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncContinue(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -783,7 +783,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncCoords(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncCoords(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -791,7 +791,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncCpptext(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncCpptext(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -800,7 +800,7 @@ begin
 
 end;
 
-function TSynUnrealSyn.FuncCross(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncCross(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSymbol
@@ -808,7 +808,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncDefault(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncDefault(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -816,7 +816,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncDefaultproperties(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncDefaultproperties(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -824,7 +824,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncDelegate(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncDelegate(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -832,7 +832,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncDelete(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncDelete(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -840,7 +840,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncDependson(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncDependson(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -848,7 +848,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncDeprecated(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncDeprecated(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -856,7 +856,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncDo(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncDo(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -864,7 +864,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncDontcollapsecategories(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncDontcollapsecategories(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -872,7 +872,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncDot(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncDot(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkSymbol
@@ -880,7 +880,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncEach(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncEach(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -888,15 +888,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncEdfindable(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey2
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncEditconst(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncEdfindable(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -904,7 +896,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncEditconstarray(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncEditconst(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -912,7 +904,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncEditinline(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncEditconstarray(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -920,7 +912,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncEditinlinenew(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncEditinline(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -928,7 +920,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncEditinlinenotify(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncEditinlinenew(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -936,7 +928,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncEditinlineuse(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncEditinlinenotify(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -944,95 +936,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncElse(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncEnum(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncEnumcount(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncEvent(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncExec(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncExpands(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncExplicit(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncExport(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncExportstructs(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncExtends(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncFalse(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncFinal(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncEditinlineuse(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1040,7 +944,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncFloat(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncElse(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1048,7 +952,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncFor(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncEnum(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1056,7 +960,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncForeach(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncEnumcount(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1064,7 +968,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncFunction(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncEvent(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1072,7 +976,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncGlobal(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncExec(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1080,7 +984,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncGlobalconfig(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncExpands(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1088,7 +992,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncGoto(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncExplicit(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1096,7 +1000,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncGuid(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncExport(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1104,7 +1008,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncHidecategories(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncExportstructs(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1112,7 +1016,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncHidedropdown(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncExtends(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1120,7 +1024,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncHideparent(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncFalse(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1128,55 +1032,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncIf(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncIgnores(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncImport(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncInit(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncInput(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncInsert(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncInstanced(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncFinal(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1184,7 +1040,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncInt(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncFloat(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1192,7 +1048,135 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncIntrinsic(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncFor(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncForeach(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncFunction(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncGlobal(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncGlobalconfig(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncGoto(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncGuid(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncHidecategories(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncHidedropdown(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncHideparent(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncIf(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncIgnores(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncImport(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncInit(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncInput(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncInsert(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncInstanced(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1200,7 +1184,15 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncInvariant(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncInt(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncIntrinsic(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1208,15 +1200,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncIterator(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncLatent(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncInvariant(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1224,7 +1208,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncLength(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncIterator(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1232,15 +1216,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncLocal(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncLocalized(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncLatent(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1248,7 +1224,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncLong(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncLength(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1256,7 +1232,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncMesh(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncLocal(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1264,31 +1240,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncModel(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncMutable(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncName(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncNative(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncLocalized(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1296,7 +1248,47 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncNativereplication(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncLong(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncMesh(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncModel(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncMutable(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncName(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncNative(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1304,15 +1296,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncNew(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncNoexport(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncNativereplication(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1320,7 +1304,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncNone(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncNew(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1328,15 +1312,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncNoteditinlinenew(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncNotplaceable(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncNoexport(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1344,7 +1320,23 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncNousercreate(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncNone(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncNoteditinlinenew(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncNotplaceable(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1352,47 +1344,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncOperator(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncOptional(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncOut(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncParseconfig(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncPerobjectconfig(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncPlaceable(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncNousercreate(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1400,7 +1352,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncPlane(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncOperator(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1408,7 +1360,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncPointer(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncOptional(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1416,7 +1368,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncPostoperator(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncOut(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1424,7 +1376,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncPreoperator(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncParseconfig(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1432,7 +1384,15 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncPrivate(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncPerobjectconfig(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncPlaceable(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1440,7 +1400,39 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncProtected(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncPlane(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncPointer(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncPostoperator(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncPreoperator(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncPrivate(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1448,15 +1440,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncRegister(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncReliable(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncProtected(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1464,7 +1448,15 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncRemove(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncRegister(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncReliable(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1472,7 +1464,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncReplication(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncRemove(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1480,39 +1472,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncReturn(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncRng(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncRot(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncRotator(Index: Integer): TtkTokenKind;
-begin
-  if IsCurrentToken(KeyWords[Index]) then
-    Result := tkKey
-  else
-    Result := tkIdentifier;
-end;
-
-function TSynUnrealSyn.FuncSafereplace(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncReplication(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1520,7 +1480,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncScale(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncReturn(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1528,7 +1488,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncScriptconst(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncRng(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1536,7 +1496,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncSelf(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncRot(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1544,7 +1504,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncShowcategories(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncRotator(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1552,7 +1512,47 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncSimulated(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncSafereplace(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey2
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncScale(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncScriptconst(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncSelf(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncShowcategories(Index: Integer): TtkTokenKind;
+begin
+  if IsCurrentToken(KeyWords[Index]) then
+    Result := tkKey
+  else
+    Result := tkIdentifier;
+end;
+
+function TSynEdit32HighlighterUnreal.FuncSimulated(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1561,7 +1561,7 @@ begin
 
 end;
 
-function TSynUnrealSyn.FuncSingular(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncSingular(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1569,7 +1569,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncSkip(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncSkip(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1577,7 +1577,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncSound(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncSound(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1585,7 +1585,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncState(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncState(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1593,7 +1593,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncStatic(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncStatic(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1601,7 +1601,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncStop(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncStop(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1609,7 +1609,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncString(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncString(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1617,7 +1617,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncStruct(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncStruct(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1625,7 +1625,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncSuper(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncSuper(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1633,7 +1633,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncSwitch(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncSwitch(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1641,7 +1641,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncTexture(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncTexture(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1649,7 +1649,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncTransient(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncTransient(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1657,7 +1657,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncTravel(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncTravel(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1665,7 +1665,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncTrue(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncTrue(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1673,7 +1673,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncUnreliable(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncUnreliable(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey2
@@ -1681,7 +1681,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncUntil(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncUntil(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1689,7 +1689,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncVar(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncVar(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1697,7 +1697,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncVect(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncVect(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1705,7 +1705,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncVector(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncVector(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1713,7 +1713,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncVoid(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncVoid(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1721,7 +1721,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncWhile(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncWhile(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1729,7 +1729,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynUnrealSyn.FuncWithin(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterUnreal.FuncWithin(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1737,7 +1737,7 @@ begin
     Result := tkIdentifier;
 end;
 
-constructor TSynUnrealSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterUnreal.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -1774,7 +1774,7 @@ begin
   fDefaultFilter := SYNS_FilterCPP;
 end; { Create }
 
-procedure TSynUnrealSyn.AnsiCProc;
+procedure TSynEdit32HighlighterUnreal.AnsiCProc;
 begin
   FTokenID := tkComment;
   case FLine[FRun] of
@@ -1814,7 +1814,7 @@ begin
     end;
 end;
 
-procedure TSynUnrealSyn.AndSymbolProc;
+procedure TSynEdit32HighlighterUnreal.AndSymbolProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -1836,7 +1836,7 @@ begin
   end;
 end;
 
-procedure TSynUnrealSyn.AsciiCharProc;
+procedure TSynEdit32HighlighterUnreal.AsciiCharProc;
 begin
   FTokenID := tkString2;
   repeat
@@ -1849,28 +1849,28 @@ begin
   if not IsLineEnd(FRun) then Inc(FRun);
 end;
 
-procedure TSynUnrealSyn.BraceCloseProc;
+procedure TSynEdit32HighlighterUnreal.BraceCloseProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
   FExtTokenID := xtkBraceClose;
 end;
 
-procedure TSynUnrealSyn.BraceOpenProc;
+procedure TSynEdit32HighlighterUnreal.BraceOpenProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
   FExtTokenID := xtkBraceOpen;
 end;
 
-procedure TSynUnrealSyn.CRProc;
+procedure TSynEdit32HighlighterUnreal.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
   if FLine[FRun + 1] = #10 then Inc(FRun);
 end;
 
-procedure TSynUnrealSyn.ColonProc;
+procedure TSynEdit32HighlighterUnreal.ColonProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -1887,14 +1887,14 @@ begin
   end;
 end;
 
-procedure TSynUnrealSyn.CommaProc;
+procedure TSynEdit32HighlighterUnreal.CommaProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
   FExtTokenID := xtkComma;
 end;
 
-procedure TSynUnrealSyn.DirectiveProc;
+procedure TSynEdit32HighlighterUnreal.DirectiveProc;
 begin
   if IsLineEnd(FRun) then
   begin
@@ -1928,7 +1928,7 @@ begin
   end;
 end;
 
-procedure TSynUnrealSyn.EqualProc;
+procedure TSynEdit32HighlighterUnreal.EqualProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -1945,7 +1945,7 @@ begin
   end;
 end;
 
-procedure TSynUnrealSyn.GreaterProc;
+procedure TSynEdit32HighlighterUnreal.GreaterProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -1975,27 +1975,27 @@ begin
   end;
 end;
 
-procedure TSynUnrealSyn.QuestionProc;
+procedure TSynEdit32HighlighterUnreal.QuestionProc;
 begin
   FTokenID := tkSymbol;                {conditional}
   FExtTokenID := xtkQuestion;
   Inc(FRun);
 end;
 
-procedure TSynUnrealSyn.IdentProc;
+procedure TSynEdit32HighlighterUnreal.IdentProc;
 begin
   FTokenID := IdentKind((FLine + FRun));
   Inc(FRun, FStringLen);
   while IsIdentChar(FLine[FRun]) do Inc(FRun);
 end;
 
-procedure TSynUnrealSyn.LFProc;
+procedure TSynEdit32HighlighterUnreal.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynUnrealSyn.LowerProc;
+procedure TSynEdit32HighlighterUnreal.LowerProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -2025,7 +2025,7 @@ begin
   end;
 end;
 
-procedure TSynUnrealSyn.MinusProc;
+procedure TSynEdit32HighlighterUnreal.MinusProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -2052,7 +2052,7 @@ begin
   end;
 end;
 
-procedure TSynUnrealSyn.ModSymbolProc;
+procedure TSynEdit32HighlighterUnreal.ModSymbolProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -2069,7 +2069,7 @@ begin
   end;
 end;
 
-procedure TSynUnrealSyn.NotSymbolProc;
+procedure TSynEdit32HighlighterUnreal.NotSymbolProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -2086,13 +2086,13 @@ begin
   end;
 end;
 
-procedure TSynUnrealSyn.NullProc;
+procedure TSynEdit32HighlighterUnreal.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynUnrealSyn.NumberProc;
+procedure TSynEdit32HighlighterUnreal.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -2117,7 +2117,7 @@ begin
   end;
 end;
 
-procedure TSynUnrealSyn.OrSymbolProc;
+procedure TSynEdit32HighlighterUnreal.OrSymbolProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -2139,7 +2139,7 @@ begin
   end;
 end;
 
-procedure TSynUnrealSyn.PlusProc;
+procedure TSynEdit32HighlighterUnreal.PlusProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -2161,7 +2161,7 @@ begin
   end;
 end;
 
-procedure TSynUnrealSyn.PointProc;
+procedure TSynEdit32HighlighterUnreal.PointProc;
 begin
   FTokenID := tkSymbol;
   if (FLine[FRun + 1] = '.') and (FLine[FRun + 2] = '.') then
@@ -2176,7 +2176,7 @@ begin
     end;
 end;
 
-procedure TSynUnrealSyn.RoundCloseProc;
+procedure TSynEdit32HighlighterUnreal.RoundCloseProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -2184,7 +2184,7 @@ begin
   dec(FRoundCount);
 end;
 
-procedure TSynUnrealSyn.RoundOpenProc;
+procedure TSynEdit32HighlighterUnreal.RoundOpenProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -2192,14 +2192,14 @@ begin
   Inc(FRoundCount);
 end;
 
-procedure TSynUnrealSyn.SemiColonProc;
+procedure TSynEdit32HighlighterUnreal.SemiColonProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
   FExtTokenID := xtkSemiColon;
 end;
 
-procedure TSynUnrealSyn.SlashProc;
+procedure TSynEdit32HighlighterUnreal.SlashProc;
 begin
   case FLine[FRun + 1] of
     '/':                               {c++ style comments}
@@ -2250,14 +2250,14 @@ begin
   end;
 end;
 
-procedure TSynUnrealSyn.SpaceProc;
+procedure TSynEdit32HighlighterUnreal.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynUnrealSyn.SquareCloseProc;
+procedure TSynEdit32HighlighterUnreal.SquareCloseProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -2265,7 +2265,7 @@ begin
   dec(FSquareCount);
 end;
 
-procedure TSynUnrealSyn.SquareOpenProc;
+procedure TSynEdit32HighlighterUnreal.SquareOpenProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -2273,7 +2273,7 @@ begin
   Inc(FSquareCount);
 end;
 
-procedure TSynUnrealSyn.StarProc;
+procedure TSynEdit32HighlighterUnreal.StarProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -2290,7 +2290,7 @@ begin
   end;
 end;
 
-procedure TSynUnrealSyn.StringProc;
+procedure TSynEdit32HighlighterUnreal.StringProc;
 begin
   FTokenID := tkString;
   if (FLine[FRun + 1] = #34) and (FLine[FRun + 2] = #34) then Inc(FRun, 2);
@@ -2307,21 +2307,21 @@ begin
   if not IsLineEnd(FRun) then Inc(FRun);
 end;
 
-procedure TSynUnrealSyn.DollarSignProc;
+procedure TSynEdit32HighlighterUnreal.DollarSignProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
 end;
 
 
-procedure TSynUnrealSyn.TildeProc;
+procedure TSynEdit32HighlighterUnreal.TildeProc;
 begin
   Inc(FRun);                            {bitwise complement}
   FTokenID := tkSymbol;
   FExtTokenID := xtkBitComplement;
 end;
 
-procedure TSynUnrealSyn.XOrSymbolProc;
+procedure TSynEdit32HighlighterUnreal.XOrSymbolProc;
 begin
   FTokenID := tkSymbol;
   case FLine[FRun + 1] of
@@ -2338,13 +2338,13 @@ begin
   end;
 end;
 
-procedure TSynUnrealSyn.UnknownProc;
+procedure TSynEdit32HighlighterUnreal.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynUnrealSyn.Next;
+procedure TSynEdit32HighlighterUnreal.Next;
 begin
   fTokenPos := FRun;
   case FRange of
@@ -2359,7 +2359,7 @@ begin
   inherited;
 end;
 
-procedure TSynUnrealSyn.NextProcedure;
+procedure TSynEdit32HighlighterUnreal.NextProcedure;
 begin
   case FLine[FRun] of
     '&': AndSymbolProc;
@@ -2400,7 +2400,7 @@ begin
   end;
 end;
 
-function TSynUnrealSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterUnreal.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -2414,29 +2414,29 @@ begin
   end;
 end;
 
-function TSynUnrealSyn.GetRange: Pointer;
+function TSynEdit32HighlighterUnreal.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-function TSynUnrealSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterUnreal.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynUnrealSyn.GetExtTokenID: TxtkTokenKind;
+function TSynEdit32HighlighterUnreal.GetExtTokenID: TxtkTokenKind;
 begin
   Result := FExtTokenID;
 end;
 
 
-function TSynUnrealSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterUnreal.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterCPP;
 end; { IsFilterStored }
 
 
-function TSynUnrealSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterUnreal.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case FTokenID of
     tkComment: Result := FCommentAttri;
@@ -2454,22 +2454,22 @@ begin
   end;
 end;
 
-function TSynUnrealSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterUnreal.GetTokenKind: integer;
 begin
   Result := Ord(GetTokenID);
 end;
 
-procedure TSynUnrealSyn.ResetRange;
+procedure TSynEdit32HighlighterUnreal.ResetRange;
 begin
   FRange:= rsUnknown;
 end;
 
-procedure TSynUnrealSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterUnreal.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-procedure TSynUnrealSyn.EnumUserSettings(settings: TStrings);
+procedure TSynEdit32HighlighterUnreal.EnumUserSettings(settings: TStrings);
 begin
   { returns the user settings that exist in the registry }
 {$IFNDEF SYN_CLX}
@@ -2492,7 +2492,7 @@ begin
 {$ENDIF}
 end;
 
-function TSynUnrealSyn.UseUserSettings(settingIndex: integer): boolean;
+function TSynEdit32HighlighterUnreal.UseUserSettings(settingIndex: integer): boolean;
 // Possible parameter values:
 //   index into TStrings returned by EnumUserSettings
 // Possible return values:
@@ -2606,19 +2606,19 @@ function TSynUnrealSyn.UseUserSettings(settingIndex: integer): boolean;
 
 begin
   Result := ReadCPPBSettings(settingIndex);
-end; { TSynUnrealSyn.UseUserSettings }
+end; { TSynEdit32HighlighterUnreal.UseUserSettings }
 
-class function TSynUnrealSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterUnreal.GetLanguageName: string;
 begin
   Result := SYNS_LangUnreal;
 end;
 
-class function TSynUnrealSyn.GetCapabilities: TSynHighlighterCapabilities;
+class function TSynEdit32HighlighterUnreal.GetCapabilities: TSynHighlighterCapabilities;
 begin
   Result := inherited GetCapabilities + [hcUserSettings];
 end;
 
-function TSynUnrealSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterUnreal.GetSampleSource: UnicodeString;
 begin
   Result := '//----Comment-----------------------------------------------------------'#13#10+
             'class TestObject expands Object native;'#13#10+
@@ -2640,11 +2640,11 @@ begin
             '}';
 end;
 
-class function TSynUnrealSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterUnreal.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangUnreal;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynUnrealSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterUnreal);
 end.

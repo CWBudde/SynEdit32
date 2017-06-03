@@ -63,7 +63,7 @@ type
   PIdentFuncTableFunc = ^TIdentFuncTableFunc;
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
-  TSynSTSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterST = class(TSynEdit32CustomHighlighter)
   private
     FAsmStart: Boolean;
     FRange: TRangeState;
@@ -171,7 +171,7 @@ const
   );
 
 {$Q-}
-function TSynSTSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterST.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) do
@@ -184,7 +184,7 @@ begin
 end;
 {$Q+}
 
-function TSynSTSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterST.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -196,7 +196,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynSTSyn.InitIdent;
+procedure TSynEdit32HighlighterST.InitIdent;
 var
   i: Integer;
 begin
@@ -209,12 +209,12 @@ begin
       FIdentFuncTable[i] := KeyWordFunc;
 end;
 
-function TSynSTSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterST.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier
 end;
 
-function TSynSTSyn.KeyWordFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterST.KeyWordFunc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -222,7 +222,7 @@ begin
     Result := tkIdentifier
 end;
 
-constructor TSynSTSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterST.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -254,21 +254,21 @@ begin
   fDefaultFilter := SYNS_FilterST;
 end; { Create }
 
-procedure TSynSTSyn.AddressOpProc;
+procedure TSynEdit32HighlighterST.AddressOpProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if FLine[FRun] = '@' then Inc(FRun);
 end;
 
-procedure TSynSTSyn.AsciiCharProc;
+procedure TSynEdit32HighlighterST.AsciiCharProc;
 begin
   FTokenID := tkString;
   Inc(FRun);
   while CharInSet(FLine[FRun], ['0'..'9']) do Inc(FRun);
 end;
 
-procedure TSynSTSyn.BorProc;
+procedure TSynEdit32HighlighterST.BorProc;
 begin
   case FLine[FRun] of
      #0: NullProc;
@@ -291,7 +291,7 @@ begin
   end;
 end;
 
-procedure TSynSTSyn.BraceOpenProc;
+procedure TSynEdit32HighlighterST.BraceOpenProc;
 begin
   if FRange = rsAsm then
     FRange := rsBorAsm
@@ -300,28 +300,28 @@ begin
   BorProc;
 end;
 
-procedure TSynSTSyn.ColonOrGreaterProc;
+procedure TSynEdit32HighlighterST.ColonOrGreaterProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if FLine[FRun] = '=' then Inc(FRun);
 end;
 
-procedure TSynSTSyn.CRProc;
+procedure TSynEdit32HighlighterST.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
   if FLine[FRun] = #10 then Inc(FRun);
 end;
 
-procedure TSynSTSyn.IdentProc;
+procedure TSynEdit32HighlighterST.IdentProc;
 begin
   FTokenID := IdentKind((FLine + FRun));
   Inc(FRun, FStringLen);
   while IsIdentChar(FLine[FRun]) do Inc(FRun);
 end;
 
-procedure TSynSTSyn.IntegerProc;
+procedure TSynEdit32HighlighterST.IntegerProc;
 
   function IsIntegerChar: Boolean;
   begin
@@ -339,26 +339,26 @@ begin
   while IsIntegerChar do Inc(FRun);
 end;
 
-procedure TSynSTSyn.LFProc;
+procedure TSynEdit32HighlighterST.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynSTSyn.LowerProc;
+procedure TSynEdit32HighlighterST.LowerProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if CharInSet(FLine[FRun], ['=', '>']) then Inc(FRun);
 end;
 
-procedure TSynSTSyn.NullProc;
+procedure TSynEdit32HighlighterST.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynSTSyn.NumberProc;
+procedure TSynEdit32HighlighterST.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -383,14 +383,14 @@ begin
   end;
 end;
 
-procedure TSynSTSyn.PointProc;
+procedure TSynEdit32HighlighterST.PointProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if CharInSet(FLine[FRun], ['.', ')']) then Inc(FRun);
 end;
 
-procedure TSynSTSyn.AnsiProc;
+procedure TSynEdit32HighlighterST.AnsiProc;
 begin
   case FLine[FRun] of
      #0: NullProc;
@@ -412,7 +412,7 @@ begin
   end;
 end;
 
-procedure TSynSTSyn.RoundOpenProc;
+procedure TSynEdit32HighlighterST.RoundOpenProc;
 begin
   Inc(FRun);
   case FLine[FRun] of
@@ -437,7 +437,7 @@ begin
   end;
 end;
 
-procedure TSynSTSyn.SemicolonProc;
+procedure TSynEdit32HighlighterST.SemicolonProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
@@ -445,7 +445,7 @@ begin
     FRange := rsUnknown;
 end;
 
-procedure TSynSTSyn.SlashProc;
+procedure TSynEdit32HighlighterST.SlashProc;
 begin
   Inc(FRun);
   if FLine[FRun] = '/' then begin
@@ -457,14 +457,14 @@ begin
     FTokenID := tkSymbol;
 end;
 
-procedure TSynSTSyn.SpaceProc;
+procedure TSynEdit32HighlighterST.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynSTSyn.StringProc;
+procedure TSynEdit32HighlighterST.StringProc;
 begin
   FTokenID := tkString;
   Inc(FRun);
@@ -480,19 +480,19 @@ begin
   end;
 end;
 
-procedure TSynSTSyn.SymbolProc;
+procedure TSynEdit32HighlighterST.SymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynSTSyn.UnknownProc;
+procedure TSynEdit32HighlighterST.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynSTSyn.Next;
+procedure TSynEdit32HighlighterST.Next;
 begin
   FAsmStart := False;
   fTokenPos := FRun;
@@ -534,7 +534,7 @@ begin
   inherited;
 end;
 
-function TSynSTSyn.GetDefaultAttribute(Index: Integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterST.GetDefaultAttribute(Index: Integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -547,7 +547,7 @@ begin
   end;
 end;
 
-function TSynSTSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterST.GetTokenID: TtkTokenKind;
 begin
   if not FAsmStart and (FRange = rsAsm)
     and not (FTokenID in [tkNull, tkComment, tkSpace])
@@ -557,7 +557,7 @@ begin
     Result := FTokenID;
 end;
 
-function TSynSTSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterST.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkAsm: Result := FAsmAttri;
@@ -574,41 +574,41 @@ begin
   end;
 end;
 
-function TSynSTSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterST.GetTokenKind: integer;
 begin
   Result := Ord(GetTokenID);
 end;
 
-function TSynSTSyn.GetRange: Pointer;
+function TSynEdit32HighlighterST.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-procedure TSynSTSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterST.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-procedure TSynSTSyn.ResetRange;
+procedure TSynEdit32HighlighterST.ResetRange;
 begin
   FRange:= rsUnknown;
 end;
 
-class function TSynSTSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterST.GetLanguageName: string;
 begin
   Result := SYNS_LangST;
 end;
 
-function TSynSTSyn.IsFilterStored: boolean;
+function TSynEdit32HighlighterST.IsFilterStored: boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterST;
 end;
 
-class function TSynSTSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterST.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangST;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynSTSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterST);
 end.

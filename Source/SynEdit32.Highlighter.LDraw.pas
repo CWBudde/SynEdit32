@@ -75,7 +75,7 @@ type
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
 type
-  TSynLDRSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterLDR = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
     FTokenID: TtkTokenKind;
@@ -151,7 +151,7 @@ const
   );
 
 {$Q-}
-function TSynLDRSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterLDR.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) do
@@ -164,7 +164,7 @@ begin
 end;
 {$Q+}
 
-function TSynLDRSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterLDR.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -176,7 +176,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynLDRSyn.InitIdent;
+procedure TSynEdit32HighlighterLDR.InitIdent;
 var
   i: Integer;
 begin
@@ -187,12 +187,12 @@ begin
   FIdentFuncTable[1] := FuncAuthor;
 end;
 
-function TSynLDRSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterLDR.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier;
 end;
 
-function TSynLDRSyn.FuncAuthor(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterLDR.FuncAuthor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -200,13 +200,13 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynLDRSyn.NullProc;
+procedure TSynEdit32HighlighterLDR.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynLDRSyn.CRProc;
+procedure TSynEdit32HighlighterLDR.CRProc;
 begin
   FTokenID := tkUnknown;
   Inc(FRun);
@@ -214,13 +214,13 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynLDRSyn.LFProc;
+procedure TSynEdit32HighlighterLDR.LFProc;
 begin
   FTokenID := tkUnknown;
   Inc(FRun);
 end;
 
-constructor TSynLDRSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterLDR.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FColorAttri := TSynEdit32HighlighterAttributes.Create(SYNS_AttrColor, SYNS_FriendlyAttrColor);
@@ -276,7 +276,7 @@ begin
   FRange := rsUnknown;
 end;
 
-function TSynLDRSyn.FirstChar(DatLine: PWideChar): WideChar;
+function TSynEdit32HighlighterLDR.FirstChar(DatLine: PWideChar): WideChar;
 var
   i: Integer;
 begin
@@ -285,7 +285,7 @@ begin
   Result := DatLine[i];
 end;
 
-procedure TSynLDRSyn.IdentProc;
+procedure TSynEdit32HighlighterLDR.IdentProc;
 begin
   if FirstChar(FLine) = '0' then
   begin
@@ -302,7 +302,7 @@ begin
   end;
 end;
 
-procedure TSynLDRSyn.Number1Proc;
+procedure TSynEdit32HighlighterLDR.Number1Proc;
 
   function ArgNumber(DatLine: PWideChar): Byte;
   var
@@ -356,13 +356,13 @@ begin
   while CharInSet(FLine[FRun], ['0'..'9', '.']) do Inc(FRun);
 end;
 
-procedure TSynLDRSyn.UnknownProc;
+procedure TSynEdit32HighlighterLDR.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynLDRSyn.Next;
+procedure TSynEdit32HighlighterLDR.Next;
 begin
   fTokenPos := FRun;
   case FLine[FRun] of
@@ -376,7 +376,7 @@ begin
   inherited;
 end;
 
-function TSynLDRSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterLDR.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -387,17 +387,17 @@ begin
   end;
 end;
 
-function TSynLDRSyn.GetKeyWords(TokenKind: Integer): UnicodeString;
+function TSynEdit32HighlighterLDR.GetKeyWords(TokenKind: Integer): UnicodeString;
 begin
   Result := 'Author';
 end;
 
-function TSynLDRSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterLDR.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynLDRSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterLDR.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkColor: Result := FColorAttri;
@@ -418,12 +418,12 @@ begin
   end;
 end;
 
-function TSynLDRSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterLDR.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-function TSynLDRSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterLDR.GetSampleSource: UnicodeString;
 begin
   Result := #13#10 +
             'Sample source for: '#13#10 +
@@ -436,12 +436,12 @@ begin
             '5 16 0 0 0 1 1 1 2 2 2 3 3 3';
 end;
 
-function TSynLDRSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterLDR.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterLDraw;
 end;
 
-function TSynLDRSyn.IsIdentChar(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterLDR.IsIdentChar(AChar: WideChar): Boolean;
 begin
   case AChar of
     '_', 'A'..'Z', 'a'..'z':
@@ -451,31 +451,31 @@ begin
   end;
 end;
 
-class function TSynLDRSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterLDR.GetLanguageName: string;
 begin
   Result := SYNS_LangLDraw;
 end;
 
-procedure TSynLDRSyn.ResetRange;
+procedure TSynEdit32HighlighterLDR.ResetRange;
 begin
   FRange := rsUnknown;
 end;
 
-procedure TSynLDRSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterLDR.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-function TSynLDRSyn.GetRange: Pointer;
+function TSynEdit32HighlighterLDR.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-class function TSynLDRSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterLDR.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangLDraw;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynLDRSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterLDR);
 end.

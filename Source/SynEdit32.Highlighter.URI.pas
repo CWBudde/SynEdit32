@@ -88,7 +88,7 @@ type
 
   TAlreadyVisitedURIFunc = function (URI: UnicodeString): Boolean of object;
 
-  TSynURISyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterURI = class(TSynEdit32CustomHighlighter)
   private
     FMayBeProtocol: PWideChar;
     FTokenID: TtkTokenKind;
@@ -176,7 +176,7 @@ const
     'news://', 'www', 'nntp://', 'ftp://', 'wais://', '', 'telnet://', 'mailto:'
   );
 
-function TSynURISyn.HashKey(Str: PWideChar): Integer;
+function TSynEdit32HighlighterURI.HashKey(Str: PWideChar): Integer;
 begin
   Result := 0;
   while CharInSet(Str^, ['A'..'Z', 'a'..'z']) do
@@ -206,7 +206,7 @@ begin
   FStringLen := Str - FMayBeProtocol;
 end;
 
-procedure TSynURISyn.InitIdent;
+procedure TSynEdit32HighlighterURI.InitIdent;
 var
   i: Integer;
 begin
@@ -227,7 +227,7 @@ begin
   FIdentFuncTable[9] := FuncWeb;
 end;
 
-function TSynURISyn.IsCurrentToken(const Token: UnicodeString): Boolean;
+function TSynEdit32HighlighterURI.IsCurrentToken(const Token: UnicodeString): Boolean;
 var
   I: Integer;
   Temp: PWideChar;
@@ -250,12 +250,12 @@ begin
     Result := False;
 end;
 
-function TSynURISyn.AltFunc(Key: Integer): TtkTokenKind;
+function TSynEdit32HighlighterURI.AltFunc(Key: Integer): TtkTokenKind;
 begin
   Result := tkUnknown;
 end;
 
-constructor TSynURISyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterURI.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FCaseSensitive := False;
@@ -278,7 +278,7 @@ begin
   FDefaultFilter := SYNS_FilterURI;
 end;
 
-destructor TSynURISyn.Destroy; 
+destructor TSynEdit32HighlighterURI.Destroy;
 begin
   inherited;
   //the other attributes are automatically freed because of AddAttribute()
@@ -286,7 +286,7 @@ begin
   FIdentifierAttri.Free;
 end;
 
-procedure TSynURISyn.CRProc;
+procedure TSynEdit32HighlighterURI.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
@@ -294,13 +294,13 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynURISyn.LFProc;
+procedure TSynEdit32HighlighterURI.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynURISyn.NullProc;
+procedure TSynEdit32HighlighterURI.NullProc;
 begin
   if FRun < fLineLen + 1 then
   begin
@@ -311,20 +311,20 @@ begin
     FTokenID := tkNull
 end;
 
-procedure TSynURISyn.SpaceProc;
+procedure TSynEdit32HighlighterURI.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynURISyn.UnknownProc;
+procedure TSynEdit32HighlighterURI.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynURISyn.Next;
+procedure TSynEdit32HighlighterURI.Next;
 begin
   fTokenPos := FRun;
   case FLine[FRun] of
@@ -339,7 +339,7 @@ begin
   inherited;
 end;
 
-function TSynURISyn.GetDefaultAttribute(Index: Integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterURI.GetDefaultAttribute(Index: Integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_IDENTIFIER: Result := FIdentifierAttri;
@@ -351,7 +351,7 @@ begin
   end;
 end;
 
-function TSynURISyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterURI.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 var
   Visited: Boolean;
 begin
@@ -373,22 +373,22 @@ begin
   end;
 end;
 
-function TSynURISyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterURI.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynURISyn.GetTokenKind: Integer;
+function TSynEdit32HighlighterURI.GetTokenKind: Integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-class function TSynURISyn.GetLanguageName: string;
+class function TSynEdit32HighlighterURI.GetLanguageName: string;
 begin
   Result := SYNS_LangURI;
 end;
 
-function TSynURISyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterURI.GetSampleSource: UnicodeString;
 begin
   Result := 'Universal Resource Identifier highlighting'#13#10#13#10 +
             'http://www.somewhere.org'#13#10 +
@@ -399,32 +399,32 @@ begin
             'news:comp.lang.pascal.borland';
 end;
 
-function TSynURISyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterURI.IsFilterStored: Boolean;
 begin
   Result := FDefaultFilter <> SYNS_FilterURI;
 end;
 
-function TSynURISyn.IsIdentChar(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterURI.IsIdentChar(AChar: WideChar): Boolean;
 begin
   Result := SynIsCharAlphaNumeric(AChar);
 end;
 
-procedure TSynURISyn.SetAlreadyVisitedURIFunc(Value: TAlreadyVisitedURIFunc);
+procedure TSynEdit32HighlighterURI.SetAlreadyVisitedURIFunc(Value: TAlreadyVisitedURIFunc);
 begin
   FAlreadyVisitedURI := Value;
 end;
 
-procedure TSynURISyn.SetURIAttri(const Value: TSynEdit32HighlighterAttributes);
+procedure TSynEdit32HighlighterURI.SetURIAttri(const Value: TSynEdit32HighlighterAttributes);
 begin
   FURIAttri.Assign(Value);
 end;
 
-procedure TSynURISyn.SetVisitedURIAttri(const Value: TSynEdit32HighlighterAttributes);
+procedure TSynEdit32HighlighterURI.SetVisitedURIAttri(const Value: TSynEdit32HighlighterAttributes);
 begin
   FVisitedURIAttri.Assign(Value);
 end;
 
-procedure TSynURISyn.ProtocolProc;
+procedure TSynEdit32HighlighterURI.ProtocolProc;
 var
   Key: Integer;
 begin
@@ -443,7 +443,7 @@ begin
   end;
 end;
 
-function TSynURISyn.FuncFtp(Key: Integer): TtkTokenKind;
+function TSynEdit32HighlighterURI.FuncFtp(Key: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Key]) and IsValidURI then
     Result := tkFtpLink
@@ -451,7 +451,7 @@ begin
     Result := tkUnknown;
 end;
 
-function TSynURISyn.FuncGopher(Key: Integer): TtkTokenKind;
+function TSynEdit32HighlighterURI.FuncGopher(Key: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Key]) and IsValidURI then
     Result := tkGopherLink
@@ -459,7 +459,7 @@ begin
     Result := tkUnknown;
 end;
 
-function TSynURISyn.FuncHttp(Key: Integer): TtkTokenKind;
+function TSynEdit32HighlighterURI.FuncHttp(Key: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Key]) and IsValidURI then
     Result := tkHttpLink
@@ -467,7 +467,7 @@ begin
     Result := tkUnknown;
 end;
 
-function TSynURISyn.FuncHttps(Key: Integer): TtkTokenKind;
+function TSynEdit32HighlighterURI.FuncHttps(Key: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Key]) and IsValidURI then
     Result := tkHttpsLink
@@ -475,7 +475,7 @@ begin
     Result := tkUnknown;
 end;
 
-function TSynURISyn.FuncMailto(Key: Integer): TtkTokenKind;
+function TSynEdit32HighlighterURI.FuncMailto(Key: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Key]) and IsValidURI then
     Result := tkMailtoLink
@@ -483,7 +483,7 @@ begin
     Result := tkUnknown;
 end;
 
-function TSynURISyn.FuncNews(Key: Integer): TtkTokenKind;
+function TSynEdit32HighlighterURI.FuncNews(Key: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Key]) and IsValidURI then
     Result := tkNewsLink
@@ -491,7 +491,7 @@ begin
     Result := tkUnknown;
 end;
 
-function TSynURISyn.FuncNntp(Key: Integer): TtkTokenKind;
+function TSynEdit32HighlighterURI.FuncNntp(Key: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Key]) and IsValidURI then
     Result := tkNntpLink
@@ -499,7 +499,7 @@ begin
     Result := tkUnknown;
 end;
 
-function TSynURISyn.FuncProspero(Key: Integer): TtkTokenKind;
+function TSynEdit32HighlighterURI.FuncProspero(Key: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Key]) and IsValidURI then
     Result := tkProsperoLink
@@ -507,7 +507,7 @@ begin
     Result := tkUnknown;
 end;
 
-function TSynURISyn.FuncTelnet(Key: Integer): TtkTokenKind;
+function TSynEdit32HighlighterURI.FuncTelnet(Key: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Key]) and IsValidURI then
     Result := tkTelnetLink
@@ -515,7 +515,7 @@ begin
     Result := tkUnknown;
 end;
 
-function TSynURISyn.FuncWais(Key: Integer): TtkTokenKind;
+function TSynEdit32HighlighterURI.FuncWais(Key: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Key]) and IsValidURI then
     Result := tkWaisLink
@@ -523,7 +523,7 @@ begin
     Result := tkUnknown;
 end;
 
-function TSynURISyn.FuncWeb(Key: Integer): TtkTokenKind;
+function TSynEdit32HighlighterURI.FuncWeb(Key: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Key]) and IsValidWebLink then
     Result := tkWebLink
@@ -532,12 +532,12 @@ begin
 end;
 
 
-function TSynURISyn.IsAlphaNum(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterURI.IsAlphaNum(AChar: WideChar): Boolean;
 begin
   Result := SynIsCharAlphaNumeric(AChar);
 end;
 
-function TSynURISyn.IsMark(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterURI.IsMark(AChar: WideChar): Boolean;
 begin
   case AChar of
     '-', '_', '.', '!', '~', '*', '''', '(' , ')':
@@ -547,7 +547,7 @@ begin
   end;
 end;
 
-function TSynURISyn.IsReserved(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterURI.IsReserved(AChar: WideChar): Boolean;
 begin
   case AChar of
     ';', '/', '?', ':', '@', '&', '=', '+', '$', ',', '%', '#':
@@ -557,23 +557,23 @@ begin
   end;
 end;
 
-function TSynURISyn.IsUnreserved(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterURI.IsUnreserved(AChar: WideChar): Boolean;
 begin
   Result := IsAlphaNum(AChar) or IsMark(AChar);
 end;
 
-function TSynURISyn.IsURIChar(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterURI.IsURIChar(AChar: WideChar): Boolean;
 begin
   Result := IsReserved(AChar) or IsUnreserved(AChar);
 end;
 
-function TSynURISyn.IsNeverAtEnd(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterURI.IsNeverAtEnd(AChar: WideChar): Boolean;
 begin
   Result := (IsMark(AChar) and (AChar <> '''')) or
             (IsReserved(AChar) and (AChar <> '/') and (AChar <> '$'));
 end;
 
-function TSynURISyn.IsEMailAddressChar(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterURI.IsEMailAddressChar(AChar: WideChar): Boolean;
 begin
   case AChar of
     '.', '_', '-', '@':
@@ -583,12 +583,12 @@ begin
   end;
 end;
 
-function TSynURISyn.IsNeverAtEMailAddressEnd(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterURI.IsNeverAtEMailAddressEnd(AChar: WideChar): Boolean;
 begin
   Result := (AChar = '.') or (AChar = '@');
 end;
 
-function TSynURISyn.IsValidEmailAddress: Boolean;
+function TSynEdit32HighlighterURI.IsValidEmailAddress: Boolean;
 var
   StartPos, AtPos, DotPos: Integer;
 begin
@@ -619,7 +619,7 @@ begin
   if not Result then FRun := StartPos;
 end;
 
-function TSynURISyn.IsValidURI: Boolean;
+function TSynEdit32HighlighterURI.IsValidURI: Boolean;
 var
   ProtocolEndPos, DotPos: Integer;
 
@@ -651,7 +651,7 @@ begin
   Result := FRun > ProtocolEndPos;
 end;
 
-function TSynURISyn.IsValidWebLink: Boolean;
+function TSynEdit32HighlighterURI.IsValidWebLink: Boolean;
 var
   WWWEndPos, DotPos, SecondDotPos: Integer;
 
@@ -689,11 +689,11 @@ begin
             (SecondDotPos > WWWEndPos + 1) and (SecondDotPos < FRun);
 end;
 
-class function TSynURISyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterURI.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangURI;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynURISyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterURI);
 end.

@@ -114,7 +114,7 @@ type
     FirstLine: Integer;
   end;
   //The actual print controller object
-  TSynEditPrint = class(TComponent)
+  TSynEdit32Print = class(TComponent)
   private
     FCopies: Integer;
     FFooter: TFooter;
@@ -237,9 +237,9 @@ implementation
 uses
   Math;
 
-{ TSynEditPrint }
+{ TSynEdit32Print }
 
-constructor TSynEditPrint.Create(AOwner: TComponent);
+constructor TSynEdit32Print.Create(AOwner: TComponent);
 begin
   inherited;
   FCopies := 1;
@@ -263,7 +263,7 @@ begin
   FDefaultBG := clWhite;                                                        
 end;
 
-destructor TSynEditPrint.Destroy;
+destructor TSynEdit32Print.Destroy;
 var
   i: Integer;
 begin
@@ -281,7 +281,7 @@ begin
   inherited;
 end;
 
-procedure TSynEditPrint.DefineProperties(Filer: TFiler);
+procedure TSynEdit32Print.DefineProperties(Filer: TFiler);
 begin
   inherited;
 {$IFNDEF UNICODE}
@@ -289,7 +289,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TSynEditPrint.SetLines(const Value: TUnicodeStrings);
+procedure TSynEdit32Print.SetLines(const Value: TUnicodeStrings);
 var
   i, j: Integer;
   ConvertTabsProc: TConvertTabsProc;
@@ -320,23 +320,23 @@ begin
   FPagesCounted := False;
 end;
 
-procedure TSynEditPrint.SetFont(const Value: TFont);
+procedure TSynEdit32Print.SetFont(const Value: TFont);
 begin
   FFont.Assign(Value);
   FPagesCounted := False;
 end;
 
-procedure TSynEditPrint.SetCharWidth(const Value: Integer);
+procedure TSynEdit32Print.SetCharWidth(const Value: Integer);
 begin
   FCharWidth := Value;
 end;
 
-procedure TSynEditPrint.SetMaxLeftChar(const Value: Integer);
+procedure TSynEdit32Print.SetMaxLeftChar(const Value: Integer);
 begin
   FMaxLeftChar := Value;
 end;
 
-procedure TSynEditPrint.SetHighlighter(const Value: TSynEdit32CustomHighlighter);
+procedure TSynEdit32Print.SetHighlighter(const Value: TSynEdit32CustomHighlighter);
 begin
   FHighlighter := Value;
   FRangesOK := False;
@@ -348,7 +348,7 @@ end;
 // are usually wider than latin glpyhs)
 // This is only to simplify paint-operations and has nothing to do with
 // multi-byte chars.
-function TSynEditPrint.ExpandAtWideGlyphs(const S: UnicodeString): UnicodeString;
+function TSynEdit32Print.ExpandAtWideGlyphs(const S: UnicodeString): UnicodeString;
 var
   i, j, CountOfAvgGlyphs: Integer;
 begin
@@ -378,7 +378,7 @@ begin
   SetLength(Result, j);
 end;
 
-procedure TSynEditPrint.InitPrint;
+procedure TSynEdit32Print.InitPrint;
 { Initialize Font.PixelsPerInch, Character widths, Margins, Total Page count,
   headers and footers}
 var
@@ -412,7 +412,7 @@ begin
   FSynOK := Highlight and Assigned(FHighLighter) and (FLines.Count > 0);
 end;
 
-procedure TSynEditPrint.SetPixelsPrInch;
+procedure TSynEdit32Print.SetPixelsPrInch;
 var
   TmpSize: Integer;
 begin
@@ -424,7 +424,7 @@ begin
   FFont.Size := TmpSize;
 end;
 
-procedure TSynEditPrint.InitRanges;
+procedure TSynEdit32Print.InitRanges;
 //Initialize ranges in Highlighter
 var
   i: Integer;
@@ -446,7 +446,7 @@ begin
 end;
 
 // Calculates the total number of pages
-procedure TSynEditPrint.CalcPages;
+procedure TSynEdit32Print.CalcPages;
 var
   AStr, Text: UnicodeString;
   StrWidth: Integer;
@@ -564,7 +564,7 @@ end;
 { Writes the line number. FMargins. PLeft is the position of the left margin
   (which is automatically incremented by the length of the linenumber text, if
   the linenumbers should not be placed in the margin) }
-procedure TSynEditPrint.WriteLineNumber;
+procedure TSynEdit32Print.WriteLineNumber;
 var
   AStr: UnicodeString;
 begin
@@ -577,7 +577,7 @@ begin
   RestoreCurrentFont;
 end;
 
-procedure TSynEditPrint.HandleWrap(const Text: UnicodeString; MaxWidth: Integer);
+procedure TSynEdit32Print.HandleWrap(const Text: UnicodeString; MaxWidth: Integer);
 var
   AStr: UnicodeString;
   AList: TList;
@@ -627,17 +627,17 @@ begin
   AList.Free;
 end;
 
-procedure TSynEditPrint.SaveCurrentFont;
+procedure TSynEdit32Print.SaveCurrentFont;
 begin
   FOldFont.Assign(FCanvas.Font);
 end;
 
-procedure TSynEditPrint.RestoreCurrentFont;
+procedure TSynEdit32Print.RestoreCurrentFont;
 begin
   FCanvas.Font.Assign(FOldFont);
 end;
 
-function TSynEditPrint.ClipLineToRect(S: UnicodeString; R: TRect): UnicodeString;
+function TSynEdit32Print.ClipLineToRect(S: UnicodeString; R: TRect): UnicodeString;
 begin
  while TextWidth(FCanvas, S) > FMaxWidth do
     SetLength(S, Length(S) - 1);
@@ -646,7 +646,7 @@ begin
 end;
 
 //Does the actual printing
-procedure TSynEditPrint.TextOut(const Text: UnicodeString; AList: TList);
+procedure TSynEdit32Print.TextOut(const Text: UnicodeString; AList: TList);
 var
   Token: UnicodeString;
   TokenPos: Integer;
@@ -820,7 +820,7 @@ begin
   end
 end;
 
-procedure TSynEditPrint.WriteLine(const Text: UnicodeString);
+procedure TSynEdit32Print.WriteLine(const Text: UnicodeString);
 var
   StrWidth: Integer;
 begin
@@ -837,7 +837,7 @@ begin
   FYPos := FYPos + FLineHeight;
 end;
 
-procedure TSynEditPrint.PrintPage(Num: Integer);
+procedure TSynEdit32Print.PrintPage(Num: Integer);
 //Prints a page
 var
   i, iEnd: Integer;
@@ -885,7 +885,7 @@ begin
   end;
 end;
 
-procedure TSynEditPrint.UpdatePages(ACanvas: TCanvas);
+procedure TSynEdit32Print.UpdatePages(ACanvas: TCanvas);
 //Update pages (called explicitly by preview component)
 begin
   FCanvas := ACanvas;
@@ -893,7 +893,7 @@ begin
   InitPrint;
 end;
 
-procedure TSynEditPrint.PrintToCanvas(ACanvas: TCanvas; PageNumber: Integer);
+procedure TSynEdit32Print.PrintToCanvas(ACanvas: TCanvas; PageNumber: Integer);
 //Print to specified canvas. Used by preview component
 begin
   FAbort := False;
@@ -902,12 +902,12 @@ begin
   PrintPage(PageNumber);
 end;
 
-procedure TSynEditPrint.Print;
+procedure TSynEdit32Print.Print;
 begin
   PrintRange(1, -1);
 end;
 
-procedure TSynEditPrint.PrintRange(StartPage, EndPage: Integer);
+procedure TSynEdit32Print.PrintRange(StartPage, EndPage: Integer);
 //Prints the pages in the specified range
 var
   i, ii: Integer;
@@ -944,14 +944,14 @@ begin
   FPrinting := False;
 end;
 
-procedure TSynEditPrint.PrintLine(LineNumber, PageNumber: Integer);
+procedure TSynEdit32Print.PrintLine(LineNumber, PageNumber: Integer);
 //Fires the OnPrintLine event
 begin
   if Assigned(FOnPrintLine) then
     FOnPrintLine(Self, LineNumber, PageNumber);
 end;
 
-procedure TSynEditPrint.PrintStatus(Status: TSynPrintStatus;
+procedure TSynEdit32Print.PrintStatus(Status: TSynPrintStatus;
   PageNumber: Integer; var Abort: Boolean);
 //Fires the OnPrintStatus event
 begin
@@ -964,7 +964,7 @@ begin
   end;
 end;
 
-function TSynEditPrint.GetPageCount: Integer;
+function TSynEdit32Print.GetPageCount: Integer;
 {Returns total page count. If pages hasn't been counted before,
  then a UpdatePages is called with a temporary canvas}
 var
@@ -1000,7 +1000,7 @@ begin
   end;
 end;
 
-procedure TSynEditPrint.SetSynEdit(const Value: TCustomSynEdit32);
+procedure TSynEdit32Print.SetSynEdit(const Value: TCustomSynEdit32);
 begin
 //  Lines := Value.Lines;
   HighLighter := Value.Highlighter;
@@ -1013,7 +1013,7 @@ begin
   FSelMode := Value.SelectionMode;
 end;
 
-procedure TSynEditPrint.LoadFromStream(AStream: TStream);
+procedure TSynEdit32Print.LoadFromStream(AStream: TStream);
 var
   Len, BufferSize: Integer;
   Buffer: PWideChar;
@@ -1052,7 +1052,7 @@ begin
   end;
 end;
 
-procedure TSynEditPrint.SaveToStream(AStream: TStream);
+procedure TSynEdit32Print.SaveToStream(AStream: TStream);
 var
   aLen: Integer;
 begin
@@ -1076,17 +1076,17 @@ begin
   end;
 end;
 
-procedure TSynEditPrint.SetFooter(const Value: TFooter);
+procedure TSynEdit32Print.SetFooter(const Value: TFooter);
 begin
   FFooter.Assign(Value);
 end;
 
-procedure TSynEditPrint.SetHeader(const Value: THeader);
+procedure TSynEdit32Print.SetHeader(const Value: THeader);
 begin
   FHeader.Assign(Value);
 end;
 
-procedure TSynEditPrint.SetMargins(const Value: TSynEdit32PrintMargins);
+procedure TSynEdit32Print.SetMargins(const Value: TSynEdit32PrintMargins);
 begin
   FMargins.Assign(Value);
 end;

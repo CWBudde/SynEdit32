@@ -81,7 +81,7 @@ type
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
 type
-  TSynProgressSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterProgress = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
     FCommentLevel: Integer;
@@ -475,7 +475,7 @@ implementation
 uses
   SynEdit32.StrConst;
 
-function TSynProgressSyn.HashKey(Str: PWideChar): Integer;
+function TSynEdit32HighlighterProgress.HashKey(Str: PWideChar): Integer;
 
   function GetOrd: Integer;
   begin
@@ -504,7 +504,7 @@ begin
   FStringLen := Str - FToIdent;
 end;
 
-function TSynProgressSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterProgress.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Entry: TSynEdit32HashEntry;
 begin
@@ -525,7 +525,7 @@ begin
   Result := tkIdentifier;
 end;
 
-procedure TSynProgressSyn.DoAddKeyword(AKeyword: UnicodeString; AKind: Integer);
+procedure TSynEdit32HighlighterProgress.DoAddKeyword(AKeyword: UnicodeString; AKind: Integer);
 var
   HashValue: Integer;
 begin
@@ -533,7 +533,7 @@ begin
   FHashList[HashValue] := TSynEdit32HashEntry.Create(AKeyword, AKind);
 end;
 
-constructor TSynProgressSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterProgress.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -598,25 +598,25 @@ begin
   SetAttributesOnChange(DefHighlightChange);
 end;
 
-destructor TSynProgressSyn.Destroy;
+destructor TSynEdit32HighlighterProgress.Destroy;
 begin
   FHashList.Free;
   inherited Destroy;
 end;
 
-procedure TSynProgressSyn.IdentProc;
+procedure TSynEdit32HighlighterProgress.IdentProc;
 begin
   FTokenID := IdentKind(FLine + FRun);
   Inc(FRun, FStringLen);
 end;
 
-procedure TSynProgressSyn.NullProc;
+procedure TSynEdit32HighlighterProgress.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynProgressSyn.NumberProc;
+procedure TSynEdit32HighlighterProgress.NumberProc;
 var
   p: PWideChar;
 begin
@@ -628,7 +628,7 @@ begin
   FRun := p - FLine;
 end;
 
-procedure TSynProgressSyn.PreprocessorDefinitionProc;
+procedure TSynEdit32HighlighterProgress.PreprocessorDefinitionProc;
 var
   p: PWideChar;
 begin
@@ -645,14 +645,14 @@ begin
   FRun := p - FLine;
 end;
 
-procedure TSynProgressSyn.SpaceProc;
+procedure TSynEdit32HighlighterProgress.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynProgressSyn.StringProc;
+procedure TSynEdit32HighlighterProgress.StringProc;
 var
   p: PWideChar;
 begin
@@ -665,19 +665,19 @@ begin
   FRun := p - FLine;
 end;
 
-procedure TSynProgressSyn.SymbolProc;
+procedure TSynEdit32HighlighterProgress.SymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynProgressSyn.UnknownProc;
+procedure TSynEdit32HighlighterProgress.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynProgressSyn.AsciiCharProc;
+procedure TSynEdit32HighlighterProgress.AsciiCharProc;
 var
   p: PWideChar;
 begin
@@ -690,7 +690,7 @@ begin
   FRun := p - FLine;
 end;
 
-procedure TSynProgressSyn.SlashProc;
+procedure TSynEdit32HighlighterProgress.SlashProc;
 var
   p: PWideChar;
 begin
@@ -734,7 +734,7 @@ begin
   FRun := p - FLine;
 end;
 
-procedure TSynProgressSyn.CommentRangeProc;
+procedure TSynEdit32HighlighterProgress.CommentRangeProc;
 var
   p: PWideChar;
 begin
@@ -775,7 +775,7 @@ begin
   FRun := p - FLine;
 end;
 
-procedure TSynProgressSyn.IncludeRangeProc;
+procedure TSynEdit32HighlighterProgress.IncludeRangeProc;
 var
   p: PWideChar;
 begin
@@ -808,7 +808,7 @@ begin
   FRun := p - FLine;
 end;
 
-procedure TSynProgressSyn.PreprocessorRangeProc;
+procedure TSynEdit32HighlighterProgress.PreprocessorRangeProc;
 var
   p: PWideChar;
 begin
@@ -836,7 +836,7 @@ begin
   FRun := p - FLine;
 end;
 
-procedure TSynProgressSyn.PreprocessorDefinitionRangeProc;
+procedure TSynEdit32HighlighterProgress.PreprocessorDefinitionRangeProc;
 var
   p: PWideChar;
 begin
@@ -863,7 +863,7 @@ begin
   FRun := p - FLine;
 end;
 
-procedure TSynProgressSyn.BraceOpenProc;
+procedure TSynEdit32HighlighterProgress.BraceOpenProc;
 var
   p: PWideChar;
 
@@ -915,7 +915,7 @@ begin
   FRun := p - FLine;
 end;
 
-procedure TSynProgressSyn.Next;
+procedure TSynEdit32HighlighterProgress.Next;
 begin
   fTokenPos := FRun;
   case FRange of
@@ -941,12 +941,12 @@ begin
   inherited;
 end;
 
-function TSynProgressSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterProgress.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   Result := nil;
 end;
 
-function TSynProgressSyn.GetRange: Pointer;
+function TSynEdit32HighlighterProgress.GetRange: Pointer;
 var
   rng: TRangeInfo;
 begin
@@ -960,12 +960,12 @@ begin
   Result := rng.Ptr;
 end;
 
-function TSynProgressSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterProgress.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynProgressSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterProgress.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkComment: Result := FCommentAttri;
@@ -985,12 +985,12 @@ begin
   end;
 end;
 
-function TSynProgressSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterProgress.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-procedure TSynProgressSyn.ResetRange;
+procedure TSynEdit32HighlighterProgress.ResetRange;
 begin
   FRange := rsNone;
   FCommentLevel := 0;
@@ -998,7 +998,7 @@ begin
   FPreProcessorLevel := 0;
 end;
 
-procedure TSynProgressSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterProgress.SetRange(Value: Pointer);
 var
   rng: TRangeInfo;
 begin
@@ -1014,12 +1014,12 @@ begin
   end;
 end;
 
-function TSynProgressSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterProgress.IsFilterStored: Boolean;
 begin
   Result := FDefaultFilter <> SYNS_FilterProgress;
 end;
 
-function TSynProgressSyn.IsIdentChar(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterProgress.IsIdentChar(AChar: WideChar): Boolean;
 begin
   case AChar of
     '-', '_', '0'..'9', 'A'..'Z', 'a'..'z':
@@ -1029,12 +1029,12 @@ begin
   end;
 end;
 
-class function TSynProgressSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterProgress.GetLanguageName: string;
 begin
   Result := SYNS_LangProgress;
 end;
 
-function TSynProgressSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterProgress.GetSampleSource: UnicodeString;
 begin
   Result :=
     '&scoped-define FirstChar 65'#13#10+
@@ -1059,11 +1059,11 @@ begin
     'display s.';
 end;
 
-class function TSynProgressSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterProgress.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangProgress;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynProgressSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterProgress);
 end.

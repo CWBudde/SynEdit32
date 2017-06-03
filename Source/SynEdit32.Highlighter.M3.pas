@@ -67,7 +67,7 @@ type
       True: (TokenRange: Word; Level: Word);
     end;
 
-  TSynM3Syn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterM3 = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
     FTokenID: TtkTokenKind;
@@ -162,7 +162,7 @@ const
     'LONGREAL,LOOPHOLE,MAX,MIN,MUTEX,NARROW,NEW,NIL,NULL,NUMBER,ORD,REAL,' +
     'REFANY,ROUND,SUBARRAY,TEXT,TRUE,TRUNC,TYPECODE,VAL';
 
-procedure TSynM3Syn.DoAddKeyword(AKeyword: UnicodeString; AKind: integer);
+procedure TSynEdit32HighlighterM3.DoAddKeyword(AKeyword: UnicodeString; AKind: integer);
 var
   HashValue: integer;
 begin
@@ -170,7 +170,7 @@ begin
   FKeywords[HashValue] := TSynEdit32HashEntry.Create(AKeyword, AKind);
 end;
 
-function TSynM3Syn.HashKey(Str: PWideChar): Integer;
+function TSynEdit32HighlighterM3.HashKey(Str: PWideChar): Integer;
 
   function GetOrd: Integer;
   begin
@@ -198,7 +198,7 @@ begin
   FStringLen := Str - FToIdent;
 end;
 
-function TSynM3Syn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterM3.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Entry: TSynEdit32HashEntry;
 begin
@@ -219,7 +219,7 @@ begin
   Result := tkIdentifier;
 end;
 
-constructor TSynM3Syn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterM3.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -257,13 +257,13 @@ begin
   FDefaultFilter := SYNS_FilterModula3;
 end;
 
-destructor TSynM3Syn.Destroy;
+destructor TSynEdit32HighlighterM3.Destroy;
 begin
   FKeywords.Free;
   inherited Destroy;
 end;
 
-procedure TSynM3Syn.SymAsciiCharProc;
+procedure TSynEdit32HighlighterM3.SymAsciiCharProc;
 begin
   FTokenID := tkString;
   Inc(FRun);
@@ -282,13 +282,13 @@ begin
   end;
 end;
 
-procedure TSynM3Syn.SymCommentHelpProc;
+procedure TSynEdit32HighlighterM3.SymCommentHelpProc;
 begin
   FTokenID := tkComment;
   SymNestedHelperProc('(', ')');
 end;
 
-procedure TSynM3Syn.SymCRProc;
+procedure TSynEdit32HighlighterM3.SymCRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
@@ -296,7 +296,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynM3Syn.SymIdentProc;
+procedure TSynEdit32HighlighterM3.SymIdentProc;
 begin
   FTokenID := IdentKind(FLine + FRun);
   Inc(FRun, FStringLen);
@@ -304,13 +304,13 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynM3Syn.SymLFProc;
+procedure TSynEdit32HighlighterM3.SymLFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynM3Syn.SymNestedHelperProc(AOpenChar, ACloseChar: WideChar);
+procedure TSynEdit32HighlighterM3.SymNestedHelperProc(AOpenChar, ACloseChar: WideChar);
 begin
   case FLine[FRun] of
      #0: SymNullProc;
@@ -348,13 +348,13 @@ begin
   end;
 end;
 
-procedure TSynM3Syn.SymNullProc;
+procedure TSynEdit32HighlighterM3.SymNullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynM3Syn.SymNumberProc;
+procedure TSynEdit32HighlighterM3.SymNumberProc;
 var
   BasedNumber: Boolean;
   MaxDigit: Integer;
@@ -463,7 +463,7 @@ begin
   end;
 end;
 
-procedure TSynM3Syn.SymPragmaProc;
+procedure TSynEdit32HighlighterM3.SymPragmaProc;
 begin
   Inc(FRun);
   if FLine[FRun] = '*' then
@@ -479,13 +479,13 @@ begin
     FTokenID := tkSymbol;
 end;
 
-procedure TSynM3Syn.SymPragmaHelpProc;
+procedure TSynEdit32HighlighterM3.SymPragmaHelpProc;
 begin
   FTokenID := tkPragma;
   SymNestedHelperProc('<', '>');
 end;
 
-procedure TSynM3Syn.SymRoundOpenProc;
+procedure TSynEdit32HighlighterM3.SymRoundOpenProc;
 begin
   Inc(FRun);
   if FLine[FRun] = '*' then
@@ -506,14 +506,14 @@ begin
   end;
 end;
 
-procedure TSynM3Syn.SymSpaceProc;
+procedure TSynEdit32HighlighterM3.SymSpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynM3Syn.SymStringProc;
+procedure TSynEdit32HighlighterM3.SymStringProc;
 begin
   FTokenID := tkString;
   Inc(FRun);
@@ -531,19 +531,19 @@ begin
   end;
 end;
 
-procedure TSynM3Syn.SymSymbolProc;
+procedure TSynEdit32HighlighterM3.SymSymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynM3Syn.SymUnknownProc;
+procedure TSynEdit32HighlighterM3.SymUnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynM3Syn.Next;
+procedure TSynEdit32HighlighterM3.Next;
 begin
   fTokenPos := FRun;
   case TTokenRange(FRange.TokenRange) of
@@ -568,7 +568,7 @@ begin
   inherited;
 end;
 
-function TSynM3Syn.GetDefaultAttribute(Index: integer):
+function TSynEdit32HighlighterM3.GetDefaultAttribute(Index: integer):
   TSynEdit32HighlighterAttributes;
 begin
   case Index of
@@ -583,22 +583,22 @@ begin
   end;
 end;
 
-function TSynM3Syn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterM3.IsFilterStored: Boolean;
 begin
   Result := FDefaultFilter <> SYNS_FilterModula3;
 end;
 
-class function TSynM3Syn.GetLanguageName: string;
+class function TSynEdit32HighlighterM3.GetLanguageName: string;
 begin
   Result := SYNS_LangModula3;
 end;
 
-function TSynM3Syn.GetRange: pointer;
+function TSynEdit32HighlighterM3.GetRange: pointer;
 begin
   result := FRange.p;
 end;
 
-function TSynM3Syn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterM3.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case FTokenID of
     tkComment: Result := FCommentAttri;
@@ -617,31 +617,31 @@ begin
   end;
 end;
 
-function TSynM3Syn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterM3.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynM3Syn.GetTokenKind: integer;
+function TSynEdit32HighlighterM3.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-procedure TSynM3Syn.ResetRange;
+procedure TSynEdit32HighlighterM3.ResetRange;
 begin
   FRange.p := nil;
 end;
 
-procedure TSynM3Syn.SetRange(Value: pointer);
+procedure TSynEdit32HighlighterM3.SetRange(Value: pointer);
 begin
   FRange.p := Value;
 end;
 
-class function TSynM3Syn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterM3.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangModula3;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynM3Syn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterM3);
 end.

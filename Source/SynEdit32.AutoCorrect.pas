@@ -113,7 +113,7 @@ type
     const AOriginal, ACorrection: UnicodeString; Line, Column: Integer;
     var Action: TAutoCorrectAction) of object;
 
-  TCustomSynAutoCorrect = class(TComponent)
+  TCustomSynEdit32AutoCorrect = class(TComponent)
   private
     { Private declarations }
 
@@ -185,7 +185,7 @@ type
     property OnCorrected: TNotifyEvent read FOnCorrected write FOnCorrected;
   end;
 
-  TSynAutoCorrect = class(TCustomSynAutoCorrect)
+  TSynEdit32AutoCorrect = class(TCustomSynEdit32AutoCorrect)
   published
     { Published declarations }
     property Enabled;
@@ -201,9 +201,9 @@ type
 implementation
 
 
-{ TCustomSynAutoCorrect }
+{ TCustomSynEdit32AutoCorrect }
 
-constructor TCustomSynAutoCorrect.Create(AOwner: TComponent);
+constructor TCustomSynEdit32AutoCorrect.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -215,7 +215,7 @@ begin
 //  FEditor := nil; initialized by Delphi
 end;
 
-destructor TCustomSynAutoCorrect.Destroy;
+destructor TCustomSynEdit32AutoCorrect.Destroy;
 begin
   Editor := nil;
   inherited;
@@ -225,7 +225,7 @@ end;
 
 { Utility functions }
 
-function TCustomSynAutoCorrect.HalfString(Str: UnicodeString;
+function TCustomSynEdit32AutoCorrect.HalfString(Str: UnicodeString;
   GetFirstHalf: Boolean): UnicodeString;
 var
   i: Integer;
@@ -239,7 +239,7 @@ begin
     Result := Copy(Str, Succ(i), MaxInt);
 end;
 
-procedure TCustomSynAutoCorrect.LoadFromIni(AFileName, ASection: string);
+procedure TCustomSynEdit32AutoCorrect.LoadFromIni(AFileName, ASection: string);
 var
   i: Integer;
   Original, Correction: UnicodeString;
@@ -261,7 +261,7 @@ begin
   end;
 end;
 
-procedure TCustomSynAutoCorrect.SaveToIni(AFileName, ASection: string);
+procedure TCustomSynEdit32AutoCorrect.SaveToIni(AFileName, ASection: string);
 var
   i: Integer;
   Reg: TIniFile;
@@ -284,7 +284,7 @@ begin
   end;
 end;
 
-function TCustomSynAutoCorrect.LoadFromList(AFileName: string): Boolean;
+function TCustomSynEdit32AutoCorrect.LoadFromList(AFileName: string): Boolean;
 begin
   Result := False;
   if FileExists(AFileName) then
@@ -294,12 +294,12 @@ begin
   end;
 end;
 
-procedure TCustomSynAutoCorrect.SaveToList(AFileName: string);
+procedure TCustomSynEdit32AutoCorrect.SaveToList(AFileName: string);
 begin
   FItems.SaveToFile(AFileName);
 end;
 
-procedure TCustomSynAutoCorrect.LoadFromRegistry(ARoot: DWORD; AKey: string);
+procedure TCustomSynEdit32AutoCorrect.LoadFromRegistry(ARoot: DWORD; AKey: string);
 var
   i: Integer;
   Original, Correction: UnicodeString;
@@ -325,7 +325,7 @@ begin
   end;
 end;
 
-procedure TCustomSynAutoCorrect.SaveToRegistry(ARoot: DWORD; AKey: string);
+procedure TCustomSynEdit32AutoCorrect.SaveToRegistry(ARoot: DWORD; AKey: string);
 var
   i: Integer;
   Reg: TRegIniFile;
@@ -349,12 +349,12 @@ begin
   end;
 end;
 
-procedure TCustomSynAutoCorrect.Add(AOriginal, ACorrection: UnicodeString);
+procedure TCustomSynEdit32AutoCorrect.Add(AOriginal, ACorrection: UnicodeString);
 begin
   FItems.Add(AOriginal + FItemSepChar + ACorrection);
 end;
 
-function TCustomSynAutoCorrect.AutoCorrectAll: Boolean;
+function TCustomSynEdit32AutoCorrect.AutoCorrectAll: Boolean;
 var
   i, cx: Integer;
   s, Original, Correction, CurrText: UnicodeString;
@@ -376,7 +376,7 @@ begin
   end;
 end;
 
-function TCustomSynAutoCorrect.CorrectItemStart(EditLine, SearchString: UnicodeString;
+function TCustomSynEdit32AutoCorrect.CorrectItemStart(EditLine, SearchString: UnicodeString;
   StartPos: LongInt; MatchCase, WholeWord: Boolean): LongInt;
 var
   SearchCount, I: Integer;
@@ -475,7 +475,7 @@ begin
   CurBuf := nil;   
 end;
 
-procedure TCustomSynAutoCorrect.DefineProperties(Filer: TFiler);
+procedure TCustomSynEdit32AutoCorrect.DefineProperties(Filer: TFiler);
 begin
   inherited;
 {$IFNDEF UNICODE}
@@ -483,19 +483,19 @@ begin
 {$ENDIF}
 end;
 
-procedure TCustomSynAutoCorrect.Delete(AIndex: Integer);
+procedure TCustomSynEdit32AutoCorrect.Delete(AIndex: Integer);
 begin
   FItems.Delete(AIndex);
 end;
 
-procedure TCustomSynAutoCorrect.Edit(AIndex: Integer;
+procedure TCustomSynEdit32AutoCorrect.Edit(AIndex: Integer;
   ANewOriginal, ANewCorrection: UnicodeString);
 begin
   if AIndex > -1 then
     FItems[AIndex] := ANewOriginal + FItemSepChar + ANewCorrection;
 end;
 
-procedure TCustomSynAutoCorrect.KeyboardHandler(Sender: TObject; AfterProcessing: Boolean;
+procedure TCustomSynEdit32AutoCorrect.KeyboardHandler(Sender: TObject; AfterProcessing: Boolean;
   var Handled: Boolean; var Command: TSynEditorCommand; var AChar: WideChar;
   Data: Pointer; HandlerData: Pointer);
 var
@@ -532,7 +532,7 @@ begin
   end;
 end;
 
-procedure TCustomSynAutoCorrect.MouseDownHandler(Sender: TObject;
+procedure TCustomSynEdit32AutoCorrect.MouseDownHandler(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 var
   Action: TAutoCorrectAction;
@@ -574,7 +574,7 @@ begin
   end;
 end;
 
-function TCustomSynAutoCorrect.FindAndCorrect(var EditLine: UnicodeString;
+function TCustomSynEdit32AutoCorrect.FindAndCorrect(var EditLine: UnicodeString;
   Original, Correction: UnicodeString; var CurrentX: Integer): Boolean;
 var
   StartPos: LongInt;
@@ -668,12 +668,12 @@ begin
   end;       
 end;
                       
-function TCustomSynAutoCorrect.GetItems: TUnicodeStrings;
+function TCustomSynEdit32AutoCorrect.GetItems: TUnicodeStrings;
 begin
   Result := FItems;
 end;
 
-procedure TCustomSynAutoCorrect.Notification(AComponent: TComponent;
+procedure TCustomSynEdit32AutoCorrect.Notification(AComponent: TComponent;
   Operation: TOperation);
 begin
   inherited;
@@ -683,7 +683,7 @@ begin
   end;
 end;
 
-function TCustomSynAutoCorrect.PreviousToken: UnicodeString;
+function TCustomSynEdit32AutoCorrect.PreviousToken: UnicodeString;
 var
   i, cx: Integer;
 begin
@@ -701,7 +701,7 @@ begin
     Result := '';
 end;
 
-procedure TCustomSynAutoCorrect.SetEditor(Value: TCustomSynEdit32);
+procedure TCustomSynEdit32AutoCorrect.SetEditor(Value: TCustomSynEdit32);
 begin
   if FEditor <> Value then
   begin
@@ -725,7 +725,7 @@ begin
   end;
 end;
 
-procedure TCustomSynAutoCorrect.SetItems(const Value: TUnicodeStrings);
+procedure TCustomSynEdit32AutoCorrect.SetItems(const Value: TUnicodeStrings);
 begin
   FItems.Assign(Value);
 end;

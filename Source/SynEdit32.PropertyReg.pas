@@ -35,9 +35,7 @@ located at http://SynEdit.SourceForge.net
 Known Issues:
 -------------------------------------------------------------------------------}
 
-{$IFNDEF QSYNEDITPROPERTYREG}
-unit SynEditPropertyReg;
-{$ENDIF}
+unit SynEdit32.PropertyReg;
 
 {$I SynEdit.inc}
 
@@ -47,26 +45,13 @@ uses
 {$IFDEF SYN_COMPILER_6_UP}
   DesignIntf,
   DesignEditors,
-  {$IFDEF SYN_KYLIX}
-  ClxEditors,
-  ClxStrEdit,
-  {$ELSE}
   VCLEditors,
   StrEdit,
-  {$ENDIF}
 {$ELSE}
   DsgnIntf,
   StrEdit,
 {$ENDIF}
-{$IFDEF SYN_CLX}
-  QSynUnicode,
-{$ELSE}
   SynEdit32.Unicode,
-{$ENDIF}
-{$IFDEF USE_TNT_DESIGNTIME_SUPPORT}
-  TntClasses,
-  TntStrEdit_Design,
-{$ENDIF}
   Classes;
 
 type
@@ -135,37 +120,20 @@ procedure Register;
 implementation
 
 uses
-{$IFDEF SYN_CLX}
-  QDialogs,
-  QForms,
-  QGraphics,
-  QControls,
-  QSynEditKeyCmds,
-  QSynEditKeyCmdsEditor,
-  QSynEdit,
-  QSynEditPrint,
-  QSynEditPrintMargins,
-  QSynEditPrintMarginsDialog,
-  QSynCompletionProposal,
-  QSynMacroRecorder,
-  QSynAutoCorrect,
-  QSynAutoCorrectEditor,
-{$ELSE}
   Dialogs,
   Forms,
   Graphics,
   Controls,
-  SynEditKeyCmds,
-  SynEditKeyCmdsEditor,
+  SynEdit32.KeyCmds,
+  SynEdit32.KeyCmdsEditor,
   SynEdit32,
-  SynEditPrint,
-  SynEditPrintMargins,
-  SynEditPrintMarginsDialog,
-  SynCompletionProposal,
-  SynMacroRecorder,
-  SynAutoCorrect,
-  SynAutoCorrectEditor,
-{$ENDIF}
+  SynEdit32.Print,
+  SynEdit32.PrintMargins,
+  SynEdit32.PrintMarginsDialog,
+  SynEdit32.CompletionProposal,
+  SynEdit32.MacroRecorder,
+  SynEdit32.AutoCorrect,
+  SynEdit32.AutoCorrectEditor,
   SysUtils;
 
 {$IFDEF USE_TNT_DESIGNTIME_SUPPORT}
@@ -292,7 +260,7 @@ begin
   Application.CreateForm(TSynEditKeystrokesEditorForm, Dlg);
   try
     Dlg.Caption := Self.GetName;
-    Dlg.Keystrokes := TSynEditKeystrokes(GetOrdValue);
+    Dlg.Keystrokes := TSynEdit32Keystrokes(GetOrdValue);
     if Dlg.ShowModal = mrOk then
     begin
       { SetOrdValue will operate on all selected propertiy values }
@@ -317,9 +285,9 @@ var
 begin
   SynEditPrintMarginsDlg := TSynEditPrintMarginsDlg.Create(nil);
   try
-    SynEditPrintMarginsDlg.SetMargins(TSynEditPrintMargins(GetOrdValue));
+    SynEditPrintMarginsDlg.SetMargins(TSynEdit32PrintMargins(GetOrdValue));
     if SynEditPrintMarginsDlg.ShowModal = mrOk then
-      SynEditPrintMarginsDlg.GetMargins(TSynEditPrintMargins(GetOrdValue));
+      SynEditPrintMarginsDlg.GetMargins(TSynEdit32PrintMargins(GetOrdValue));
   finally
     SynEditPrintMarginsDlg.Free;
   end;
@@ -336,7 +304,7 @@ var
 begin
   frmAutoCorrectEditor := TfrmAutoCorrectEditor.Create(Application);
   try
-    frmAutoCorrectEditor.SynAutoCorrect := TSynAutoCorrect(Component);
+    frmAutoCorrectEditor.SynAutoCorrect := TSynEdit32AutoCorrect(Component);
     frmAutoCorrectEditor.ShowModal;
   finally
     frmAutoCorrectEditor.Free;
@@ -369,7 +337,7 @@ var
 begin
   frmAutoCorrectEditor := TfrmAutoCorrectEditor.Create(Application);
   try
-    frmAutoCorrectEditor.SynAutoCorrect := TSynAutoCorrect(GetComponent(0));
+    frmAutoCorrectEditor.SynAutoCorrect := TSynEdit32AutoCorrect(GetComponent(0));
     frmAutoCorrectEditor.ShowModal;
   finally
     frmAutoCorrectEditor.Free;
@@ -408,23 +376,23 @@ begin
      '', TStringListProperty);
 {$ENDIF}
 
-  RegisterPropertyEditor(TypeInfo(TFont), TCustomSynEdit,
+  RegisterPropertyEditor(TypeInfo(TFont), TCustomSynEdit32,
      'Font', TSynEditFontProperty);
   RegisterPropertyEditor(TypeInfo(TSynEditorCommand), nil,
      '', TSynEditCommandProperty);
-  RegisterPropertyEditor(TypeInfo(TSynEditKeystrokes), nil,
+  RegisterPropertyEditor(TypeInfo(TSynEdit32Keystrokes), nil,
     '', TSynEditKeystrokesProperty);
-  RegisterPropertyEditor(TypeInfo(TSynEditPrintMargins), TPersistent,
+  RegisterPropertyEditor(TypeInfo(TSynEdit32PrintMargins), TPersistent,
     '', TSynEditPrintMarginsProperty);
-  RegisterPropertyEditor(TypeInfo(TStrings), TSynAutoCorrect,
+  RegisterPropertyEditor(TypeInfo(TStrings), TSynEdit32AutoCorrect,
     'Items', TAutoCorrectionProperty);
-  RegisterComponentEditor(TSynAutoCorrect, TSynAutoCorrectComponentEditor);
+  RegisterComponentEditor(TSynEdit32AutoCorrect, TSynAutoCorrectComponentEditor);
   {$IFDEF SYN_DELPHI_6_UP} // TODO: shouldn't that be COMPILER_6_UP instead?
-  RegisterPropertyEditor(TypeInfo(TShortCut), TSynCompletionProposal, '',
+  RegisterPropertyEditor(TypeInfo(TShortCut), TSynEdit32CompletionProposal, '',
     TShortCutProperty);
-  RegisterPropertyEditor(TypeInfo(TShortCut), TSynAutoComplete, '',
+  RegisterPropertyEditor(TypeInfo(TShortCut), TSynEdit32AutoComplete, '',
     TShortCutProperty);
-  RegisterPropertyEditor(TypeInfo(TShortCut), TSynMacroRecorder, '',
+  RegisterPropertyEditor(TypeInfo(TShortCut), TSynEdit32MacroRecorder, '',
     TShortCutProperty);
   {$ENDIF}
 end;

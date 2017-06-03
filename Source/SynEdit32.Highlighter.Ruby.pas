@@ -74,7 +74,7 @@ type
 {$ENDIF}
 
 type
-  TSynRubySyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterRuby = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
 {$IFDEF SYN_HEREDOC}
@@ -164,7 +164,7 @@ const
     'private', 'public', 'puts', 'raise', 'redo', 'require', 'rescue', 'retry',
     'return', 'self', 'then', 'true', 'unless', 'when', 'while', 'yield');
 
-function TSynRubySyn.IsKeyword(const AKeyword: UnicodeString): Boolean;
+function TSynEdit32HighlighterRuby.IsKeyword(const AKeyword: UnicodeString): Boolean;
 var
   First, Last, I, Compare: Integer;
   Token: UnicodeString;
@@ -190,7 +190,7 @@ begin
   end;
 end; { IsKeyWord }
 
-function TSynRubySyn.IsSecondKeyWord(aToken: UnicodeString): Boolean;
+function TSynEdit32HighlighterRuby.IsSecondKeyWord(aToken: UnicodeString): Boolean;
 var
   First, Last, I, Compare: Integer;
   Token: UnicodeString;
@@ -215,7 +215,7 @@ begin
   end;
 end; { IsSecondKeyWord }
 
-constructor TSynRubySyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterRuby.Create(AOwner: TComponent);
 var
   i: integer;
 begin
@@ -260,26 +260,26 @@ begin
   fDefaultFilter := SYNS_FilterRuby;
 end; { Create }
 
-destructor TSynRubySyn.Destroy;
+destructor TSynEdit32HighlighterRuby.Destroy;
 begin
   FKeyWords.Free;
   FSecondKeys.Free;
   inherited Destroy;
 end; { Destroy }
 
-procedure TSynRubySyn.BraceOpenProc;
+procedure TSynEdit32HighlighterRuby.BraceOpenProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynRubySyn.PointCommaProc;
+procedure TSynEdit32HighlighterRuby.PointCommaProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynRubySyn.CRProc;
+procedure TSynEdit32HighlighterRuby.CRProc;
 begin
   FTokenID := tkSpace;
   case FLine[FRun + 1] of
@@ -288,7 +288,7 @@ begin
   end;
 end;
 
-procedure TSynRubySyn.IdentProc;
+procedure TSynEdit32HighlighterRuby.IdentProc;
 begin
   while IsIdentChar(FLine[FRun]) do Inc(FRun);
   if IsKeyWord(GetToken) then
@@ -303,13 +303,13 @@ begin
     FTokenID := tkIdentifier;
 end;
 
-procedure TSynRubySyn.LFProc;
+procedure TSynEdit32HighlighterRuby.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynRubySyn.LowerProc;
+procedure TSynEdit32HighlighterRuby.LowerProc;
 {$IFDEF SYN_HEREDOC}
 var
   i, Len, SkipRun: Integer;
@@ -380,13 +380,13 @@ begin
   end;
 end;
 
-procedure TSynRubySyn.NullProc;
+procedure TSynEdit32HighlighterRuby.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynRubySyn.NumberProc;
+procedure TSynEdit32HighlighterRuby.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -411,13 +411,13 @@ begin
   end;
 end;
 
-procedure TSynRubySyn.RoundOpenProc;
+procedure TSynEdit32HighlighterRuby.RoundOpenProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynRubySyn.SlashProc;
+procedure TSynEdit32HighlighterRuby.SlashProc;
 begin
   case FLine[FRun] of
     '/':
@@ -444,14 +444,14 @@ begin
   end;
 end;
 
-procedure TSynRubySyn.SpaceProc;
+procedure TSynEdit32HighlighterRuby.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynRubySyn.StringProc;
+procedure TSynEdit32HighlighterRuby.StringProc;
 var
   QuoteChar: WideChar;
 begin
@@ -484,14 +484,14 @@ begin
   if FLine[FRun] <> #0 then Inc(FRun);
 end;
 
-procedure TSynRubySyn.UnknownProc;
+procedure TSynEdit32HighlighterRuby.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
 {$IFDEF SYN_HEREDOC}
-procedure TSynRubySyn.HeredocProc;
+procedure TSynEdit32HighlighterRuby.HeredocProc;
 
   procedure SkipToEOL;
   begin
@@ -551,7 +551,7 @@ begin
 end;
 {$ENDIF}
 
-procedure TSynRubySyn.Next;
+procedure TSynEdit32HighlighterRuby.Next;
 begin
   fTokenPos := FRun;
 {$IFDEF SYN_HEREDOC}
@@ -563,7 +563,7 @@ begin
   inherited;
 end;
 
-procedure TSynRubySyn.NextProcedure;
+procedure TSynEdit32HighlighterRuby.NextProcedure;
 begin
   case FLine[FRun] of
     '<': LowerProc;
@@ -583,7 +583,7 @@ begin
   end;
 end;
 
-function TSynRubySyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterRuby.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -596,7 +596,7 @@ begin
   end;
 end;
 
-function TSynRubySyn.GetRange: Pointer;
+function TSynEdit32HighlighterRuby.GetRange: Pointer;
 {$IFDEF SYN_HEREDOC}
 var
   RangePointer: TRangePointer;
@@ -617,12 +617,12 @@ begin
 {$ENDIF}
 end;
 
-function TSynRubySyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterRuby.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynRubySyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterRuby.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case FTokenID of
     tkComment: Result := FCommentAttri;
@@ -639,12 +639,12 @@ begin
   end;
 end;
 
-function TSynRubySyn.GetTokenKind: integer;
+function TSynEdit32HighlighterRuby.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-procedure TSynRubySyn.ResetRange;
+procedure TSynEdit32HighlighterRuby.ResetRange;
 begin
   FRange := rsUnknown;
 {$IFDEF SYN_HEREDOC}
@@ -653,7 +653,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TSynRubySyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterRuby.SetRange(Value: Pointer);
 {$IFDEF SYN_HEREDOC}
 var
   RangePointer: TRangePointer;
@@ -674,7 +674,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TSynRubySyn.SetSecondKeys(const Value: TUnicodeStrings);
+procedure TSynEdit32HighlighterRuby.SetSecondKeys(const Value: TUnicodeStrings);
 var
   i: Integer;
 begin
@@ -689,17 +689,17 @@ begin
   DefHighLightChange(nil);
 end;
 
-function TSynRubySyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterRuby.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterRuby;
 end;
 
-class function TSynRubySyn.GetLanguageName: string;
+class function TSynEdit32HighlighterRuby.GetLanguageName: string;
 begin
   Result := SYNS_LangRuby;
 end;
 
-function TSynRubySyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterRuby.GetSampleSource: UnicodeString;
 begin
   Result :=
     '# Factorial'+#13#10+
@@ -713,11 +713,11 @@ begin
     'print fact(ARGV[0].to_i), "\n"';
 end;
 
-class function TSynRubySyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterRuby.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangRuby;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynRubySyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterRuby);
 end.

@@ -74,7 +74,7 @@ type
   TRangeState = (rsComment, rsSelector, rsDeclaration, rsUnknown, rsProperty,
     rsValue, rsAttrib, rsParameter);
 
-  TSynCssSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterCss = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
     FCommentRange: TRangeState;
@@ -496,10 +496,10 @@ const
                      +',word-wrap'
                      +',writing-mode';
 
-{ TSynCssSyn }
+{ TSynEdit32HighlighterCss }
 
 {$Q-}
-function TSynCssSyn.HashKey(Str: PWideChar): Integer;
+function TSynEdit32HighlighterCss.HashKey(Str: PWideChar): Integer;
 begin
   Result := 0;
   while CharInSet(Str^, ['a'..'z', 'A'..'Z', '_', '-']) do
@@ -521,7 +521,7 @@ begin
 end;
 {$Q+}
 
-function TSynCssSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterCss.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Entry: TSynEdit32HashEntry;
 begin
@@ -542,7 +542,7 @@ begin
   Result := tkUndefProperty;
 end;
 
-procedure TSynCssSyn.DoAddKeyword(AKeyword: UnicodeString; AKind: Integer);
+procedure TSynEdit32HighlighterCss.DoAddKeyword(AKeyword: UnicodeString; AKind: Integer);
 var
   HashValue: Integer;
 begin
@@ -550,7 +550,7 @@ begin
   FKeywords[HashValue] := TSynEdit32HashEntry.Create(AKeyword, AKind);
 end;
 
-constructor TSynCssSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterCss.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -625,13 +625,13 @@ begin
   FDefaultFilter := SYNS_FilterCSS;
 end;
 
-destructor TSynCssSyn.Destroy;
+destructor TSynEdit32HighlighterCss.Destroy;
 begin
   FKeywords.Free;
   inherited Destroy;
 end;
 
-procedure TSynCssSyn.AttributeProc;
+procedure TSynEdit32HighlighterCss.AttributeProc;
 
   function IsStopChar: Boolean;
   begin
@@ -662,35 +662,35 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynCssSyn.BraceCloseProc;
+procedure TSynEdit32HighlighterCss.BraceCloseProc;
 begin
   FRange := rsSelector;
   FTokenID := tkSymbol;
   Inc(FRun);
 end;
 
-procedure TSynCssSyn.BraceOpenProc;
+procedure TSynEdit32HighlighterCss.BraceOpenProc;
 begin
   Inc(FRun);
   FRange := rsDeclaration;
   FTokenID := tkSymbol;
 end;
 
-procedure TSynCssSyn.BracketCloseProc;
+procedure TSynEdit32HighlighterCss.BracketCloseProc;
 begin
   FTokenID := tkSymbol;
   FRange := rsSelector;
   Inc(FRun);
 end;
 
-procedure TSynCssSyn.BracketOpenProc;
+procedure TSynEdit32HighlighterCss.BracketOpenProc;
 begin
   Inc(FRun);
   FRange := rsAttrib;
   FTokenID := tkSymbol;
 end;
 
-procedure TSynCssSyn.CircumflexProc;
+procedure TSynEdit32HighlighterCss.CircumflexProc;
 begin
   Inc(FRun);
   if FLine[FRun] = '=' then
@@ -700,7 +700,7 @@ begin
   end;
 end;
 
-procedure TSynCssSyn.CommentProc;
+procedure TSynEdit32HighlighterCss.CommentProc;
 begin
   if FLine[FRun] = #0 then
     NullProc
@@ -719,28 +719,28 @@ begin
   end;
 end;
 
-procedure TSynCssSyn.CRProc;
+procedure TSynEdit32HighlighterCss.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
   if FLine[FRun] = #10 then Inc(FRun);
 end;
 
-procedure TSynCssSyn.SemiProc;
+procedure TSynEdit32HighlighterCss.SemiProc;
 begin
   FRange := rsUnknown;
   FTokenID := tkSymbol;
   Inc(FRun);
 end;
 
-procedure TSynCssSyn.StartValProc;
+procedure TSynEdit32HighlighterCss.StartValProc;
 begin
   FRange := rsValue;
   FTokenID := tkSymbol;
   Inc(FRun);
 end;
 
-procedure TSynCssSyn.NumberProc;
+procedure TSynEdit32HighlighterCss.NumberProc;
 begin
   if (FLine[FRun] = '-') and not CharInSet(FLine[FRun + 1], ['0'..'9']) then
     IdentProc
@@ -759,14 +759,14 @@ begin
   end;
 end;
 
-procedure TSynCssSyn.ParenCloseProc;
+procedure TSynEdit32HighlighterCss.ParenCloseProc;
 begin
   FRange := FParameterRange;
   FTokenID := tkSymbol;
   Inc(FRun);
 end;
 
-procedure TSynCssSyn.ParenOpenProc;
+procedure TSynEdit32HighlighterCss.ParenOpenProc;
 begin
   Inc(FRun);
   FParameterRange := FRange;
@@ -774,7 +774,7 @@ begin
   FTokenID := tkSymbol;
 end;
 
-procedure TSynCssSyn.PipeProc;
+procedure TSynEdit32HighlighterCss.PipeProc;
 begin
   Inc(FRun);
   if FLine[FRun] = '=' then
@@ -784,13 +784,13 @@ begin
   end;
 end;
 
-procedure TSynCssSyn.PlusProc;
+procedure TSynEdit32HighlighterCss.PlusProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynCssSyn.IdentProc;
+procedure TSynEdit32HighlighterCss.IdentProc;
 begin
   case FRange of
     rsProperty:
@@ -820,19 +820,19 @@ begin
   end;
 end;
 
-procedure TSynCssSyn.LFProc;
+procedure TSynEdit32HighlighterCss.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynCssSyn.NullProc;
+procedure TSynEdit32HighlighterCss.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynCssSyn.AtRuleProc;
+procedure TSynEdit32HighlighterCss.AtRuleProc;
 
   function IsStopChar: Boolean;
   begin
@@ -858,7 +858,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynCssSyn.SelectorProc;
+procedure TSynEdit32HighlighterCss.SelectorProc;
 
   function IsStopChar: Boolean;
   begin
@@ -903,7 +903,7 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynCssSyn.TildeProc;
+procedure TSynEdit32HighlighterCss.TildeProc;
 begin
   Inc(FRun);
   if FLine[FRun] = '=' then
@@ -913,14 +913,14 @@ begin
   end;
 end;
 
-procedure TSynCssSyn.SpaceProc;
+procedure TSynEdit32HighlighterCss.SpaceProc;
 begin
   Inc(FRun);
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynCssSyn.StringProc;
+procedure TSynEdit32HighlighterCss.StringProc;
 begin
   FTokenID := tkString;
   Inc(FRun);  // first '"'
@@ -928,7 +928,7 @@ begin
   if FLine[FRun] = '"' then Inc(FRun);  // last '"'
 end;
 
-procedure TSynCssSyn.HashProc;
+procedure TSynEdit32HighlighterCss.HashProc;
 
   function IsHexChar: Boolean;
   begin
@@ -946,13 +946,13 @@ begin
   while IsHexChar do Inc(FRun);
 end;
 
-procedure TSynCssSyn.EqualProc;
+procedure TSynEdit32HighlighterCss.EqualProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynCssSyn.ExclamProc;
+procedure TSynEdit32HighlighterCss.ExclamProc;
 begin
   if (FLine[FRun + 1] = 'i') and
     (FLine[FRun + 2] = 'm') and
@@ -971,7 +971,7 @@ begin
     IdentProc;
 end;
 
-procedure TSynCssSyn.SlashProc;
+procedure TSynEdit32HighlighterCss.SlashProc;
 begin
   Inc(FRun);
   if FLine[FRun] = '*' then
@@ -987,7 +987,7 @@ begin
     FTokenID := tkSymbol;
 end;
 
-procedure TSynCssSyn.Next;
+procedure TSynEdit32HighlighterCss.Next;
 begin
   FTokenPos := FRun;
   case FRange of
@@ -1004,7 +1004,7 @@ begin
   inherited;
 end;
 
-procedure TSynCssSyn.NextDeclaration;
+procedure TSynEdit32HighlighterCss.NextDeclaration;
 begin
   case FLine[FRun] of
     #0: NullProc;
@@ -1026,7 +1026,7 @@ begin
   end;
 end;
 
-function TSynCssSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterCss.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -1037,12 +1037,12 @@ begin
   end;
 end;
 
-function TSynCssSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterCss.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynCssSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterCss.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case FTokenID of
     tkComment: Result := FCommentAttri;
@@ -1063,50 +1063,50 @@ begin
   end;
 end;
 
-function TSynCssSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterCss.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-procedure TSynCssSyn.GreaterProc;
+procedure TSynEdit32HighlighterCss.GreaterProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-function TSynCssSyn.GetRange: Pointer;
+function TSynEdit32HighlighterCss.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-procedure TSynCssSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterCss.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-procedure TSynCssSyn.ResetRange;
+procedure TSynEdit32HighlighterCss.ResetRange;
 begin
   FRange:= rsSelector;
 end;
 
-function TSynCssSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterCss.GetSampleSource: UnicodeString;
 begin
   Result := '/* Syntax Highlighting */'#13#10 +
         'body { font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size: 8pt }'#13#10 +
         'H1 { font-size: 18pt; color: #000099; made-up-property: 1 }';
 end; { GetSampleSource }
 
-class function TSynCssSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterCss.GetLanguageName: string;
 begin
   Result := SYNS_LangCSS;
 end;
 
-function TSynCssSyn.IsFilterStored: boolean;
+function TSynEdit32HighlighterCss.IsFilterStored: boolean;
 begin
   Result := FDefaultFilter <> SYNS_FilterCSS;
 end;
 
-function TSynCssSyn.IsIdentChar(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterCss.IsIdentChar(AChar: WideChar): Boolean;
 begin
   case AChar of
     '_', '-', '0'..'9', 'A'..'Z', 'a'..'z':
@@ -1116,11 +1116,11 @@ begin
   end;
 end;
 
-class function TSynCssSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterCss.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangCSS;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynCssSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterCss);
 end.

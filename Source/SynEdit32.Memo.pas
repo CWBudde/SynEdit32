@@ -55,7 +55,7 @@ uses
   Classes;
 
 type
-  TSynEdit32Memo = class(TSynEdit)
+  TSynEdit32Memo = class(TSynEdit32)
   private
     procedure EMGetSel(var Message: TMessage); message EM_GETSEL;
     procedure EMSetSel(var Message: TMessage); message EM_SETSEL;

@@ -53,7 +53,7 @@ uses
   Classes;
 
 type
-  TSynExporterRTF = class(TSynEdit32CustomExporter)
+  TSynEdit32ExporterRTF = class(TSynEdit32CustomExporter)
   private
     FAttributesChanged: Boolean;
     FListColors: TList;
@@ -94,9 +94,9 @@ uses
   SynEdit32.StrConst,
   SysUtils;
 
-{ TSynExporterRTF }
+{ TSynEdit32ExporterRTF }
 
-constructor TSynExporterRTF.Create(AOwner: TComponent);
+constructor TSynEdit32ExporterRTF.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FListColors := TList.Create;
@@ -105,21 +105,21 @@ begin
   FEncoding := seUTF8;
 end;
 
-destructor TSynExporterRTF.Destroy;
+destructor TSynEdit32ExporterRTF.Destroy;
 begin
   FListColors.Free;
   FListColors := nil;
   inherited Destroy;
 end;
 
-procedure TSynExporterRTF.Clear;
+procedure TSynEdit32ExporterRTF.Clear;
 begin
   inherited Clear;
   if Assigned(FListColors) then
     FListColors.Clear;
 end;
 
-function TSynExporterRTF.ColorToRTF(AColor: TColor): UnicodeString;
+function TSynEdit32ExporterRTF.ColorToRTF(AColor: TColor): UnicodeString;
 var
   Col: Integer;
 begin
@@ -128,12 +128,12 @@ begin
     GetBValue(Col)]);
 end;
 
-procedure TSynExporterRTF.FormatAfterLastAttribute;
+procedure TSynEdit32ExporterRTF.FormatAfterLastAttribute;
 begin
   // no need to reset the font style here...
 end;
 
-procedure TSynExporterRTF.FormatAttributeDone(BackgroundChanged,
+procedure TSynEdit32ExporterRTF.FormatAttributeDone(BackgroundChanged,
   ForegroundChanged: Boolean; FontStylesChanged: TFontStyles);
 const
   FontTags: array[TFontStyle] of UnicodeString = ('\b0', '\i0', '\ul0', '\strike0');
@@ -151,7 +151,7 @@ begin
   end;
 end;
 
-procedure TSynExporterRTF.FormatAttributeInit(BackgroundChanged,
+procedure TSynEdit32ExporterRTF.FormatAttributeInit(BackgroundChanged,
   ForegroundChanged: Boolean; FontStylesChanged: TFontStyles);
 const
   FontTags: array[TFontStyle] of UnicodeString = ('\b', '\i', '\ul', '\strike');
@@ -184,35 +184,35 @@ begin
   end;
 end;
 
-procedure TSynExporterRTF.FormatBeforeFirstAttribute(BackgroundChanged,
+procedure TSynEdit32ExporterRTF.FormatBeforeFirstAttribute(BackgroundChanged,
   ForegroundChanged: Boolean; FontStylesChanged: TFontStyles);
 begin
   FormatAttributeInit(BackgroundChanged, ForegroundChanged, FontStylesChanged);
 end;
 
-procedure TSynExporterRTF.FormatNewLine;
+procedure TSynEdit32ExporterRTF.FormatNewLine;
 begin
   AddData(#13#10'\par ');
 end;
 
-function TSynExporterRTF.GetColorIndex(AColor: TColor): Integer;
+function TSynEdit32ExporterRTF.GetColorIndex(AColor: TColor): Integer;
 begin
   Result := FListColors.IndexOf(pointer(AColor));
   if Result = -1 then
     Result := FListColors.Add(pointer(AColor));
 end;
 
-function TSynExporterRTF.GetFooter: UnicodeString;
+function TSynEdit32ExporterRTF.GetFooter: UnicodeString;
 begin
   Result := '}';
 end;
 
-function TSynExporterRTF.GetFormatName: string;
+function TSynEdit32ExporterRTF.GetFormatName: string;
 begin
   Result := SYNS_ExporterFormatRTF;
 end;
 
-function TSynExporterRTF.GetHeader: UnicodeString;
+function TSynEdit32ExporterRTF.GetHeader: UnicodeString;
 var
   i: Integer;
 
@@ -239,7 +239,7 @@ begin
     [2 * Font.Size]);
 end;
 
-function TSynExporterRTF.ReplaceReservedChar(AChar: WideChar): UnicodeString;
+function TSynEdit32ExporterRTF.ReplaceReservedChar(AChar: WideChar): UnicodeString;
 begin
   Result := '';
   case AChar of
@@ -258,12 +258,12 @@ begin
   end;
 end;
 
-function TSynExporterRTF.SupportedEncodings: TSynEncodings;
+function TSynEdit32ExporterRTF.SupportedEncodings: TSynEncodings;
 begin
   Result := [seUTF8];
 end;
 
-function TSynExporterRTF.UseBom: Boolean;
+function TSynEdit32ExporterRTF.UseBom: Boolean;
 begin
   Result := False;
 end;

@@ -75,7 +75,7 @@ type
                  rsQuoteStringMayBe, rsApostStringMayBe);
 
 type
-  TSynCobolSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterCobol = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
     FTokenID: TtkTokenKind;
@@ -264,7 +264,7 @@ const
 const
   StringChars: array[TRangeState] of WideChar = (#0, '"', '''', '=',  '"', '''');
 
-procedure TSynCobolSyn.DoAddKeyword(AKeyword: UnicodeString; AKind: integer);
+procedure TSynEdit32HighlighterCobol.DoAddKeyword(AKeyword: UnicodeString; AKind: integer);
 var
   HashValue: integer;
 begin
@@ -272,7 +272,7 @@ begin
   FKeywords[HashValue] := TSynEdit32HashEntry.Create(AKeyword, AKind);
 end;
 
-function TSynCobolSyn.HashKey(Str: PWideChar): Integer;
+function TSynEdit32HighlighterCobol.HashKey(Str: PWideChar): Integer;
 var
   InternalRun: LongInt;
 
@@ -306,7 +306,7 @@ begin
   FStringLen := Str - FToIdent;
 end;
 
-function TSynCobolSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterCobol.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Entry: TSynEdit32HashEntry;
   I: Integer;
@@ -346,7 +346,7 @@ begin
   Result := tkIdentifier;
 end;
 
-procedure TSynCobolSyn.SpaceProc;
+procedure TSynEdit32HighlighterCobol.SpaceProc;
 begin
   FTokenID := tkSpace;
   repeat
@@ -354,7 +354,7 @@ begin
   until not CharInSet(FLine[FRun], [#1..#32]);
 end;
 
-procedure TSynCobolSyn.FirstCharsProc;
+procedure TSynEdit32HighlighterCobol.FirstCharsProc;
 var
   I: Integer;
 begin
@@ -386,7 +386,7 @@ begin
   end;
 end;
 
-procedure TSynCobolSyn.LastCharsProc;
+procedure TSynEdit32HighlighterCobol.LastCharsProc;
 begin
   if IsLineEnd(FRun) then
     NextProcedure
@@ -399,7 +399,7 @@ begin
   end;
 end;
 
-procedure TSynCobolSyn.CommentProc;
+procedure TSynEdit32HighlighterCobol.CommentProc;
 begin
   FIndicator := #0;
 
@@ -414,7 +414,7 @@ begin
   end;
 end;
 
-procedure TSynCobolSyn.DebugProc;
+procedure TSynEdit32HighlighterCobol.DebugProc;
 begin
   FIndicator := #0;
 
@@ -429,7 +429,7 @@ begin
   end;
 end;
 
-procedure TSynCobolSyn.PointProc;
+procedure TSynEdit32HighlighterCobol.PointProc;
 begin
   if (FRun < FCodeEndPos) and CharInSet(FLine[FRun + 1], ['0'..'9', 'e', 'E']) then
     NumberProc
@@ -437,7 +437,7 @@ begin
     UnknownProc;
 end;
 
-procedure TSynCobolSyn.NumberProc;
+procedure TSynEdit32HighlighterCobol.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -478,13 +478,13 @@ begin
   end;
 end;
 
-procedure TSynCobolSyn.NullProc;
+procedure TSynEdit32HighlighterCobol.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynCobolSyn.CRProc;
+procedure TSynEdit32HighlighterCobol.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
@@ -492,13 +492,13 @@ begin
     Inc(FRun);
 end;
 
-procedure TSynCobolSyn.LFProc;
+procedure TSynEdit32HighlighterCobol.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynCobolSyn.StringOpenProc;
+procedure TSynEdit32HighlighterCobol.StringOpenProc;
 begin
   case FLine[FRun] of
     '"': FRange := rsQuoteString;
@@ -521,7 +521,7 @@ begin
   FTokenID := tkString;
 end;
 
-procedure TSynCobolSyn.StringProc;
+procedure TSynEdit32HighlighterCobol.StringProc;
 begin
   FTokenID := tkString;
 
@@ -542,7 +542,7 @@ begin
   until IsLineEnd(FRun) or (FRun > FCodeEndPos);
 end;
 
-procedure TSynCobolSyn.StringEndProc;
+procedure TSynEdit32HighlighterCobol.StringEndProc;
 begin
   if IsLineEnd(FRun) then
     NextProcedure
@@ -570,7 +570,7 @@ begin
   end;
 end;
 
-constructor TSynCobolSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterCobol.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -646,13 +646,13 @@ begin
   EnumerateKeywords(Ord(tkUnknown), AmbigiousWords, IsIdentChar, DoAddKeyword);
 end;
 
-destructor TSynCobolSyn.Destroy;
+destructor TSynEdit32HighlighterCobol.Destroy;
 begin
   FKeywords.Free;
   inherited Destroy;
 end;
 
-procedure TSynCobolSyn.IdentProc;
+procedure TSynEdit32HighlighterCobol.IdentProc;
 begin
   if CharInSet(FLine[FRun], ['x', 'g', 'X', 'G'])
     and (FRun < FCodeEndPos) and CharInSet(FLine[FRun + 1], ['"', '''']) then
@@ -672,13 +672,13 @@ begin
   end;
 end;
 
-procedure TSynCobolSyn.UnknownProc;
+procedure TSynEdit32HighlighterCobol.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynCobolSyn.Next;
+procedure TSynEdit32HighlighterCobol.Next;
 begin
   fTokenPos := FRun;
 
@@ -704,7 +704,7 @@ begin
   inherited;
 end;
 
-procedure TSynCobolSyn.NextProcedure;
+procedure TSynEdit32HighlighterCobol.NextProcedure;
 begin
   case FLine[FRun] of
     #0: NullProc;
@@ -721,7 +721,7 @@ begin
   end;
 end;
 
-function TSynCobolSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterCobol.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -734,12 +734,12 @@ begin
   end;
 end;
 
-function TSynCobolSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterCobol.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynCobolSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterCobol.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkComment: Result := FCommentAttri;
@@ -761,12 +761,12 @@ begin
   end;
 end;
 
-function TSynCobolSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterCobol.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-function TSynCobolSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterCobol.GetSampleSource: UnicodeString;
 begin
   Result := '000100* This is a sample file to be used to show all TSynCobolSyn''s'#13#10 +
             '000200* features.'#13#10 +
@@ -851,12 +851,12 @@ begin
             '007800*    be highlighted properly.';
 end;
 
-function TSynCobolSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterCobol.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterCOBOL;
 end;
 
-function TSynCobolSyn.IsIdentChar(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterCobol.IsIdentChar(AChar: WideChar): Boolean;
 begin
   case AChar of
     '-', '0'..'9', 'a'..'z', 'A'..'Z':
@@ -866,7 +866,7 @@ begin
   end;
 end;
 
-procedure TSynCobolSyn.SetCodeStartPos(Value: LongInt);
+procedure TSynEdit32HighlighterCobol.SetCodeStartPos(Value: LongInt);
 begin
   if Value < FCodeMediumPos then
     FCodeStartPos := Value
@@ -874,7 +874,7 @@ begin
     FCodeStartPos := FCodeMediumPos;
 end;
 
-procedure TSynCobolSyn.SetCodeMediumPos(Value: LongInt);
+procedure TSynEdit32HighlighterCobol.SetCodeMediumPos(Value: LongInt);
 begin
   if (FCodeStartPos <= Value) and (Value <= FCodeEndPos) then
     FCodeMediumPos := Value
@@ -884,7 +884,7 @@ begin
     else FCodeMediumPos := FCodeStartPos;
 end;
 
-procedure TSynCobolSyn.SetCodeEndPos(Value: LongInt);
+procedure TSynEdit32HighlighterCobol.SetCodeEndPos(Value: LongInt);
 begin
   if Value > FCodeMediumPos then
     FCodeEndPos := Value
@@ -892,31 +892,31 @@ begin
     FCodeEndPos := FCodeMediumPos;
 end;
 
-class function TSynCobolSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterCobol.GetLanguageName: string;
 begin
   Result := SYNS_LangCOBOL;
 end;
 
-procedure TSynCobolSyn.ResetRange;
+procedure TSynEdit32HighlighterCobol.ResetRange;
 begin
   FRange := rsUnknown;
 end;
 
-procedure TSynCobolSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterCobol.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-function TSynCobolSyn.GetRange: Pointer;
+function TSynEdit32HighlighterCobol.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-class function TSynCobolSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterCobol.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangCOBOL;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynCobolSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterCobol);
 end.

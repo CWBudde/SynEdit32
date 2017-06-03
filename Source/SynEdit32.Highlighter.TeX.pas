@@ -53,7 +53,7 @@ type
                   tkControlSequence, tkMathMode);
 
 type
-  TSynTeXSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterTeX = class(TSynEdit32CustomHighlighter)
   private
     FTokenID: TtkTokenKind;
     FTextAttri: TSynEdit32HighlighterAttributes;
@@ -114,7 +114,7 @@ implementation
 uses
   SynEdit32.StrConst;
 
-constructor TSynTeXSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterTeX.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -147,7 +147,7 @@ begin
   fDefaultFilter := SYNS_FilterTeX;
 end;  { Create }
 
-procedure TSynTeXSyn.CRProc;
+procedure TSynEdit32HighlighterTeX.CRProc;
 begin
   FTokenID := tkSpace;
   case FLine[FRun + 1] of
@@ -157,56 +157,56 @@ begin
 end;  { CRProc }
 
 
-procedure TSynTeXSyn.SpaceProc;
+procedure TSynEdit32HighlighterTeX.SpaceProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;  { SpaceProc }
 
-procedure TSynTeXSyn.TextProc;
+procedure TSynEdit32HighlighterTeX.TextProc;
 begin
   FTokenID := tkText;
   Inc(FRun);
 end;  { TextProc }
 
-procedure TSynTeXSyn.LFProc;
+procedure TSynEdit32HighlighterTeX.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;  { SpaceProc }
 
-procedure TSynTeXSyn.BraceOpenProc;
+procedure TSynEdit32HighlighterTeX.BraceOpenProc;
 begin
   FTokenID := tkBrace;
   Inc(FRun);
 end;  { BraceOpen }
 
-procedure TSynTeXSyn.BraceCloseProc;
+procedure TSynEdit32HighlighterTeX.BraceCloseProc;
 begin
   FTokenID := tkBrace;
   Inc(FRun);
 end;  { BraceClose }
 
-procedure TSynTeXSyn.BracketOpenProc;
+procedure TSynEdit32HighlighterTeX.BracketOpenProc;
 begin
   FTokenID := tkBracket;
   Inc(FRun);
 end;  { BracketOpen }
 
-procedure TSynTeXSyn.BracketCloseProc;
+procedure TSynEdit32HighlighterTeX.BracketCloseProc;
 begin
   FTokenID := tkBracket;
   Inc(FRun);
 end;  { BracketClose }
 
-procedure TSynTeXSyn.NullProc;
+procedure TSynEdit32HighlighterTeX.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;  { NullProc }
 
-procedure TSynTeXSyn.CommentProc;
+procedure TSynEdit32HighlighterTeX.CommentProc;
 begin
  FTokenID := tkComment;
  repeat
@@ -218,13 +218,13 @@ begin
   Exit;
 end;  { CommentProc }
 
-procedure TSynTeXSyn.MathModeProc;
+procedure TSynEdit32HighlighterTeX.MathModeProc;
 begin
  FTokenID := tkMathMode;
  Inc(FRun);
 end;  { MathModeProc }
 
-procedure TSynTeXSyn.ControlSequenceProc;
+procedure TSynEdit32HighlighterTeX.ControlSequenceProc;
 begin
  FTokenID := tkControlSequence;
  repeat
@@ -245,7 +245,7 @@ begin
  exit;
 end;  { ControlSequenceProc }
 
-procedure TSynTeXSyn.Next;
+procedure TSynEdit32HighlighterTeX.Next;
 begin
   fTokenPos := FRun;
   case  FLine[FRun] of
@@ -265,7 +265,7 @@ begin
   inherited;
 end;  { Next }
 
-function TSynTeXSyn.GetDefaultAttribute(Index: integer):
+function TSynEdit32HighlighterTeX.GetDefaultAttribute(Index: integer):
   TSynEdit32HighlighterAttributes;
 begin
   case Index of
@@ -275,12 +275,12 @@ begin
   end;
 end;
 
-function TSynTeXSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterTeX.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;  { GetTokenID }
 
-function TSynTeXSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterTeX.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case FTokenID of
     tkComment: Result := FCommentAttri;
@@ -295,22 +295,22 @@ begin
   end;
 end;  { GetTokenAttribute }
 
-function TSynTeXSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterTeX.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;  { GetTokenKind }
 
-function TSynTeXSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterTeX.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterTeX;
 end;
 
-class function TSynTeXSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterTeX.GetLanguageName: string;
 begin
   Result := SYNS_LangTeX;
 end;  { GetLanguageName }
 
-function TSynTeXSyn.CreateHighlighterAttributes(Name: string; FriendlyName: UnicodeString;
+function TSynEdit32HighlighterTeX.CreateHighlighterAttributes(Name: string; FriendlyName: UnicodeString;
   Foreground, Background: TColor; FontStyles: TFontStyles): TSynEdit32HighlighterAttributes;
 begin
   Result := TSynEdit32HighlighterAttributes.Create(Name, FriendlyName);
@@ -319,7 +319,7 @@ begin
   Result.Style := FontStyles;
 end;
 
-function TSynTeXSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterTeX.GetSampleSource: UnicodeString;
 begin
   Result :=
     '\documentclass[a4paper]{article}'+#13#10+
@@ -329,11 +329,11 @@ begin
     '\end{document}';
 end;
 
-class function TSynTeXSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterTeX.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangTeX;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynTeXSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterTeX);
 end.

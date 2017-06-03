@@ -68,7 +68,7 @@ type
   PIdentFuncTableFunc = ^TIdentFuncTableFunc;
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
-  TSynDmlSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterDml = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
     FIdentFuncTable: array[0..2438] of TIdentFuncTableFunc;
@@ -603,7 +603,7 @@ const
   );
 
 {$Q-}
-function TSynDmlSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterDml.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) do
@@ -616,7 +616,7 @@ begin
 end;
 {$Q+}
 
-function TSynDmlSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterDml.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
@@ -628,7 +628,7 @@ begin
     Result := tkIdentifier;
 end;
 
-procedure TSynDmlSyn.InitIdent;
+procedure TSynEdit32HighlighterDml.InitIdent;
 var
   i: Integer;
 begin
@@ -902,21 +902,21 @@ begin
   FIdentFuncTable[2350] := FuncYesno_block;
 end;
 
-function TSynDmlSyn.IsQuali: boolean;
+function TSynEdit32HighlighterDml.IsQuali: boolean;
 begin
   Result:= False;
   if FRun > 0 then
     if FLine[FRun - 1] = '/' then Result:= True;
 end;
 
-function TSynDmlSyn.IsSpecial: Boolean;
+function TSynEdit32HighlighterDml.IsSpecial: Boolean;
 begin
   Result:= False;
   if FRun > 0 then
     if FLine[FRun - 1] = '%' then Result:= True;
 end;
 
-function TSynDmlSyn.FuncAbs(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncAbs(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -924,7 +924,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncAbsolute_position(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncAbsolute_position(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -932,7 +932,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncAccount(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncAccount(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsSpecial then
     Result := tkSpecial
@@ -940,7 +940,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncAcos(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncAcos(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -948,7 +948,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncActual_break(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncActual_break(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsSpecial then
     Result := tkSpecial
@@ -956,7 +956,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncAdd(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncAdd(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -972,7 +972,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncAdd_form(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncAdd_form(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -980,7 +980,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncAlternate_form(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncAlternate_form(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -988,7 +988,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncAscii(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncAscii(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -996,7 +996,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncAsin(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncAsin(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -1004,7 +1004,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncAtan(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncAtan(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -1012,7 +1012,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncAtan2(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncAtan2(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -1020,7 +1020,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncAttributes(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncAttributes(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1028,7 +1028,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncBack(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncBack(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1036,7 +1036,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncBase(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncBase(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1044,7 +1044,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncBatch(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncBatch(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1052,7 +1052,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncBegin_block(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncBegin_block(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkBlock
@@ -1060,7 +1060,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncBegin_case(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncBegin_case(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1068,7 +1068,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncBegin_disable_trigger(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncBegin_disable_trigger(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1076,7 +1076,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncBegin_row(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncBegin_row(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1084,7 +1084,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncBegin_signal_to_status(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncBegin_signal_to_status(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1092,7 +1092,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncBell(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncBell(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1100,7 +1100,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncBinary_to_poly(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncBinary_to_poly(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -1108,7 +1108,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncBottom_line(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncBottom_line(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsSpecial then
     Result := tkSpecial
@@ -1116,7 +1116,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncBreak(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncBreak(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1124,7 +1124,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncBreak0(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncBreak0(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1132,7 +1132,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncCall(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncCall(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1140,7 +1140,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncCase(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncCase(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1148,7 +1148,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncCeil(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncCeil(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -1156,7 +1156,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncCheck(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncCheck(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1164,7 +1164,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncCheck_domain(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncCheck_domain(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1172,7 +1172,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncChr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncChr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -1180,7 +1180,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncClear_buffer(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncClear_buffer(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1188,7 +1188,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncCli(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncCli(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1196,7 +1196,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncClose(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncClose(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1204,7 +1204,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncClose_text(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncClose_text(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1212,7 +1212,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncCol(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncCol(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -1227,7 +1227,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncColumn_heading_row(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncColumn_heading_row(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1235,7 +1235,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncColumn_headings(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncColumn_headings(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1243,7 +1243,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncColumn_spacing(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncColumn_spacing(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1251,7 +1251,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncCommit(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncCommit(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1259,7 +1259,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncCommit_rate(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncCommit_rate(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1267,7 +1267,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncCompile(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncCompile(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1275,7 +1275,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncCompress(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncCompress(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -1283,7 +1283,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncCompress_all(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncCompress_all(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -1291,7 +1291,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncConfirm(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncConfirm(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1299,7 +1299,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncConnect(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncConnect(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1307,7 +1307,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncContinue(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncContinue(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1315,7 +1315,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncCos(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncCos(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -1323,7 +1323,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncCosh(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncCosh(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -1331,7 +1331,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncCross_reference(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncCross_reference(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1339,7 +1339,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncDate(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncDate(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -1347,7 +1347,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncDate_seconds(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncDate_seconds(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -1355,7 +1355,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncDay_of_week(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncDay_of_week(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -1363,7 +1363,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncDays(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncDays(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -1371,7 +1371,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncDcl(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncDcl(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1379,7 +1379,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncDefault_tag(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncDefault_tag(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1387,7 +1387,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncDelete(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncDelete(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1395,7 +1395,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncDelete_form(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncDelete_form(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1403,7 +1403,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncDescription(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncDescription(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1411,7 +1411,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncDir(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncDir(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1419,7 +1419,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncDisconnect(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncDisconnect(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1427,7 +1427,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncDisplay(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncDisplay(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1435,7 +1435,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncDisplay_length(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncDisplay_length(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1443,7 +1443,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncDocumentation(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncDocumentation(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1451,7 +1451,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncDomain(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncDomain(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1459,7 +1459,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncEdit(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncEdit(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1467,7 +1467,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncElse(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncElse(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1475,7 +1475,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncElse_if(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncElse_if(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1483,7 +1483,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncEnd_block(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncEnd_block(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkBlock
@@ -1491,7 +1491,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncEnd_case(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncEnd_case(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1499,7 +1499,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncEnd_disable_trigger(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncEnd_disable_trigger(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1507,7 +1507,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncEnd_execute(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncEnd_execute(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1515,7 +1515,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncEnd_form(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncEnd_form(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkForm
@@ -1523,7 +1523,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncEnd_if(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncEnd_if(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1533,7 +1533,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncEnd_row(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncEnd_row(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1541,7 +1541,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncEnd_signal_to_status(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncEnd_signal_to_status(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1549,7 +1549,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncEnd_while(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncEnd_while(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1557,7 +1557,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncErase(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncErase(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1565,7 +1565,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncError(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncError(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -1578,7 +1578,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncExecute(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncExecute(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1586,7 +1586,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncExit(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncExit(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1596,7 +1596,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncExit_forward(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncExit_forward(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1604,7 +1604,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncExpand(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncExpand(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -1612,7 +1612,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncExternal(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncExternal(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1620,7 +1620,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncFacility(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncFacility(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1628,7 +1628,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncFailure(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncFailure(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -1643,7 +1643,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncFetch(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncFetch(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1651,7 +1651,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncFiles(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncFiles(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1659,7 +1659,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncFind(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncFind(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -1670,7 +1670,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncFind_form(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncFind_form(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1678,7 +1678,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncFinish(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncFinish(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1686,7 +1686,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncFirst(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncFirst(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1694,7 +1694,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncFloor(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncFloor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1702,7 +1702,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncFooting(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncFooting(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1710,7 +1710,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncFooting_form(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncFooting_form(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1718,7 +1718,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncForm(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncForm(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -1731,7 +1731,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncGenerate(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncGenerate(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1739,7 +1739,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncGoto(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncGoto(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1747,7 +1747,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncGrouped_by(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncGrouped_by(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1755,7 +1755,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncHeading(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncHeading(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1763,7 +1763,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncHeading_form(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncHeading_form(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkQualifier
@@ -1771,7 +1771,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncHeight(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncHeight(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1779,7 +1779,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncIdentifier(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncIdentifier(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1787,7 +1787,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncIf(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncIf(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1795,7 +1795,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncIn(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncIn(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and (FRange = rsFind) then
   begin
@@ -1806,7 +1806,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncInput_block(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncInput_block(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkBlock
@@ -1814,7 +1814,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncInput_mask(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncInput_mask(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1822,7 +1822,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncInput_row_height(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncInput_row_height(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1830,7 +1830,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncInt(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncInt(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -1838,7 +1838,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncInvoke(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncInvoke(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1846,7 +1846,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncItem(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncItem(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1854,7 +1854,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncItem_block(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncItem_block(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkBlock
@@ -1862,7 +1862,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncItem_if(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncItem_if(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1870,7 +1870,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncJoined_to(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncJoined_to(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1878,7 +1878,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLeft(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLeft(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -1886,7 +1886,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLen(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLen(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -1899,7 +1899,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLfooting(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLfooting(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1907,7 +1907,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLheading(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLheading(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1915,7 +1915,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLine(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLine(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1923,7 +1923,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLines_after(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLines_after(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1933,7 +1933,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLines_before(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLines_before(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1941,7 +1941,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncList(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncList(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1949,7 +1949,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLoad(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLoad(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -1957,7 +1957,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLock(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLock(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1965,7 +1965,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLog(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLog(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -1978,7 +1978,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLog10(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLog10(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -1986,7 +1986,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLov(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLov(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -1994,7 +1994,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLov_auto_select(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLov_auto_select(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2002,7 +2002,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLov_col(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLov_col(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2010,7 +2010,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLov_data(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLov_data(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2018,7 +2018,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLov_first(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLov_first(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2026,7 +2026,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLov_height(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLov_height(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2034,7 +2034,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLov_noheading(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLov_noheading(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2042,7 +2042,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLov_nosearch(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLov_nosearch(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2050,7 +2050,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLov_reduced_to(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLov_reduced_to(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2058,7 +2058,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLov_row(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLov_row(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2066,7 +2066,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLov_secondary(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLov_secondary(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2074,7 +2074,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLov_selection(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLov_selection(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2082,7 +2082,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLov_sorted_by(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLov_sorted_by(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2090,7 +2090,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLov_width(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLov_width(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2098,7 +2098,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLov_with(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLov_with(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2106,7 +2106,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLowercase(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLowercase(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -2114,7 +2114,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncLtrim(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncLtrim(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -2122,7 +2122,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncMail(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncMail(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2130,7 +2130,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncMenu(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncMenu(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2138,7 +2138,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncMenu_block(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncMenu_block(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkBlock
@@ -2146,7 +2146,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncMenu_form(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncMenu_form(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkForm
@@ -2154,7 +2154,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncMessage(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncMessage(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2162,7 +2162,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncMid(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncMid(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -2170,7 +2170,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncMod(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncMod(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -2178,7 +2178,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncModify_form(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncModify_form(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2186,7 +2186,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncNew(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncNew(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2194,7 +2194,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncNo_domain(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncNo_domain(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2202,7 +2202,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncNobell(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncNobell(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkFunction
@@ -2210,7 +2210,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncNoclear_buffer(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncNoclear_buffer(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2218,7 +2218,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncNodeadlock_exit(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncNodeadlock_exit(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2226,7 +2226,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncNoerase(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncNoerase(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2234,7 +2234,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncNoerror(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncNoerror(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2242,7 +2242,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncNoexit_forward(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncNoexit_forward(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2250,7 +2250,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncNoheading(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncNoheading(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2258,7 +2258,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncNolov_data(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncNolov_data(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2266,7 +2266,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncNorepeat(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncNorepeat(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2274,7 +2274,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncNostatus(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncNostatus(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2282,7 +2282,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncNototals(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncNototals(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsSpecial then
     Result := tkSpecial
@@ -2290,7 +2290,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncNounderlines(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncNounderlines(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -2305,7 +2305,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncNowait(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncNowait(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2313,7 +2313,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncOpen(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncOpen(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2321,7 +2321,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncOpen_text(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncOpen_text(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2329,7 +2329,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncOpt(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncOpt(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2337,7 +2337,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncOptions(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncOptions(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2345,7 +2345,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncOutput(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncOutput(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2353,7 +2353,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncOutput_block(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncOutput_block(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkBlock
@@ -2361,7 +2361,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncOutput_mask(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncOutput_mask(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2369,7 +2369,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncPause(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncPause(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2377,7 +2377,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncPause_block(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncPause_block(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkBlock
@@ -2385,7 +2385,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncPerform(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncPerform(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2393,7 +2393,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncPoly_to_binary(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncPoly_to_binary(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -2401,7 +2401,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncPos(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncPos(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2409,7 +2409,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncPrint(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncPrint(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2417,7 +2417,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncProcedure_form(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncProcedure_form(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkForm
@@ -2425,7 +2425,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncPrompt(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncPrompt(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2433,7 +2433,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncProtect(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncProtect(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2441,7 +2441,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncQuery(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncQuery(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2449,7 +2449,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncQuery_form(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncQuery_form(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkForm
@@ -2457,7 +2457,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncRandom(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncRandom(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2465,7 +2465,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncRead_line(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncRead_line(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2473,7 +2473,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncRead_only(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncRead_only(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2481,7 +2481,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncReceive(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncReceive(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2489,7 +2489,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncReceive_arguments(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncReceive_arguments(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2497,7 +2497,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncReceive_data(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncReceive_data(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2505,7 +2505,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncReceive_table(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncReceive_table(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2513,7 +2513,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncReduced_to(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncReduced_to(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2521,7 +2521,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncRelease(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncRelease(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2529,7 +2529,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncRemain(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncRemain(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2537,7 +2537,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncRepeat(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncRepeat(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -2550,7 +2550,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncReport(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncReport(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2558,7 +2558,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncReport_form(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncReport_form(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkForm
@@ -2566,7 +2566,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncReposition(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncReposition(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2574,7 +2574,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncRewind_text(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncRewind_text(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2582,7 +2582,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncRfooting(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncRfooting(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkQualifier
@@ -2590,7 +2590,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncRheading(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncRheading(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2598,7 +2598,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncRight(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncRight(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -2606,7 +2606,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncRollback(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncRollback(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2614,7 +2614,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncRound(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncRound(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -2622,7 +2622,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncRow(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncRow(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2632,7 +2632,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncRow_height(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncRow_height(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2640,7 +2640,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncSearch(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncSearch(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2648,7 +2648,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncSecondary(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncSecondary(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2656,7 +2656,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncSeconds(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncSeconds(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -2664,7 +2664,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncSelection(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncSelection(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2672,7 +2672,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncSend(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncSend(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2680,7 +2680,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncSend_data(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncSend_data(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2688,7 +2688,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncSend_message(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncSend_message(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2696,7 +2696,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncSend_table(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncSend_table(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2704,7 +2704,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncSequence(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncSequence(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2712,7 +2712,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncSeverity(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncSeverity(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2720,7 +2720,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncSin(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncSin(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -2728,7 +2728,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncSinh(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncSinh(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -2736,7 +2736,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncSorted_by(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncSorted_by(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2744,7 +2744,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncSource(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncSource(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2752,7 +2752,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncSource_if(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncSource_if(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2760,7 +2760,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncSqrt(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncSqrt(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -2768,7 +2768,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncStart_stream(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncStart_stream(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2776,7 +2776,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncStart_transaction(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncStart_transaction(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2784,7 +2784,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncStatistic(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncStatistic(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2792,7 +2792,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncStatus(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncStatus(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -2807,7 +2807,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncStream_name(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncStream_name(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2815,7 +2815,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncString(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncString(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -2823,7 +2823,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncSuccess(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncSuccess(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -2838,7 +2838,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncSwitch(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncSwitch(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2846,7 +2846,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncSwitch_base(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncSwitch_base(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2854,7 +2854,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncSystem(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncSystem(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2862,7 +2862,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncTable(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncTable(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2870,7 +2870,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncTable_form(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncTable_form(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkForm
@@ -2878,7 +2878,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncTable_search(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncTable_search(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2886,7 +2886,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncTag(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncTag(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2894,7 +2894,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncTag_length(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncTag_length(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2902,7 +2902,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncTan(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncTan(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -2910,7 +2910,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncTanh(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncTanh(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -2918,7 +2918,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncTarget(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncTarget(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2926,7 +2926,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncText(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncText(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -2939,7 +2939,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncText_only(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncText_only(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2947,7 +2947,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncTitle(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncTitle(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
   begin
@@ -2960,7 +2960,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncTo(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncTo(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and (FRange = rsAdd) then
   begin
@@ -2971,7 +2971,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncTop_line(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncTop_line(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsSpecial then
     Result := tkSpecial
@@ -2979,7 +2979,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncTotal(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncTotal(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -2987,7 +2987,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncTransfer(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncTransfer(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -2995,7 +2995,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncTrigger(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncTrigger(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -3003,7 +3003,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncTrim(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncTrim(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -3011,7 +3011,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncTsuppress(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncTsuppress(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsSpecial then
     Result := tkSpecial
@@ -3019,7 +3019,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncUnload(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncUnload(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -3027,7 +3027,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncUppercase(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncUppercase(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkFunction
@@ -3035,7 +3035,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncUse_if(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncUse_if(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -3043,7 +3043,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncUser_key(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncUser_key(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -3051,7 +3051,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncUsing(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncUsing(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -3059,7 +3059,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncUtilities(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncUtilities(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -3067,7 +3067,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncWait(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncWait(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -3075,7 +3075,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncWhile(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncWhile(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -3083,7 +3083,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncWidth(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncWidth(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -3091,7 +3091,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncWith(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncWith(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) and IsQuali then
     Result := tkQualifier
@@ -3099,7 +3099,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncWrite(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncWrite(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -3107,7 +3107,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncWrite_line(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncWrite_line(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -3115,7 +3115,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.FuncYesno_block(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.FuncYesno_block(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkBlock
@@ -3123,12 +3123,12 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynDmlSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterDml.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier;
 end;
 
-constructor TSynDmlSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterDml.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -3183,14 +3183,14 @@ begin
   fDefaultFilter := SYNS_FilterGembase;
 end;
 
-procedure TSynDmlSyn.AddressOpProc;
+procedure TSynEdit32HighlighterDml.AddressOpProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if FLine[FRun] = '@' then Inc(FRun);
 end;
 
-procedure TSynDmlSyn.AsciiCharProc;
+procedure TSynEdit32HighlighterDml.AsciiCharProc;
 
   function IsAsciiChar: Boolean;
   begin
@@ -3210,53 +3210,53 @@ begin
   until not IsAsciiChar;
 end;
 
-procedure TSynDmlSyn.SymbolProc;
+procedure TSynEdit32HighlighterDml.SymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynDmlSyn.CRProc;
+procedure TSynEdit32HighlighterDml.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
   if FLine[FRun] = #10 then Inc(FRun);
 end;
 
-procedure TSynDmlSyn.GreaterProc;
+procedure TSynEdit32HighlighterDml.GreaterProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if FLine[FRun] = '=' then Inc(FRun);
 end;
 
-procedure TSynDmlSyn.IdentProc;
+procedure TSynEdit32HighlighterDml.IdentProc;
 begin
   FTokenID := IdentKind((FLine + FRun));
   Inc(FRun, FStringLen);
   while IsIdentChar(FLine[FRun]) do Inc(FRun);
 end;
 
-procedure TSynDmlSyn.LFProc;
+procedure TSynEdit32HighlighterDml.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynDmlSyn.LowerProc;
+procedure TSynEdit32HighlighterDml.LowerProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if (FLine[FRun]= '=') or (FLine[FRun]= '>') then Inc(FRun);
 end;
 
-procedure TSynDmlSyn.NullProc;
+procedure TSynEdit32HighlighterDml.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynDmlSyn.NumberProc;
+procedure TSynEdit32HighlighterDml.NumberProc;
 begin
   Inc(FRun);
   FTokenID := tkNumber;
@@ -3270,14 +3270,14 @@ begin
   end;
 end;
 
-procedure TSynDmlSyn.PointProc;
+procedure TSynEdit32HighlighterDml.PointProc;
 begin
   FTokenID := tkSymbol;
   Inc(FRun);
   if (FLine[FRun]='.') or (FLine[FRun]=')') then Inc(FRun);
 end;
 
-procedure TSynDmlSyn.RemProc;
+procedure TSynEdit32HighlighterDml.RemProc;
 var
   p: PWideChar;
 begin
@@ -3299,13 +3299,13 @@ begin
   until IsLineEnd(FRun);
 end;
 
-procedure TSynDmlSyn.SpaceProc;
+procedure TSynEdit32HighlighterDml.SpaceProc;
 begin
   FTokenID := tkSpace;
   while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynDmlSyn.StringProc;
+procedure TSynEdit32HighlighterDml.StringProc;
 begin
   FTokenID := tkString;
   if (FLine[FRun + 1] = '"') and (FLine[FRun + 2] = '"') then Inc(FRun, 2);
@@ -3316,13 +3316,13 @@ begin
   if FLine[FRun] <> #0 then Inc(FRun);
 end;
 
-procedure TSynDmlSyn.UnknownProc;
+procedure TSynEdit32HighlighterDml.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynDmlSyn.Next;
+procedure TSynEdit32HighlighterDml.Next;
 begin
   fTokenPos := FRun;
    case FLine[FRun] of
@@ -3351,7 +3351,7 @@ begin
   inherited;
 end;
 
-function TSynDmlSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterDml.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -3365,12 +3365,12 @@ begin
   end;
 end;
 
-function TSynDmlSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterDml.GetTokenID: TtkTokenKind;
 begin
   Result:= FTokenID;
 end;
 
-function TSynDmlSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterDml.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkForm: Result := FFormAttri;
@@ -3391,41 +3391,41 @@ begin
   end;
 end;
 
-function TSynDmlSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterDml.GetTokenKind: integer;
 begin
   Result := Ord(GetTokenID);
 end;
 
-function TSynDmlSyn.GetRange: Pointer;
+function TSynEdit32HighlighterDml.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-procedure TSynDmlSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterDml.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-procedure TSynDmlSyn.ResetRange;
+procedure TSynEdit32HighlighterDml.ResetRange;
 begin
   FRange:= rsUnknown;
 end;
 
-function TSynDmlSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterDml.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterGembase;
 end;
 
-class function TSynDmlSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterDml.GetLanguageName: string;
 begin
   Result := SYNS_LangGembase;
 end;
 
-class function TSynDmlSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterDml.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangGembase;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynDmlSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterDml);
 end.

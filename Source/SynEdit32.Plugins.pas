@@ -285,7 +285,7 @@ begin
   { shortcurts aren't created while in design-time }
   if [csDesigning] * ComponentState = [csDesigning] then
   begin
-    if TSynEdit(aEditor).Keystrokes.FindShortcut(aNewShortCut) >= 0 then
+    if TSynEdit32(aEditor).Keystrokes.FindShortcut(aNewShortCut) >= 0 then
       raise ESynKeyError.Create(SYNS_EDuplicateShortCut)
     else
       Exit;
@@ -293,10 +293,10 @@ begin
   { tries to update old Keystroke }
   if aOldShortCut <> 0 then
   begin
-    iIndex := TSynEdit(aEditor).Keystrokes.FindShortcut(aOldShortCut);
+    iIndex := TSynEdit32(aEditor).Keystrokes.FindShortcut(aOldShortCut);
     if (iIndex >= 0) then
     begin
-      iKeystroke := TSynEdit(aEditor).Keystrokes[iIndex];
+      iKeystroke := TSynEdit32(aEditor).Keystrokes[iIndex];
       if iKeystroke.Command = aCommandID then
       begin
         iKeystroke.ShortCut := aNewShortCut;
@@ -305,7 +305,7 @@ begin
     end;
   end;
   { new Keystroke }
-  iKeystroke := TSynEdit(aEditor).Keystrokes.Add;
+  iKeystroke := TSynEdit32(aEditor).Keystrokes.Add;
   try
     iKeystroke.ShortCut := aNewShortCut;
   except
@@ -322,10 +322,10 @@ var
   iIndex: integer;
 begin
   aEditor.UnregisterCommandHandler(OnCommand);
-  iIndex := TSynEdit(aEditor).Keystrokes.FindShortcut(aShortCut);
+  iIndex := TSynEdit32(aEditor).Keystrokes.FindShortcut(aShortCut);
   if (iIndex >= 0) and
-    (TSynEdit(aEditor).Keystrokes[iIndex].Command = aCommandID) then
-    TSynEdit(aEditor).Keystrokes[iIndex].Free;
+    (TSynEdit32(aEditor).Keystrokes[iIndex].Command = aCommandID) then
+    TSynEdit32(aEditor).Keystrokes[iIndex].Free;
 end;
 
 { TAbstractSynHookerPlugin }

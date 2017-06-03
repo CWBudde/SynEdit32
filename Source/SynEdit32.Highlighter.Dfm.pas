@@ -65,7 +65,7 @@ type
   TRangeState = (rsANil, rsComment, rsUnKnown);
 
 type
-  TSynDfmSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterDfm = class(TSynEdit32CustomHighlighter)
   private
     FRange: TRangeState;
     FTokenID: TtkTokenKind;
@@ -278,9 +278,9 @@ begin
 end;
 {$ENDIF}
 
-{ TSynDfmSyn }
+{ TSynEdit32HighlighterDfm }
 
-constructor TSynDfmSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterDfm.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -307,7 +307,7 @@ begin
   FRange := rsUnknown;
 end;
 
-procedure TSynDfmSyn.AltProc;
+procedure TSynEdit32HighlighterDfm.AltProc;
 begin
   FTokenID := tkIdentifier;
   repeat
@@ -315,7 +315,7 @@ begin
   until not IsIdentChar(FLine[FRun]);
 end;
 
-procedure TSynDfmSyn.AsciiCharProc;
+procedure TSynEdit32HighlighterDfm.AsciiCharProc;
 begin
   FTokenID := tkString;
   repeat
@@ -323,20 +323,20 @@ begin
   until not CharInSet(FLine[FRun], ['0'..'9']);
 end;
 
-procedure TSynDfmSyn.BraceCloseProc;
+procedure TSynEdit32HighlighterDfm.BraceCloseProc;
 begin
   Inc(FRun);
   FRange := rsUnknown;
   FTokenID := tkIdentifier;
 end;
 
-procedure TSynDfmSyn.BraceOpenProc;
+procedure TSynEdit32HighlighterDfm.BraceOpenProc;
 begin
   FRange := rsComment;
   CommentProc;
 end;
 
-procedure TSynDfmSyn.CommentProc;
+procedure TSynEdit32HighlighterDfm.CommentProc;
 begin
   FTokenID := tkComment;
   repeat
@@ -349,14 +349,14 @@ begin
   until IsLineEnd(FRun);
 end;
 
-procedure TSynDfmSyn.CRProc;
+procedure TSynEdit32HighlighterDfm.CRProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
   if (FLine[FRun] = #10) then Inc(FRun);
 end;
 
-procedure TSynDfmSyn.EndProc;
+procedure TSynEdit32HighlighterDfm.EndProc;
 begin
   if CharInSet(FLine[FRun + 1], ['n', 'N']) and
      CharInSet(FLine[FRun + 2], ['d', 'D']) and
@@ -370,7 +370,7 @@ begin
     AltProc;
 end;
 
-procedure TSynDfmSyn.IntegerProc;
+procedure TSynEdit32HighlighterDfm.IntegerProc;
 
   function IsIntegerChar: Boolean;
   begin
@@ -389,19 +389,19 @@ begin
   until not IsIntegerChar;
 end;
 
-procedure TSynDfmSyn.LFProc;
+procedure TSynEdit32HighlighterDfm.LFProc;
 begin
   FTokenID := tkSpace;
   Inc(FRun);
 end;
 
-procedure TSynDfmSyn.NullProc;
+procedure TSynEdit32HighlighterDfm.NullProc;
 begin
   FTokenID := tkNull;
   Inc(FRun);
 end;
 
-procedure TSynDfmSyn.NumberProc;
+procedure TSynEdit32HighlighterDfm.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
@@ -425,7 +425,7 @@ begin
   until not IsNumberChar;
 end;
 
-procedure TSynDfmSyn.ObjectProc;
+procedure TSynEdit32HighlighterDfm.ObjectProc;
 begin
   if CharInSet(FLine[FRun + 1], ['b', 'B']) and
      CharInSet(FLine[FRun + 2], ['j', 'J']) and
@@ -442,7 +442,7 @@ begin
     AltProc;
 end;
 
-procedure TSynDfmSyn.InheritedProc;
+procedure TSynEdit32HighlighterDfm.InheritedProc;
 begin
   if CharInSet(FLine[FRun + 1], ['n', 'N']) and
      CharInSet(FLine[FRun + 2], ['h', 'H']) and
@@ -473,7 +473,7 @@ begin
     AltProc;
 end;
 
-procedure TSynDfmSyn.SpaceProc;
+procedure TSynEdit32HighlighterDfm.SpaceProc;
 begin
   FTokenID := tkSpace;
   repeat
@@ -481,7 +481,7 @@ begin
   until (FLine[FRun] > #32) or IsLineEnd(FRun);
 end;
 
-procedure TSynDfmSyn.StringProc;
+procedure TSynEdit32HighlighterDfm.StringProc;
 begin
   FTokenID := tkString;
   repeat
@@ -493,19 +493,19 @@ begin
   until IsLineEnd(FRun);
 end;
 
-procedure TSynDfmSyn.SymbolProc;
+procedure TSynEdit32HighlighterDfm.SymbolProc;
 begin
   Inc(FRun);
   FTokenID := tkSymbol;
 end;
 
-procedure TSynDfmSyn.UnknownProc;
+procedure TSynEdit32HighlighterDfm.UnknownProc;
 begin
   Inc(FRun);
   FTokenID := tkUnknown;
 end;
 
-procedure TSynDfmSyn.Next;
+procedure TSynEdit32HighlighterDfm.Next;
 begin
   fTokenPos := FRun;
   if FRange = rsComment then
@@ -542,7 +542,7 @@ begin
   inherited;
 end;
 
-function TSynDfmSyn.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterDfm.GetDefaultAttribute(Index: integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
     SYN_ATTR_COMMENT: Result := FCommentAttri;
@@ -556,17 +556,17 @@ begin
   end;
 end;
 
-function TSynDfmSyn.GetRange: Pointer;
+function TSynEdit32HighlighterDfm.GetRange: Pointer;
 begin
   Result := Pointer(FRange);
 end;
 
-function TSynDfmSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterDfm.GetTokenID: TtkTokenKind;
 begin
   Result := FTokenID;
 end;
 
-function TSynDfmSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterDfm.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case FTokenID of
     tkComment: Result := FCommentAttri;
@@ -581,32 +581,32 @@ begin
   end;
 end;
 
-function TSynDfmSyn.GetTokenKind: integer;
+function TSynEdit32HighlighterDfm.GetTokenKind: integer;
 begin
   Result := Ord(FTokenID);
 end;
 
-procedure TSynDfmSyn.ResetRange;
+procedure TSynEdit32HighlighterDfm.ResetRange;
 begin
   FRange := rsUnknown;
 end;
 
-procedure TSynDfmSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterDfm.SetRange(Value: Pointer);
 begin
   FRange := TRangeState(Value);
 end;
 
-function TSynDfmSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterDfm.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterDFM;
 end;
 
-class function TSynDfmSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterDfm.GetLanguageName: string;
 begin
   Result := SYNS_LangDfm;
 end;
 
-function TSynDfmSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterDfm.GetSampleSource: UnicodeString;
 begin
   Result := '{ Delphi/C++ Builder Form Definitions }'#13#10 +
             'object TestForm: TTestForm'#13#10 +
@@ -616,11 +616,11 @@ begin
             'end';
 end; { GetSampleSource }
 
-class function TSynDfmSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterDfm.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangDfm;
 end;
 
 initialization
-  RegisterPlaceableHighlighter(TSynDfmSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterDfm);
 end.
