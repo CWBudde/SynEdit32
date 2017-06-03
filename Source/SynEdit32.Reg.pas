@@ -66,7 +66,7 @@ uses
   SynEdit32.OptionsDialog,
   SynEdit32.Highlighter.Multi,
   SynEdit32.Highlighter.ADSP21xx,
-//  SynEdit32.Highlighter.Asm,
+  SynEdit32.Highlighter.Assembly,
   SynEdit32.Highlighter.AsmMASM,
   SynEdit32.Highlighter.AWK,
   SynEdit32.Highlighter.Baan,
@@ -88,7 +88,7 @@ uses
   SynEdit32.Highlighter.Foxpro,
   SynEdit32.Highlighter.Galaxy,
   SynEdit32.Highlighter.General,
-//  SynEdit32.Highlighter.Go,
+  SynEdit32.Highlighter.Go,
   SynEdit32.Highlighter.Haskell,
   SynEdit32.Highlighter.HC11,
   SynEdit32.Highlighter.HP48,
@@ -149,7 +149,7 @@ begin
   GroupDescendentsWith(TSynEdit32HighlighterMulti, TSynEdit32);
   GroupDescendentsWith(TSynEdit32BaseCompletionProposal, TSynEdit32);
   GroupDescendentsWith(TSynEdit32AutoComplete, TSynEdit32);
-  GroupDescendentsWith(TAbstractSynPlugin, TSynEdit32);
+  GroupDescendentsWith(TAbstractSynEdit32Plugin, TSynEdit32);
   GroupDescendentsWith(TCustomSynEdit32AutoCorrect, TSynEdit32);
   GroupDescendentsWith(TSynEdit32Print, TSynEdit32);
   GroupDescendentsWith(TSynEdit32PrintPreview, TSynEdit32);
@@ -179,7 +179,7 @@ begin
     TSynEdit32HighlighterJava,
     TSynEdit32HighlighterM3, TSynEdit32HighlighterPas, TSynEdit32HighlighterVB,
     TSynEdit32HighlighterCobol, TSynEdit32HighlighterCS,
-    //TSynEdit32HighlighterGo,
+    TSynEdit32HighlighterGo,
     // internet
     TSynEdit32HighlighterCss, TSynEdit32HighlighterHTML,
     TSynEdit32HighlighterJScript, TSynEdit32HighlighterPHP,
@@ -199,7 +199,7 @@ begin
     TSynEdit32HighlighterFoxpro, TSynEdit32HighlighterSQL,
     TSynEdit32HighlighterSDD,
     //assembler
-    TSynEdit32HighlighterADSP21xx, //TSynEdit32HighlighterAsm,
+    TSynEdit32HighlighterADSP21xx, TSynEdit32HighlighterAsm,
     TSynEdit32HighlighterHC11, TSynEdit32HighlighterHP48,
     TSynEdit32HighlighterST, TSynEdit32HighlighterAsmMASM,
     //data modeling

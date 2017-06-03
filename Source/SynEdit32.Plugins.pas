@@ -53,7 +53,7 @@ uses
   Classes;
 
 type
-  TAbstractSynPlugin = class(TComponent)
+  TAbstractSynEdit32Plugin = class(TComponent)
   private
     procedure SetEditor(const Value: TCustomSynEdit32);
     function GetEditors(aIndex: integer): TCustomSynEdit32;
@@ -75,7 +75,7 @@ type
     property Editor: TCustomSynEdit32 read GetEditor write SetEditor;
   end;
 
-  TAbstractSynHookerPlugin = class(TAbstractSynPlugin)
+  TAbstractSynEdit32HookerPlugin = class(TAbstractSynEdit32Plugin)
   protected
     procedure HookEditor(aEditor: TCustomSynEdit32; aCommandID: TSynEditorCommand;
       aOldShortCut, aNewShortCut: TShortCut);
@@ -88,7 +88,7 @@ type
 
   TPluginState = (psNone, psExecuting, psAccepting, psCancelling);
 
-  TAbstractSynSingleHookPlugin = class(TAbstractSynHookerPlugin)
+  TAbstractSynEdit32SingleHookPlugin = class(TAbstractSynEdit32HookerPlugin)
   private
     FCommandID: TSynEditorCommand;
     function IsShortCutStored: Boolean;
@@ -118,9 +118,9 @@ type
       stored IsShortCutStored;
   end;
 
-  { use TAbstractSynCompletion for non-visual completion }
+  { use TAbstractEdit32SynCompletion for non-visual completion }
 
-  TAbstractSynCompletion = class(TAbstractSynSingleHookPlugin)
+  TAbstractEdit32SynCompletion = class(TAbstractSynEdit32SingleHookPlugin)
   protected
     FCurrentString: UnicodeString;
   protected
@@ -167,9 +167,9 @@ begin
     gCurrentCommand := aCmd;
 end;
 
-{ TAbstractSynPlugin }
+{ TAbstractSynEdit32Plugin }
 
-function TAbstractSynPlugin.AddEditor(aEditor: TCustomSynEdit32): integer;
+function TAbstractSynEdit32Plugin.AddEditor(aEditor: TCustomSynEdit32): integer;
 begin
   if FEditors = nil then
   begin
@@ -186,7 +186,7 @@ begin
   DoAddEditor(aEditor);
 end;
 
-destructor TAbstractSynPlugin.Destroy;
+destructor TAbstractSynEdit32Plugin.Destroy;
 begin
   { RemoveEditor will free FEditors when it reaches count = 0}
   while Assigned(FEditors) do
@@ -194,7 +194,7 @@ begin
   inherited;
 end;
 
-procedure TAbstractSynPlugin.Notification(aComponent: TComponent;
+procedure TAbstractSynEdit32Plugin.Notification(aComponent: TComponent;
   aOperation: TOperation);
 begin
   inherited;
@@ -205,17 +205,17 @@ begin
   end;
 end;
 
-procedure TAbstractSynPlugin.DoAddEditor(aEditor: TCustomSynEdit32);
+procedure TAbstractSynEdit32Plugin.DoAddEditor(aEditor: TCustomSynEdit32);
 begin
 
 end;
 
-procedure TAbstractSynPlugin.DoRemoveEditor(aEditor: TCustomSynEdit32);
+procedure TAbstractSynEdit32Plugin.DoRemoveEditor(aEditor: TCustomSynEdit32);
 begin
 
 end;
 
-function TAbstractSynPlugin.RemoveEditor(aEditor: TCustomSynEdit32): integer;
+function TAbstractSynEdit32Plugin.RemoveEditor(aEditor: TCustomSynEdit32): integer;
 begin
   if FEditors = nil then
   begin
@@ -233,7 +233,7 @@ begin
     DoRemoveEditor(aEditor);
 end;
 
-procedure TAbstractSynPlugin.SetEditor(const Value: TCustomSynEdit32);
+procedure TAbstractSynEdit32Plugin.SetEditor(const Value: TCustomSynEdit32);
 var
   iEditor: TCustomSynEdit32;
 begin
@@ -252,12 +252,12 @@ begin
   end;
 end;
 
-function TAbstractSynPlugin.GetEditors(aIndex: integer): TCustomSynEdit32;
+function TAbstractSynEdit32Plugin.GetEditors(aIndex: integer): TCustomSynEdit32;
 begin
   Result := TCustomSynEdit32(FEditors[aIndex]);
 end;
 
-function TAbstractSynPlugin.GetEditor: TCustomSynEdit32;
+function TAbstractSynEdit32Plugin.GetEditor: TCustomSynEdit32;
 begin
   if FEditors <> nil then
     Result := FEditors[0]
@@ -265,7 +265,7 @@ begin
     Result := nil;
 end;
 
-function TAbstractSynPlugin.GetEditorCount: integer;
+function TAbstractSynEdit32Plugin.GetEditorCount: integer;
 begin
   if FEditors <> nil then
     Result := FEditors.Count
@@ -273,9 +273,9 @@ begin
     Result := 0;
 end;
 
-{ TAbstractSynHookerPlugin }
+{ TAbstractSynEdit32HookerPlugin }
 
-procedure TAbstractSynHookerPlugin.HookEditor(aEditor: TCustomSynEdit32;
+procedure TAbstractSynEdit32HookerPlugin.HookEditor(aEditor: TCustomSynEdit32;
   aCommandID: TSynEditorCommand; aOldShortCut, aNewShortCut: TShortCut);
 var
   iIndex: integer;
@@ -316,7 +316,7 @@ begin
   aEditor.RegisterCommandHandler(OnCommand, Self);
 end;
 
-procedure TAbstractSynHookerPlugin.UnHookEditor(aEditor: TCustomSynEdit32;
+procedure TAbstractSynEdit32HookerPlugin.UnHookEditor(aEditor: TCustomSynEdit32;
   aCommandID: TSynEditorCommand; aShortCut: TShortCut);
 var
   iIndex: integer;
@@ -328,9 +328,9 @@ begin
     TSynEdit32(aEditor).Keystrokes[iIndex].Free;
 end;
 
-{ TAbstractSynHookerPlugin }
+{ TAbstractSynEdit32HookerPlugin }
 
-procedure TAbstractSynSingleHookPlugin.Accept;
+procedure TAbstractSynEdit32SingleHookPlugin.Accept;
 begin
   FState := psAccepting;
   try
@@ -341,7 +341,7 @@ begin
   end;
 end;
 
-procedure TAbstractSynSingleHookPlugin.Cancel;
+procedure TAbstractSynEdit32SingleHookPlugin.Cancel;
 begin
   FState := psCancelling;
   try
@@ -352,19 +352,19 @@ begin
   end;
 end;
 
-constructor TAbstractSynSingleHookPlugin.Create(aOwner: TComponent);
+constructor TAbstractSynEdit32SingleHookPlugin.Create(aOwner: TComponent);
 begin
   inherited;
   FCommandID := NewPluginCommand;
   FShortCut := DefaultShortCut;
 end;
 
-class function TAbstractSynSingleHookPlugin.DefaultShortCut: TShortCut;
+class function TAbstractSynEdit32SingleHookPlugin.DefaultShortCut: TShortCut;
 begin
   Result := 0;
 end;
 
-destructor TAbstractSynSingleHookPlugin.Destroy;
+destructor TAbstractSynEdit32SingleHookPlugin.Destroy;
 begin
   if Executing then
     Cancel;
@@ -372,14 +372,14 @@ begin
   inherited;
 end;
 
-procedure TAbstractSynSingleHookPlugin.DoAddEditor(
+procedure TAbstractSynEdit32SingleHookPlugin.DoAddEditor(
   aEditor: TCustomSynEdit32);
 begin
   if ShortCut <> 0 then
     HookEditor(aEditor, CommandID, 0, ShortCut);
 end;
 
-procedure TAbstractSynSingleHookPlugin.Execute(aEditor: TCustomSynEdit32);
+procedure TAbstractSynEdit32SingleHookPlugin.Execute(aEditor: TCustomSynEdit32);
 begin
   if Executing then
     Cancel;
@@ -395,17 +395,17 @@ begin
   end;
 end;
 
-function TAbstractSynSingleHookPlugin.Executing: boolean;
+function TAbstractSynEdit32SingleHookPlugin.Executing: boolean;
 begin
   Result := FState = psExecuting;
 end;
 
-function TAbstractSynSingleHookPlugin.IsShortCutStored: Boolean;
+function TAbstractSynEdit32SingleHookPlugin.IsShortCutStored: Boolean;
 begin
   Result := FShortCut <> DefaultShortCut;
 end;
 
-procedure TAbstractSynSingleHookPlugin.DoRemoveEditor(aEditor: TCustomSynEdit32);
+procedure TAbstractSynEdit32SingleHookPlugin.DoRemoveEditor(aEditor: TCustomSynEdit32);
 begin
   if ShortCut <> 0 then
     UnHookEditor(aEditor, CommandID, ShortCut);
@@ -413,7 +413,7 @@ begin
     Cancel;
 end;
 
-procedure TAbstractSynSingleHookPlugin.SetShortCut(const Value: TShortCut);
+procedure TAbstractSynEdit32SingleHookPlugin.SetShortCut(const Value: TShortCut);
 var
   cEditor: integer;
 begin
@@ -434,9 +434,9 @@ begin
   end;
 end;
 
-{ TAbstractSynCompletion }
+{ TAbstractEdit32SynCompletion }
 
-function TAbstractSynCompletion.GetCurrentEditorString: UnicodeString;
+function TAbstractEdit32SynCompletion.GetCurrentEditorString: UnicodeString;
 var
   S: UnicodeString;
   Col: integer;
@@ -452,22 +452,22 @@ begin
   end;
 end;
 
-procedure TAbstractSynCompletion.DoAccept;
+procedure TAbstractEdit32SynCompletion.DoAccept;
 begin
   FCurrentString := '';
 end;
 
-procedure TAbstractSynCompletion.DoCancel;
+procedure TAbstractEdit32SynCompletion.DoCancel;
 begin
   FCurrentString := '';
 end;
 
-procedure TAbstractSynCompletion.DoExecute;
+procedure TAbstractEdit32SynCompletion.DoExecute;
 begin
   CurrentString := GetCurrentEditorString;
 end;
 
-procedure TAbstractSynCompletion.OnCommand(Sender: TObject;
+procedure TAbstractEdit32SynCompletion.OnCommand(Sender: TObject;
   AfterProcessing: boolean; var Handled: boolean;
   var Command: TSynEditorCommand; var AChar: WideChar; Data,
   HandlerData: Pointer);
@@ -544,12 +544,12 @@ begin
     end; {endif Sender = CurrentEditor}
 end;
 
-procedure TAbstractSynCompletion.SetCurrentString(const Value: UnicodeString);
+procedure TAbstractEdit32SynCompletion.SetCurrentString(const Value: UnicodeString);
 begin
   FCurrentString := Value;
 end;
 
-procedure TAbstractSynCompletion.AddEditor(aEditor: TCustomSynEdit32);
+procedure TAbstractEdit32SynCompletion.AddEditor(aEditor: TCustomSynEdit32);
 begin
   inherited AddEditor(aEditor);
 end;

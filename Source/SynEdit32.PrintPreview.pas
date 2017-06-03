@@ -78,7 +78,7 @@ type
   end;
   {$ENDIF}
 
-  TSynEditPrintPreview = class(TCustomControl)
+  TSynEdit32PrintPreview = class(TCustomControl)
   protected
     FBorderStyle: TBorderStyle;
     FSynEditPrint: TSynEdit32Print;
@@ -169,9 +169,9 @@ const
   MARGIN_Y = 12; // margin height above and below page
   SHADOW_SIZE = 2; // page shadow width
 
-{ TSynEditPrintPreview }
+{ TSynEdit32PrintPreview }
 
-constructor TSynEditPrintPreview.Create(AOwner: TComponent);
+constructor TSynEdit32PrintPreview.Create(AOwner: TComponent);
 begin
   inherited;
   ControlStyle := ControlStyle + [csNeedsBorderPaint];
@@ -190,7 +190,7 @@ begin
   FWheelAccumulator := 0;
 end;
 
-procedure TSynEditPrintPreview.CreateParams(var Params: TCreateParams);
+procedure TSynEdit32PrintPreview.CreateParams(var Params: TCreateParams);
 const
   BorderStyles: array[TBorderStyle] of DWord = (0, WS_BORDER);
 begin
@@ -205,7 +205,7 @@ begin
   end;
 end;
 
-function TSynEditPrintPreview.GetPageHeightFromWidth(AWidth: Integer): Integer;
+function TSynEdit32PrintPreview.GetPageHeightFromWidth(AWidth: Integer): Integer;
 begin
   if Assigned(FSynEditPrint) then begin
     with FSynEditPrint.PrinterInfo do
@@ -215,7 +215,7 @@ begin
     Result := MulDiv(AWidth, 141, 100); // fake A4 size
 end;
 
-function TSynEditPrintPreview.GetPageWidthFromHeight(AHeight: Integer): Integer;
+function TSynEdit32PrintPreview.GetPageWidthFromHeight(AHeight: Integer): Integer;
 begin
   if Assigned(FSynEditPrint) then begin
     with FSynEditPrint.PrinterInfo do
@@ -225,7 +225,7 @@ begin
     Result := MulDiv(AHeight, 100, 141); // fake A4 size
 end;
 
-function TSynEditPrintPreview.GetPageHeight100Percent: Integer;
+function TSynEdit32PrintPreview.GetPageHeight100Percent: Integer;
 var
   DC: HDC;
   ScreenDPI: Integer;
@@ -239,7 +239,7 @@ begin
       Result := MulDiv(PhysicalHeight, ScreenDPI, YPixPrInch);
 end;
 
-function TSynEditPrintPreview.GetPageWidth100Percent: Integer;
+function TSynEdit32PrintPreview.GetPageWidth100Percent: Integer;
 var
   DC: HDC;
   ScreenDPI: Integer;
@@ -253,7 +253,7 @@ begin
       Result := MulDiv(PhysicalWidth, ScreenDPI, XPixPrInch);
 end;
 
-procedure TSynEditPrintPreview.Notification(AComponent: TComponent;
+procedure TSynEdit32PrintPreview.Notification(AComponent: TComponent;
   Operation: TOperation);
 begin
   inherited;
@@ -261,7 +261,7 @@ begin
     SynEditPrint := nil;
 end;
 
-procedure TSynEditPrintPreview.PaintPaper;
+procedure TSynEdit32PrintPreview.PaintPaper;
 var
   rcClip, rcPaper: TRect;
   {$IFNDEF SYN_CLX}
@@ -321,7 +321,7 @@ begin
   end;
 end;
 
-procedure TSynEditPrintPreview.Paint;
+procedure TSynEdit32PrintPreview.Paint;
 var
   ptOrgScreen: TPoint;
 begin
@@ -359,12 +359,12 @@ begin
   end;
 end;
 
-procedure TSynEditPrintPreview.ScrollHorzFor(Value: Integer);
+procedure TSynEdit32PrintPreview.ScrollHorzFor(Value: Integer);
 begin
   ScrollHorzTo(FScrollPosition.X + Value);
 end;
 
-procedure TSynEditPrintPreview.ScrollHorzTo(Value: Integer);
+procedure TSynEdit32PrintPreview.ScrollHorzTo(Value: Integer);
 var
   nW, n: Integer;
 begin
@@ -389,12 +389,12 @@ begin
   end;
 end;
 
-procedure TSynEditPrintPreview.ScrollVertFor(Value: Integer);
+procedure TSynEdit32PrintPreview.ScrollVertFor(Value: Integer);
 begin
   ScrollVertTo(FScrollPosition.Y + Value);
 end;
 
-procedure TSynEditPrintPreview.ScrollVertTo(Value: Integer);
+procedure TSynEdit32PrintPreview.ScrollVertTo(Value: Integer);
 var
   nH, n: Integer;
 begin
@@ -419,7 +419,7 @@ begin
   end;
 end;
 
-procedure TSynEditPrintPreview.SizeChanged;
+procedure TSynEdit32PrintPreview.SizeChanged;
 var
   nWDef: Integer;
 begin
@@ -459,7 +459,7 @@ begin
 end;
 
 
-procedure TSynEditPrintPreview.UpdateScrollbars;
+procedure TSynEdit32PrintPreview.UpdateScrollbars;
 {$IFNDEF SYN_CLX}
 var
   si: TScrollInfo;
@@ -516,7 +516,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TSynEditPrintPreview.SetBorderStyle(Value: TBorderStyle);
+procedure TSynEdit32PrintPreview.SetBorderStyle(Value: TBorderStyle);
 begin
   if (Value <> FBorderStyle) then
   begin
@@ -527,7 +527,7 @@ begin
   end;
 end;
 
-procedure TSynEditPrintPreview.SetPageBG(Value: TColor);
+procedure TSynEdit32PrintPreview.SetPageBG(Value: TColor);
 begin
   if (FPageBG <> Value) then
   begin
@@ -536,7 +536,7 @@ begin
   end;
 end;
 
-procedure TSynEditPrintPreview.SetSynEditPrint(Value: TSynEdit32Print);
+procedure TSynEdit32PrintPreview.SetSynEditPrint(Value: TSynEdit32Print);
 begin
   if (FSynEditPrint <> Value) then
   begin
@@ -546,7 +546,7 @@ begin
   end;
 end;
 
-procedure TSynEditPrintPreview.SetScaleMode(Value: TSynPreviewScale);
+procedure TSynEdit32PrintPreview.SetScaleMode(Value: TSynPreviewScale);
 begin
   if (FScaleMode <> Value) then begin
     FScaleMode := Value;
@@ -558,7 +558,7 @@ begin
   end;
 end;
 
-procedure TSynEditPrintPreview.SetScalePercent(Value: Integer);
+procedure TSynEdit32PrintPreview.SetScalePercent(Value: Integer);
 begin
   if (FScalePercent <> Value) then begin
     FScaleMode := pscUserScaled;
@@ -573,12 +573,12 @@ begin
 end;
 
 {$IFNDEF SYN_CLX}
-procedure TSynEditPrintPreview.WMEraseBkgnd(var Msg: TWMEraseBkgnd);
+procedure TSynEdit32PrintPreview.WMEraseBkgnd(var Msg: TWMEraseBkgnd);
 begin
   Msg.Result := 1;
 end;
 
-procedure TSynEditPrintPreview.WMHScroll(var Msg: TWMHScroll);
+procedure TSynEdit32PrintPreview.WMHScroll(var Msg: TWMHScroll);
 var
   nW: Integer;
 begin
@@ -596,7 +596,7 @@ begin
   end;
 end;
 
-procedure TSynEditPrintPreview.WMSize(var Msg: TWMSize);
+procedure TSynEdit32PrintPreview.WMSize(var Msg: TWMSize);
 begin
   inherited;
   if not (csDesigning in ComponentState) then SizeChanged;
@@ -614,7 +614,7 @@ begin
   Result := ScrollHintWnd;
 end;
 
-procedure TSynEditPrintPreview.WMVScroll(var Msg: TWMVScroll);
+procedure TSynEdit32PrintPreview.WMVScroll(var Msg: TWMVScroll);
 var
   nH: Integer;
   s: string;
@@ -695,7 +695,7 @@ begin
   end;
 end;
 
-procedure TSynEditPrintPreview.WMMouseWheel(var Message: TWMMouseWheel);
+procedure TSynEdit32PrintPreview.WMMouseWheel(var Message: TWMMouseWheel);
 {$IFNDEF SYN_COMPILER_3_UP}
 const
   WHEEL_DELTA = 120;
@@ -747,7 +747,7 @@ end;
 
 {$ENDIF}
 
-procedure TSynEditPrintPreview.UpdatePreview;
+procedure TSynEdit32PrintPreview.UpdatePreview;
 var
   OldScale: Integer;
   OldMode: TSynPreviewScale;
@@ -766,7 +766,7 @@ begin
     FOnPreviewPage(Self, FPageNumber);
 end;
 
-procedure TSynEditPrintPreview.FirstPage;
+procedure TSynEdit32PrintPreview.FirstPage;
 begin
   FPageNumber := 1;
   if Assigned(FOnPreviewPage) then
@@ -774,7 +774,7 @@ begin
   Invalidate;
 end;
 
-procedure TSynEditPrintPreview.LastPage;
+procedure TSynEdit32PrintPreview.LastPage;
 begin
   if Assigned(FSynEditPrint) then
     FPageNumber := FSynEditPrint.PageCount;
@@ -783,7 +783,7 @@ begin
   Invalidate;
 end;
 
-procedure TSynEditPrintPreview.NextPage;
+procedure TSynEdit32PrintPreview.NextPage;
 begin
   FPageNumber := FPageNumber + 1;
   if Assigned(FSynEditPrint) and (FPageNumber > FSynEditPrint.PageCount) then
@@ -793,7 +793,7 @@ begin
   Invalidate;
 end;
 
-procedure TSynEditPrintPreview.PreviousPage;
+procedure TSynEdit32PrintPreview.PreviousPage;
 begin
   FPageNumber := FPageNumber - 1;
   if Assigned(FSynEditPrint) and (FPageNumber < 1) then
@@ -803,7 +803,7 @@ begin
   Invalidate;
 end;
 
-procedure TSynEditPrintPreview.Print;
+procedure TSynEdit32PrintPreview.Print;
 begin
   if Assigned(FSynEditPrint) then begin
     FSynEditPrint.Print;
@@ -811,7 +811,7 @@ begin
   end;
 end;
 
-function TSynEditPrintPreview.GetPageCount: Integer;
+function TSynEdit32PrintPreview.GetPageCount: Integer;
 begin
   Result := SynEditPrint.PageCount;
 end;

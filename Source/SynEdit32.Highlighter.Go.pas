@@ -78,18 +78,18 @@ type
   TIdentFuncTableFunc = function (Index: Integer): TtkTokenKind of object;
 
 type
-  TSynGoSyn = class(TSynEdit32CustomHighlighter)
+  TSynEdit32HighlighterGo = class(TSynEdit32CustomHighlighter)
   private
-    fRange: TRangeState;
-    fTokenID: TtkTokenKind;
-    fIdentFuncTable: array[0..88] of TIdentFuncTableFunc;
-    fCommentAttri: TSynEdit32HighlighterAttributes;
-    fNumberAttri: TSynEdit32HighlighterAttributes;
-    fIdentifierAttri: TSynEdit32HighlighterAttributes;
-    fKeyAttri: TSynEdit32HighlighterAttributes;
-    fSpaceAttri: TSynEdit32HighlighterAttributes;
-    fStringAttri: TSynEdit32HighlighterAttributes;
-    fSymbolAttri: TSynEdit32HighlighterAttributes;
+    FRange: TRangeState;
+    FTokenID: TtkTokenKind;
+    FIdentFuncTable: array[0..88] of TIdentFuncTableFunc;
+    FCommentAttri: TSynEdit32HighlighterAttributes;
+    FNumberAttri: TSynEdit32HighlighterAttributes;
+    FIdentifierAttri: TSynEdit32HighlighterAttributes;
+    FKeyAttri: TSynEdit32HighlighterAttributes;
+    FSpaceAttri: TSynEdit32HighlighterAttributes;
+    FStringAttri: TSynEdit32HighlighterAttributes;
+    FSymbolAttri: TSynEdit32HighlighterAttributes;
     function HashKey(Str: PWideChar): Cardinal;
     function FuncBool(Index: Integer): TtkTokenKind;
     function FuncBreak(Index: Integer): TtkTokenKind;
@@ -169,13 +169,13 @@ type
     function IsIdentChar(AChar: WideChar): Boolean; override;
     procedure Next; override;
   published
-    property CommentAttri: TSynEdit32HighlighterAttributes read fCommentAttri write fCommentAttri;
-    property NumberAttri: TSynEdit32HighlighterAttributes read fNumberAttri write fNumberAttri;
-    property IdentifierAttri: TSynEdit32HighlighterAttributes read fIdentifierAttri write fIdentifierAttri;
-    property KeyAttri: TSynEdit32HighlighterAttributes read fKeyAttri write fKeyAttri;
-    property SpaceAttri: TSynEdit32HighlighterAttributes read fSpaceAttri write fSpaceAttri;
-    property StringAttri: TSynEdit32HighlighterAttributes read fStringAttri write fStringAttri;
-    property SymbolAttri: TSynEdit32HighlighterAttributes read fSymbolAttri write fSymbolAttri;
+    property CommentAttri: TSynEdit32HighlighterAttributes read FCommentAttri write FCommentAttri;
+    property NumberAttri: TSynEdit32HighlighterAttributes read FNumberAttri write FNumberAttri;
+    property IdentifierAttri: TSynEdit32HighlighterAttributes read FIdentifierAttri write FIdentifierAttri;
+    property KeyAttri: TSynEdit32HighlighterAttributes read FKeyAttri write FKeyAttri;
+    property SpaceAttri: TSynEdit32HighlighterAttributes read FSpaceAttri write FSpaceAttri;
+    property StringAttri: TSynEdit32HighlighterAttributes read FStringAttri write FStringAttri;
+    property SymbolAttri: TSynEdit32HighlighterAttributes read FSymbolAttri write FSymbolAttri;
   end;
 
 implementation
@@ -206,62 +206,62 @@ const
     -1, -1, -1, -1, 18, 19, 38, -1, 42, 12, -1, 0 
   );
 
-procedure TSynGoSyn.InitIdent;
+procedure TSynEdit32HighlighterGo.InitIdent;
 var
   i: Integer;
 begin
-  for i := Low(fIdentFuncTable) to High(fIdentFuncTable) do
+  for i := Low(FIdentFuncTable) to High(FIdentFuncTable) do
     if KeyIndices[i] = -1 then
-      fIdentFuncTable[i] := AltFunc;
+      FIdentFuncTable[i] := AltFunc;
 
-  fIdentFuncTable[88] := FuncBool;
-  fIdentFuncTable[14] := FuncBreak;
-  fIdentFuncTable[65] := FuncByte;
-  fIdentFuncTable[49] := FuncCase;
-  fIdentFuncTable[58] := FuncChan;
-  fIdentFuncTable[61] := FuncComplex128;
-  fIdentFuncTable[59] := FuncComplex64;
-  fIdentFuncTable[5] := FuncConst;
-  fIdentFuncTable[73] := FuncContinue;
-  fIdentFuncTable[43] := FuncDefault;
-  fIdentFuncTable[64] := FuncDefer;
-  fIdentFuncTable[8] := FuncElse;
-  fIdentFuncTable[86] := FuncFallthrough;
-  fIdentFuncTable[44] := FuncFloat32;
-  fIdentFuncTable[11] := FuncFloat64;
-  fIdentFuncTable[52] := FuncFor;
-  fIdentFuncTable[66] := FuncFunc;
-  fIdentFuncTable[26] := FuncGo;
-  fIdentFuncTable[81] := FuncGoto;
-  fIdentFuncTable[82] := FuncIf;
-  fIdentFuncTable[45] := FuncImport;
-  fIdentFuncTable[13] := FuncInt;
-  fIdentFuncTable[10] := FuncInt16;
-  fIdentFuncTable[34] := FuncInt32;
-  fIdentFuncTable[1] := FuncInt64;
-  fIdentFuncTable[55] := FuncInt8;
-  fIdentFuncTable[32] := FuncInterface;
-  fIdentFuncTable[57] := FuncMap;
-  fIdentFuncTable[23] := FuncPackage;
-  fIdentFuncTable[0] := FuncRange;
-  fIdentFuncTable[31] := FuncReturn;
-  fIdentFuncTable[19] := FuncRune;
-  fIdentFuncTable[30] := FuncSelect;
-  fIdentFuncTable[76] := FuncString;
-  fIdentFuncTable[36] := FuncStruct;
-  fIdentFuncTable[47] := FuncSwitch;
-  fIdentFuncTable[75] := FuncType;
-  fIdentFuncTable[7] := FuncUint;
-  fIdentFuncTable[83] := FuncUint16;
-  fIdentFuncTable[18] := FuncUint32;
-  fIdentFuncTable[74] := FuncUint64;
-  fIdentFuncTable[33] := FuncUint8;
-  fIdentFuncTable[85] := FuncUintptr;
-  fIdentFuncTable[70] := FuncVar;
+  FIdentFuncTable[88] := FuncBool;
+  FIdentFuncTable[14] := FuncBreak;
+  FIdentFuncTable[65] := FuncByte;
+  FIdentFuncTable[49] := FuncCase;
+  FIdentFuncTable[58] := FuncChan;
+  FIdentFuncTable[61] := FuncComplex128;
+  FIdentFuncTable[59] := FuncComplex64;
+  FIdentFuncTable[5] := FuncConst;
+  FIdentFuncTable[73] := FuncContinue;
+  FIdentFuncTable[43] := FuncDefault;
+  FIdentFuncTable[64] := FuncDefer;
+  FIdentFuncTable[8] := FuncElse;
+  FIdentFuncTable[86] := FuncFallthrough;
+  FIdentFuncTable[44] := FuncFloat32;
+  FIdentFuncTable[11] := FuncFloat64;
+  FIdentFuncTable[52] := FuncFor;
+  FIdentFuncTable[66] := FuncFunc;
+  FIdentFuncTable[26] := FuncGo;
+  FIdentFuncTable[81] := FuncGoto;
+  FIdentFuncTable[82] := FuncIf;
+  FIdentFuncTable[45] := FuncImport;
+  FIdentFuncTable[13] := FuncInt;
+  FIdentFuncTable[10] := FuncInt16;
+  FIdentFuncTable[34] := FuncInt32;
+  FIdentFuncTable[1] := FuncInt64;
+  FIdentFuncTable[55] := FuncInt8;
+  FIdentFuncTable[32] := FuncInterface;
+  FIdentFuncTable[57] := FuncMap;
+  FIdentFuncTable[23] := FuncPackage;
+  FIdentFuncTable[0] := FuncRange;
+  FIdentFuncTable[31] := FuncReturn;
+  FIdentFuncTable[19] := FuncRune;
+  FIdentFuncTable[30] := FuncSelect;
+  FIdentFuncTable[76] := FuncString;
+  FIdentFuncTable[36] := FuncStruct;
+  FIdentFuncTable[47] := FuncSwitch;
+  FIdentFuncTable[75] := FuncType;
+  FIdentFuncTable[7] := FuncUint;
+  FIdentFuncTable[83] := FuncUint16;
+  FIdentFuncTable[18] := FuncUint32;
+  FIdentFuncTable[74] := FuncUint64;
+  FIdentFuncTable[33] := FuncUint8;
+  FIdentFuncTable[85] := FuncUintptr;
+  FIdentFuncTable[70] := FuncVar;
 end;
 
 {$Q-}
-function TSynGoSyn.HashKey(Str: PWideChar): Cardinal;
+function TSynEdit32HighlighterGo.HashKey(Str: PWideChar): Cardinal;
 begin
   Result := 0;
   while IsIdentChar(Str^) do
@@ -274,7 +274,7 @@ begin
 end;
 {$Q+}
 
-function TSynGoSyn.FuncBool(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncBool(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -282,7 +282,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncBreak(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncBreak(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -290,7 +290,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncByte(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncByte(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -298,7 +298,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncCase(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncCase(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -306,7 +306,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncChan(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncChan(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -314,7 +314,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncComplex128(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncComplex128(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -322,7 +322,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncComplex64(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncComplex64(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -330,7 +330,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncConst(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncConst(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -338,7 +338,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncContinue(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncContinue(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -346,7 +346,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncDefault(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncDefault(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -354,7 +354,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncDefer(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncDefer(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -362,7 +362,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncElse(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncElse(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -370,7 +370,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncFallthrough(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncFallthrough(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -378,7 +378,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncFloat32(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncFloat32(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -386,7 +386,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncFloat64(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncFloat64(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -394,7 +394,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncFor(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncFor(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -402,7 +402,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncFunc(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -410,7 +410,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncGo(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncGo(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -418,7 +418,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncGoto(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncGoto(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -426,7 +426,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncIf(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncIf(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -434,7 +434,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncImport(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncImport(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -442,7 +442,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncInt(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncInt(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -450,7 +450,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncInt16(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncInt16(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -458,7 +458,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncInt32(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncInt32(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -466,7 +466,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncInt64(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncInt64(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -474,7 +474,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncInt8(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncInt8(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -482,7 +482,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncInterface(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncInterface(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -490,7 +490,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncMap(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncMap(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -498,7 +498,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncPackage(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncPackage(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -506,7 +506,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncRange(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncRange(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -514,7 +514,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncReturn(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncReturn(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -522,7 +522,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncRune(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncRune(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -530,7 +530,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncSelect(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncSelect(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -538,7 +538,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncString(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncString(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -546,7 +546,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncStruct(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncStruct(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -554,7 +554,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncSwitch(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncSwitch(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -562,7 +562,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncType(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncType(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -570,7 +570,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncUint(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncUint(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -578,7 +578,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncUint16(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncUint16(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -586,7 +586,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncUint32(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncUint32(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -594,7 +594,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncUint64(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncUint64(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -602,7 +602,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncUint8(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncUint8(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -610,7 +610,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncUintptr(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncUintptr(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -618,7 +618,7 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.FuncVar(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.FuncVar(Index: Integer): TtkTokenKind;
 begin
   if IsCurrentToken(KeyWords[Index]) then
     Result := tkKey
@@ -626,185 +626,185 @@ begin
     Result := tkIdentifier;
 end;
 
-function TSynGoSyn.AltFunc(Index: Integer): TtkTokenKind;
+function TSynEdit32HighlighterGo.AltFunc(Index: Integer): TtkTokenKind;
 begin
   Result := tkIdentifier;
 end;
 
-function TSynGoSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
+function TSynEdit32HighlighterGo.IdentKind(MayBe: PWideChar): TtkTokenKind;
 var
   Key: Cardinal;
 begin
   FToIdent := MayBe;
   Key := HashKey(MayBe);
-  if Key <= High(fIdentFuncTable) then
-    Result := fIdentFuncTable[Key](KeyIndices[Key])
+  if Key <= High(FIdentFuncTable) then
+    Result := FIdentFuncTable[Key](KeyIndices[Key])
   else
     Result := tkIdentifier;
 end;
 
-procedure TSynGoSyn.SpaceProc;
+procedure TSynEdit32HighlighterGo.SpaceProc;
 begin
-  Inc(Run);
-  fTokenID := tkSpace;
-  while (FLine[Run] <= #32) and not IsLineEnd(Run) do Inc(Run);
+  Inc(FRun);
+  FTokenID := tkSpace;
+  while (FLine[FRun] <= #32) and not IsLineEnd(FRun) do Inc(FRun);
 end;
 
-procedure TSynGoSyn.StringProc;
+procedure TSynEdit32HighlighterGo.StringProc;
 var
   StringChar: Char;
 begin
-  fTokenID := tkString;
-  StringChar := fLine[Run];
+  FTokenID := tkString;
+  StringChar := fLine[FRun];
   repeat
-    Inc(Run);
-  until IsLineEnd(Run) or (fLine[Run] = StringChar);
+    Inc(FRun);
+  until IsLineEnd(FRun) or (fLine[FRun] = StringChar);
 
-  if FLine[Run] = #34 then
-    Inc(Run);
+  if FLine[FRun] = #34 then
+    Inc(FRun);
 end;
 
-procedure TSynGoSyn.NullProc;
+procedure TSynEdit32HighlighterGo.NullProc;
 begin
-  fTokenID := tkNull;
-  Inc(Run);
+  FTokenID := tkNull;
+  Inc(FRun);
 end;
 
-procedure TSynGoSyn.CRProc;
+procedure TSynEdit32HighlighterGo.CRProc;
 begin
-  fTokenID := tkSpace;
-  Inc(Run);
-  if fLine[Run] = #10 then
-    Inc(Run);
+  FTokenID := tkSpace;
+  Inc(FRun);
+  if fLine[FRun] = #10 then
+    Inc(FRun);
 end;
 
-procedure TSynGoSyn.LFProc;
+procedure TSynEdit32HighlighterGo.LFProc;
 begin
-  fTokenID := tkSpace;
-  Inc(Run);
+  FTokenID := tkSpace;
+  Inc(FRun);
 end;
 
-procedure TSynGoSyn.SlashProc;
+procedure TSynEdit32HighlighterGo.SlashProc;
 begin
-  case FLine[Run + 1] of
+  case FLine[FRun + 1] of
     '/':
       begin
-        fTokenID := tkComment;
-        Inc(Run, 2);
-        while not IsLineEnd(Run) do Inc(Run);
+        FTokenID := tkComment;
+        Inc(FRun, 2);
+        while not IsLineEnd(FRun) do Inc(FRun);
       end;
     '*':
       begin
-        fTokenID := tkComment;
-        Inc(Run, 2);
-        while fLine[Run] <> #0 do
-          case fLine[Run] of
+        FTokenID := tkComment;
+        Inc(FRun, 2);
+        while fLine[FRun] <> #0 do
+          case fLine[FRun] of
             '*':
-              if fLine[Run + 1] = '/' then
+              if fLine[FRun + 1] = '/' then
               begin
-                Inc(Run, 2);
+                Inc(FRun, 2);
                 break;
-              end else Inc(Run);
+              end else Inc(FRun);
             #10, #13:
                 break;
-          else Inc(Run);
+          else Inc(FRun);
           end;
       end;
     '=':
       begin
-        Inc(Run, 2);
-        fTokenID := tkSymbol;
+        Inc(FRun, 2);
+        FTokenID := tkSymbol;
       end;
   else
     begin
-      Inc(Run);
-      fTokenID := tkSymbol;
+      Inc(FRun);
+      FTokenID := tkSymbol;
     end;
   end;
 end;
 
-procedure TSynGoSyn.BlockCommentProc;
+procedure TSynEdit32HighlighterGo.BlockCommentProc;
 begin
-  case fLine[Run] of
+  case fLine[FRun] of
      #0: NullProc;
     #10: LFProc;
     #13: CRProc;
   else
     begin
-      fTokenID := tkComment;
+      FTokenID := tkComment;
       repeat
-        if (fLine[Run] = '*') and
-           (fLine[Run + 1] = '/') then
+        if (fLine[FRun] = '*') and
+           (fLine[FRun + 1] = '/') then
         begin
-          Inc(Run, 2);
-          fRange := rsUnKnown;
+          Inc(FRun, 2);
+          FRange := rsUnKnown;
           Break;
         end;
-        if not IsLineEnd(Run) then
-          Inc(Run);
-      until IsLineEnd(Run);
+        if not IsLineEnd(FRun) then
+          Inc(FRun);
+      until IsLineEnd(FRun);
     end;
   end;
 end;
 
-procedure TSynGoSyn.LineCommentProc;
+procedure TSynEdit32HighlighterGo.LineCommentProc;
 begin
-  fTokenID := tkComment;
+  FTokenID := tkComment;
   repeat
 //    if  then
     begin
-      Inc(Run, 0);
-      fRange := rsUnKnown;
+      Inc(FRun, 0);
+      FRange := rsUnKnown;
       Break;
     end;
-    if not IsLineEnd(Run) then
-      Inc(Run);
-  until IsLineEnd(Run);
+    if not IsLineEnd(FRun) then
+      Inc(FRun);
+  until IsLineEnd(FRun);
 end;
 
-constructor TSynGoSyn.Create(AOwner: TComponent);
+constructor TSynEdit32HighlighterGo.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FCaseSensitive := False;
 
-  fCommentAttri := TSynEdit32HighlighterAttributes.Create(SYNS_AttrComment, SYNS_FriendlyAttrComment);
-  fCommentAttri.Style := [fsItalic];
-  fCommentAttri.Foreground := clNavy;
-  AddAttribute(fCommentAttri);
+  FCommentAttri := TSynEdit32HighlighterAttributes.Create(SYNS_AttrComment, SYNS_FriendlyAttrComment);
+  FCommentAttri.Style := [fsItalic];
+  FCommentAttri.Foreground := clNavy;
+  AddAttribute(FCommentAttri);
 
-  fIdentifierAttri := TSynEdit32HighlighterAttributes.Create(SYNS_AttrIdentifier, SYNS_FriendlyAttrIdentifier);
-  AddAttribute(fIdentifierAttri);
+  FIdentifierAttri := TSynEdit32HighlighterAttributes.Create(SYNS_AttrIdentifier, SYNS_FriendlyAttrIdentifier);
+  AddAttribute(FIdentifierAttri);
 
-  fNumberAttri := TSynEdit32HighlighterAttributes.Create(SYNS_AttrNumber, SYNS_FriendlyAttrNumber);
-  fNumberAttri.Foreground := $666666;
-  AddAttribute(fNumberAttri);
+  FNumberAttri := TSynEdit32HighlighterAttributes.Create(SYNS_AttrNumber, SYNS_FriendlyAttrNumber);
+  FNumberAttri.Foreground := $666666;
+  AddAttribute(FNumberAttri);
 
-  fKeyAttri := TSynEdit32HighlighterAttributes.Create(SYNS_AttrReservedWord, SYNS_FriendlyAttrReservedWord);
-  fKeyAttri.Foreground := $214195;
-  AddAttribute(fKeyAttri);
+  FKeyAttri := TSynEdit32HighlighterAttributes.Create(SYNS_AttrReservedWord, SYNS_FriendlyAttrReservedWord);
+  FKeyAttri.Foreground := $214195;
+  AddAttribute(FKeyAttri);
 
-  fSpaceAttri := TSynEdit32HighlighterAttributes.Create(SYNS_AttrSpace, SYNS_FriendlyAttrSpace);
-  AddAttribute(fSpaceAttri);
+  FSpaceAttri := TSynEdit32HighlighterAttributes.Create(SYNS_AttrSpace, SYNS_FriendlyAttrSpace);
+  AddAttribute(FSpaceAttri);
 
-  fStringAttri := TSynEdit32HighlighterAttributes.Create(SYNS_AttrString, SYNS_FriendlyAttrString);
-  fStringAttri.Foreground := $619121;
-  AddAttribute(fStringAttri);
+  FStringAttri := TSynEdit32HighlighterAttributes.Create(SYNS_AttrString, SYNS_FriendlyAttrString);
+  FStringAttri.Foreground := $619121;
+  AddAttribute(FStringAttri);
 
-  fSymbolAttri := TSynEdit32HighlighterAttributes.Create(SYNS_AttrSymbol, SYNS_FriendlyAttrSymbol);
-  fSymbolAttri.Foreground := $666666;
-  AddAttribute(fSymbolAttri);
+  FSymbolAttri := TSynEdit32HighlighterAttributes.Create(SYNS_AttrSymbol, SYNS_FriendlyAttrSymbol);
+  FSymbolAttri.Foreground := $666666;
+  AddAttribute(FSymbolAttri);
 
   SetAttributesOnChange(DefHighlightChange);
   InitIdent;
   fDefaultFilter := SYNS_FilterGo;
-  fRange := rsUnknown;
+  FRange := rsUnknown;
 end;
 
-procedure TSynGoSyn.NumberProc;
+procedure TSynEdit32HighlighterGo.NumberProc;
 
   function IsNumberChar: Boolean;
   begin
-    case fLine[Run] of
+    case fLine[FRun] of
       '0'..'9', '.', 'e', 'E', '-', '+':
         Result := True;
       else
@@ -813,52 +813,52 @@ procedure TSynGoSyn.NumberProc;
   end;
 
 begin
-  Inc(Run);
-  fTokenID := tkNumber;
+  Inc(FRun);
+  FTokenID := tkNumber;
   while IsNumberChar do
   begin
-    case fLine[Run] of
+    case fLine[FRun] of
       '.':
-        if fLine[Run + 1] = '.' then
+        if fLine[FRun + 1] = '.' then
           Break
         else
-          fTokenID := tkFloat;
-      'e', 'E': fTokenID := tkFloat;
+          FTokenID := tkFloat;
+      'e', 'E': FTokenID := tkFloat;
       '-', '+':
         begin
-          if fTokenID <> tkFloat then // arithmetic
+          if FTokenID <> tkFloat then // arithmetic
             Break;
-          if (FLine[Run - 1] <> 'e') and (FLine[Run - 1] <> 'E') then
+          if (FLine[FRun - 1] <> 'e') and (FLine[FRun - 1] <> 'E') then
             Break; //float, but it ends here
         end;
     end;
-    Inc(Run);
+    Inc(FRun);
   end;
 end;
 
-procedure TSynGoSyn.IdentProc;
+procedure TSynEdit32HighlighterGo.IdentProc;
 begin
-  fTokenID := IdentKind((fLine + Run));
-  Inc(Run, FStringLen);
-  while IsIdentChar(fLine[Run]) do Inc(Run);
+  FTokenID := IdentKind((fLine + FRun));
+  Inc(FRun, FStringLen);
+  while IsIdentChar(fLine[FRun]) do Inc(FRun);
 end;
 
-procedure TSynGoSyn.SymbolProc;
+procedure TSynEdit32HighlighterGo.SymbolProc;
 begin
-  Inc(Run);
-  fTokenID := tkSymbol;
+  Inc(FRun);
+  FTokenID := tkSymbol;
 end;
 
-procedure TSynGoSyn.UnknownProc;
+procedure TSynEdit32HighlighterGo.UnknownProc;
 begin
-  Inc(Run);
-  fTokenID := tkUnknown;
+  Inc(FRun);
+  FTokenID := tkUnknown;
 end;
 
-procedure TSynGoSyn.Next;
+procedure TSynEdit32HighlighterGo.Next;
 begin
-  fTokenPos := Run;
-  case fLine[Run] of
+  fTokenPos := FRun;
+  case fLine[FRun] of
     #0:
       NullProc;
     #10:
@@ -890,26 +890,26 @@ begin
   inherited;
 end;
 
-function TSynGoSyn.GetDefaultAttribute(Index: Integer): TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterGo.GetDefaultAttribute(Index: Integer): TSynEdit32HighlighterAttributes;
 begin
   case Index of
-    SYN_ATTR_COMMENT: Result := fCommentAttri;
-    SYN_ATTR_IDENTIFIER: Result := fIdentifierAttri;
-    SYN_ATTR_KEYWORD: Result := fKeyAttri;
-    SYN_ATTR_STRING: Result := fStringAttri;
-    SYN_ATTR_SYMBOL: Result := fSymbolAttri;
-    SYN_ATTR_WHITESPACE: Result := fSpaceAttri;
+    SYN_ATTR_COMMENT: Result := FCommentAttri;
+    SYN_ATTR_IDENTIFIER: Result := FIdentifierAttri;
+    SYN_ATTR_KEYWORD: Result := FKeyAttri;
+    SYN_ATTR_STRING: Result := FStringAttri;
+    SYN_ATTR_SYMBOL: Result := FSymbolAttri;
+    SYN_ATTR_WHITESPACE: Result := FSpaceAttri;
   else
     Result := nil;
   end;
 end;
 
-function TSynGoSyn.GetEol: Boolean;
+function TSynEdit32HighlighterGo.GetEol: Boolean;
 begin
-  Result := Run = fLineLen + 1;
+  Result := FRun = fLineLen + 1;
 end;
 
-function TSynGoSyn.GetKeyWords(TokenKind: Integer): UnicodeString;
+function TSynEdit32HighlighterGo.GetKeyWords(TokenKind: Integer): UnicodeString;
 begin
   Result := 
     'bool,break,byte,case,chan,complex128,complex64,const,continue,default' +
@@ -918,41 +918,41 @@ begin
     ',string,struct,switch,type,uint,uint16,uint32,uint64,uint8,uintptr,var';
 end;
 
-function TSynGoSyn.GetTokenID: TtkTokenKind;
+function TSynEdit32HighlighterGo.GetTokenID: TtkTokenKind;
 begin
-  Result := fTokenId;
+  Result := FTokenID;
 end;
 
-function TSynGoSyn.GetTokenAttribute: TSynEdit32HighlighterAttributes;
+function TSynEdit32HighlighterGo.GetTokenAttribute: TSynEdit32HighlighterAttributes;
 begin
   case GetTokenID of
     tkComment:
-      Result := fCommentAttri;
+      Result := FCommentAttri;
     tkIdentifier:
-      Result := fIdentifierAttri;
+      Result := FIdentifierAttri;
     tkNumber, tkFloat:
-      Result := fNumberAttri;
+      Result := FNumberAttri;
     tkKey:
-      Result := fKeyAttri;
+      Result := FKeyAttri;
     tkSpace:
-      Result := fSpaceAttri;
+      Result := FSpaceAttri;
     tkString:
-      Result := fStringAttri;
+      Result := FStringAttri;
     tkSymbol:
-      Result := fSymbolAttri;
+      Result := FSymbolAttri;
     tkUnknown:
-      Result := fIdentifierAttri;
+      Result := FIdentifierAttri;
   else
     Result := nil;
   end;
 end;
 
-function TSynGoSyn.GetTokenKind: Integer;
+function TSynEdit32HighlighterGo.GetTokenKind: Integer;
 begin
-  Result := Ord(fTokenId);
+  Result := Ord(FTokenID);
 end;
 
-function TSynGoSyn.IsIdentChar(AChar: WideChar): Boolean;
+function TSynEdit32HighlighterGo.IsIdentChar(AChar: WideChar): Boolean;
 begin
   case AChar of
     '_', '0'..'9', 'a'..'z', 'A'..'Z':
@@ -962,7 +962,7 @@ begin
   end;
 end;
 
-function TSynGoSyn.GetSampleSource: UnicodeString;
+function TSynEdit32HighlighterGo.GetSampleSource: UnicodeString;
 begin
   Result := 
     #13#10 +
@@ -976,38 +976,38 @@ begin
     '  fmt.Println("hello world")'#13#10+'}';
 end;
 
-function TSynGoSyn.IsFilterStored: Boolean;
+function TSynEdit32HighlighterGo.IsFilterStored: Boolean;
 begin
   Result := fDefaultFilter <> SYNS_FilterGo;
 end;
 
-class function TSynGoSyn.GetFriendlyLanguageName: UnicodeString;
+class function TSynEdit32HighlighterGo.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := SYNS_FriendlyLangGo;
 end;
 
-class function TSynGoSyn.GetLanguageName: string;
+class function TSynEdit32HighlighterGo.GetLanguageName: string;
 begin
   Result := SYNS_LangGo;
 end;
 
-procedure TSynGoSyn.ResetRange;
+procedure TSynEdit32HighlighterGo.ResetRange;
 begin
-  fRange := rsUnknown;
+  FRange := rsUnknown;
 end;
 
-procedure TSynGoSyn.SetRange(Value: Pointer);
+procedure TSynEdit32HighlighterGo.SetRange(Value: Pointer);
 begin
-  fRange := TRangeState(Value);
+  FRange := TRangeState(Value);
 end;
 
-function TSynGoSyn.GetRange: Pointer;
+function TSynEdit32HighlighterGo.GetRange: Pointer;
 begin
-  Result := Pointer(fRange);
+  Result := Pointer(FRange);
 end;
 
 initialization
 {$IFNDEF SYN_CPPB_1}
-  RegisterPlaceableHighlighter(TSynGoSyn);
+  RegisterPlaceableHighlighter(TSynEdit32HighlighterGo);
 {$ENDIF}
 end.

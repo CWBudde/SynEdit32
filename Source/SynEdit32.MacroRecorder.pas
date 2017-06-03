@@ -168,7 +168,7 @@ type
     is created in the position the Caret is at the time of playback.
   }
 
-  TCustomSynEdit32MacroRecorder = class(TAbstractSynHookerPlugin)
+  TCustomSynEdit32MacroRecorder = class(TAbstractSynEdit32HookerPlugin)
   private
     FShortCuts: array [TSynEdit32MacroCommand] of TShortCut;
     FOnStateChange: TNotifyEvent;
