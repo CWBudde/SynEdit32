@@ -56,10 +56,10 @@ type
     property OnMouseDown;
   end;
 
-  TMouseCursorEvent =  procedure(Sender: TObject; const aLineCharPos: TBufferCoord;
+  TMouseCursorEvent =  procedure(Sender: TObject; const aLineCharPos: TSynEdit32BufferCoord;
     var aCursor: TCursor) of object;
 
-  TMethodList = class
+  TSynEdit32MethodList = class
   private
     FData: TList;
     function GetItem(Index: integer): TMethod;
@@ -75,12 +75,12 @@ type
 
   TSynEdit32KbdHandler = class (TObject)
   private
-    FKeyPressChain: TMethodList;
-    FKeyDownChain: TMethodList;
-    FKeyUpChain: TMethodList;
-    FMouseDownChain: TMethodList;
-    FMouseUpChain: TMethodList;
-    FMouseCursorChain: TMethodList;
+    FKeyPressChain: TSynEdit32MethodList;
+    FKeyDownChain: TSynEdit32MethodList;
+    FKeyUpChain: TSynEdit32MethodList;
+    FMouseDownChain: TSynEdit32MethodList;
+    FMouseUpChain: TSynEdit32MethodList;
+    FMouseCursorChain: TSynEdit32MethodList;
     { avoid infinite recursiveness }
     FInKeyPress: Boolean;
     FInKeyDown: Boolean;
@@ -99,7 +99,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure ExecuteMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure ExecuteMouseCursor(Sender: TObject; const aLineCharPos: TBufferCoord;
+    procedure ExecuteMouseCursor(Sender: TObject; const aLineCharPos: TSynEdit32BufferCoord;
       var aCursor: TCursor);
 
     procedure AddKeyDownHandler(aHandler: TKeyEvent);
@@ -154,22 +154,22 @@ end;
 constructor TSynEdit32KbdHandler.Create;
 begin
   { Elements to handle KeyDown-Events }
-  FKeyDownChain := TMethodList.Create;
+  FKeyDownChain := TSynEdit32MethodList.Create;
 
   { Elements to handle KeyUp-Events }
-  FKeyUpChain := TMethodList.Create;
+  FKeyUpChain := TSynEdit32MethodList.Create;
 
   { Elements to handle KeyPress-Events }
-  FKeyPressChain := TMethodList.Create;
+  FKeyPressChain := TSynEdit32MethodList.Create;
 
   { Elements to handle MouseDown Events }
-  FMouseDownChain := TMethodList.Create;
+  FMouseDownChain := TSynEdit32MethodList.Create;
 
   { Elements to handle MouseUp Events }
-  FMouseUpChain := TMethodList.Create;
+  FMouseUpChain := TSynEdit32MethodList.Create;
 
   { Elements to handle MouseCursor Events }
-  FMouseCursorChain := TMethodList.Create;
+  FMouseCursorChain := TSynEdit32MethodList.Create;
 end;
 
 destructor TSynEdit32KbdHandler.Destroy;
@@ -292,7 +292,7 @@ begin
 end;
 
 procedure TSynEdit32KbdHandler.ExecuteMouseCursor(Sender: TObject;
-  const aLineCharPos: TBufferCoord; var aCursor: TCursor);
+  const aLineCharPos: TSynEdit32BufferCoord; var aCursor: TCursor);
 var
   cHandler: Integer;
 begin
@@ -337,37 +337,37 @@ begin
   FMouseCursorChain.Remove(TMethod(aHandler));
 end;
 
-{ TMethodList }
+{ TSynEdit32MethodList }
 
-procedure TMethodList.Add(aHandler: TMethod);
+procedure TSynEdit32MethodList.Add(aHandler: TMethod);
 begin
   FData.Add(aHandler.Data);
   FData.Add(aHandler.Code);
 end;
 
-constructor TMethodList.Create;
+constructor TSynEdit32MethodList.Create;
 begin
   FData := TList.Create;
 end;
 
-destructor TMethodList.Destroy;
+destructor TSynEdit32MethodList.Destroy;
 begin
   FData.Free;
 end;
 
-function TMethodList.GetCount: Integer;
+function TSynEdit32MethodList.GetCount: Integer;
 begin
   Result := FData.Count div 2;
 end;
 
-function TMethodList.GetItem(Index: Integer): TMethod;
+function TSynEdit32MethodList.GetItem(Index: Integer): TMethod;
 begin
   Index := Index * 2;
   Result.Data := FData[Index];
   Result.Code := FData[Index + 1];
 end;
 
-procedure TMethodList.Remove(aHandler: TMethod);
+procedure TSynEdit32MethodList.Remove(aHandler: TMethod);
 var
   cPos: Integer;
 begin

@@ -307,13 +307,13 @@ type
     FOverwriteCaret: TSynEdit32CaretType;
     FInsertCaret: TSynEdit32CaretType;
     FKeystrokes: TSynEdit32KeyStrokes;
-    FOptions: TSynEditorOptions;
+    FOptions: TSynEdit32EditorOptions;
     FSynGutter: TSynEdit32Gutter;
     FColor: TColor;
     procedure SetBookMarks(const Value: TSynEdit32BookMarkOpt);
     procedure SetFont(const Value: TFont);
     procedure SetKeystrokes(const Value: TSynEdit32KeyStrokes);
-    procedure SetOptions(const Value: TSynEditorOptions);
+    procedure SetOptions(const Value: TSynEdit32EditorOptions);
     procedure SetSynGutter(const Value: TSynEdit32Gutter);
   public
     constructor Create(AOwner: TComponent); override;
@@ -321,7 +321,7 @@ type
     procedure Assign(Source : TPersistent); override;
     procedure AssignTo(Dest : TPersistent); override;
   published
-    property Options : TSynEditorOptions read FOptions write SetOptions;
+    property Options : TSynEdit32EditorOptions read FOptions write SetOptions;
     property BookMarkOptions : TSynEdit32BookMarkOpt read FBookmarks write SetBookMarks;
     property Color : TColor read FColor write FColor;
     property Font : TFont read FFont write SetFont;
@@ -508,7 +508,7 @@ begin
 end;
 
 procedure TSynEditorOptionsContainer.SetOptions(
-  const Value: TSynEditorOptions);
+  const Value: TSynEdit32EditorOptions);
 begin
   FOptions := Value;
 end;
@@ -611,9 +611,9 @@ end;
 
 procedure TfmEditorOptionsDialog.PutData;
 var
-  vOptions: TSynEditorOptions;
+  vOptions: TSynEdit32EditorOptions;
 
-  procedure SetFlag(aOption: TSynEditorOption; aValue: Boolean);
+  procedure SetFlag(aOption: TSynEdit32EditorOption; aValue: Boolean);
   begin
     if aValue then
       Include(vOptions, aOption)
@@ -697,13 +697,7 @@ var I : Integer;
     C : TColor;
     B : TBitmap;
 begin
-  {$IFDEF SYN_COMPILER_4_UP}
   KeyList.OnSelectItem := KeyListSelectItem;
-  {$ELSE}
-  FOldWndProc := KeyList.WindowProc;
-  KeyList.WindowProc := OverridingWndProc;
-  FOnSelectItem := KeyListSelectItem;
-  {$ENDIF}
 
   FInChanging := False;
   B := TBitmap.Create;
@@ -721,9 +715,7 @@ begin
       B.Canvas.Pen.Color := clBlack;
       B.Canvas.Rectangle(0,0,16,16);
       ImageList.Add(B, nil);
-{$IFDEF SYN_COMPILER_4_UP}
       ColorPopup.Items[I].ImageIndex := ColorPopup.Items[I].Tag;
-{$ENDIF}
     end;
   finally
     B.Free;

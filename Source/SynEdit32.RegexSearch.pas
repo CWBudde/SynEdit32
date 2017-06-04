@@ -56,7 +56,7 @@ type
   protected
     function GetPattern: UnicodeString; override;
     procedure SetPattern(const Value: UnicodeString); override;
-    procedure SetOptions(const Value: TSynSearchOptions); override;
+    procedure SetOptions(const Value: TSynEdit32SearchOptions); override;
     function GetLength(Index: Integer): Integer; override;
     function GetResult(Index: Integer): Integer; override;
     function GetResultCount: Integer; override;
@@ -140,7 +140,7 @@ begin
   Result := FPositions.Count;
 end;
 
-procedure TSynEdit32RegexSearch.SetOptions(const Value: TSynSearchOptions);
+procedure TSynEdit32RegexSearch.SetOptions(const Value: TSynEdit32SearchOptions);
 begin
   FRegex.ModifierI := not(ssoMatchCase in Value);
 end;

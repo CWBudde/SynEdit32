@@ -182,9 +182,7 @@ function LoadDFMFile2Strings(const AFile: string; AStrings: TStrings;
   var WasText: Boolean): Integer;
 var
   Src, Dest: TStream;
-{$IFDEF SYN_COMPILER_5_UP}
   origFormat: TStreamOriginalFormat;
-{$ENDIF}
 begin
   Result := 0;
   WasText := FALSE;
@@ -194,13 +192,9 @@ begin
     try
       Dest := TMemoryStream.Create;
       try
-{$IFDEF SYN_COMPILER_5_UP}
         origFormat := sofUnknown;
         ObjectResourceToText(Src, Dest, origFormat);
         WasText := origFormat = sofText;
-{$ELSE}
-        ObjectResourceToText(Src, Dest);
-{$ENDIF}
         Dest.Seek(0, soFromBeginning);
         AStrings.LoadFromStream(Dest);
       finally

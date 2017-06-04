@@ -66,7 +66,7 @@ type
   protected
     procedure NewKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure NewKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure NewMouseCursor(Sender: TObject; const aLineCharPos: TBufferCoord;
+    procedure NewMouseCursor(Sender: TObject; const aLineCharPos: TSynEdit32BufferCoord;
       var aCursor: TCursor);
     procedure NewMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -120,11 +120,7 @@ function TSynEdit32URIOpener.MouseInSynEdit: Boolean;
 var
   pt: TPoint;
 begin
-  {$IFDEF SYN_COMPILER_6_UP}
   pt := Mouse.CursorPos;
-  {$ELSE}
-  GetCursorPos(pt);
-  {$ENDIF}
   Result := PtInRect(FEditor.ClientRect, FEditor.ScreenToClient(pt))
 end;
 
@@ -154,7 +150,7 @@ begin
 end;
 
 procedure TSynEdit32URIOpener.NewMouseCursor(Sender: TObject;
-  const aLineCharPos: TBufferCoord; var aCursor: TCursor);
+  const aLineCharPos: TSynEdit32BufferCoord; var aCursor: TCursor);
 var
   TokenType, Start: Integer;
   Token: UnicodeString;
@@ -188,7 +184,7 @@ end;
 procedure TSynEdit32URIOpener.NewMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 var
-  ptLineCol: TBufferCoord;
+  ptLineCol: TSynEdit32BufferCoord;
   TokenType, Start: Integer;
   Token: UnicodeString;
   Attri: TSynEdit32HighlighterAttributes;

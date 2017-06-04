@@ -58,7 +58,7 @@ uses
   SysUtils;
 
 type
-  ESynEdit32Encoding = class(ESynError);
+  ESynEdit32Encoding = class(ECustomSynEdit32Error);
 
   { Base exporter class, implements the buffering and the common functionality
     to track the changes of token attributes, to export to the clipboard or to
@@ -167,7 +167,7 @@ type
     { Exports everything in the strings parameter to the output buffer. }
     procedure ExportAll(ALines: TUnicodeStrings);
     { Exports the given range of the strings parameter to the output buffer. }
-    procedure ExportRange(ALines: TUnicodeStrings; Start, Stop: TBufferCoord);
+    procedure ExportRange(ALines: TUnicodeStrings; Start, Stop: TSynEdit32BufferCoord);
     { Saves the contents of the output buffer to a file. }
     procedure SaveToFile(const FileName: UnicodeString);
     { Saves the contents of the output buffer to a stream. }
@@ -406,7 +406,7 @@ begin
   ExportRange(ALines, BufferCoord(1, 1), BufferCoord(MaxInt, MaxInt));
 end;
 
-procedure TSynEdit32CustomExporter.ExportRange(ALines: TUnicodeStrings; Start, Stop: TBufferCoord);
+procedure TSynEdit32CustomExporter.ExportRange(ALines: TUnicodeStrings; Start, Stop: TSynEdit32BufferCoord);
 var
   i: Integer;
   Line, Token: UnicodeString;

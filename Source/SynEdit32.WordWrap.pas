@@ -107,8 +107,8 @@ type
     destructor Destroy; override;
     property LineCount: Integer read FLineCount;
     { ISynEdit32BufferPlugin }
-    function BufferToDisplayPos(const aPos: TBufferCoord): TDisplayCoord;
-    function DisplayToBufferPos(const aPos: TDisplayCoord): TBufferCoord;
+    function BufferToDisplayPos(const aPos: TSynEdit32BufferCoord): TSynEdit32DisplayCoord;
+    function DisplayToBufferPos(const aPos: TSynEdit32DisplayCoord): TSynEdit32BufferCoord;
     function RowCount: Integer;
     function GetRowLength(aRow: Integer): Integer;
     function LinesInserted(aIndex: Integer; aCount: Integer): Integer;
@@ -126,7 +126,7 @@ uses
 { TSynEdit32WordWrapPlugin }
 
 function TSynEdit32WordWrapPlugin.BufferToDisplayPos(
-  const aPos: TBufferCoord): TDisplayCoord;
+  const aPos: TSynEdit32BufferCoord): TSynEdit32DisplayCoord;
 var
   vStartRow: Integer; // first row of the line
   cRow: Integer;
@@ -184,7 +184,7 @@ begin
 end;
 
 function TSynEdit32WordWrapPlugin.DisplayToBufferPos(
-  const aPos: TDisplayCoord): TBufferCoord;
+  const aPos: TSynEdit32DisplayCoord): TSynEdit32BufferCoord;
 var
   cLine: Integer;
   cRow: Integer;

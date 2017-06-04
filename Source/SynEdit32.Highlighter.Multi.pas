@@ -78,11 +78,8 @@ type
     procedure SetStartExpr(const Value: UnicodeString);
     procedure SetCaseSensitive(const Value: Boolean);
   protected
-    procedure DefineProperties(Filer: TFiler); override;
-{$IFDEF SYN_COMPILER_3_UP}
     function GetDisplayName: string; override;
     procedure SetDisplayName(const Value: string); override;
-{$ENDIF}
   public
     constructor Create(Collection: TCollection); override;
     destructor Destroy; override;
@@ -109,11 +106,9 @@ type
     FOwner: TSynEdit32HighlighterMulti;
     function GetItems(Index: integer): TScheme;
     procedure SetItems(Index: integer; const Value: TScheme);
-{$IFDEF SYN_COMPILER_3_UP}
   protected
     function GetOwner: TPersistent; override;
     procedure Update(Item: TCollectionItem); override;
-{$ENDIF}
   public
     constructor Create(aOwner: TSynEdit32HighlighterMulti);
     property Items[aIndex: integer]: TScheme read GetItems write SetItems;
@@ -135,11 +130,7 @@ type
 
   TRangeOperation = (roGet, roSet);
 
-{$IFDEF SYN_COMPILER_16_UP}
   TRangeUNativeInt = NativeUInt;
-{$ELSE}
-  TRangeUNativeInt = Cardinal;
-{$ENDIF}
   TRangeProc = procedure (Operation: TRangeOperation; var Range: TRangeUNativeInt) of object;
 
   TCustomRangeEvent = procedure (Sender: TSynEdit32HighlighterMulti; Operation: TRangeOperation;
@@ -234,10 +225,8 @@ type
     function UpdateRangeProcs: Boolean;
     property CurrScheme: Integer read FCurrScheme write FCurrScheme;
     property CurrLine: UnicodeString read FLineStr;
-{$IFNDEF SYN_CLX}
     function LoadFromRegistry(RootKey: HKEY; Key: string): Boolean; override;
     function SaveToRegistry(RootKey: HKEY; Key: string): Boolean; override;
-{$ENDIF}
     function IsIdentChar(AChar: WideChar): Boolean; override;
   published
     property Schemes: TSchemes read FSchemes write SetSchemes;
@@ -252,10 +241,10 @@ implementation
 
 uses
   Graphics,
+  SysUtils,
   SynEdit32.MiscProcs,
   SynEdit32.RegExpr,
-  SynEdit32.StrConst,
-  SysUtils;
+  SynEdit32.StrConst;
 
 procedure CheckExpression(const Expr: UnicodeString);
 var
@@ -677,9 +666,7 @@ end;
 procedure TSynEdit32HighlighterMulti.UnhookHighlighter(aHL: TSynEdit32CustomHighLighter);
 begin
   aHL.UnhookAttrChangeEvent(DefHighlightChange);
-{$IFDEF SYN_COMPILER_5_UP}
   aHL.RemoveFreeNotification(Self);
-{$ENDIF}
 end;
 
 function TSynEdit32HighlighterMulti.GetSampleSource: UnicodeString;
@@ -692,7 +679,6 @@ begin
   FSampleSource := Value;
 end;
 
-{$IFNDEF SYN_CLX}
 function TSynEdit32HighlighterMulti.LoadFromRegistry(RootKey: HKEY;
   Key: string): Boolean;
 var
@@ -751,7 +737,6 @@ begin
     r.Free;
   end;
 end;
-{$ENDIF}
 
 function TSynEdit32HighlighterMulti.GetRange: Pointer;
 begin
@@ -967,19 +952,16 @@ begin
   Result := inherited Items[Index] as TScheme;
 end;
 
-{$IFDEF SYN_COMPILER_3_UP}
 function TSchemes.GetOwner: TPersistent;
 begin
   Result := FOwner;
 end;
-{$ENDIF}
 
 procedure TSchemes.SetItems(Index: Integer; const Value: TScheme);
 begin
   inherited Items[Index] := Value;
 end;
 
-{$IFDEF SYN_COMPILER_3_UP}
 procedure TSchemes.Update(Item: TCollectionItem);
 begin
   if Item <> nil then
@@ -987,7 +969,7 @@ begin
   else // pass the MultiSyn as the Sender so Editors reparse their text
     FOwner.DefHighlightChange(FOwner);
 end;
-{$ENDIF}
+
 
 { TScheme }
 
@@ -1018,15 +1000,6 @@ begin
   FMarkerAttri.Free;
 end;
 
-procedure TScheme.DefineProperties(Filer: TFiler);
-begin
-  inherited;
-{$IFNDEF UNICODE}
-  UnicodeDefineProperties(Filer, Self);
-{$ENDIF}
-end;
-
-{$IFDEF SYN_COMPILER_3_UP}
 function TScheme.GetDisplayName: string;
 begin
   if SchemeName <> '' then
@@ -1034,7 +1007,6 @@ begin
   else
     Result := inherited GetDisplayName;
 end;
-{$ENDIF SYN_COMPILER_3_UP}
 
 procedure TScheme.MarkerAttriChanged(Sender: TObject);
 begin

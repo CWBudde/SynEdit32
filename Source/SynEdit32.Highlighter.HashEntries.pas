@@ -133,7 +133,7 @@ type
   keyword is considered any number of successive chars that are contained in
   Identifiers, with chars not contained in Identifiers before and after them. }
 procedure EnumerateKeywords(AKind: Integer; KeywordList: UnicodeString;
-  IsIdentChar: TCategoryMethod; AKeywordProc: TEnumerateKeywordEvent);
+  IsIdentChar: TSynEdit32CategoryMethod; AKeywordProc: TEnumerateKeywordEvent);
 
 implementation
 
@@ -141,7 +141,7 @@ uses
   SysUtils;
 
 procedure EnumerateKeywords(AKind: Integer; KeywordList: UnicodeString;
-  IsIdentChar: TCategoryMethod; AKeywordProc: TEnumerateKeywordEvent);
+  IsIdentChar: TSynEdit32CategoryMethod; AKeywordProc: TEnumerateKeywordEvent);
 var
   pStart, pEnd: PWideChar;
   Keyword: UnicodeString;

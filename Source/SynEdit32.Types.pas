@@ -54,18 +54,18 @@ const
   SynSpaceGlyph = WideChar($2219);     //'·'
 
 type
-  ESynError = class(Exception);
+  ECustomSynEdit32Error = class(Exception);
 
-  TSynSearchOption = (ssoMatchCase, ssoWholeWord, ssoBackwards,
+  TSynEdit32SearchOption = (ssoMatchCase, ssoWholeWord, ssoBackwards,
     ssoEntireScope, ssoSelectedOnly, ssoReplace, ssoReplaceAll, ssoPrompt);
-  TSynSearchOptions = set of TSynSearchOption;
+  TSynEdit32SearchOptions = set of TSynEdit32SearchOption;
 
-  TCategoryMethod = function(AChar: WideChar): Boolean of object;
+  TSynEdit32CategoryMethod = function(AChar: WideChar): Boolean of object;
 
   TKeyPressWEvent = procedure(Sender: TObject; var Key: WideChar) of object;
 
-  PSynSelectionMode = ^TSynSelectionMode;
-  TSynSelectionMode = (smNormal, smLine, smColumn);
+  PSynEdit32SelectionMode = ^TSynEdit32SelectionMode;
+  TSynEdit32SelectionMode = (smNormal, smLine, smColumn);
 
   PBorlandSelectionMode = ^TBorlandSelectionMode;
   TBorlandSelectionMode = (
@@ -76,45 +76,39 @@ type
   );
 
   //todo: better field names. CharIndex and LineIndex?
-  TBufferCoord = record
-    Char: integer;
-    Line: integer;
-    {$IFDEF SYN_COMPILER_10_UP}
-    class operator Equal(a, b: TBufferCoord): Boolean;
-    {$ENDIF}
+  TSynEdit32BufferCoord = record
+    Char: Integer;
+    Line: Integer;
+    class operator Equal(a, b: TSynEdit32BufferCoord): Boolean;
   end;
 
-  // Codehunter patch: added TBufferBlock
-  TBufferBlock = record
+  // Codehunter patch: added TSynEdit32BufferBlock
+  TSynEdit32BufferBlock = record
     BeginLine,
     BeginChar,
     EndLine,
     EndChar: Integer;
-    {$IFDEF SYN_COMPILER_10_UP}
-    class operator Equal(a, b: TBufferBlock): Boolean;
-    {$ENDIF}
+    class operator Equal(a, b: TSynEdit32BufferBlock): Boolean;
   end;
 
-  TDisplayCoord = record
-    Column: integer;
-    Row: integer;
-    {$IFDEF SYN_COMPILER_10_UP}
-    class operator Equal(a, b: TDisplayCoord): Boolean;
-    {$ENDIF}
+  TSynEdit32DisplayCoord = record
+    Column: Integer;
+    Row: Integer;
+    class operator Equal(a, b: TSynEdit32DisplayCoord): Boolean;
   end;
 
-function DisplayCoord(AColumn, ARow: Integer): TDisplayCoord;
-function BufferCoord(AChar, ALine: Integer): TBufferCoord;
+function SynEdit32DisplayCoord(AColumn, ARow: Integer): TSynEdit32DisplayCoord;
+function SynEdit32BufferCoord(AChar, ALine: Integer): TSynEdit32BufferCoord;
 
 implementation
 
-function DisplayCoord(AColumn, ARow: Integer): TDisplayCoord;
+function SynEdit32DisplayCoord(AColumn, ARow: Integer): TSynEdit32DisplayCoord;
 begin
   Result.Column := AColumn;
   Result.Row := ARow;
 end;
 
-function BufferCoord(AChar, ALine: Integer): TBufferCoord;
+function SynEdit32BufferCoord(AChar, ALine: Integer): TSynEdit32BufferCoord;
 begin
   Result.Char := AChar;
   Result.Line := ALine;
@@ -122,24 +116,24 @@ end;
 
 {$IFDEF SYN_COMPILER_10_UP}
 
-{ TBufferCoord }
+{ TSynEdit32BufferCoord }
 
-class operator TBufferCoord.Equal(a, b: TBufferCoord): Boolean;
+class operator TSynEdit32BufferCoord.Equal(a, b: TSynEdit32BufferCoord): Boolean;
 begin
   Result := (a.Char = b.Char) and (a.Line = b.Line);
 end;
 
-{ TBufferBlock }
+{ TSynEdit32BufferBlock }
 
-class operator TBufferBlock.Equal(a, b: TBufferBlock): Boolean;
+class operator TSynEdit32BufferBlock.Equal(a, b: TSynEdit32BufferBlock): Boolean;
 begin
   Result := (a.BeginLine = b.BeginLine) and (a.BeginChar = b.BeginChar) and
     (a.EndLine = b.EndLine) and (a.EndChar = b.EndChar);
 end;
 
-{ TDisplayCoord }
+{ TSynEdit32DisplayCoord }
 
-class operator TDisplayCoord.Equal(a, b: TDisplayCoord): Boolean;
+class operator TSynEdit32DisplayCoord.Equal(a, b: TSynEdit32DisplayCoord): Boolean;
 begin
   Result := (a.Row = b.Row) and (a.Column = b.Column);
 end;

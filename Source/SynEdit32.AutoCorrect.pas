@@ -580,7 +580,7 @@ var
   StartPos: LongInt;
   EndPos: Integer;
   FoundText, ReplaceDefText: UnicodeString;
-  p: TBufferCoord;
+  p: TSynEdit32BufferCoord;
   Action: TAutoCorrectAction;
 
   function FirstCapCase(s: UnicodeString): UnicodeString;
@@ -709,9 +709,7 @@ begin
     begin
       Editor.RemoveMouseDownHandler(MouseDownHandler);
       Editor.UnregisterCommandHandler(KeyboardHandler);
-{$IFDEF SYN_COMPILER_5_UP}
       Editor.RemoveFreeNotification(Self);
-{$ENDIF}
     end;
 
     FEditor := Value;

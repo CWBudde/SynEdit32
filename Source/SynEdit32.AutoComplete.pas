@@ -214,7 +214,7 @@ var
   i, j, Len, IndentLen: integer;
   s: UnicodeString;
   IdxMaybe, NumMaybe: integer;
-  p: TBufferCoord;
+  p: TSynEdit32BufferCoord;
   NewCaretPos: Boolean;
   Temp: TUnicodeStringList;
 begin
@@ -471,9 +471,7 @@ begin
         FEditor := nil;
       FEditors.Delete(i);
       AEditor.UnregisterCommandHandler(SynEditCommandHandler);
-      {$IFDEF SYN_COMPILER_5_UP}
       RemoveFreeNotification(AEditor);
-      {$ENDIF}
     end;
   end;
   Result := False;

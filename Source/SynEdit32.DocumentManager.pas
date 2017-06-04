@@ -13,8 +13,8 @@ uses
 type
   ISynEdit32Document = interface
   ['{DC80C7CF-FC56-4FDE-9E3E-6A1C53D6EFCD}']
-    procedure SetCaretXY(const Value : TBufferCoord);
-    function GetCaretXY : TBufferCoord;
+    procedure SetCaretXY(const Value : TSynEdit32BufferCoord);
+    function GetCaretXY : TSynEdit32BufferCoord;
     procedure SetLines(const Value : TStrings);
     function GetLines : TStrings;
     function GetUndoList: TSynEdit32UndoList;
@@ -30,7 +30,7 @@ type
     procedure SetDataIntf(const Value : IInterface);
     function GetMarks: TSynEdit32MarkList;
 
-    property CaretXY: TBufferCoord read GetCaretXY write SetCaretXY;
+    property CaretXY: TSynEdit32BufferCoord read GetCaretXY write SetCaretXY;
     property Lines: TStrings read GetLines write SetLines;
     property UndoList: TSynEdit32UndoList read GetUndoList;
     property RedoList: TSynEdit32UndoList read GetRedoList;
@@ -91,7 +91,7 @@ type
   private
     FName         : string;
     FLines        : TStringList;
-    FCaretXY      : TBufferCoord;
+    FCaretXY      : TSynEdit32BufferCoord;
     FModified     : Boolean;
     FRedoList     : TSynEdit32UndoList;
     FUndoList     : TSynEdit32UndoList;
@@ -100,14 +100,14 @@ type
     FDataIntf     : IInterface;
     FMarks        : TSynEdit32MarkList;
   protected
-    function GetCaretXY : TBufferCoord;
+    function GetCaretXY : TSynEdit32BufferCoord;
     function GetLines : TStrings;
     function GetModified  : Boolean;
     function GetName  : String;
     function GetRedoList  : TSynEdit32UndoList;
     function GetTopLine : Integer;
     function GetUndoList  : TSynEdit32UndoList;
-    procedure SetCaretXY(const Value: TBufferCoord);
+    procedure SetCaretXY(const Value: TSynEdit32BufferCoord);
     procedure SetLines(const Value: TStrings);
     procedure SetModified(const Value: Boolean);
     procedure SetTopLine(const Value: Integer);
@@ -337,7 +337,7 @@ begin
   inherited;
 end;
 
-function TSynEdit32Document.GetCaretXY: TBufferCoord;
+function TSynEdit32Document.GetCaretXY: TSynEdit32BufferCoord;
 begin
   Result := FCaretXY;
 end;
@@ -388,7 +388,7 @@ begin
   Result := FUndoList;
 end;
 
-procedure TSynEdit32Document.SetCaretXY(const Value: TBufferCoord);
+procedure TSynEdit32Document.SetCaretXY(const Value: TSynEdit32BufferCoord);
 begin
   FCaretXY := Value;
 end;

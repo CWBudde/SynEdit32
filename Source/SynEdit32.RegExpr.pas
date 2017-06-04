@@ -49,14 +49,10 @@ interface
 {$EXTENDEDSYNTAX ON}
 {$LONGSTRINGS ON}
 {$OPTIMIZATION ON}
-{$IFDEF SYN_COMPILER_6_UP}
-  {$WARN SYMBOL_PLATFORM OFF} // Suppress .Net warnings
-{$ENDIF}
-{$IFDEF SYN_COMPILER_7_UP}
-  {$WARN UNSAFE_CAST OFF} // Suppress .Net warnings
-  {$WARN UNSAFE_TYPE OFF} // Suppress .Net warnings
-  {$WARN UNSAFE_CODE OFF} // Suppress .Net warnings
-{$ENDIF}
+{$WARN SYMBOL_PLATFORM OFF} // Suppress .Net warnings
+{$WARN UNSAFE_CAST OFF} // Suppress .Net warnings
+{$WARN UNSAFE_TYPE OFF} // Suppress .Net warnings
+{$WARN UNSAFE_CODE OFF} // Suppress .Net warnings
 {$IFDEF FPC}
   {$MODE DELPHI} // Delphi-compatible mode in FreePascal
 {$ENDIF}
@@ -79,14 +75,14 @@ interface
 // Define 'UseAsserts' option (do not edit this definitions).
 // Asserts used to catch 'strange bugs' in TRegExpr implementation (when something goes
 // completely wrong). You can swith asserts on/off with help of {$C+}/{$C-} compiler options.
-{$IFDEF SYN_COMPILER_3_UP} {$DEFINE UseAsserts} {$ENDIF}
+{$DEFINE UseAsserts}
 {$IFDEF FPC} {$DEFINE UseAsserts} {$ENDIF}
 
 // Define 'use subroutine parameters default values' option (do not edit this definition).
-{$IFDEF SYN_COMPILER_4_UP} {$DEFINE DefParam} {$ENDIF}
+{$DEFINE DefParam}
 
 // Define 'OverMeth' options, to use method overloading (do not edit this definitions).
-{$IFDEF SYN_COMPILER_5_UP} {$DEFINE OverMeth} {$ENDIF}
+{$DEFINE OverMeth}
 {$IFDEF FPC} {$DEFINE OverMeth} {$ENDIF}
 
 uses

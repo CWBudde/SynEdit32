@@ -131,7 +131,7 @@ type
 
   TSynEdit32PositionEvent = class(TSynEdit32BasicEvent)
   protected
-    FPosition: TBufferCoord;
+    FPosition: TSynEdit32BufferCoord;
     function GetAsString: UnicodeString; override;
     procedure InitEventParameters(aStr: UnicodeString); override;
   public
@@ -141,7 +141,7 @@ type
     procedure SaveToStream(aStream: TStream); override;
     procedure Playback(aEditor: TCustomSynEdit32); override;
   public
-    property Position: TBufferCoord read FPosition write FPosition;
+    property Position: TSynEdit32BufferCoord read FPosition write FPosition;
   end;
 
   TSynEdit32DataEvent = class(TSynEdit32BasicEvent)
@@ -852,7 +852,7 @@ procedure TSynEdit32PositionEvent.Initialize(aCmd: TSynEditorCommand;
 begin
   inherited;
   if aData <> nil then
-    Position := TBufferCoord(aData^)
+    Position := TSynEdit32BufferCoord(aData^)
   else
     Position := BufferCoord(0, 0);
 end;

@@ -156,9 +156,9 @@ type
     FFontColor: TColor;
     FSelectedOnly: Boolean;
     FSelAvail: Boolean;
-    FSelMode: TSynSelectionMode;
-    FBlockBegin: TBufferCoord;
-    FBlockEnd: TBufferCoord;
+    FSelMode: TSynEdit32SelectionMode;
+    FBlockBegin: TSynEdit32BufferCoord;
+    FBlockEnd: TSynEdit32BufferCoord;
     FETODist: PIntArray;
     procedure CalcPages;
     procedure SetLines(const Value: TUnicodeStrings);

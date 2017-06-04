@@ -63,7 +63,7 @@ uses
 type
   SynCompletionType = (ctCode, ctHint, ctParams);
 
-  TSynForm = {$IFDEF SYN_COMPILER_3_UP}TCustomForm{$ELSE}TForm{$ENDIF};
+  TSynForm = TCustomForm;
 
   TSynBaseCompletionProposalPaintItem = procedure(Sender: TObject;
     Index: Integer; TargetCanvas: TCanvas; ItemRect: TRect;
@@ -344,8 +344,7 @@ type
   public
     constructor Create(Aowner: TComponent); override;
     procedure Execute(s: UnicodeString; x, y: Integer);
-    procedure ExecuteEx(s: UnicodeString; x, y: Integer; Kind: SynCompletionType
-      {$IFDEF SYN_COMPILER_4_UP} = ctCode {$ENDIF}); virtual;
+    procedure ExecuteEx(s: UnicodeString; x, y: Integer; Kind: SynCompletionType = ctCode); virtual;
     procedure Activate;
     procedure Deactivate;
 
@@ -440,8 +439,7 @@ type
     procedure AddEditor(AEditor: TCustomSynEdit32);
     function RemoveEditor(AEditor: TCustomSynEdit32): boolean;
     function EditorsCount: integer;
-    procedure ExecuteEx(s: UnicodeString; x, y: Integer; Kind : SynCompletionType
-      {$IFDEF SYN_COMPILER_4_UP} = ctCode {$ENDIF}); override;
+    procedure ExecuteEx(s: UnicodeString; x, y: Integer; Kind : SynCompletionType = ctCode); override;
     procedure ActivateCompletion;
     procedure CancelCompletion; 
     procedure ActivateTimer(ACurrentEditor: TCustomSynEdit32);
@@ -531,16 +529,12 @@ type
     function GetItem(Index: Integer): TProposalColumn;
     procedure SetItem(Index: Integer; Value: TProposalColumn);
   protected
-    function GetOwner: TPersistent; {$IFDEF SYN_COMPILER_3_UP} override; {$ENDIF}
+    function GetOwner: TPersistent; override;
   public
     constructor Create(AOwner: TPersistent; ItemClass: TCollectionItemClass);
     function Add: TProposalColumn;
-    {$IFDEF SYN_COMPILER_3_UP}
     function FindItemID(ID: Integer): TProposalColumn;
-    {$ENDIF}
-    {$IFDEF SYN_COMPILER_4_UP}
     function Insert(Index: Integer): TProposalColumn;
-    {$ENDIF}
     property Items[Index: Integer]: TProposalColumn read GetItem write SetItem; default;
   end;
 
@@ -550,7 +544,7 @@ procedure FormattedTextOut(TargetCanvas: TCanvas; const Rect: TRect;
 function FormattedTextWidth(TargetCanvas: TCanvas; const Text: UnicodeString;
   Columns: TProposalColumns; Images: TImageList): Integer;
 function PrettyTextToFormattedString(const APrettyText: UnicodeString;
-  AlternateBoldStyle: Boolean {$IFDEF SYN_COMPILER_4_UP} = False {$ENDIF}): UnicodeString;
+  AlternateBoldStyle: Boolean = False): UnicodeString;
 
 implementation
 
@@ -1019,7 +1013,7 @@ begin
 end;
 
 function PrettyTextToFormattedString(const APrettyText: UnicodeString;
-  AlternateBoldStyle: Boolean {$IFDEF SYN_COMPILER_4_UP} = False {$ENDIF}): UnicodeString;
+  AlternateBoldStyle: Boolean = False): UnicodeString;
 var
   i: Integer;
   Color: TColor;
@@ -1133,19 +1127,15 @@ begin
 end;
 
 
-{$IFDEF SYN_COMPILER_3_UP}
 function TProposalColumns.FindItemID(ID: Integer): TProposalColumn;
 begin
   Result := inherited FindItemID(ID) as TProposalColumn;
 end;
-{$ENDIF}
 
-{$IFDEF SYN_COMPILER_4_UP}
 function TProposalColumns.Insert(Index: Integer): TProposalColumn;
 begin
   Result := inherited Insert(Index) as TProposalColumn;
 end;
-{$ENDIF}
 
 
 
@@ -1265,17 +1255,9 @@ begin
     Style := WS_POPUP;
     ExStyle := WS_EX_TOOLWINDOW;
 
-    {$IFDEF SYN_COMPILER_3_UP}
     if ((Win32Platform and VER_PLATFORM_WIN32_NT) <> 0)
       and (Win32MajorVersion > 4)
       and (Win32MinorVersion > 0) {Windows XP} then
-    {$ELSE}
-    VersionInfo.dwOSVersionInfoSize := sizeof(TOSVersionInfo);
-    if GetVersionEx(VersionInfo)
-      and ((VersionInfo.dwPlatformId and VER_PLATFORM_WIN32_NT) <> 0)
-      and (VersionInfo.dwMajorVersion > 4)
-      and (VersionInfo.dwMinorVersion > 0) {Windows XP} then
-    {$ENDIF}
       Params.WindowClass.style := Params.WindowClass.style or CS_DROPSHADOW;
 
     if DisplayType = ctCode then
@@ -1922,10 +1904,8 @@ procedure TSynBaseCompletionProposalForm.SetImages(const Value: TImageList);
 begin
   if FImages <> Value then
   begin
-    {$IFDEF SYN_COMPILER_5_UP}
     if Assigned(FImages) then
       FImages.RemoveFreeNotification(Self);
-    {$ENDIF SYN_COMPILER_5_UP}
 
     FImages := Value;
     if Assigned(FImages) then
@@ -1973,12 +1953,7 @@ const
 begin
   if csDesigning in ComponentState then exit;
 
-{$IFDEF SYN_COMPILER_4_UP}
   if GetKeyState(VK_CONTROL) >= 0 then nDelta := Mouse.WheelScrollLines
-{$ELSE}
-  if GetKeyState(VK_CONTROL) >= 0 then
-    SystemParametersInfo(SPI_GETWHEELSCROLLLINES, 0, @nDelta, 0)
-{$ENDIF}
     else nDelta := FLinesInWindow;
 
   Inc(FMouseWheelAccumulator, SmallInt(Msg.wParamHi));
@@ -2235,20 +2210,12 @@ procedure TSynEdit32BaseCompletionProposal.ExecuteEx(s: UnicodeString; x, y: int
 
   function GetWorkAreaWidth: Integer;
   begin
-    {$IFDEF SYN_COMPILER_5_UP}
     Result := Screen.DesktopWidth;
-    {$ELSE}
-    Result := Screen.Width;
-    {$ENDIF}
   end;
 
   function GetWorkAreaHeight: Integer;
   begin
-    {$IFDEF SYN_COMPILER_5_UP}
     Result := Screen.DesktopHeight;
-    {$ELSE}
-    Result := Screen.Height;
-    {$ENDIF}
   end;
 
   function GetParamWidth(const S: UnicodeString): Integer;
@@ -3243,9 +3210,7 @@ begin
     AEditor.RemoveKeyDownHandler(EditorKeyDown);
     AEditor.RemoveKeyPressHandler(EditorKeyPress);
     AEditor.UnregisterCommandHandler(HookedEditorCommand);
-    {$IFDEF SYN_COMPILER_5_UP}
     RemoveFreeNotification( AEditor );
-    {$ENDIF}
     if FEditor = AEditor then
       FEditor := nil;
   end;
@@ -3435,11 +3400,11 @@ procedure TSynEdit32AutoComplete.ExecuteEx(Token: UnicodeString; Editor: TCustom
 var
   Temp: UnicodeString;
   i, j: integer;
-  StartOfBlock: TBufferCoord;
+  StartOfBlock: TSynEdit32BufferCoord;
   ChangedIndent: Boolean;
   ChangedTrailing: Boolean;
-  TmpOptions: TSynEditorOptions;
-  OrigOptions: TSynEditorOptions;
+  TmpOptions: TSynEdit32EditorOptions;
+  OrigOptions: TSynEdit32EditorOptions;
   BeginningSpaceCount : Integer;
   Spacing: UnicodeString;
 begin
@@ -3594,9 +3559,7 @@ begin
     begin
       Editor.RemoveKeyDownHandler( EditorKeyDown );
       Editor.RemoveKeyPressHandler( EditorKeyPress );
-      {$IFDEF SYN_COMPILER_5_UP}
       RemoveFreeNotification( Editor );
-      {$ENDIF}
     end;
     FEditor := Value;
     if Editor <> nil then

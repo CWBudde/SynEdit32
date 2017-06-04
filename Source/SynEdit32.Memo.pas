@@ -145,8 +145,8 @@ end;
 // or use SetSelText/SetSelTextPrimitive (no undo)
 procedure TSynEdit32Memo.EMReplaceSel(var Message: TMessage);
 var
-  StartOfBlock: TBufferCoord;
-  EndOfBlock: TBufferCoord;
+  StartOfBlock: TSynEdit32BufferCoord;
+  EndOfBlock: TSynEdit32BufferCoord;
 begin
   if ReadOnly then exit;
   DoOnPaintTransient(ttBefore);
@@ -235,7 +235,7 @@ end;
 //(LPARAM) lParam     // point coordinates
 procedure TSynEdit32Memo.EMCharFromPos(var Message: TMessage);
 var
-  vPos: TBufferCoord;
+  vPos: TSynEdit32BufferCoord;
   i: Integer;
 begin
   vPos := DisplayToBufferPos(PixelsToRowColumn(Message.LParamLo, Message.LParamHi));

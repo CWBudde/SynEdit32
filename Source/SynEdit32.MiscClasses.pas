@@ -325,7 +325,7 @@ type
     function GetLength(Index: Integer): Integer; virtual; abstract;
     function GetResult(Index: Integer): Integer; virtual; abstract;
     function GetResultCount: Integer; virtual; abstract;
-    procedure SetOptions(const Value: TSynSearchOptions); virtual; abstract;
+    procedure SetOptions(const Value: TSynEdit32SearchOptions); virtual; abstract;
   public
     function FindAll(const NewText: UnicodeString): Integer; virtual; abstract;
     function Replace(const aOccurrence, aReplacement: UnicodeString): UnicodeString; virtual; abstract;
@@ -333,7 +333,7 @@ type
     property ResultCount: Integer read GetResultCount;
     property Results[Index: Integer]: Integer read GetResult;
     property Lengths[Index: Integer]: Integer read GetLength;
-    property Options: TSynSearchOptions write SetOptions;
+    property Options: TSynEdit32SearchOptions write SetOptions;
   end;
 
   TBetterRegistry = TRegistry;
@@ -1204,11 +1204,7 @@ begin
   inherited;
 
   BorderStyle := bsSingle;
-  {$IFNDEF SYN_CLX}
-  {$IFDEF SYN_COMPILER_7_UP}
   ControlStyle := ControlStyle + [csNeedsBorderPaint];
-  {$ENDIF}
-  {$ENDIF}
 
   FInvalidKeys := [hcNone, hcShift];
   FModifiers := [hkAlt];

@@ -75,7 +75,7 @@ type
     function GetLength(Index: Integer): Integer; override;
     function GetResult(Index: Integer): Integer; override;
     function GetResultCount: Integer; override;
-    procedure SetOptions(const Value: TSynSearchOptions); override;
+    procedure SetOptions(const Value: TSynEdit32SearchOptions); override;
   public
     constructor Create(aOwner: TComponent); override;
     destructor Destroy; override;
@@ -293,7 +293,7 @@ begin
   Result := CasedPat; 
 end;
 
-procedure TSynEdit32Search.SetOptions(const Value: TSynSearchOptions);
+procedure TSynEdit32Search.SetOptions(const Value: TSynEdit32SearchOptions);
 begin
   CaseSensitive := ssoMatchCase in Value;
   Whole := ssoWholeWord in Value;

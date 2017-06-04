@@ -232,9 +232,7 @@ type
 implementation
 
 uses
-{$IFDEF SYN_COMPILER_4_UP}
   Math,
-{$ENDIF}
   SynEdit32.MiscProcs;
 
 // Helper routine for AsString processing.
@@ -270,11 +268,7 @@ function THeaderFooterItem.GetAsString: UnicodeString;
 begin
   Result :=
     EncodeString(FText) + '/' +
-{$IFDEF SYN_COMPILER_3_UP}
     IntToStr(FFont.Charset) + '/' +
-{$ELSE}
-    IntToStr(DEFAULT_CHARSET)+'/' +                             
-{$ENDIF}
     IntToStr(FFont.Color) + '/' +
     IntToStr(FFont.Height) + '/' +
     EncodeString(FFont.Name) + '/' +
@@ -477,11 +471,7 @@ begin
     Write(PWideChar(FText)^, aLen * sizeof(WideChar));
     Write(FLineNumber, sizeof(FLineNumber));
     // font
-    {$IFDEF SYN_COMPILER_3_UP}
     aCharset := FFont.Charset;
-    {$ELSE}
-    aCharset := DEFAULT_CHARSET;
-    {$ENDIF}
     aColor   := FFont.Color;
     aHeight  := FFont.Height;
     aName    := FFont.Name;
@@ -512,11 +502,7 @@ var
 begin
   s := Value;
   FText := DecodeString(GetFirstEl(s, '/'));
-{$IFDEF SYN_COMPILER_3_UP}
   FFont.Charset := StrToIntDef(GetFirstEl(s, '/'), 0);
-{$ELSE}
-  GetFirstEl(s, '/');
-{$ENDIF}
   FFont.Color := StrToIntDef(GetFirstEl(s, '/'), 0);
   FFont.Height := StrToIntDef(GetFirstEl(s, '/'), 0);
   FFont.Name := DecodeString(GetFirstEl(s, '/'));
