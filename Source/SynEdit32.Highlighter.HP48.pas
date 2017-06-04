@@ -208,10 +208,7 @@ type
 implementation
 
 uses
-{$IFDEF UNICODE}
-  WideStrUtils,
-{$ENDIF}
-  SynEdit32.StrConst;
+  WideStrUtils, Registry, SynEdit32.StrConst;
 
 const
   DefaultAsmKeyWords: UnicodeString = '!RPL'#13#10'ENDCODE'#13#10'{'#13#10'}'#13#10 +
@@ -731,7 +728,7 @@ end;
 
 function TSynEdit32HighlighterHP48.Next1: TtkTokenKind;
 begin
-  fTokenPos := FRun - 1;
+  FTokenPos := FRun - 1;
   if FRun > Length(FLineStr) then
     Result := NullProc
   else if FRange = rsComRpl then
@@ -807,12 +804,11 @@ begin
     Inc(FRun);
 end;
 
-{$IFNDEF SYN_CLX}
 function TSynEdit32HighlighterHP48.LoadFromRegistry(RootKey: HKEY; Key: string): boolean;
 var
-  r: TBetterRegistry;
+  r: TRegistry;
 begin
-  r := TBetterRegistry.Create;
+  r := TRegistry.Create;
   try
     r.RootKey := RootKey;
     if r.OpenKeyReadOnly(Key) then begin
@@ -830,9 +826,9 @@ end;
 
 function TSynEdit32HighlighterHP48.SaveToRegistry(RootKey: HKEY; Key: string): boolean;
 var
-  r: TBetterRegistry;
+  r: TRegistry;
 begin
-  r := TBetterRegistry.Create;
+  r := TRegistry.Create;
   try
     r.RootKey := RootKey;
     if r.OpenKey(Key, true) then begin
@@ -848,7 +844,6 @@ begin
   finally r.Free;
   end;
 end;
-{$ENDIF}
 
 procedure TSynEdit32HighlighterHP48.Assign(Source: TPersistent);
 var
@@ -1006,10 +1001,10 @@ function TSynEdit32HighlighterHP48.GetToken: UnicodeString;
 var
   Len: Integer;
 begin
-  Len := (FRun - 1) - fTokenPos;
+  Len := (FRun - 1) - FTokenPos;
   SetLength(Result, Len);
   if Len > 0 then
-    WStrLCopy(@Result[1], fCasedLine + fTokenPos, Len);
+    WStrLCopy(@Result[1], FCasedLine + FTokenPos, Len);
 end;
 
 class function TSynEdit32HighlighterHP48.GetFriendlyLanguageName: UnicodeString;

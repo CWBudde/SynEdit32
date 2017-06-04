@@ -48,7 +48,7 @@ unit SynEdit32.Highlighter.Unreal;
 interface
 
 uses
-  Graphics, Registry, Windows, SysUtils, Classes,
+  Graphics, Windows, SysUtils, Classes,
   SynEdit32.Highlighter, SynEdit32.Types, SynEdit32.Unicode;
 
 type
@@ -334,7 +334,7 @@ type
 implementation
 
 uses
-  SynEdit32.StrConst;
+  Registry, SynEdit32.StrConst;
 
 const
   KeyWords: array[0..142] of UnicodeString = (
@@ -2472,8 +2472,7 @@ end;
 procedure TSynEdit32HighlighterUnreal.EnumUserSettings(settings: TStrings);
 begin
   { returns the user settings that exist in the registry }
-{$IFNDEF SYN_CLX}
-  with TBetterRegistry.Create do
+  with TRegistry.Create do
   begin
     try
       RootKey := HKEY_LOCAL_MACHINE;
@@ -2489,7 +2488,6 @@ begin
       Free;
     end;
   end;
-{$ENDIF}
 end;
 
 function TSynEdit32HighlighterUnreal.UseUserSettings(settingIndex: integer): boolean;

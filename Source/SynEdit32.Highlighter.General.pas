@@ -170,7 +170,7 @@ type
 implementation
 
 uses
-  SynEdit32.StrConst;
+  Registry, SynEdit32.StrConst;
 
 constructor TSynEdit32HighlighterGeneral.Create(AOwner: TComponent);
 begin
@@ -745,9 +745,9 @@ end;
 {$IFNDEF SYN_CLX}
 function TSynEdit32HighlighterGeneral.LoadFromRegistry(RootKey: HKEY; Key: string): boolean;
 var
-  r: TBetterRegistry;
+  r: TRegistry;
 begin
-  r:= TBetterRegistry.Create;
+  r := TRegistry.Create;
   try
     r.RootKey := RootKey;
     if r.OpenKeyReadOnly(Key) then begin
@@ -760,9 +760,9 @@ end;
 
 function TSynEdit32HighlighterGeneral.SaveToRegistry(RootKey: HKEY; Key: string): boolean;
 var
-  r: TBetterRegistry;
+  r: TRegistry;
 begin
-  r:= TBetterRegistry.Create;
+  r := TRegistry.Create;
   try
     r.RootKey := RootKey;
     if r.OpenKey(Key,true) then begin

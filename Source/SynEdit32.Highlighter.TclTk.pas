@@ -172,7 +172,7 @@ type
 implementation
 
 uses
-  SynEdit32.StrConst;
+  Registry, SynEdit32.StrConst;
 
 const
   TclTkKeys: array[0..128] of UnicodeString = (
@@ -717,12 +717,11 @@ begin
   Result := SYNS_LangTclTk;
 end;
 
-{$IFNDEF SYN_CLX}
 function TSynEdit32HighlighterTclTk.LoadFromRegistry(RootKey: HKEY; Key: string): Boolean;
 var
-  r: TBetterRegistry;
+  r: TRegistry;
 begin
-  r := TBetterRegistry.Create;
+  r := TRegistry.Create;
   try
     r.RootKey := RootKey;
     if r.OpenKeyReadOnly(Key) then
@@ -739,9 +738,9 @@ end;
 
 function TSynEdit32HighlighterTclTk.SaveToRegistry(RootKey: HKEY; Key: string): boolean;
 var
-  r: TBetterRegistry;
+  r: TRegistry;
 begin
-  r:= TBetterRegistry.Create;
+  r:= TRegistry.Create;
   try
     r.RootKey := RootKey;
     if r.OpenKey(Key,true) then begin
@@ -754,7 +753,6 @@ begin
     else Result := false;
   finally r.Free; end;
 end;
-{$ENDIF}
 
 function TSynEdit32HighlighterTclTk.IsKeywordListStored: Boolean;
 var

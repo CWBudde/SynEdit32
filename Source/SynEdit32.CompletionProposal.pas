@@ -2854,12 +2854,12 @@ begin
       BeginUndoBlock;
       try
         if FAdjustCompletionStart then
-          FCompletionStart := BufferCoord(FCompletionStart, CaretY).Char;
-        BlockBegin := BufferCoord(FCompletionStart, CaretY);
+          FCompletionStart := SynEdit32BufferCoord(FCompletionStart, CaretY).Char;
+        BlockBegin := SynEdit32BufferCoord(FCompletionStart, CaretY);
         if EndToken = #0 then
-          BlockEnd := BufferCoord(WordEnd.Char, CaretY)
+          BlockEnd := SynEdit32BufferCoord(WordEnd.Char, CaretY)
         else
-          BlockEnd := BufferCoord(CaretX, CaretY);
+          BlockEnd := SynEdit32BufferCoord(CaretX, CaretY);
 
         if scoUseInsertList in FOptions then
         begin

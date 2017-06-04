@@ -266,7 +266,7 @@ begin
       p := AEditor.CaretXY;
       AEditor.BeginUpdate;
       try
-        AEditor.BlockBegin := BufferCoord(p.Char - Len, p.Line);
+        AEditor.BlockBegin := SynEdit32BufferCoord(p.Char - Len, p.Line);
         AEditor.BlockEnd := p;
         // indent the completion string if necessary, determine the caret pos
         IndentLen := p.Char - Len - 1;

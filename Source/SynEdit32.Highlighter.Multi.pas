@@ -241,6 +241,7 @@ implementation
 
 uses
   Graphics,
+  Registry,
   SysUtils,
   SynEdit32.MiscProcs,
   SynEdit32.RegExpr,
@@ -682,14 +683,14 @@ end;
 function TSynEdit32HighlighterMulti.LoadFromRegistry(RootKey: HKEY;
   Key: string): Boolean;
 var
-  r: TBetterRegistry;
+  r: TRegistry;
   i: Integer;
 begin
   if DefaultHighlighter <> nil then
     Result := DefaultHighlighter.LoadFromRegistry(RootKey, Key + '\DefaultHighlighter')
   else
     Result := False;
-  r := TBetterRegistry.Create;
+  r := TRegistry.Create;
   try
     r.RootKey := RootKey;
     for i := 0 to Schemes.Count-1 do
@@ -711,14 +712,14 @@ end;
 
 function TSynEdit32HighlighterMulti.SaveToRegistry(RootKey: HKEY; Key: string): Boolean;
 var
-  r: TBetterRegistry;
+  r: TRegistry;
   i: integer;
 begin
   if DefaultHighlighter <> nil then
     Result := DefaultHighlighter.SaveToRegistry(RootKey, Key + '\DefaultHighlighter')
   else
     Result := False;
-  r := TBetterRegistry.Create;
+  r := TRegistry.Create;
   try
     r.RootKey := RootKey;
     for i := 0 to Schemes.Count-1 do

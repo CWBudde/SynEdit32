@@ -257,11 +257,6 @@ function UniversalExtTextOut(DC: HDC; X, Y: Integer; Options: TTextOutOptions;
 
 implementation
 
-{$IFDEF SYN_UNISCRIBE}
-uses
-  SynUsp10;
-{$ENDIF}
-
 var
   gFontsInfoManager: TheFontsInfoManager;
 
@@ -286,17 +281,8 @@ end;
 // See here for details: http://groups.google.com/group/microsoft.public.win32.programmer.international/browse_thread/thread/77cd596f2b96dc76/146300208098285c?lnk=st&q=font+substitution+problem#146300208098285c
 function UniversalExtTextOut(DC: HDC; X, Y: Integer; Options: TTextOutOptions;
   Rect: TRect; Str: PWideChar; Count: Integer; ETODist: PIntegerArray): Boolean;
-{$IFDEF SYN_UNISCRIBE}
-const
-  SSAnalyseFlags = SSA_GLYPHS or SSA_FALLBACK or SSA_LINK;
-  SpaceString: UnicodeString = ' ';
-{$ENDIF}
 var
   TextOutFlags: DWORD;
-{$IFDEF SYN_UNISCRIBE}
-  GlyphBufferSize: Integer;
-  saa: TScriptStringAnalysis;
-{$ENDIF}
 begin
   TextOutFlags := 0;
   if tooOpaque in Options then
@@ -304,44 +290,8 @@ begin
   if tooClipped in Options then
     TextOutFlags := TextOutFlags or ETO_CLIPPED;
 
-{$IFDEF SYN_UNISCRIBE}
-  if Usp10IsInstalled then
-  begin
-    // UniScribe requires that the string contains at least one character.
-    // If UniversalExtTextOut should be used to fill the background we can just
-    // pass a string made of a space.
-    if Count <= 0 then
-      if tooOpaque in Options then
-      begin
-        // Clipping is necessary, since depending on X, Y the space will be
-        // printed outside Rect and potentially fill more than we want.
-        TextOutFlags := TextOutFlags or ETO_CLIPPED;
-        Str := PWideChar(SpaceString);
-        Count := 1;
-      end
-      else
-      begin
-        Result := False;
-        Exit;
-      end;
-
-    // According to the MS Windows SDK (1.5 * Count + 16) is the recommended
-    // value for GlyphBufferSize (see documentation of cGlyphs parameter of
-    // ScriptStringAnalyse function)
-    GlyphBufferSize := (3 * Count) div 2 + 16;
-    
-    Result := Succeeded(ScriptStringAnalyse(DC, Str, Count, GlyphBufferSize, -1,
-      SSAnalyseFlags, 0, nil, nil, Pointer(ETODist), nil, nil, @saa));
-    Result := Result and Succeeded(ScriptStringOut(saa, X, Y, TextOutFlags,
-      @Rect, 0, 0, False));
-    Result := Result and Succeeded(ScriptStringFree(@saa));
-  end
-  else
-{$ENDIF}
-  begin
-    Result := ExtTextOutW(DC, X, Y, TextOutFlags, @Rect, Str, Count,
-      Pointer(ETODist));
-  end;
+  Result := ExtTextOutW(DC, X, Y, TextOutFlags, @Rect, Str, Count,
+    Pointer(ETODist));
 end;
 
 { TheFontsInfoManager }
@@ -458,12 +408,7 @@ begin
 
   with pFontsInfo^ do
   begin
-{$IFDEF HE_ASSERT}
-    ASSERT(LockCount < RefCount,
-      'Call DeactivateFontsInfo before calling this.');
-{$ELSE}
-    ASSERT(LockCount < RefCount);
-{$ENDIF}
+    Assert(LockCount < RefCount);
     if RefCount > 1 then
       Dec(RefCount)
     else
@@ -658,16 +603,10 @@ var
   hOldFont: HFONT;
   p: PheFontData;
 begin
-{$IFDEF HE_ASSERT}
-  ASSERT(SizeOf(TFontStyles) = 1,
-    'TheTextDrawer.SetStyle: There''s more than four font styles but the current '+
-    'code expects only four styles.');
-{$ELSE}
-  ASSERT(SizeOf(TFontStyles) = 1);
-{$ENDIF}
+  Assert(SizeOf(TFontStyles) = 1);
 
   idx := Byte(Value);
-  ASSERT(idx <= High(TheStockFontPatterns));
+  Assert(idx <= High(TheStockFontPatterns));
 
   UseFontHandles;
   p := FontData[idx];

@@ -294,15 +294,11 @@ type
     procedure SetHotKey(const Value: TShortCut);
     procedure SetInvalidKeys(const Value: THKInvalidKeys);
     procedure SetModifiers(const Value: THKModifiers);
-    {$IFNDEF SYN_CLX}
     procedure WMGetDlgCode(var Message: TMessage); message WM_GETDLGCODE;
-     procedure WMKillFocus(var Msg: TWMKillFocus); message WM_KILLFOCUS;
+    procedure WMKillFocus(var Msg: TWMKillFocus); message WM_KILLFOCUS;
     procedure WMSetFocus(var Msg: TWMSetFocus); message WM_SETFOCUS;
-    {$ENDIF}
   protected
-    {$IFNDEF SYN_CLX}
     procedure CreateParams(var Params: TCreateParams); override;
-    {$ENDIF}
     procedure DoExit; override;
     procedure KeyDown(var Key: Word; Shift: TShiftState); override;
     procedure KeyUp(var Key: Word; Shift: TShiftState); override;
@@ -335,8 +331,6 @@ type
     property Lengths[Index: Integer]: Integer read GetLength;
     property Options: TSynEdit32SearchOptions write SetOptions;
   end;
-
-  TBetterRegistry = TRegistry;
 
 implementation
 
@@ -1215,7 +1209,6 @@ begin
   TabStop := True;
 end;
 
-{$IFNDEF SYN_CLX}
 procedure TSynEdit32HotKey.CreateParams(var Params: TCreateParams);
 const
   BorderStyles: array[TSynBorderStyle] of DWORD = (0, WS_BORDER);
@@ -1234,7 +1227,6 @@ begin
     end;
   end;
 end;
-{$ENDIF}
 
 procedure TSynEdit32HotKey.DoExit;
 begin
@@ -1363,41 +1355,6 @@ begin
   SetCaretPos(BorderWidth + 1 + TextWidth(Canvas, Text), BorderWidth + 1);
   ShowCaret(Handle);
 end;
-
-
-{$IFNDEF SYN_CLX}
-  {$IFNDEF SYN_COMPILER_4_UP}
-
-{ TBetterRegistry }
-
-function TBetterRegistry.OpenKeyReadOnly(const Key: string): Boolean;
-
-  function IsRelative(const Value: string): Boolean;
-  begin
-    Result := not ((Value <> '') and (Value[1] = '\'));
-  end;
-
-var
-  TempKey: HKey;
-  S: string;
-  Relative: Boolean;
-begin
-  S := Key;
-  Relative := IsRelative(S);
-
-  if not Relative then Delete(S, 1, 1);
-  TempKey := 0;
-  Result := RegOpenKeyEx(GetBaseKey(Relative), PChar(S), 0,
-      KEY_READ, TempKey) = ERROR_SUCCESS;
-  if Result then
-  begin
-    if (CurrentKey <> 0) and Relative then S := CurrentPath + '\' + S;
-    ChangeKey(TempKey, S);
-  end;
-end; { TBetterRegistry.OpenKeyReadOnly }
-
-  {$ENDIF SYN_COMPILER_4_UP}
-{$ENDIF SYN_CLX}
 
 begin
   InternalResources := nil;

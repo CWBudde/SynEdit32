@@ -327,6 +327,7 @@ implementation
 
 uses
   Windows,
+  Registry,
   SynEdit32.StrConst;
 
 const
@@ -2493,8 +2494,7 @@ end;
 procedure TSynEdit32HighlighterADSP21xx.EnumUserSettings(settings: TStrings);
 begin
   { returns the user settings that exist in the registry }
-  {$IFNDEF SYN_CLX}
-  with TBetterRegistry.Create do
+  with TRegistry.Create do
   begin
     try
       RootKey := HKEY_CURRENT_USER;
@@ -2511,7 +2511,6 @@ begin
       Free;
     end;
   end;
-  {$ENDIF}
 end;
 
 function TSynEdit32HighlighterADSP21xx.UseUserSettings(settingIndex: integer): boolean;

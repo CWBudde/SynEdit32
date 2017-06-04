@@ -214,7 +214,7 @@ type
 implementation
 
 uses
-  SynEdit32.StrConst;
+  Registry, SynEdit32.StrConst;
 
 const
   // if the language is case-insensitive keywords *must* be in lowercase
@@ -1073,7 +1073,7 @@ procedure TSynEdit32HighlighterPas.EnumUserSettings(DelphiVersions: TStrings);
     Versions: TStringList;
     i: Integer;
   begin
-    with TBetterRegistry.Create do
+    with TRegistry.Create do
     begin
       try
         RootKey := HKEY_LOCAL_MACHINE;
@@ -1100,14 +1100,11 @@ procedure TSynEdit32HighlighterPas.EnumUserSettings(DelphiVersions: TStrings);
 
 begin
   { returns the user settings that exist in the registry }
-{$IFNDEF SYN_CLX}
   // See UseUserSettings below where these strings are used
   LoadKeyVersions('\SOFTWARE\Borland\Delphi', '');
   LoadKeyVersions('\SOFTWARE\Borland\BDS', BDSVersionPrefix);
   LoadKeyVersions('\SOFTWARE\CodeGear\BDS', BDSVersionPrefix);
   LoadKeyVersions('\SOFTWARE\Embarcadero\BDS', BDSVersionPrefix);
-
-{$ENDIF}
 end;
 
 function TSynEdit32HighlighterPas.UseUserSettings(VersionIndex: Integer): Boolean;
@@ -1118,7 +1115,6 @@ function TSynEdit32HighlighterPas.UseUserSettings(VersionIndex: Integer): Boolea
 //   False: problem reading settings or invalid version specified - old settings
 //          were preserved
 
-{$IFNDEF SYN_CLX}
   function ReadDelphiSettings(settingIndex: Integer): Boolean;
 
     function ReadDelphiSetting(settingTag: string; attri: TSynEdit32HighlighterAttributes; key: string): Boolean;
@@ -1194,11 +1190,6 @@ function TSynEdit32HighlighterPas.UseUserSettings(VersionIndex: Integer): Boolea
     iVersions: TStringList;
     iVersionTag: string;
   begin { ReadDelphiSettings }
-    {$IFDEF SYN_COMPILER_7_UP}
-    {$IFNDEF SYN_COMPILER_9_UP}
-    Result := False; // Silence the compiler warning
-    {$ENDIF}
-    {$ENDIF}
     iVersions := TStringList.Create;
     try
       EnumUserSettings(iVersions);
@@ -1253,39 +1244,35 @@ function TSynEdit32HighlighterPas.UseUserSettings(VersionIndex: Integer): Boolea
     tmpStringAttri.Free;
     tmpSymbolAttri.Free;
   end;
-{$ENDIF}
 
 begin
-{$IFNDEF SYN_CLX}
   Result := ReadDelphiSettings(VersionIndex);
-{$ELSE}
-  Result := False;
-{$ENDIF}
 end;
 
 function TSynEdit32HighlighterPas.GetSampleSource: UnicodeString;
 begin
-  Result := '{ Syntax highlighting }'#13#10 +
-             'procedure TForm1.Button1Click(Sender: TObject);'#13#10 +
-             'var'#13#10 +
-             '  Number, I, X: Integer;'#13#10 +
-             'begin'#13#10 +
-             '  Number := 123456;'#13#10 +
-             '  Caption := ''The Number is'' + #32 + IntToStr(Number);'#13#10 +
-             '  for I := 0 to Number do'#13#10 +
-             '  begin'#13#10 +
-             '    Inc(X);'#13#10 +
-             '    Dec(X);'#13#10 +
-             '    X := X + 1.0;'#13#10 +
-             '    X := X - $5E;'#13#10 +
-             '  end;'#13#10 +
-             '  {$R+}'#13#10 +
-             '  asm'#13#10 +
-             '    mov AX, 1234H'#13#10 +
-             '    mov Number, AX'#13#10 +
-             '  end;'#13#10 +
-             '  {$R-}'#13#10 +
-             'end;';
+  Result :=
+    '{ Syntax highlighting }'#13#10 +
+    'procedure TForm1.Button1Click(Sender: TObject);'#13#10 +
+    'var'#13#10 +
+    '  Number, I, X: Integer;'#13#10 +
+    'begin'#13#10 +
+    '  Number := 123456;'#13#10 +
+    '  Caption := ''The Number is'' + #32 + IntToStr(Number);'#13#10 +
+    '  for I := 0 to Number do'#13#10 +
+    '  begin'#13#10 +
+    '    Inc(X);'#13#10 +
+    '    Dec(X);'#13#10 +
+    '    X := X + 1.0;'#13#10 +
+    '    X := X - $5E;'#13#10 +
+    '  end;'#13#10 +
+    '  {$R+}'#13#10 +
+    '  asm'#13#10 +
+    '    mov AX, 1234H'#13#10 +
+    '    mov Number, AX'#13#10 +
+    '  end;'#13#10 +
+    '  {$R-}'#13#10 +
+    'end;';
 end;
 
 
@@ -1334,4 +1321,3 @@ end;
 initialization
   RegisterPlaceableHighlighter(TSynEdit32HighlighterPas);
 end.
-

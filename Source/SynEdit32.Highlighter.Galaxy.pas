@@ -120,7 +120,7 @@ type
 implementation
 
 uses
-  SynEdit32.StrConst;
+  Registry, SynEdit32.StrConst;
 
 function TSynEdit32HighlighterGalaxy.IsIdentChar(AChar: WideChar): Boolean;
 begin
@@ -383,12 +383,11 @@ begin
   Result := SYNS_LangGalaxy;
 end;
 
-{$IFNDEF SYN_CLX}
 function TSynEdit32HighlighterGalaxy.LoadFromRegistry(RootKey: HKEY; Key: string): boolean;
 var
-  r: TBetterRegistry;
+  r: TRegistry;
 begin
-  r:= TBetterRegistry.Create;
+  r := TRegistry.Create;
   try
     r.RootKey := RootKey;
     if r.OpenKeyReadOnly(Key) then
@@ -405,9 +404,9 @@ end;
 
 function TSynEdit32HighlighterGalaxy.SaveToRegistry(RootKey: HKEY; Key: string): boolean;
 var
-  r: TBetterRegistry;
+  r: TRegistry;
 begin
-  r:= TBetterRegistry.Create;
+  r:= TRegistry.Create;
   try
     r.RootKey := RootKey;
     if r.OpenKey(Key,true) then
@@ -424,7 +423,6 @@ begin
     r.Free;
   end;
 end;
-{$ENDIF}
 
 class function TSynEdit32HighlighterGalaxy.GetFriendlyLanguageName: UnicodeString;
 begin

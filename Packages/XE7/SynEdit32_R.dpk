@@ -138,7 +138,6 @@ contains
   SynEdit32.Memo in '..\..\Source\SynEdit32.Memo.pas',
   SynEdit32.RegExpr in '..\..\Source\SynEdit32.RegExpr.pas',
   SynEdit32.URIOpener in '..\..\Source\SynEdit32.URIOpener.pas',
-  SynEdit32.Unicode in '..\..\Source\SynEdit32.Unicode.pas' {$IFNDEF CPUX64},
-  SynEdit32.Usp10 in '..\..\Source\SynEdit32.Usp10.pas' {$ENDIF};
+  SynEdit32.Unicode in '..\..\Source\SynEdit32.Unicode.pas';
 
 end.

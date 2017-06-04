@@ -176,7 +176,7 @@ type
 implementation
 
 uses
-  Windows,
+  Windows, Registry,
   SynEdit32.StrConst;
 
 const
@@ -890,7 +890,7 @@ end;
 procedure TSynEdit32HighlighterHaskell.EnumUserSettings(settings: TStrings);
 begin
   { returns the user settings that exist in the registry }
-  with TBetterRegistry.Create do
+  with TRegistry.Create do
   begin
     try
       RootKey := HKEY_LOCAL_MACHINE;

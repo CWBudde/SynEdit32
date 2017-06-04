@@ -840,7 +840,7 @@ begin
     c := Pos(')', aStr);
     valStr := Copy(aStr, 1, c - 1);
     y := StrToIntDef(valStr, 1);
-    Position := BufferCoord(x, y);
+    Position := SynEdit32BufferCoord(x, y);
     Delete(aStr, 1, c);
     aStr := WideTrim(aStr);
     RepeatCount := StrToIntDef(aStr, 1);
@@ -854,7 +854,7 @@ begin
   if aData <> nil then
     Position := TSynEdit32BufferCoord(aData^)
   else
-    Position := BufferCoord(0, 0);
+    Position := SynEdit32BufferCoord(0, 0);
 end;
 
 procedure TSynEdit32PositionEvent.LoadFromStream(aStream: TStream);

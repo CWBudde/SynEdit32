@@ -403,7 +403,7 @@ end;
 
 procedure TSynEdit32CustomExporter.ExportAll(ALines: TUnicodeStrings);
 begin
-  ExportRange(ALines, BufferCoord(1, 1), BufferCoord(MaxInt, MaxInt));
+  ExportRange(ALines, SynEdit32BufferCoord(1, 1), SynEdit32BufferCoord(MaxInt, MaxInt));
 end;
 
 procedure TSynEdit32CustomExporter.ExportRange(ALines: TUnicodeStrings; Start, Stop: TSynEdit32BufferCoord);

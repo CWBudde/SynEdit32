@@ -140,8 +140,6 @@ type
     function GetItems: TUnicodeStrings;
     procedure SetItems(const Value: TUnicodeStrings);
   protected
-    { Protected declarations }
-    procedure DefineProperties(Filer: TFiler); override;
     procedure KeyboardHandler(Sender: TObject; AfterProcessing: Boolean;
       var Handled: Boolean; var Command: TSynEditorCommand; var AChar: WideChar;
       Data: Pointer; HandlerData: Pointer); virtual;
@@ -151,7 +149,6 @@ type
       Operation: TOperation); override;
     procedure SetEditor(Value: TCustomSynEdit32);
   public
-    { Public declarations }
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
 
@@ -310,7 +307,7 @@ begin
     with Reg do
     begin
       RootKey := ARoot;
-      TBetterRegistry(Reg).OpenKeyReadOnly(AKey);
+      TRegistry(Reg).OpenKeyReadOnly(AKey);
       FItems.Clear;
       for i := 0 to Pred(ReadInteger('', 'Count', 0)) do
       begin
@@ -475,14 +472,6 @@ begin
   CurBuf := nil;   
 end;
 
-procedure TCustomSynEdit32AutoCorrect.DefineProperties(Filer: TFiler);
-begin
-  inherited;
-{$IFNDEF UNICODE}
-  UnicodeDefineProperties(Filer, Self);
-{$ENDIF}
-end;
-
 procedure TCustomSynEdit32AutoCorrect.Delete(AIndex: Integer);
 begin
   FItems.Delete(AIndex);
@@ -641,9 +630,9 @@ begin
 
         try
           if p.Char = 0 then
-            Editor.BlockBegin := BufferCoord(p.Char - 1 - EndPos, p.Line)
+            Editor.BlockBegin := SynEdit32BufferCoord(p.Char - 1 - EndPos, p.Line)
           else
-            Editor.BlockBegin := BufferCoord(p.Char - EndPos, p.Line);
+            Editor.BlockBegin := SynEdit32BufferCoord(p.Char - EndPos, p.Line);
 
           Editor.BlockEnd := p;
           p := Editor.BlockBegin;

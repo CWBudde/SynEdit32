@@ -114,8 +114,6 @@ begin
   Result.Line := ALine;
 end;
 
-{$IFDEF SYN_COMPILER_10_UP}
-
 { TSynEdit32BufferCoord }
 
 class operator TSynEdit32BufferCoord.Equal(a, b: TSynEdit32BufferCoord): Boolean;
@@ -137,7 +135,5 @@ class operator TSynEdit32DisplayCoord.Equal(a, b: TSynEdit32DisplayCoord): Boole
 begin
   Result := (a.Row = b.Row) and (a.Column = b.Column);
 end;
-
-{$ENDIF}
 
 end.
