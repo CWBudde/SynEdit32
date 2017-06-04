@@ -386,7 +386,7 @@ type
 
     FGutter: TSynEdit32Gutter;
     FTabWidth: Integer;
-    FTextDrawer: TheTextDrawer;
+    FTextDrawer: TSynEdit32TextDrawer;
     FInvalidateRect: TRect;
     FStateFlags: TSynEdit32StateFlags;
     FOptions: TSynEdit32EditorOptions;
@@ -1219,6 +1219,7 @@ end;
 constructor TCustomSynEdit32.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
+
   FLines := TSynEdit32StringList.Create(ExpandAtWideGlyphs);
   FOrigLines := FLines;
   with TSynEdit32StringList(FLines) do
@@ -1230,39 +1231,54 @@ begin
     OnInserted := ListInserted;
     OnPutted := ListPutted;
   end;
+
   FFontDummy := TFont.Create;
+
   FUndoList := TSynEdit32UndoList.Create;
   FUndoList.OnAddedUndo := UndoRedoAdded;
   FOrigUndoList := FUndoList;
+
   FRedoList := TSynEdit32UndoList.Create;
   FRedoList.OnAddedUndo := UndoRedoAdded;
   FOrigRedoList := FRedoList;
 
-  DoubleBuffered := False;
-  FActiveLineColor := clNone;
+  FTextDrawer := TSynEdit32TextDrawer.Create([fsBold], FFontDummy);
+  FFocusList := TList.Create;
+  FKbdHandler := TSynEdit32KbdHandler.Create;
+  FKeyStrokes := TSynEdit32KeyStrokes.Create(Self);
+  FMarkList := TSynEdit32MarkList.Create(self);
+  FMarkList.OnChange := MarkListChange;
+
   FSelectedColor := TSynEdit32SelectedColor.Create;
   FSelectedColor.OnChange := SelectedColorsChanged;
   FBookMarkOpt := TSynEdit32BookMarkOpt.Create(Self);
   FBookMarkOpt.OnChange := BookMarkOptionsChanged;
+
+  DoubleBuffered := False;
+  FActiveLineColor := clNone;
+
 // FRightEdge has to be set before FontChanged is called for the first time
   FRightEdge := 80;
+
   FGutter := TSynEdit32Gutter.Create;
   FGutter.OnChange := GutterChanged;
   FGutterWidth := FGutter.Width;
+
   FWordWrapGlyph := TSynGlyph.Create(HINSTANCE, 'SynEditWrapped', clLime);
   FWordWrapGlyph.OnChange := WordWrapGlyphChange;
+  FFontDummy.Name := 'Courier New';
+  FFontDummy.Size := 10;
+  FFontDummy.CharSet := DEFAULT_CHARSET;
+
+  Font.Assign(FFontDummy);
+  Font.OnChange := SynFontChanged;
+
   FTextOffset := FGutterWidth + 2;
   ControlStyle := ControlStyle + [csOpaque, csSetCaption, csNeedsBorderPaint];
   Height := 150;
   Width := 200;
   Cursor := crIBeam;
   Color := clWindow;
-  FFontDummy.Name := 'Courier New';
-  FFontDummy.Size := 10;
-  FFontDummy.CharSet := DEFAULT_CHARSET;
-  FTextDrawer := TheTextDrawer.Create([fsBold], FFontDummy);
-  Font.Assign(FFontDummy);
-  Font.OnChange := SynFontChanged;
   ParentFont := False;
   ParentColor := False;
   TabStop := True;
@@ -1275,11 +1291,6 @@ begin
   FOverwriteCaret := ctBlock;
   FSelectionMode := smNormal;
   FActiveSelectionMode := smNormal;
-  FFocusList := TList.Create;
-  FKbdHandler := TSynEdit32KbdHandler.Create;
-  FKeyStrokes := TSynEdit32KeyStrokes.Create(Self);
-  FMarkList := TSynEdit32MarkList.Create(self);
-  FMarkList.OnChange := MarkListChange;
   SetDefaultKeystrokes;
   FRightEdgeColor := clSilver;
   FWantReturns := True;
@@ -1294,6 +1305,7 @@ begin
   FBlockBegin.Line := 1;
   FBlockEnd := FBlockBegin;
   FOptions := SYNEDIT_DEFAULT_OPTIONS;
+
   FScrollTimer := TTimer.Create(Self);
   FScrollTimer.Enabled := False;
   FScrollTimer.Interval := 100;
@@ -2786,7 +2798,7 @@ var
 
   procedure AdjustEndRect;
   // trick to avoid clipping the last pixels of text in italic,
-  // see also AdjustLastCharWidth in TheTextDrawer.ExtTextOut
+  // see also AdjustLastCharWidth in TSynEdit32TextDrawer.ExtTextOut
   var
     LastChar: Cardinal;
     NormalCharWidth, RealCharWidth: Integer;
