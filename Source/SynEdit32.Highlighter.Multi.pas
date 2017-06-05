@@ -625,7 +625,8 @@ procedure TSynEdit32HighlighterMulti.SetDefaultHighlighter(
 const
   sDefaultHlSetToSelf = 'A SynMultiSyn cannot be its own DefaultHighlighter.';
 begin
-  if DefaultHighlighter <> Value then begin
+  if DefaultHighlighter <> Value then
+  begin
     if Value = Self then
       raise Exception.Create(sDefaultHlSetToSelf);
     if DefaultHighlighter <> nil then
@@ -799,7 +800,8 @@ begin
   OldProc := FRangeProc;
   if Assigned(OnCustomRange) then
     FRangeProc := UserRangeProc
-  else begin
+  else
+  begin
     FRangeProc := NewRangeProc;
     for i := 0 to Schemes.Count -1 do
       if Schemes[i].Highlighter is TSynEdit32HighlighterMulti then
@@ -900,7 +902,8 @@ begin
           end;
           iParser.Expression := iScheme.StartExpr;
           iParser.ModifierI := not iScheme.CaseSensitive;
-          if iParser.Exec(iLine) then begin
+          if iParser.Exec(iLine) then
+          begin
             iExpr := Copy(Value, iParser.MatchPos[0] + iEaten, iParser.MatchLen[0]);
             DoCheckMarker(iScheme, iParser.MatchPos[0] + iEaten, iParser.MatchLen[0],
               iExpr, True, LineNumber, Value);

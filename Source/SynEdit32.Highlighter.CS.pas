@@ -1122,7 +1122,8 @@ procedure TSynEdit32HighlighterCS.AsciiCharProc;
 begin
   FTokenID := tkString;
   repeat
-    if FLine[FRun] = '\' then begin
+    if FLine[FRun] = '\' then
+    begin
       if CharInSet(FLine[FRun + 1], [#39, '\']) then
         Inc(FRun);
     end;
@@ -1609,7 +1610,8 @@ procedure TSynEdit32HighlighterCS.StringProc;
 begin
   FTokenID := tkString;
   repeat
-    if FLine[FRun] = '\' then begin
+    if FLine[FRun] = '\' then
+    begin
       case FLine[FRun + 1] of
         #34, '\':
           Inc(FRun);
@@ -1903,8 +1905,10 @@ function TSynEdit32HighlighterCS.UseUserSettings(settingIndex: integer): boolean
     s := TStringList.Create;
     try
       EnumUserSettings(s);
-      if settingIndex >= s.Count then Result := false
-      else begin
+      if settingIndex >= s.Count then
+        Result := false
+      else
+      begin
         tmpStringAttri    := TSynEdit32HighlighterAttributes.Create('', '');
         tmpNumberAttri    := TSynEdit32HighlighterAttributes.Create('', '');
         tmpKeyAttri       := TSynEdit32HighlighterAttributes.Create('', '');
@@ -1938,7 +1942,8 @@ function TSynEdit32HighlighterCS.UseUserSettings(settingIndex: integer): boolean
                   ReadCPPBSetting(s[settingIndex],FStringAttri,'String')         and
                   ReadCPPBSetting(s[settingIndex],FSymbolAttri,'Symbol')         and
                   ReadCPPBSetting(s[settingIndex],FDirecAttri,'Preprocessor');
-        if not Result then begin
+        if not Result then
+        begin
           FStringAttri    .Assign(tmpStringAttri);
           FNumberAttri    .Assign(tmpNumberAttri);
           FKeyAttri       .Assign(tmpKeyAttri);

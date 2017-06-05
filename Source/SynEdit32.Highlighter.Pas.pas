@@ -864,7 +864,8 @@ begin
   else
     FTokenID := tkComment;
     repeat
-      if (FLine[FRun] = '*') and (FLine[FRun + 1] = ')') then begin
+      if (FLine[FRun] = '*') and (FLine[FRun + 1] = ')') then
+      begin
         Inc(FRun, 2);
         if FRange = rsAnsiAsm then
           FRange := rsAsm
@@ -937,7 +938,8 @@ begin
   Inc(FRun);
   while not IsLineEnd(FRun) do
   begin
-    if FLine[FRun] = #39 then begin
+    if FLine[FRun] = #39 then
+    begin
       Inc(FRun);
       if FLine[FRun] <> #39 then
         break;
@@ -1176,7 +1178,8 @@ function TSynEdit32HighlighterPas.UseUserSettings(VersionIndex: Integer): Boolea
             else
               Result := ReadDelphi8To2007(VersionStr, attri, key);
         end
-        else begin // Borland Delphi 7 or earlier
+        else
+        begin // Borland Delphi 7 or earlier
           if (settingTag[1] = '2') or (settingTag[1] = '3')
             then Result := ReadDelphi2Or3(settingTag, attri, key)
             else Result := ReadDelphi4OrMore(settingTag, attri, key);

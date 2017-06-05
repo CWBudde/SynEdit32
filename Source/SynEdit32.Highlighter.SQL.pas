@@ -1449,7 +1449,8 @@ begin
   // Oracle SQL allows strings to go over multiple lines
   if FLine[FRun] = #0 then
     NullProc
-  else begin
+  else
+  begin
     FTokenID := tkString;
     // else it's end of multiline string
     if SQLDialect <> sqlMySql then
@@ -1654,7 +1655,8 @@ begin
         end;
         repeat
           Inc(FRun);
-          if (FLine[FRun] = '*') and (FLine[FRun + 1] = '/') then begin
+          if (FLine[FRun] = '*') and (FLine[FRun + 1] = '/') then
+          begin
             FRange := rsUnknown;
             Inc(FRun, 2);
             break;

@@ -989,7 +989,8 @@ begin
       FTokenId := tkAmpersand;
       Inc(FRun, WStrLen(EscapeAmps[FAndCode]));
     end;
-    else begin
+    else
+    begin
       if (FLine[FRun + 1] = '#') then
       begin
         FAndCode := -1;
@@ -1003,7 +1004,8 @@ begin
         else
           while CharInSet(FLine[FRun], ['0'..'9']) do
             Inc(FRun);
-        if (FLine[FRun] = ';') then begin
+        if (FLine[FRun] = ';') then
+        begin
           Inc(FRun);
           FTokenId := tkAmpersand;
         end else

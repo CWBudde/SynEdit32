@@ -548,7 +548,8 @@ end;
 
 procedure TSynEdit32KeyStroke.LoadFromStream(AStream: TStream);
 begin
-  with AStream do begin
+  with AStream do
+  begin
     Read(fKey, SizeOf(fKey));
     Read(fShift, SizeOf(fShift));
     Read(fKey2, SizeOf(fKey2));
@@ -559,7 +560,8 @@ end;
 
 procedure TSynEdit32KeyStroke.SaveToStream(AStream: TStream);
 begin
-  with AStream do begin
+  with AStream do
+  begin
     Write(fKey, SizeOf(fKey));
     Write(fShift, SizeOf(fShift));
     Write(fKey2, SizeOf(fKey2));
@@ -634,8 +636,8 @@ var
 begin
   Result := -1;
   for x := 0 to Count-1 do
-    if (Items[x].Key = Code) and (Items[x].Shift = SS) and (Items[x].Key2 = 0)
-    then begin
+    if (Items[x].Key = Code) and (Items[x].Shift = SS) and (Items[x].Key2 = 0) then
+    begin
       Result := x;
       break;
     end;
@@ -698,7 +700,8 @@ var
 begin
   Clear;
   AStream.Read(Num, SizeOf(Num));
-  while Num > 0 do begin
+  while Num > 0 do
+  begin
     with Add do
       LoadFromStream(AStream);
     Dec(Num);

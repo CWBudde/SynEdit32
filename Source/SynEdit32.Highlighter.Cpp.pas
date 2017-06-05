@@ -426,7 +426,8 @@ procedure TSynEdit32HighlighterCpp.AsciiCharProc;
 begin
   FTokenID := tkChar;
   repeat
-    if FLine[FRun] = '\' then begin
+    if FLine[FRun] = '\' then
+    begin
       if CharInSet(FLine[FRun + 1], [#39, '\']) then
         Inc(FRun);
     end;
@@ -1099,7 +1100,8 @@ procedure TSynEdit32HighlighterCpp.StringProc;
 begin
   FTokenID := tkString;
   repeat
-    if FLine[FRun] = '\' then begin
+    if FLine[FRun] = '\' then
+    begin
       case FLine[FRun + 1] of
         #34, '\':
           Inc(FRun);
@@ -1399,7 +1401,8 @@ function TSynEdit32HighlighterCpp.UseUserSettings(settingIndex: integer): boolea
     try
       EnumUserSettings(s);
       if settingIndex >= s.Count then Result := false
-      else begin
+      else
+      begin
         tmpStringAttri    := TSynEdit32HighlighterAttributes.Create('', '');
         tmpCharAttri      := TSynEdit32HighlighterAttributes.Create('', '');
         tmpNumberAttri    := TSynEdit32HighlighterAttributes.Create('', '');
@@ -1445,7 +1448,8 @@ function TSynEdit32HighlighterCpp.UseUserSettings(settingIndex: integer): boolea
                   ReadCPPBSetting(s[settingIndex],FCharAttri,'Character')             and
                   ReadCPPBSetting(s[settingIndex],FSymbolAttri,'Symbol')         and
                   ReadCPPBSetting(s[settingIndex],FDirecAttri,'Preprocessor');
-        if not Result then begin
+        if not Result then
+        begin
           FStringAttri    .Assign(tmpStringAttri);
           FCharAttri      .Assign(tmpCharAttri);
           FNumberAttri    .Assign(tmpNumberAttri);

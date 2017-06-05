@@ -479,7 +479,8 @@ begin
       begin
         // ...if growing, update offsets (and thus RowCount) before rowlengths
         GrowRows(RowCount + Result);
-        if Result = 1 then begin
+        if Result = 1 then
+        begin
           // EG: this makes Schlemiel run twice as fast, but doesn't solve
           // the algorithmic issue if someone can spend some time looking
           // at the big picture... there are huge speedups to be made by
@@ -487,7 +488,8 @@ begin
           p:=FLineOffsets;
           for cLine := aIndex to LineCount - 1 do
              Inc(p[cLine])
-        end else begin
+        end else
+        begin
           p:=FLineOffsets;
           for cLine := aIndex to LineCount - 1 do
             Inc(p[cLine], Result);

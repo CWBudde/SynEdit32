@@ -446,7 +446,8 @@ procedure TSynEdit32HighlighterBat.CommentProc;
 begin
   FTokenID := tkIdentifier;
   Inc(FRun);
-  if FLine[FRun] = ':' then begin
+  if FLine[FRun] = ':' then
+  begin
     FTokenID := tkComment;
     repeat
       Inc(FRun);
@@ -489,7 +490,8 @@ begin
   begin
     FTokenID := tkComment;
     Inc(FRun, 3);
-    while (FLine[FRun] <> #0) do begin
+    while (FLine[FRun] <> #0) do
+    begin
       case FLine[FRun] of
         #10, #13: break;
       end; { case }

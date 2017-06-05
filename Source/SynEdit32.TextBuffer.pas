@@ -313,7 +313,8 @@ procedure TSynEdit32StringList.AddStrings(Strings: TUnicodeStrings);
 var
   i, FirstAdded: Integer;
 begin
-  if Strings.Count > 0 then begin
+  if Strings.Count > 0 then
+  begin
     FIndexOfLongestLine := -1;
     BeginUpdate;
     try
@@ -321,8 +322,10 @@ begin
       if i > FCapacity then
         SetCapacity((i + 15) and (not 15));
       FirstAdded := FCount;
-      for i := 0 to Strings.Count - 1 do begin
-        with FList^[FCount] do begin
+      for i := 0 to Strings.Count - 1 do
+      begin
+        with FList^[FCount] do
+        begin
           Pointer(FString) := nil;
           FString := Strings[i];
           FObject := Strings.Objects[i];
@@ -342,7 +345,8 @@ end;
 
 procedure TSynEdit32StringList.Clear;
 begin
-  if FCount <> 0 then begin
+  if FCount <> 0 then
+  begin
     BeginUpdate;
     Finalize(FList^[0], FCount);
     FCount := 0;
@@ -361,7 +365,8 @@ begin
   BeginUpdate;
   Finalize(FList^[Index]);
   Dec(FCount);
-  if Index < FCount then begin
+  if Index < FCount then
+  begin
     System.Move(FList^[Index + 1], FList^[Index],
       (FCount - Index) * SynEdit32StringRecSize);
   end;
@@ -375,7 +380,8 @@ procedure TSynEdit32StringList.DeleteLines(Index, NumLines: Integer);
 var
   LinesAfter: Integer;
 begin
-  if NumLines > 0 then begin
+  if NumLines > 0 then
+  begin
     if (Index < 0) or (Index > FCount) then
       ListIndexOutOfBounds(Index);
     LinesAfter := FCount - (Index + NumLines - 1);
@@ -383,7 +389,8 @@ begin
       NumLines := FCount - Index - 1;
     Finalize(FList^[Index], NumLines);
 
-    if LinesAfter > 0 then begin
+    if LinesAfter > 0 then
+    begin
       BeginUpdate;
       try
         System.Move(FList^[Index + NumLines], FList^[Index],
@@ -461,7 +468,8 @@ begin
   if FCount=0 then Exit;
   p := @FList^[0];
   n := 0;
-  for i := 1 to FCount do begin
+  for i := 1 to FCount do
+  begin
     p.FCharIndex := n;
     Inc(n, Length(p.FString));
     Inc(p);
@@ -477,7 +485,8 @@ end;
 
 function TSynEdit32StringList.LineCharIndex(Index : Integer) : Integer;
 begin
-  if Cardinal(Index)<Cardinal(FCount) then begin
+  if Cardinal(Index)<Cardinal(FCount) then
+  begin
     if not FCharIndexesAreValid then
       UpdateCharIndexes;
     Result := FList^[Index].FCharIndex;
@@ -583,7 +592,8 @@ var
   P, PLineBreak: PChar;
   PRec: PSynEdit32StringRec;
 begin
-  if FCount = 0 then begin
+  if FCount = 0 then
+  begin
      Result := '';
      exit;
   end;
@@ -812,12 +822,14 @@ procedure TSynEdit32StringList.Put(Index: Integer; const S: UnicodeString);
 begin
   if (Index = 0) and (FCount = 0) or (FCount = Index) then
     Add(S)
-  else begin
+  else
+  begin
     if Cardinal(Index)>=Cardinal(FCount) then
       ListIndexOutOfBounds(Index);
     BeginUpdate;
     FIndexOfLongestLine := -1;
-    with FList^[Index] do begin
+    with FList^[Index] do
+    begin
       Include(FFlags, sfExpandedLengthUnknown);
       Exclude(FFlags, sfHasTabs);
       Exclude(FFlags, sfHasNoTabs);
@@ -875,12 +887,14 @@ procedure TSynEdit32StringList.SetTabWidth(Value: Integer);
 var
   i: Integer;
 begin
-  if Value <> FTabWidth then begin
+  if Value <> FTabWidth then
+  begin
     FTabWidth := Value;
     FConvertTabsProc := GetBestConvertTabsProcEx(FTabWidth);
     FIndexOfLongestLine := -1;
     for i := 0 to FCount - 1 do
-      with FList^[i] do begin
+      with FList^[i] do
+      begin
         FExpandedLength := -1;
         Exclude(FFlags, sfHasNoTabs);
         Include(FFlags, sfExpandedLengthUnknown);
@@ -958,10 +972,12 @@ end;
 procedure TSynEdit32StringList.SetUpdateState(Updating: Boolean);
 begin
   FCharIndexesAreValid := False;
-  if Updating then begin
+  if Updating then
+  begin
     if Assigned(FOnChanging) then
       FOnChanging(Self);
-  end else begin
+  end else
+  begin
     if Assigned(FOnChange) then
       FOnChange(Self);
   end;
@@ -1048,10 +1064,12 @@ procedure TSynEdit32UndoList.AddChange(AReason: TSynEdit32ChangeReason; const AS
 var
   NewItem: TSynEdit32UndoItem;
 begin
-  if FLockCount = 0 then begin
+  if FLockCount = 0 then
+  begin
     NewItem := TSynEdit32UndoItem.Create;
     try
-      with NewItem do begin
+      with NewItem do
+      begin
         FChangeReason := AReason;
         FChangeSelMode := SelMode;
         FChangeStartPos := AStart;
@@ -1059,9 +1077,11 @@ begin
         FChangeStr := ChangeText;
         if FBlockChangeNumber <> 0 then
           FChangeNumber := FBlockChangeNumber
-        else begin
+        else
+        begin
           FChangeNumber := FNextChangeNumber;
-          if FBlockCount = 0 then begin
+          if FBlockCount = 0 then
+          begin
             Inc(FNextChangeNumber);
             if FNextChangeNumber = 0 then
               Inc(FNextChangeNumber);
@@ -1096,9 +1116,11 @@ procedure TSynEdit32UndoList.EndBlock;
 var
   iBlockID: Integer;
 begin
-  if FBlockCount > 0 then begin
+  if FBlockCount > 0 then
+  begin
     Dec(FBlockCount);
-    if FBlockCount = 0 then begin
+    if FBlockCount = 0 then
+    begin
       iBlockID := FBlockChangeNumber;
       FBlockChangeNumber := 0;
       Inc(FNextChangeNumber);
@@ -1120,7 +1142,8 @@ begin
   if FItems.Count > FMaxUndoActions then
   begin
     FFullUndoImposible := True;
-    while FItems.Count > FMaxUndoActions do begin
+    while FItems.Count > FMaxUndoActions do
+    begin
       Item := FItems[0];
       Item.Free;
       FItems.Delete(0);
@@ -1159,7 +1182,8 @@ var
 begin
   Result := nil;
   iLast := FItems.Count - 1;
-  if iLast >= 0 then begin
+  if iLast >= 0 then
+  begin
     Result := FItems[iLast];
     FItems.Delete(iLast);
   end;
@@ -1167,7 +1191,8 @@ end;
 
 procedure TSynEdit32UndoList.PushItem(Item: TSynEdit32UndoItem);
 begin
-  if Assigned(Item) then begin
+  if Assigned(Item) then
+  begin
     FItems.Add(Item);
     EnsureMaxEntries;
     if (Item.ChangeReason <> crGroupBreak) and Assigned(OnAddedUndo) then
@@ -1179,7 +1204,8 @@ procedure TSynEdit32UndoList.SetMaxUndoActions(Value: Integer);
 begin
   if Value < 0 then
     Value := 0;
-  if Value <> FMaxUndoActions then begin
+  if Value <> FMaxUndoActions then
+  begin
     FMaxUndoActions := Value;
     EnsureMaxEntries;
   end;

@@ -50,8 +50,8 @@ uses
 type
   TSynEdit32SelectedColor = class(TPersistent)
   private
-    fBG: TColor;
-    fFG: TColor;
+    FBG: TColor;
+    FFG: TColor;
     FOnChange: TNotifyEvent;
     procedure SetBG(Value: TColor);
     procedure SetFG(Value: TColor);
@@ -59,8 +59,8 @@ type
     constructor Create;
     procedure Assign(Source: TPersistent); override;
   published
-    property Background: TColor read fBG write SetBG default clHighLight;
-    property Foreground: TColor read fFG write SetFG default clHighLightText;
+    property Background: TColor read FBG write SetBG default clHighLight;
+    property Foreground: TColor read FFG write SetFG default clHighLightText;
     property OnChange: TNotifyEvent read FOnChange write FOnChange;
   end;
 
@@ -68,29 +68,29 @@ type
 
   TSynEdit32Gutter = class(TPersistent)
   private
-    fFont: TFont;
-    fColor: TColor;
-    fBorderColor: TColor;
+    FFont: TFont;
+    FColor: TColor;
+    FBorderColor: TColor;
     FWidth: Integer;
-    fShowLineNumbers: Boolean;
-    fShowModification: Boolean;
-    fDigitCount: Integer;
-    fLeadingZeros: Boolean;
-    fZeroStart: Boolean;
-    fLeftOffset: Integer;
-    fRightOffset: Integer;
+    FShowLineNumbers: Boolean;
+    FShowModification: Boolean;
+    FDigitCount: Integer;
+    FLeadingZeros: Boolean;
+    FZeroStart: Boolean;
+    FLeftOffset: Integer;
+    FRightOffset: Integer;
     FOnChange: TNotifyEvent;
-    fCursor: TCursor;
+    FCursor: TCursor;
     FVisible: Boolean;
-    fUseFontStyle: Boolean;
-    fAutoSize: Boolean;
-    fAutoSizeDigitCount: Integer;
-    fBorderStyle: TSynEdit32GutterBorderStyle;
-    fLineNumberStart: Integer;
-    fGradient: Boolean;
-    fGradientStartColor: TColor;
-    fGradientEndColor: TColor;
-    fGradientSteps: Integer;
+    FUseFontStyle: Boolean;
+    FAutoSize: Boolean;
+    FAutoSizeDigitCount: Integer;
+    FBorderStyle: TSynEdit32GutterBorderStyle;
+    FLineNumberStart: Integer;
+    FGradient: Boolean;
+    FGradientStartColor: TColor;
+    FGradientEndColor: TColor;
+    FGradientSteps: Integer;
     procedure SetAutoSize(const Value: Boolean);
     procedure SetBorderColor(const Value: TColor);
     procedure SetColor(const Value: TColor);
@@ -121,36 +121,36 @@ type
     function FormatLineNumber(Line: Integer): string;
     function RealGutterWidth(CharWidth: Integer): Integer;
   published
-    property AutoSize: Boolean read fAutoSize write SetAutoSize default FALSE;
-    property BorderStyle: TSynEdit32GutterBorderStyle read fBorderStyle
+    property AutoSize: Boolean read FAutoSize write SetAutoSize default FALSE;
+    property BorderStyle: TSynEdit32GutterBorderStyle read FBorderStyle
       write SetBorderStyle default gbsMiddle;
-    property Color: TColor read fColor write SetColor default clBtnFace;
-    property BorderColor: TColor read fBorderColor write SetBorderColor default clWindow;
-    property Cursor: TCursor read fCursor write fCursor default crDefault;
-    property DigitCount: Integer read fDigitCount write SetDigitCount
+    property Color: TColor read FColor write SetColor default clBtnFace;
+    property BorderColor: TColor read FBorderColor write SetBorderColor default clWindow;
+    property Cursor: TCursor read FCursor write FCursor default crDefault;
+    property DigitCount: Integer read FDigitCount write SetDigitCount
       default 4;
-    property Font: TFont read fFont write SetFont;
-    property LeadingZeros: Boolean read fLeadingZeros write SetLeadingZeros
+    property Font: TFont read FFont write SetFont;
+    property LeadingZeros: Boolean read FLeadingZeros write SetLeadingZeros
       default FALSE;
-    property LeftOffset: Integer read fLeftOffset write SetLeftOffset
+    property LeftOffset: Integer read FLeftOffset write SetLeftOffset
       default 16;
-    property RightOffset: Integer read fRightOffset write SetRightOffset
+    property RightOffset: Integer read FRightOffset write SetRightOffset
       default 2;
-    property ShowLineNumbers: Boolean read fShowLineNumbers
+    property ShowLineNumbers: Boolean read FShowLineNumbers
       write SetShowLineNumbers default FALSE;
-    property ShowModification: Boolean read fShowModification
+    property ShowModification: Boolean read FShowModification
       write SetShowModification default FALSE;
-    property UseFontStyle: Boolean read fUseFontStyle write SetUseFontStyle
+    property UseFontStyle: Boolean read FUseFontStyle write SetUseFontStyle
       default True;
     property Visible: Boolean read FVisible write SetVisible default TRUE;
     property Width: Integer read GetWidth write SetWidth default 30;
-    property ZeroStart: Boolean read fZeroStart write SetZeroStart
+    property ZeroStart: Boolean read FZeroStart write SetZeroStart
       default False;
-    property LineNumberStart: Integer read fLineNumberStart write SetLineNumberStart default 1;
-    property Gradient: Boolean read fGradient write SetGradient default False;
-    property GradientStartColor: TColor read fGradientStartColor write SetGradientStartColor default clWindow;
-    property GradientEndColor: TColor read fGradientEndColor write SetGradientEndColor default clBtnFace;
-    property GradientSteps: Integer read fGradientSteps write SetGradientSteps default 48;
+    property LineNumberStart: Integer read FLineNumberStart write SetLineNumberStart default 1;
+    property Gradient: Boolean read FGradient write SetGradient default False;
+    property GradientStartColor: TColor read FGradientStartColor write SetGradientStartColor default clWindow;
+    property GradientEndColor: TColor read FGradientEndColor write SetGradientEndColor default clBtnFace;
+    property GradientSteps: Integer read FGradientSteps write SetGradientSteps default 48;
     property OnChange: TNotifyEvent read FOnChange write FOnChange;
   end;
 
@@ -342,18 +342,19 @@ uses
 constructor TSynEdit32SelectedColor.Create;
 begin
   inherited Create;
-  fBG := clHighLight;
-  fFG := clHighLightText;
+  FBG := clHighLight;
+  FFG := clHighLightText;
 end;
 
 procedure TSynEdit32SelectedColor.Assign(Source: TPersistent);
 var
   Src: TSynEdit32SelectedColor;
 begin
-  if (Source <> nil) and (Source is TSynEdit32SelectedColor) then begin
+  if (Source <> nil) and (Source is TSynEdit32SelectedColor) then
+  begin
     Src := TSynEdit32SelectedColor(Source);
-    fBG := Src.fBG;
-    fFG := Src.fFG;
+    FBG := Src.FBG;
+    FFG := Src.FFG;
     if Assigned(FOnChange) then FOnChange(Self);
   end else
     inherited Assign(Source);
@@ -361,16 +362,18 @@ end;
 
 procedure TSynEdit32SelectedColor.SetBG(Value: TColor);
 begin
-  if (fBG <> Value) then begin
-    fBG := Value;
+  if (FBG <> Value) then
+  begin
+    FBG := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
 end;
 
 procedure TSynEdit32SelectedColor.SetFG(Value: TColor);
 begin
-  if (fFG <> Value) then begin
-    fFG := Value;
+  if (FFG <> Value) then
+  begin
+    FFG := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
 end;
@@ -380,33 +383,33 @@ end;
 constructor TSynEdit32Gutter.Create;
 begin
   inherited Create;
-  fFont := TFont.Create;
-  fFont.Name := 'Courier New';
-  fFont.Size := 8;
-  fFont.Style := [];
-  fUseFontStyle := True;
-  fFont.OnChange := OnFontChange;
+  FFont := TFont.Create;
+  FFont.Name := 'Courier New';
+  FFont.Size := 8;
+  FFont.Style := [];
+  FUseFontStyle := True;
+  FFont.OnChange := OnFontChange;
 
-  fColor := clBtnFace;
+  FColor := clBtnFace;
   FVisible := TRUE;
   FWidth := 30;
-  fLeftOffset := 16;
-  fDigitCount := 4;
-  fAutoSizeDigitCount := fDigitCount;
-  fRightOffset := 2;
-  fBorderColor := clWindow;
-  fBorderStyle := gbsMiddle;
-  fLineNumberStart := 1;
-  fZeroStart := False;
-  fGradient := False;
-  fGradientStartColor := clWindow;
-  fGradientEndColor := clBtnFace;
-  fGradientSteps := 48;
+  FLeftOffset := 16;
+  FDigitCount := 4;
+  FAutoSizeDigitCount := FDigitCount;
+  FRightOffset := 2;
+  FBorderColor := clWindow;
+  FBorderStyle := gbsMiddle;
+  FLineNumberStart := 1;
+  FZeroStart := False;
+  FGradient := False;
+  FGradientStartColor := clWindow;
+  FGradientEndColor := clBtnFace;
+  FGradientSteps := 48;
 end;
 
 destructor TSynEdit32Gutter.Destroy;
 begin
-  fFont.Free;
+  FFont.Free;
   inherited Destroy;
 end;
 
@@ -417,26 +420,26 @@ begin
   if Assigned(Source) and (Source is TSynEdit32Gutter) then
   begin
     Src := TSynEdit32Gutter(Source);
-    fFont.Assign(src.Font);
-    fUseFontStyle := src.fUseFontStyle;
-    fColor := Src.fColor;
+    FFont.Assign(src.Font);
+    FUseFontStyle := src.FUseFontStyle;
+    FColor := Src.FColor;
     FVisible := Src.FVisible;
     FWidth := Src.FWidth;
-    fShowLineNumbers := Src.fShowLineNumbers;
-    fLeadingZeros := Src.fLeadingZeros;
-    fZeroStart := Src.fZeroStart;
-    fLeftOffset := Src.fLeftOffset;
-    fDigitCount := Src.fDigitCount;
-    fRightOffset := Src.fRightOffset;
-    fAutoSize := Src.fAutoSize;
-    fAutoSizeDigitCount := Src.fAutoSizeDigitCount;
-    fLineNumberStart := Src.fLineNumberStart;
-    fBorderColor := Src.fBorderColor;
-    fBorderStyle := Src.fBorderStyle;
-    fGradient := Src.fGradient;
-    fGradientStartColor := Src.fGradientStartColor;
-    fGradientEndColor := Src.fGradientEndColor;
-    fGradientSteps := Src.fGradientSteps;
+    FShowLineNumbers := Src.FShowLineNumbers;
+    FLeadingZeros := Src.FLeadingZeros;
+    FZeroStart := Src.FZeroStart;
+    FLeftOffset := Src.FLeftOffset;
+    FDigitCount := Src.FDigitCount;
+    FRightOffset := Src.FRightOffset;
+    FAutoSize := Src.FAutoSize;
+    FAutoSizeDigitCount := Src.FAutoSizeDigitCount;
+    FLineNumberStart := Src.FLineNumberStart;
+    FBorderColor := Src.FBorderColor;
+    FBorderStyle := Src.FBorderStyle;
+    FGradient := Src.FGradient;
+    FGradientStartColor := Src.FGradientStartColor;
+    FGradientEndColor := Src.FGradientEndColor;
+    FGradientSteps := Src.FGradientSteps;
     if Assigned(FOnChange) then FOnChange(Self);
   end 
   else
@@ -447,33 +450,35 @@ procedure TSynEdit32Gutter.AutoSizeDigitCount(LinesCount: Integer);
 var
   nDigits: Integer;
 begin
-  if FVisible and fAutoSize and fShowLineNumbers then
+  if FVisible and FAutoSize and FShowLineNumbers then
   begin
-    if fZeroStart then
+    if FZeroStart then
       Dec(LinesCount)
-    else if fLineNumberStart > 1 then
-      Inc(LinesCount, fLineNumberStart - 1);
+    else if FLineNumberStart > 1 then
+      Inc(LinesCount, FLineNumberStart - 1);
 
-    nDigits := Max(Length(IntToStr(LinesCount)), fDigitCount);
-    if fAutoSizeDigitCount <> nDigits then begin
-      fAutoSizeDigitCount := nDigits;
+    nDigits := Max(Length(IntToStr(LinesCount)), FDigitCount);
+    if FAutoSizeDigitCount <> nDigits then
+    begin
+      FAutoSizeDigitCount := nDigits;
       if Assigned(FOnChange) then FOnChange(Self);
     end;
   end else
-    fAutoSizeDigitCount := fDigitCount;
+    FAutoSizeDigitCount := FDigitCount;
 end;
 
 function TSynEdit32Gutter.FormatLineNumber(Line: Integer): string;
 var
   i: Integer;
 begin
-  if fZeroStart then
+  if FZeroStart then
     Dec(Line)
-  else if fLineNumberStart > 1 then
-    Inc(Line, fLineNumberStart - 1);
-  Result := Format('%*d', [fAutoSizeDigitCount, Line]);
-  if fLeadingZeros then
-    for i := 1 to fAutoSizeDigitCount - 1 do begin
+  else if FLineNumberStart > 1 then
+    Inc(Line, FLineNumberStart - 1);
+  Result := Format('%*d', [FAutoSizeDigitCount, Line]);
+  if FLeadingZeros then
+    for i := 1 to FAutoSizeDigitCount - 1 do
+    begin
       if (Result[i] <> ' ') then break;
       Result[i] := '0';
     end;
@@ -485,36 +490,38 @@ begin
     Result := 0
   else
   begin
-    if fShowLineNumbers then
-      Result := fLeftOffset + fRightOffset + fAutoSizeDigitCount * CharWidth + 2
+    if FShowLineNumbers then
+      Result := FLeftOffset + FRightOffset + FAutoSizeDigitCount * CharWidth + 2
     else
       Result := FWidth;
 
     // take modification indicator into account
-    if fShowModification then
+    if FShowModification then
       Result := Result + 4;
   end;
 end;
 
 procedure TSynEdit32Gutter.SetAutoSize(const Value: Boolean);
 begin
-  if fAutoSize <> Value then begin
-    fAutoSize := Value;
+  if FAutoSize <> Value then
+  begin
+    FAutoSize := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
 end;
 
 procedure TSynEdit32Gutter.SetColor(const Value: TColor);
 begin
-  if fColor <> Value then begin
-    fColor := Value;
+  if FColor <> Value then
+  begin
+    FColor := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
 end;
 
 procedure TSynEdit32Gutter.SetFont(Value: TFont);
 begin
-  fFont.Assign(Value);
+  FFont.Assign(Value);
 end;
 
 procedure TSynEdit32Gutter.OnFontChange(Sender: TObject);
@@ -525,17 +532,19 @@ end;
 procedure TSynEdit32Gutter.SetDigitCount(Value: Integer);
 begin
   Value := MinMax(Value, 2, 12);
-  if fDigitCount <> Value then begin
-    fDigitCount := Value;
-    fAutoSizeDigitCount := fDigitCount;
+  if FDigitCount <> Value then
+  begin
+    FDigitCount := Value;
+    FAutoSizeDigitCount := FDigitCount;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
 end;
 
 procedure TSynEdit32Gutter.SetLeadingZeros(const Value: Boolean);
 begin
-  if fLeadingZeros <> Value then begin
-    fLeadingZeros := Value;
+  if FLeadingZeros <> Value then
+  begin
+    FLeadingZeros := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
 end;
@@ -543,8 +552,9 @@ end;
 procedure TSynEdit32Gutter.SetLeftOffset(Value: Integer);
 begin
   Value := Max(0, Value);
-  if fLeftOffset <> Value then begin
-    fLeftOffset := Value;
+  if FLeftOffset <> Value then
+  begin
+    FLeftOffset := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
 end;
@@ -552,39 +562,44 @@ end;
 procedure TSynEdit32Gutter.SetRightOffset(Value: Integer);
 begin
   Value := Max(0, Value);
-  if fRightOffset <> Value then begin
-    fRightOffset := Value;
+  if FRightOffset <> Value then
+  begin
+    FRightOffset := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
 end;
 
 procedure TSynEdit32Gutter.SetShowLineNumbers(const Value: Boolean);
 begin
-  if fShowLineNumbers <> Value then begin
-    fShowLineNumbers := Value;
+  if FShowLineNumbers <> Value then
+  begin
+    FShowLineNumbers := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
 end;
 
 procedure TSynEdit32Gutter.SetShowModification(const Value: Boolean);
 begin
-  if fShowModification <> Value then begin
-    fShowModification := Value;
+  if FShowModification <> Value then
+  begin
+    FShowModification := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
 end;
 
 procedure TSynEdit32Gutter.SetUseFontStyle(Value: Boolean);
 begin
-  if fUseFontStyle <> Value then begin
-    fUseFontStyle := Value;
+  if FUseFontStyle <> Value then
+  begin
+    FUseFontStyle := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
 end;
 
 procedure TSynEdit32Gutter.SetVisible(Value: Boolean);
 begin
-  if FVisible <> Value then begin
+  if FVisible <> Value then
+  begin
     FVisible := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
@@ -593,7 +608,8 @@ end;
 procedure TSynEdit32Gutter.SetWidth(Value: Integer);
 begin
   Value := Max(0, Value);
-  if FWidth <> Value then begin
+  if FWidth <> Value then
+  begin
     FWidth := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
@@ -601,76 +617,77 @@ end;
 
 procedure TSynEdit32Gutter.SetZeroStart(const Value: Boolean);
 begin
-  if fZeroStart <> Value then begin
-    fZeroStart := Value;
+  if FZeroStart <> Value then
+  begin
+    FZeroStart := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
 end;
 
 procedure TSynEdit32Gutter.SetBorderStyle(const Value: TSynEdit32GutterBorderStyle);
 begin
-  fBorderStyle := Value;
+  FBorderStyle := Value;
   if Assigned(FOnChange) then FOnChange(Self);
 end;
 
 procedure TSynEdit32Gutter.SetLineNumberStart(const Value: Integer);
 begin
-  if Value <> fLineNumberStart then
+  if Value <> FLineNumberStart then
   begin
-    fLineNumberStart := Value;
-    if fLineNumberStart < 0 then
-      fLineNumberStart := 0;
-    if fLineNumberStart = 0 then
-      fZeroStart := True
+    FLineNumberStart := Value;
+    if FLineNumberStart < 0 then
+      FLineNumberStart := 0;
+    if FLineNumberStart = 0 then
+      FZeroStart := True
     else
-      fZeroStart := False;
+      FZeroStart := False;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
 end;
 
 procedure TSynEdit32Gutter.SetBorderColor(const Value: TColor);
 begin
-  if fBorderColor <> Value then 
+  if FBorderColor <> Value then
   begin
-    fBorderColor := Value;
+    FBorderColor := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
 end;
 
 procedure TSynEdit32Gutter.SetGradient(const Value: Boolean);
 begin
-  if Value <> fGradient then
+  if Value <> FGradient then
   begin
-    fGradient := Value;
+    FGradient := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
 end;
 
 procedure TSynEdit32Gutter.SetGradientEndColor(const Value: TColor);
 begin
-  if Value <> fGradientEndColor then
+  if Value <> FGradientEndColor then
   begin
-    fGradientEndColor := Value;
+    FGradientEndColor := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
 end;
 
 procedure TSynEdit32Gutter.SetGradientStartColor(const Value: TColor);
 begin
-  if Value <> fGradientStartColor then
+  if Value <> FGradientStartColor then
   begin
-    fGradientStartColor := Value;
+    FGradientStartColor := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
 end;
 
 procedure TSynEdit32Gutter.SetGradientSteps(const Value: Integer);
 begin
-  if Value <> fGradientSteps then
+  if Value <> FGradientSteps then
   begin
-    fGradientSteps := Value;
-    if fGradientSteps < 2 then
-      fGradientSteps := 2;
+    FGradientSteps := Value;
+    if FGradientSteps < 2 then
+      FGradientSteps := 2;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
 end;
@@ -700,7 +717,8 @@ procedure TSynEdit32BookMarkOpt.Assign(Source: TPersistent);
 var
   Src: TSynEdit32BookMarkOpt;
 begin
-  if (Source <> nil) and (Source is TSynEdit32BookMarkOpt) then begin
+  if (Source <> nil) and (Source is TSynEdit32BookMarkOpt) then
+  begin
     Src := TSynEdit32BookMarkOpt(Source);
     FBookmarkImages := Src.FBookmarkImages;
     FDrawBookmarksFirst := Src.FDrawBookmarksFirst;
@@ -715,7 +733,8 @@ end;
 
 procedure TSynEdit32BookMarkOpt.SetBookmarkImages(const Value: TImageList);
 begin
-  if FBookmarkImages <> Value then begin
+  if FBookmarkImages <> Value then
+  begin
     FBookmarkImages := Value;
     if Assigned(FBookmarkImages) then FBookmarkImages.FreeNotification(FOwner);
     if Assigned(FOnChange) then FOnChange(Self);
@@ -724,7 +743,8 @@ end;
 
 procedure TSynEdit32BookMarkOpt.SetDrawBookmarksFirst(Value: Boolean);
 begin
-  if Value <> FDrawBookmarksFirst then begin
+  if Value <> FDrawBookmarksFirst then
+  begin
     FDrawBookmarksFirst := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
@@ -732,7 +752,8 @@ end;
 
 procedure TSynEdit32BookMarkOpt.SetGlyphsVisible(Value: Boolean);
 begin
-  if FGlyphsVisible <> Value then begin
+  if FGlyphsVisible <> Value then
+  begin
     FGlyphsVisible := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
@@ -740,7 +761,8 @@ end;
 
 procedure TSynEdit32BookMarkOpt.SetLeftMargin(Value: Integer);
 begin
-  if FLeftMargin <> Value then begin
+  if FLeftMargin <> Value then
+  begin
     FLeftMargin := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
@@ -748,7 +770,8 @@ end;
 
 procedure TSynEdit32BookMarkOpt.SetXOffset(Value: Integer);
 begin
-  if FXoffset <> Value then begin
+  if FXoffset <> Value then
+  begin
     FXoffset := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
@@ -1046,7 +1069,8 @@ begin
   { Search the list for the needed resource }
   for idx := 0 to InternalResources.Count - 1 do
     if (TInternalResource(InternalResources[idx]).Name = UpperCase(Name)) then
-      with TInternalResource(InternalResources[idx]) do begin
+      with TInternalResource(InternalResources[idx]) do
+      begin
         UsageCount := UsageCount + 1;
         Result := Bitmap;
         exit;
@@ -1086,9 +1110,11 @@ begin
   { Decrement the usagecount in the object. If there are no more users
     remove the object from the list and free it }
   intRes := TInternalResource (InternalResources[idx]);
-  with intRes do begin
+  with intRes do
+  begin
     UsageCount := UsageCount - 1;
-    if (UsageCount = 0) then begin
+    if (UsageCount = 0) then
+    begin
       Bitmap.Free;
       InternalResources.Delete (idx);
       intRes.Free;
@@ -1096,7 +1122,8 @@ begin
   end;
 
   { If there are no more entries in the list free it }
-  if (InternalResources.Count = 0) then begin
+  if (InternalResources.Count = 0) then
+  begin
     InternalResources.Free;
     InternalResources := nil;
   end;
@@ -1109,11 +1136,13 @@ var
 begin
   if (Number >= 0) and (Number < FCount) then
   begin
-    if LineHeight >= FHeight then begin
+    if LineHeight >= FHeight then
+    begin
       rcSrc := Rect(Number * FWidth, 0, (Number + 1) * FWidth, FHeight);
       Inc(Y, (LineHeight - FHeight) div 2);
       rcDest := Rect(X, Y, X + FWidth, Y + FHeight);
-    end else begin
+    end else
+    begin
       rcDest := Rect(X, Y, X + FWidth, Y + LineHeight);
       Y := (FHeight - LineHeight) div 2;
       rcSrc := Rect(Number * FWidth, Y, (Number + 1) * FWidth,
@@ -1130,11 +1159,13 @@ var
 begin
   if (Number >= 0) and (Number < FCount) then
   begin
-    if LineHeight >= FHeight then begin
+    if LineHeight >= FHeight then
+    begin
       rcSrc := Rect(Number * FWidth, 0, (Number + 1) * FWidth, FHeight);
       Inc(Y, (LineHeight - FHeight) div 2);
       rcDest := Rect(X, Y, X + FWidth, Y + FHeight);
-    end else begin
+    end else
+    begin
       rcDest := Rect(X, Y, X + FWidth, Y + LineHeight);
       Y := (FHeight - LineHeight) div 2;
       rcSrc := Rect(Number * FWidth, Y, (Number + 1) * FWidth,
@@ -1218,9 +1249,9 @@ begin
   with Params do
   begin
     WindowClass.Style := WindowClass.Style and not ClassStylesOff;
-    Style := Style or BorderStyles[fBorderStyle] or WS_CLIPCHILDREN;
+    Style := Style or BorderStyles[FBorderStyle] or WS_CLIPCHILDREN;
 
-    if NewStyleControls and Ctl3D and (fBorderStyle = bsSingle) then
+    if NewStyleControls and Ctl3D and (FBorderStyle = bsSingle) then
     begin
       Style := Style and not WS_BORDER;
       ExStyle := ExStyle or WS_EX_CLIENTEDGE;

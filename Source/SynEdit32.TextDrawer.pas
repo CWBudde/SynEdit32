@@ -819,12 +819,14 @@ end;
 
 function TSynEdit32TextDrawer.GetCachedABCWidth(c : Cardinal; var abc : TABC) : Boolean;
 begin
-   if c>High(FCharABCWidthCache) then begin
+   if c>High(FCharABCWidthCache) then
+   begin
       Result:=GetCharABCWidthsW(FDC, c, c, abc);
       Exit;
    end;
    abc:=FCharABCWidthCache[c];
-   if (abc.abcA or Integer(abc.abcB) or abc.abcC)=0 then begin
+   if (abc.abcA or Integer(abc.abcB) or abc.abcC)=0 then
+   begin
       Result:=GetCharABCWidthsW(FDC, c, c, abc);
       if Result then
          FCharABCWidthCache[c]:=abc;

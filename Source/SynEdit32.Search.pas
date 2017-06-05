@@ -124,9 +124,11 @@ procedure TSynEdit32Search.FixResults(First, Delta: Integer);
 var
   i: Integer;
 begin
-  if (Delta <> 0) and (FResults.Count > 0) then begin
+  if (Delta <> 0) and (FResults.Count > 0) then
+  begin
     i := Pred(FResults.Count);
-    while i >= 0 do begin
+    while i >= 0 do
+    begin
       if Integer(FResults[i]) <= First then break;
       FResults[i] := pointer(Integer(FResults[i]) - Delta);
       Dec(i);

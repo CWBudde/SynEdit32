@@ -4577,7 +4577,8 @@ begin
            FRange := rsAnsi;
            repeat
              Inc(FRun);
-             if (FLine[FRun] = '*') and (FLine[FRun + 1] = '/') then begin
+             if (FLine[FRun] = '*') and (FLine[FRun + 1] = '/') then
+             begin
                FRange := rsUnKnown;
                Inc(FRun, 2);
                break;
