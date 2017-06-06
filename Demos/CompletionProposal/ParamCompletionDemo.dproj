@@ -1,4 +1,4 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{E3ECA884-6FF1-4E37-B90A-60691947590F}</ProjectGuid>
         <MainSource>ParamCompletionDemo.dpr</MainSource>
@@ -71,7 +71,6 @@
         <DCCReference Include="..\..\Source\SynEdit32.MiscProcs.pas"/>
         <DCCReference Include="..\..\Source\SynEdit32.RegExpr.pas"/>
         <DCCReference Include="..\..\Source\SynEdit32.StrConst.pas"/>
-        <DCCReference Include="..\..\Source\SynEdit32.TextDrawer.pas"/>
         <DCCReference Include="..\..\Source\SynEdit32.KeyCmds.pas"/>
         <DCCReference Include="..\..\Source\SynEdit32.KbdHandler.pas"/>
         <DCCReference Include="..\..\Source\SynEdit32.WordWrap.pas"/>

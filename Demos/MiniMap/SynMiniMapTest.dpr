@@ -14,7 +14,6 @@ uses
   SynEdit32.MiscProcs in '..\..\Source\SynEdit32.MiscProcs.pas',
   SynEdit32.RegExpr in '..\..\Source\SynEdit32.RegExpr.pas',
   SynEdit32.StrConst in '..\..\Source\SynEdit32.StrConst.pas',
-  SynEdit32.TextDrawer in '..\..\Source\SynEdit32.TextDrawer.pas',
   SynEdit32.KeyCmds in '..\..\Source\SynEdit32.KeyCmds.pas',
   SynEdit32.KbdHandler in '..\..\Source\SynEdit32.KbdHandler.pas',
   SynEdit32.WordWrap in '..\..\Source\SynEdit32.WordWrap.pas',
