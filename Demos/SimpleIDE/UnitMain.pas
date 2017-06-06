@@ -42,7 +42,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  ActnList, ImgList, ComCtrls, ToolWin, Menus, System.Actions,
+  ActnList, ImgList, ComCtrls, ToolWin, Menus, System.Actions, GR32,
   SynEdit32.Highlighter, SynEdit32.Highlighter.Pas, SynEdit32,
   SynEdit32.MiscClasses, SynEdit32.Types, UnitSimpleIdeDebugger;
 
@@ -102,16 +102,16 @@ type
     procedure SynEditorGutterClick(Sender: TObject; Button: TMouseButton; X, Y,
       Line: Integer; Mark: TSynEdit32Mark);
   private
-    FCurrentLine: integer;
+    FCurrentLine: Integer;
     FDebugger: TSampleDebugger;
-    procedure DebuggerBreakpointChange(Sender: TObject; ALine: integer);
+    procedure DebuggerBreakpointChange(Sender: TObject; ALine: Integer);
     procedure DebuggerCurrentLineChange(Sender: TObject);
     procedure DebuggerStateChange(Sender: TObject; OldState,
       NewState: TDebuggerState);
     procedure DebuggerYield(Sender: TObject);
-    procedure PaintGutterGlyphs(ACanvas: TCanvas; AClip: TRect;
-      FirstLine, LastLine: integer);
-    procedure SetCurrentLine(ALine: integer);
+    procedure PaintGutterGlyphs(ABitmap: TBitmap32; AClip: TRect;
+      FirstLine, LastLine: Integer);
+    procedure SetCurrentLine(ALine: Integer);
   end;
 
 var
@@ -127,10 +127,10 @@ type
   TDebugSupportPlugin = class(TSynEdit32Plugin)
   protected
     FForm: TSimpleIDEMainForm;
-    procedure AfterPaint(ACanvas: TCanvas; const AClip: TRect;
-      FirstLine, LastLine: integer); override;
-    procedure LinesInserted(FirstLine, Count: integer); override;
-    procedure LinesDeleted(FirstLine, Count: integer); override;
+    procedure AfterPaint(ABitmap: TBitmap32; const AClip: TRect;
+      FirstLine, LastLine: Integer); override;
+    procedure LinesInserted(FirstLine, Count: Integer); override;
+    procedure LinesDeleted(FirstLine, Count: Integer); override;
   public
     constructor Create(AForm: TSimpleIDEMainForm);
   end;
@@ -141,19 +141,19 @@ begin
   FForm := AForm;
 end;
 
-procedure TDebugSupportPlugin.AfterPaint(ACanvas: TCanvas; const AClip: TRect;
-  FirstLine, LastLine: integer);
+procedure TDebugSupportPlugin.AfterPaint(ABitmap: TBitmap32; const AClip: TRect;
+  FirstLine, LastLine: Integer);
 begin
-  FForm.PaintGutterGlyphs(ACanvas, AClip, FirstLine, LastLine);
+  FForm.PaintGutterGlyphs(ABitmap, AClip, FirstLine, LastLine);
 end;
 
-procedure TDebugSupportPlugin.LinesInserted(FirstLine, Count: integer);
+procedure TDebugSupportPlugin.LinesInserted(FirstLine, Count: Integer);
 begin
 // Note: You will need this event if you want to track the changes to
 //       breakpoints in "Real World" apps, where the editor is not read-only
 end;
 
-procedure TDebugSupportPlugin.LinesDeleted(FirstLine, Count: integer);
+procedure TDebugSupportPlugin.LinesDeleted(FirstLine, Count: Integer);
 begin
 // Note: You will need this event if you want to track the changes to
 //       breakpoints in "Real World" apps, where the editor is not read-only
@@ -234,7 +234,7 @@ begin
 end;
 
 procedure TSimpleIDEMainForm.DebuggerBreakpointChange(Sender: TObject;
-  ALine: integer);
+  ALine: Integer);
 begin
   if (ALine >= 1) and (ALine <= SynEditor.Lines.Count) then
   begin
@@ -273,12 +273,12 @@ begin
   Application.ProcessMessages;
 end;
 
-procedure TSimpleIDEMainForm.PaintGutterGlyphs(ACanvas: TCanvas; AClip: TRect;
-  FirstLine, LastLine: integer);
+procedure TSimpleIDEMainForm.PaintGutterGlyphs(ABitmap: TBitmap32; AClip: TRect;
+  FirstLine, LastLine: Integer);
 var
-  LH, X, Y: integer;
+  LH, X, Y: Integer;
   LI: TDebuggerLineInfos;
-  ImgIndex: integer;
+  ImgIndex: Integer;
 begin
   if FDebugger <> nil then
   begin
@@ -308,13 +308,13 @@ begin
           ImgIndex := -1;
       end;
       if ImgIndex >= 0 then
-        ImageListGutterGlyphs.Draw(ACanvas, X, Y, ImgIndex);
+        ImageListGutterGlyphs.Draw(ABitmap.Canvas, X, Y, ImgIndex);
       Inc(FirstLine);
     end;
   end;
 end;
 
-procedure TSimpleIDEMainForm.SetCurrentLine(ALine: integer);
+procedure TSimpleIDEMainForm.SetCurrentLine(ALine: Integer);
 begin
   if FCurrentLine <> ALine then
   begin

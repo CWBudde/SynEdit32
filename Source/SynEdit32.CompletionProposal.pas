@@ -2363,7 +2363,7 @@ begin
 
   if Assigned(Form.CurrentEditor) then
   begin
-    TmpOffset := TextWidth((Form.CurrentEditor as TCustomSynEdit32).Canvas, Copy(s, 1, DotOffset));
+    TmpOffset := (Form.CurrentEditor as TCustomSynEdit32).Buffer.TextWidth(Copy(s, 1, DotOffset));
     if DotOffset > 1 then
       TmpOffset := TmpOffset + (3 * (DotOffset -1))
   end else

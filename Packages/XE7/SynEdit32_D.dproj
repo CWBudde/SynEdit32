@@ -40,7 +40,6 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <DCC_OutputNeverBuildDcps>true</DCC_OutputNeverBuildDcps>
         <SanitizedProjectName>SynEdit32_D</SanitizedProjectName>
         <DesignOnlyPackage>true</DesignOnlyPackage>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
@@ -142,6 +141,9 @@
                     <VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
                     <VersionInfoKeys Name="Comments"/>
                 </VersionInfoKeys>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Bpl\SynEdit32_DXE7.bpl">SynEdit component suite</Excluded_Packages>
+                </Excluded_Packages>
             </Delphi.Personality>
             <Platforms>
                 <Platform value="OSX32">False</Platform>

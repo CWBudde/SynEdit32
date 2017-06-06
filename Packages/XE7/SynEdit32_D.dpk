@@ -29,7 +29,7 @@ package SynEdit32_D;
 {$DESCRIPTION 'SynEdit component suite'}
 {$LIBSUFFIX 'XE7'}
 {$DESIGNONLY}
-{$IMPLICITBUILD OFF}
+{$IMPLICITBUILD ON}
 
 requires
   designide,

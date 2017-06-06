@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ExtCtrls, SynEdit32, SynEdit32.Types, SynEdit32.Highlighter,
-  SynEdit32.Highlighter.Java;
+  SynEdit32.Highlighter.Java, GR32;
 
 type
   TFormMain = class(TForm)
@@ -18,7 +18,7 @@ type
     procedure ButtonOpenClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
-    procedure EditorPaintTransient(Sender: TObject; Canvas: TCanvas;
+    procedure EditorPaintTransient(Sender: TObject; Bitmap: TBitmap32;
       TransientType: TSynEdit32TransientType);
   private
     FBracketFG: TColor;
@@ -39,7 +39,7 @@ begin
     Editor.Lines.LoadFromFile(OpenDialog.Filename);
 end;
 
-procedure TFormMain.EditorPaintTransient(Sender: TObject; Canvas: TCanvas;
+procedure TFormMain.EditorPaintTransient(Sender: TObject; Bitmap: TBitmap32;
   TransientType: TSynEdit32TransientType);
 
 var
@@ -77,9 +77,9 @@ begin
     Exit;
   Editor := TSynEdit32(Sender);
   ArrayLength := 3;
-//if you had a highlighter that used a markup language, like html or xml,
-//then you would want to highlight the greater and less than signs
-//as illustrated below
+// if you had a highlighter that used a markup language, like html or xml,
+// then you would want to highlight the greater and less than signs
+// as illustrated below
 
 //  if (Editor.Highlighter = shHTML) or (Editor.Highlighter = shXML) then
 //    inc(ArrayLength);
@@ -126,24 +126,18 @@ begin
       begin
         Pix := CharToPixels(P);
 
-        Editor.Canvas.Brush.Style := bsSolid;//Clear;
-        Editor.Canvas.Font.Assign(Editor.Font);
-        Editor.Canvas.Font.Style := Attri.Style;
+        Editor.Font.Assign(Editor.Font);
+        Editor.Font.Style := Attri.Style;
 
         if (TransientType = ttAfter) then
-        begin
-          Editor.Canvas.Font.Color := FBracketFG;
-          Editor.Canvas.Brush.Color := FBracketBG;
-        end else begin
-          Editor.Canvas.Font.Color := Attri.Foreground;
-          Editor.Canvas.Brush.Color := Attri.Background;
-        end;
-        if Editor.Canvas.Font.Color = clNone then
-          Editor.Canvas.Font.Color := Editor.Font.Color;
-        if Editor.Canvas.Brush.Color = clNone then
-          Editor.Canvas.Brush.Color := Editor.Color;
+          Bitmap.Font.Color := FBracketFG
+        else
+          Bitmap.Font.Color := Attri.Foreground;
 
-        Editor.Canvas.TextOut(Pix.X, Pix.Y, S);
+        if Bitmap.Font.Color = clNone then
+          Bitmap.Font.Color := Editor.Font.Color;
+
+        Bitmap.TextOut(Pix.X, Pix.Y, S);
         P := Editor.GetMatchingBracketEx(P);
 
         if (P.Char > 0) and (P.Line > 0) then
@@ -152,14 +146,13 @@ begin
           if Pix.X > Editor.Gutter.Width then
           begin
             if S = OpenChars[i] then
-              Editor.Canvas.TextOut(Pix.X, Pix.Y, CloseChars[i])
+              Bitmap.TextOut(Pix.X, Pix.Y, CloseChars[i])
             else
-              Editor.Canvas.TextOut(Pix.X, Pix.Y, OpenChars[i]);
+              Bitmap.TextOut(Pix.X, Pix.Y, OpenChars[i]);
           end;
         end;
-      end; //if
-    end;//for i :=
-    Editor.Canvas.Brush.Style := bsSolid;
+      end;
+    end;
   end;
 end;
 

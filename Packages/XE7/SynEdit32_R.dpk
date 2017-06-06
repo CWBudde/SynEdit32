@@ -24,19 +24,19 @@ package SynEdit32_R;
 {$IMAGEBASE $400000}
 {$DEFINE DEBUG}
 {$ENDIF IMPLICITBUILDING}
-{$DESCRIPTION 'SynEdit32 component suite runtime'}
+{$DESCRIPTION 'SynEdit component suite runtime'}
 {$LIBSUFFIX 'XE7'}
 {$RUNONLY}
-{$IMPLICITBUILD OFF}
+{$IMPLICITBUILD ON}
 
 requires
+  GR32_R,
   vcl,
   vcldb,
   vclx,
   rtl;
 
 contains
-  SynEdit32.TextDrawer in '..\..\Source\SynEdit32.TextDrawer.pas',
   SynEdit32.AutoCorrect in '..\..\Source\SynEdit32.AutoCorrect.pas',
   SynEdit32.AutoCorrectEditor in '..\..\Source\SynEdit32.AutoCorrectEditor.pas' {frmAutoCorrectEditor},
   SynEdit32.CompletionProposal in '..\..\Source\SynEdit32.CompletionProposal.pas',
