@@ -44,7 +44,8 @@ interface
 
 uses
   Windows, Graphics, Math, Classes,
-  SynEdit32.Types, SynEdit32.Highlighter, SynEdit32.Unicode;
+  SynEdit32.Types, SynEdit32.Highlighter, SynEdit32.Unicode,
+  GR32, GR32_ColorGradients;
 
 const
   MaxIntArraySize = MaxInt div 16;
@@ -143,8 +144,8 @@ function EnumHighlighterAttris(Highlighter: TSynEdit32CustomHighlighter;
   SkipDuplicates: Boolean; HighlighterAttriProc: THighlighterAttriProc;
   Params: array of Pointer): Boolean;
 
-procedure SynDrawGradient(const ACanvas: TCanvas; const AStartColor, AEndColor: TColor;
-  ASteps: Integer; const ARect: TRect; const AHorizontal: Boolean);
+procedure SynEdit32DrawGradient(const ABitmap: TBitmap32; const AStartColor,
+  AEndColor: TColor; const ARect: TRect; const AHorizontal: Boolean);
 
 function DeleteTypePrefixAndSynSuffix(S: string): string;
 
@@ -832,59 +833,32 @@ begin
   end
 end;
 
-procedure SynDrawGradient(const ACanvas: TCanvas; const AStartColor, AEndColor: TColor;
-  ASteps: Integer; const ARect: TRect; const AHorizontal: Boolean);
+procedure SynEdit32DrawGradient(const ABitmap: TBitmap32; const AStartColor,
+  AEndColor: TColor; const ARect: TRect; const AHorizontal: Boolean);
 var
-  StartColorR, StartColorG, StartColorB: Byte;
-  DiffColorR, DiffColorG, DiffColorB: Integer;
-  i, Size: Integer;
-  PaintRect: TRect;
+  LinearGradient: TColor32Gradient;
+  BaseScanLine: PColor32Array;
+  ScanLine: PColor32Array;
+  X, Y: Integer;
+  ScaleFactor: Single;
 begin
-  StartColorR := GetRValue(ColorToRGB(AStartColor));
-  StartColorG := GetGValue(ColorToRGB(AStartColor));
-  StartColorB := GetBValue(ColorToRGB(AStartColor));
+  if (ARect.Top > ARect.Bottom) or (ARect.Left > ARect.Right) then
+    Exit;
 
-  DiffColorR := GetRValue(ColorToRGB(AEndColor)) - StartColorR;
-  DiffColorG := GetGValue(ColorToRGB(AEndColor)) - StartColorG;
-  DiffColorB := GetBValue(ColorToRGB(AEndColor)) - StartColorB;
+  LinearGradient := TColor32Gradient.Create(Color32(AStartColor), Color32(AEndColor));
+  try
+    BaseScanLine := ABitmap.ScanLine[ARect.Top];
+    ScaleFactor := 1 / ARect.Width;
+    for X := 0 to ARect.Width - 1 do
+      BaseScanLine^[ARect.Left + X] := LinearGradient.GetColorAt(X * ScaleFactor);
 
-  ASteps := MinMax(ASteps, 2, 256);
-
-  if AHorizontal then
-  begin
-    Size := ARect.Right - ARect.Left;
-    PaintRect.Top := ARect.Top;
-    PaintRect.Bottom := ARect.Bottom;
-
-    for i := 0 to ASteps - 1 do
+    for Y := ARect.Top + 1 to ARect.Bottom do
     begin
-      PaintRect.Left := ARect.Left + MulDiv(i, Size, ASteps);
-      PaintRect.Right := ARect.Left + MulDiv(i + 1, Size, ASteps);
-
-      ACanvas.Brush.Color := RGB(StartColorR + MulDiv(i, DiffColorR, ASteps - 1),
-                                 StartColorG + MulDiv(i, DiffColorG, ASteps - 1),
-                                 StartColorB + MulDiv(i, DiffColorB, ASteps - 1));
-
-      ACanvas.FillRect(PaintRect);
+      ScanLine := ABitmap.ScanLine[Y];
+      Move(BaseScanLine^[ARect.Left], ScanLine^[ARect.Left], ARect.Width * SizeOf(TColor32));
     end;
-  end
-  else
-  begin
-    Size := ARect.Bottom - ARect.Top;
-    PaintRect.Left := ARect.Left;
-    PaintRect.Right := ARect.Right;
-
-    for i := 0 to ASteps - 1 do
-    begin
-      PaintRect.Top := ARect.Top + MulDiv(i, Size, ASteps);
-      PaintRect.Bottom := ARect.Top + MulDiv(i + 1, Size, ASteps);
-
-      ACanvas.Brush.Color := RGB(StartColorR + MulDiv(i, DiffColorR, ASteps - 1),
-                                 StartColorG + MulDiv(i, DiffColorG, ASteps - 1),
-                                 StartColorB + MulDiv(i, DiffColorB, ASteps - 1));
-
-      ACanvas.FillRect(PaintRect);
-    end;
+  finally
+    LinearGradient.Free;
   end;
 end;
 

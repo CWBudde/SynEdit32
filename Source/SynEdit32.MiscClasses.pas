@@ -44,7 +44,7 @@ interface
 
 uses
   Consts, Windows, Messages, Graphics, Controls, Forms, StdCtrls, Menus,
-  Registry, Math, Classes, SysUtils,
+  Registry, Math, Classes, SysUtils, GR32,
   SynEdit32.Types, SynEdit32.KeyConst, SynEdit32.Unicode;
 
 type
@@ -189,8 +189,8 @@ type
   TSynGlyph = class(TPersistent)
   private
     FVisible: Boolean;
-    FInternalGlyph, fGlyph: TBitmap;
-    FInternalMaskColor, fMaskColor: TColor;
+    FInternalGlyph, FGlyph: TBitmap;
+    FInternalMaskColor, FMaskColor: TColor;
     FOnChange: TNotifyEvent;
     procedure SetGlyph(Value: TBitmap);
     procedure GlyphChange(Sender: TObject);
@@ -202,12 +202,12 @@ type
     constructor Create(aModule: THandle; const aName: string; aMaskColor: TColor);
     destructor Destroy; override;
     procedure Assign(aSource: TPersistent); override;
-    procedure Draw(aCanvas: TCanvas; aX, aY, aLineHeight: Integer);
+    procedure Draw(aBitmap: TBitmap32; aX, aY, aLineHeight: Integer);
     property Width : Integer read GetWidth;
     property Height : Integer read GetHeight;
   published
-    property Glyph: TBitmap read fGlyph write SetGlyph;
-    property MaskColor: TColor read fMaskColor write SetMaskColor default clNone;
+    property Glyph: TBitmap read FGlyph write SetGlyph;
+    property MaskColor: TColor read FMaskColor write SetMaskColor default clNone;
     property Visible: Boolean read FVisible write SetVisible default True;
     property OnChange: TNotifyEvent read FOnChange write FOnChange;
   end;
@@ -264,7 +264,7 @@ type
   public
     constructor Create(aModule: THandle; const Name: string; Count: Integer);
     destructor Destroy; override;
-    procedure Draw(ACanvas: TCanvas; Number, X, Y, LineHeight: Integer);
+    procedure Draw(Bitmap32: TBitmap32; Number, X, Y, LineHeight: Integer);
     procedure DrawTransparent(ACanvas: TCanvas; Number, X, Y,
       LineHeight: Integer; TransparentColor: TColor);
   end;
@@ -793,9 +793,9 @@ begin
     FInternalMaskColor := clNone;
 
   FVisible := True;
-  fGlyph := TBitmap.Create;
-  fGlyph.OnChange := GlyphChange;
-  fMaskColor := clNone;
+  FGlyph := TBitmap.Create;
+  FGlyph.OnChange := GlyphChange;
+  FMaskColor := clNone;
 end;
 
 destructor TSynGlyph.Destroy;
@@ -803,7 +803,7 @@ begin
   if Assigned(FInternalGlyph) then
     FreeAndNil(FInternalGlyph);
 
-  fGlyph.Free;
+  FGlyph.Free;
 
   inherited Destroy;
 end;
@@ -818,24 +818,24 @@ begin
     FInternalGlyph := vSrc.FInternalGlyph;
     FInternalMaskColor := vSrc.FInternalMaskColor;
     FVisible := vSrc.FVisible;
-    fGlyph := vSrc.fGlyph;
-    fMaskColor := vSrc.fMaskColor;
+    FGlyph := vSrc.FGlyph;
+    FMaskColor := vSrc.FMaskColor;
     if Assigned(FOnChange) then FOnChange(Self);
   end
   else
     inherited;
 end;
 
-procedure TSynGlyph.Draw(aCanvas: TCanvas; aX, aY, aLineHeight: Integer);
+procedure TSynGlyph.Draw(aBitmap: TBitmap32; aX, aY, aLineHeight: Integer);
 var
   rcSrc, rcDest : TRect;
   vGlyph : TBitmap;
   vMaskColor : TColor;
 begin
-  if not fGlyph.Empty then
+  if not FGlyph.Empty then
   begin
-    vGlyph := fGlyph;
-    vMaskColor := fMaskColor;
+    vGlyph := FGlyph;
+    vMaskColor := FMaskColor;
   end
   else if Assigned(FInternalGlyph) then
   begin
@@ -858,12 +858,12 @@ begin
     rcSrc := Rect(0, aY, vGlyph.Width, aY + aLineHeight);
   end;
 
-  aCanvas.BrushCopy(rcDest, vGlyph, rcSrc, vMaskColor);
+  aBitmap.Canvas.BrushCopy(rcDest, vGlyph, rcSrc, vMaskColor);
 end;
 
 procedure TSynGlyph.SetGlyph(Value: TBitmap);
 begin
-  fGlyph.Assign(Value);
+  FGlyph.Assign(Value);
 end;
 
 procedure TSynGlyph.GlyphChange(Sender: TObject);
@@ -873,9 +873,9 @@ end;
 
 procedure TSynGlyph.SetMaskColor(Value: TColor);
 begin
-  if fMaskColor <> Value then
+  if FMaskColor <> Value then
   begin
-    fMaskColor := Value;
+    FMaskColor := Value;
     if Assigned(FOnChange) then FOnChange(Self);
   end;
 end;
@@ -891,8 +891,8 @@ end;
 
 function TSynGlyph.GetWidth : Integer;
 begin
-  if not fGlyph.Empty then
-    Result := fGlyph.Width
+  if not FGlyph.Empty then
+    Result := FGlyph.Width
   else
   if Assigned(FInternalGlyph) then
     Result := FInternalGlyph.Width
@@ -902,8 +902,8 @@ end;
 
 function TSynGlyph.GetHeight : Integer;
 begin
-  if not fGlyph.Empty then
-    Result := fGlyph.Height
+  if not FGlyph.Empty then
+    Result := FGlyph.Height
   else
   if Assigned(FInternalGlyph) then
     Result := FInternalGlyph.Height
@@ -1032,10 +1032,10 @@ end;
 
 type
   TInternalResource = class (TObject)
-    public
-      UsageCount : Integer;
-      Name       : string;
-      Bitmap     : TBitmap;
+  public
+    UsageCount: Integer;
+    Name: string;
+    Bitmap: TBitmap;
   end;
 
 var
@@ -1129,7 +1129,7 @@ begin
   end;
 end;
 
-procedure TSynEdit32InternalImage.Draw(ACanvas: TCanvas;
+procedure TSynEdit32InternalImage.Draw(Bitmap32: TBitmap32;
   Number, X, Y, LineHeight: Integer);
 var
   rcSrc, rcDest: TRect;
@@ -1148,7 +1148,7 @@ begin
       rcSrc := Rect(Number * FWidth, Y, (Number + 1) * FWidth,
         Y + LineHeight);
     end;
-    ACanvas.CopyRect(rcDest, FImages.Canvas, rcSrc);
+    Bitmap32.Canvas.CopyRect(rcDest, FImages.Canvas, rcSrc);
   end;
 end;
 

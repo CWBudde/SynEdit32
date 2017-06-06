@@ -63,6 +63,9 @@ implementation
 
 {$R *.DFM}
 
+uses
+  GR32, Types, UITypes;
+
 { TFormMain }
 
 procedure TFormMain.FormCreate(Sender: TObject);
@@ -195,9 +198,8 @@ var
   GutterWidth, Offset: Integer;
   OldFont: TFont;
 begin
-  with TSynEdit32(Sender), Canvas do
+  with TSynEdit32(Sender), Buffer do
   begin
-    Brush.Style := bsClear;
     GutterWidth := Gutter.Width - 5;
     if (ALine = 1) or (ALine = CaretY) or ((ALine mod 10) = 0) then
     begin
@@ -205,25 +207,22 @@ begin
       LineNumberRect := Rect(x, y, GutterWidth, y + LineHeight);
       OldFont := TFont.Create;
       try
-        OldFont.Assign(Canvas.Font);
-        Canvas.Font := Gutter.Font;
-        Canvas.TextRect(LineNumberRect, StrLineNumber, [tfVerticalCenter,
-          tfSingleLine, tfRight]);
-        Canvas.Font := OldFont;
+        OldFont.Assign(Buffer.Font);
+        Buffer.Font := Gutter.Font;
+        Buffer.Textout(LineNumberRect, TA_RIGHT + TA_BASELINE, StrLineNumber);
+        Buffer.Font := OldFont;
       finally
         OldFont.Free;
       end;
     end
     else
     begin
-      Canvas.Pen.Color := Gutter.Font.Color;
       if (ALine mod 5) = 0 then
-        Offset := 5
+        Offset := 4
       else
-        Offset := 2;
+        Offset := 1;
       Inc(y, LineHeight div 2);
-      Canvas.MoveTo(GutterWidth - Offset, y);
-      Canvas.LineTo(GutterWidth, y);
+      Buffer.HorzLine(GutterWidth - Offset, y, GutterWidth, Color32(Gutter.Font.Color));
     end;
   end;
 end;

@@ -19,6 +19,7 @@ object FormMain: TFormMain
     Top = 89
     Width = 916
     Height = 712
+    ActiveLineColor = 14155770
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -43,7 +44,7 @@ object FormMain: TFormMain
       '  Number, I, X: Integer;'
       'begin'
       '  Number := 123456;'
-      '  Caption := '#39#39'The Number is'#39#39' + #32 + IntToStr(Number);'
+      '  Caption := '#39'The Number is'#39' + #32 + IntToStr(Number);'
       '  for I := 0 to Number do'
       '  begin'
       '    Inc(X);'
@@ -56,8 +57,10 @@ object FormMain: TFormMain
       '    mov AX, 1234H'
       '    mov Number, AX'
       '  end;'
+      '  // tab line'
       '  {$R-}'
       'end;')
+    WordWrap = True
     RemovedKeystrokes = <
       item
         Command = ecCut
