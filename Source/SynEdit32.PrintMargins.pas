@@ -85,7 +85,7 @@ CONTENTS:
 unit SynEdit32.PrintMargins;
 {$M+}
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

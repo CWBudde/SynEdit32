@@ -97,7 +97,7 @@ CONTENTS:
 unit SynEdit32.PrintHeaderFooter;
 
 {$M+}
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

@@ -38,7 +38,7 @@ Known Issues:
 
 unit SynEdit32.OptionsDialog;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 
@@ -65,7 +65,7 @@ uses
   SynEdit32.MiscClasses,
   SynEdit32.KeyCmds,
   Classes,
-  SysUtils;
+  SysUtils, System.ImageList;
 
 type
 {$IFNDEF SYN_DELPHI_4_UP}

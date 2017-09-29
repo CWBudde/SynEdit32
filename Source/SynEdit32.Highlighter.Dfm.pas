@@ -46,7 +46,7 @@ The highlighter formats form source code similar to when forms are viewed as tex
 
 unit SynEdit32.Highlighter.Dfm;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

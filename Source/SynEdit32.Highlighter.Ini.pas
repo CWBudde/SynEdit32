@@ -46,7 +46,7 @@ Thanks to Primoz Gabrijelcic, Martin Waldenburg and Michael Hieke.
 
 unit SynEdit32.Highlighter.Ini;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

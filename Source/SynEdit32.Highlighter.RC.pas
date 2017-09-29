@@ -36,7 +36,7 @@ located at http://SynEdit.SourceForge.net
 unit SynEdit32.Highlighter.RC;
 {$ENDIF}
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

@@ -47,7 +47,7 @@ be disabled for backwards compatibility with older ML compilers that do not have
 
 unit SynEdit32.Highlighter.Sml;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

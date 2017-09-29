@@ -47,7 +47,7 @@ The keywords in the string list KeyWords have to be in lowercase and sorted.
 
 unit SynEdit32.Highlighter.Galaxy;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

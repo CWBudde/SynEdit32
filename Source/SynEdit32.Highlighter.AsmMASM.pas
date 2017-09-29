@@ -49,7 +49,7 @@ compile externally until I move the API functions externally into JSON file.
 
 unit SynEdit32.Highlighter.AsmMASM;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

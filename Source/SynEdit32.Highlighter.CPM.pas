@@ -35,7 +35,7 @@ located at http://SynEdit.SourceForge.net
 
 unit SynEdit32.Highlighter.CPM;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

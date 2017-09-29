@@ -46,7 +46,7 @@ CONTENTS:
 
 unit SynEdit32.PrintPreview;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 {$M+}
 
 interface

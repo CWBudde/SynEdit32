@@ -46,7 +46,7 @@ The SynHighlighterDml unit provides SynEdit with a Dml highlighter.
 
 unit SynEdit32.Highlighter.Dml;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

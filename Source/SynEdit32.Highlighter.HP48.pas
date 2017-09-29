@@ -45,7 +45,7 @@ The unit SynEdit32.Highlighter.HP48 provides SynEdit with a HP48 assembler highl
 
 unit SynEdit32.Highlighter.HP48;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

@@ -38,7 +38,7 @@ Known Issues:
 
 unit SynEdit32.KbdHandler;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

@@ -44,7 +44,7 @@ uses indentation. So the rule is after a ":" and a line break, we have to indent
 }
 unit SynEdit32.PythonBehaviour;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

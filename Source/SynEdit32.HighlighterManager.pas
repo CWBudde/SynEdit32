@@ -45,7 +45,7 @@ Provides a component to manage many highlighters in a single project.
 
 unit SynEdit32.HighlighterManager;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

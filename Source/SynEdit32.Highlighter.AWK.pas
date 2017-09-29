@@ -47,7 +47,7 @@ unit SynEdit32.Highlighter.AWK;
 
 interface
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 uses
   Graphics,

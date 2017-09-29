@@ -47,7 +47,7 @@ Thanks to Martin Waldenburg, Hideo Koiso.
 
 unit SynEdit32.Highlighter.Assembly;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

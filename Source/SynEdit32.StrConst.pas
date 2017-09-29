@@ -35,7 +35,7 @@ Known Issues:
 
 unit SynEdit32.StrConst;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

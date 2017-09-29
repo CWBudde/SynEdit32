@@ -39,7 +39,7 @@ unit SynEdit32.RegExpr;
 
 interface
 
-{$INCLUDE SynEdit.Inc}
+{$INCLUDE SynEdit32.Inc}
 
 // ======== Determine compiler
 {$IFDEF VER80} Sorry, TRegExpr is for 32-bits Delphi only. Delphi 1 is not supported (and whos really care today?!). {$ENDIF}

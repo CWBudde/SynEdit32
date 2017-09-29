@@ -48,7 +48,7 @@ The SynHighlighterPerl unit provides SynEdit with a Perl syntax highlighter.
 
 unit SynEdit32.Highlighter.Perl;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

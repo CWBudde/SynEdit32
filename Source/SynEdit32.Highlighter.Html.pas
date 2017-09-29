@@ -48,7 +48,7 @@ unit SynEdit32.Highlighter.Html;
 
 interface
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 uses
 {$IFDEF UNICODE}

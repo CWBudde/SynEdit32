@@ -43,7 +43,7 @@ Known Issues:
 
 unit SynEdit32.ExportTeX;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

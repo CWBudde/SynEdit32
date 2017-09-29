@@ -39,7 +39,7 @@ Known Issues:
 
 unit SynEdit32.WordWrap;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

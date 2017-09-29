@@ -40,7 +40,7 @@ unit SynEdit32.AutoCorrectEditor;
 
 interface
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 uses
   {$IFDEF SYN_COMPILER_17_UP}

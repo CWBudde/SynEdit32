@@ -37,7 +37,7 @@ Known Issues:
 
 unit SynEdit32.PropertyReg;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

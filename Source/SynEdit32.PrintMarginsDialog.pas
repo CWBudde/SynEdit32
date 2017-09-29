@@ -43,7 +43,7 @@ CONTENTS:
 
 unit SynEdit32.PrintMarginsDialog;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

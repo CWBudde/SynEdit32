@@ -38,7 +38,7 @@ Known Issues:
 
 unit SynEdit32.Search;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

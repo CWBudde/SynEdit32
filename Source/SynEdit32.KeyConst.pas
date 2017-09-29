@@ -40,7 +40,7 @@ unit SynEdit32.KeyConst;
 { This unit provides a translation of DELPHI and CLX key constants to
   more readable SynEdit constants }
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

@@ -51,7 +51,7 @@ ashley@ashleybrown.co.uk
 
 unit SynEdit32.Highlighter.Haskell;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

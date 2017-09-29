@@ -47,7 +47,7 @@ Last Changes:
 
 unit SynEdit32.Unicode;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

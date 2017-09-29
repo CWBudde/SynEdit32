@@ -37,7 +37,7 @@ Known Issues:
 
 unit SynEdit32.KeyCmdEditor;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

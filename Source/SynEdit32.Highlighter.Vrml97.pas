@@ -68,7 +68,7 @@ The highlighter formats Vrml97/X3D source code highlighting keywords, strings, n
 
 unit SynEdit32.Highlighter.Vrml97;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

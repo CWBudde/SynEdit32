@@ -46,7 +46,7 @@ The SynHighlighterGeneral unit provides a customizable highlighter for SynEdit.
 
 unit SynEdit32.Highlighter.General;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

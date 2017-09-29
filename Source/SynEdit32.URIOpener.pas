@@ -42,7 +42,7 @@ http://www.mh-net.de.vu
 
 unit SynEdit32.URIOpener;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

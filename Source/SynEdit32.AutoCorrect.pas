@@ -93,7 +93,7 @@ located at http://SynEdit.SourceForge.net
 
 unit SynEdit32.AutoCorrect;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

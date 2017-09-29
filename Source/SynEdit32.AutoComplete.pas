@@ -40,7 +40,7 @@ Known Issues:
 
 unit SynEdit32.AutoComplete;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

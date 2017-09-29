@@ -46,7 +46,7 @@ Thanks to Primoz Gabrijelcic, Andy Jeffries.
 
 unit SynEdit32.Highlighter.CAC;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

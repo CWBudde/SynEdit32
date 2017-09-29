@@ -43,7 +43,7 @@ Known Issues:
 
 unit SynEdit32.Highlighter.Unreal;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

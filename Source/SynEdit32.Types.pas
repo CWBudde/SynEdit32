@@ -38,7 +38,7 @@ Known Issues:
 
 unit SynEdit32.Types;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

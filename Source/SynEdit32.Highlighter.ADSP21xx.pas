@@ -45,7 +45,7 @@ The SynHighlighterADSP21xx unit provides a ADSP21xx DSP assembler highlighter fo
 
 unit SynEdit32.Highlighter.ADSP21xx;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

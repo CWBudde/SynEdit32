@@ -1,7 +1,7 @@
-package SynEdit_D;
+package SynEdit32_D;
 
 {$R *.res}
-{$R '..\..\Source\SynEditReg.dcr'}
+{$R '..\..\Source\SynEdit32.Reg.dcr'}
 {$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
 {$ALIGN 8}
 {$ASSERTIONS ON}
@@ -33,7 +33,7 @@ package SynEdit_D;
 
 requires
   designide,
-  SynEdit_R;
+  SynEdit32_R;
 
 contains
   SynEdit32.Reg in '..\..\Source\SynEdit32.Reg.pas',

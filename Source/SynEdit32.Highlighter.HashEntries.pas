@@ -46,7 +46,7 @@ having the ability to change the set of keywords.
 
 unit SynEdit32.Highlighter.HashEntries;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

@@ -29,7 +29,7 @@ Known Issues:
 
 unit SynEdit32.Highlighter;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

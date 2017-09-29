@@ -43,7 +43,7 @@ Known Issues:
   or saving it to a file. }
 unit SynEdit32.Export;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

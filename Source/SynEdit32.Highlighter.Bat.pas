@@ -46,7 +46,7 @@ The highlighter supports the formatting of keywords and parameters (batch file a
 
 unit SynEdit32.Highlighter.Bat;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

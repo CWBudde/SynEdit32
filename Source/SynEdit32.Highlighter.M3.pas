@@ -41,7 +41,7 @@ The SynHighlighterM3 unit provides SynEdit with a Modula-3 (.m3) highlighter.
 
 unit SynEdit32.Highlighter.M3;
 
-{$I SynEdit.inc}
+{$I SynEdit32.inc}
 
 interface
 

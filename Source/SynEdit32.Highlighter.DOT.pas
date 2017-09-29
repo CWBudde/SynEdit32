@@ -45,7 +45,7 @@ The highlighter formats DOT source code ref.: http://www.research.att.com/sw/too
 
 unit SynEdit32.Highlighter.DOT;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

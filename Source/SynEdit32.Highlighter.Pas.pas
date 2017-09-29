@@ -50,7 +50,7 @@ Two extra properties included (DelphiVersion, PackageSource):
 
 unit SynEdit32.Highlighter.Pas;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

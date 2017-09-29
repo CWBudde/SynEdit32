@@ -46,7 +46,7 @@ Thanks to Martin Waldenburg.
 
 unit SynEdit32.Highlighter.Baan;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

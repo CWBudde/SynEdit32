@@ -46,7 +46,7 @@ Thanks to Primoz Gabrijelcic and Martin Waldenburg.
 
 unit SynEdit32.Highlighter.VBScript;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

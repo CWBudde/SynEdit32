@@ -48,7 +48,7 @@ Thanks to Martin Waldenburg.
 
 unit SynEdit32.Highlighter.PHP;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 

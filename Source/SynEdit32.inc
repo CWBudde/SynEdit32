@@ -134,7 +134,7 @@
 { with other versions of jedi.inc in the search-path.                          }
 {------------------------------------------------------------------------------}
 
-{$I SynEditJedi.inc}
+{$I SynEdit32.Jedi.inc}
 
 {------------------------------------------------------------------------------}
 { SYN_WIN32, SYN_LINUX and SYN_KYLIX defines                                   }

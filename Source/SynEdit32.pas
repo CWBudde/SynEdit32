@@ -47,7 +47,7 @@ Known Issues:
 
 unit SynEdit32;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 
@@ -1002,7 +1002,7 @@ type
 
 implementation
 
-{$R SynEdit.res}
+{$R SynEdit32.res}
 
 uses
   Consts,

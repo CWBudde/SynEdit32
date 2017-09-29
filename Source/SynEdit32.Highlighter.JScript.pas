@@ -46,7 +46,7 @@ The highlighter formats JavaScript source code highlighting keywords, strings, n
 
 unit SynEdit32.Highlighter.JScript;
 
-{$I SynEdit.Inc}
+{$I SynEdit32.Inc}
 
 interface
 
